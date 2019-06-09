@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="KFlearning.IDE.Views.ArticleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:viewModels="clr-namespace:KFlearning.IDE.ViewModels"
+             xmlns:applicationServices="clr-namespace:KFlearning.ApplicationServices;assembly=KFlearning.ApplicationServices"
+
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance viewModels:ArticleViewModel, IsDesignTimeCreatable=False}"
+             applicationServices:ViewModelLocator.IsAutomaticLocator="True">
+    <UserControl.Resources>
+        <Thickness x:Key="ButtonMargin" Left="5" Right="5" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Artikel." FontSize="48" Margin="{StaticResource ButtonMargin}"/>
+        <DockPanel Grid.Row="1" Margin="0,20">
+            <ComboBox Margin="{StaticResource ButtonMargin}" Width="150" DockPanel.Dock="Left" 
+                      ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}"
+                      mah:TextBoxHelper.ClearTextButton="False"
+                      mah:TextBoxHelper.UseFloatingWatermark="True"
+                      mah:TextBoxHelper.Watermark="Kategori" />
+            <Button Margin="{StaticResource ButtonMargin}" Command="{Binding RefreshCommand}" DockPanel.Dock="Left">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconMaterial Kind="CloudSearch" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="Perbarui" Margin="{StaticResource ButtonMargin}" />
+                </StackPanel>
+            </Button>
+            <TextBox HorizontalAlignment="Right" DockPanel.Dock="Right" Width="200"
+                     Style="{StaticResource SearchMetroTextBox}"
+                     mah:TextBoxHelper.ButtonCommand="{Binding SearchCommand, Mode=OneWay}"
+                     mah:TextBoxHelper.UseFloatingWatermark="True"
+                     mah:TextBoxHelper.Watermark="Cari...">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding SearchCommand}" />
+                </TextBox.InputBindings>
+            </TextBox>
+        </DockPanel>
+        <ListView Grid.Row="2" ItemTemplate="{StaticResource ArticleItemTemplate}" ItemsSource="{Binding Articles}" />
+        <mah:ProgressRing Grid.Row="2" IsActive="{Binding LoadingIsActive}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+    </Grid>
+</UserControl>

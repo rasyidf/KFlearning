@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="KFlearning.IDE.Views.AboutView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:viewModels="clr-namespace:KFlearning.IDE.ViewModels"
+             xmlns:applicationServices="clr-namespace:KFlearning.ApplicationServices;assembly=KFlearning.ApplicationServices"
+
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance viewModels:AboutViewModel, IsDesignTimeCreatable=False}"
+             d:DesignHeight="450" d:DesignWidth="800"
+             applicationServices:ViewModelLocator.IsAutomaticLocator="True">
+    <UserControl.Resources>
+        <Thickness x:Key="ButtonMargin" Left="5" Right="5" />
+    </UserControl.Resources>
+    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+        <TextBlock Text="{x:Static applicationServices:Strings.AppName}" HorizontalAlignment="Center" FontSize="48"/>
+        <TextBlock Text="{x:Static applicationServices:Strings.AppDescription}" HorizontalAlignment="Center" FontSize="24"/>
+
+        <TextBlock Text="{x:Static applicationServices:Strings.CopyrightText}" Margin="0,40,0,0" HorizontalAlignment="Center" FontSize="12"/>
+        <TextBlock Text="{x:Static applicationServices:Strings.LicenseText}" Margin="0,10,0,0" HorizontalAlignment="Center" FontSize="12"/>
+
+        <StackPanel Orientation="Horizontal" Margin="0,40,0,0" HorizontalAlignment="Center">
+            <Button Margin="{StaticResource ButtonMargin}" Command="{Binding WebCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconMaterial Kind="Web" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="Kodesiana.com" Margin="{StaticResource ButtonMargin}"  />
+                </StackPanel>
+            </Button>
+            <Button Margin="{StaticResource ButtonMargin}" Command="{Binding GitHubCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconMaterial Kind="GithubCircle" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="GitHub" Margin="{StaticResource ButtonMargin}"  />
+                </StackPanel>
+            </Button>
+            <Button Margin="{StaticResource ButtonMargin}" Command="{Binding TwitterCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconMaterial Kind="Twitter" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="Twitter" Margin="{StaticResource ButtonMargin}"  />
+                </StackPanel>
+            </Button>
+            <Button Margin="{StaticResource ButtonMargin}" Command="{Binding InstagramCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconMaterial Kind="Instagram" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="Instagram" Margin="{StaticResource ButtonMargin}"  />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

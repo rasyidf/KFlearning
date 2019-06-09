@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KFlearning.API", "KFlearning.API\KFlearning.API.csproj", "{C50528CC-E5B0-4D11-9F62-AFC4BF355361}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KFlearning.API", "src\KFlearning.API\KFlearning.API.csproj", "{C50528CC-E5B0-4D11-9F62-AFC4BF355361}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFlearning.IDE", "KFlearning.IDE\KFlearning.IDE.csproj", "{636CEE45-1A7C-4DA3-8D88-9F121CE0FF05}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFlearning.IDE", "src\KFlearning.IDE\KFlearning.IDE.csproj", "{636CEE45-1A7C-4DA3-8D88-9F121CE0FF05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFlearning.DataAccess", "KFlearning.DataAccess\KFlearning.DataAccess.csproj", "{DCBC06B0-E1C4-46BC-967E-B734FAD50842}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFlearning.ApplicationServices", "KFlearning.ApplicationServices\KFlearning.ApplicationServices.csproj", "{9C767F2D-D939-4769-AF38-698A5033C476}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFlearning.ApplicationServices", "src\KFlearning.ApplicationServices\KFlearning.ApplicationServices.csproj", "{9C767F2D-D939-4769-AF38-698A5033C476}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2D0ED7CC-537C-4B3F-9E0B-6BB826F17E05}"
 	ProjectSection(SolutionItems) = preProject
@@ -32,10 +30,6 @@ Global
 		{636CEE45-1A7C-4DA3-8D88-9F121CE0FF05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{636CEE45-1A7C-4DA3-8D88-9F121CE0FF05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{636CEE45-1A7C-4DA3-8D88-9F121CE0FF05}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DCBC06B0-E1C4-46BC-967E-B734FAD50842}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DCBC06B0-E1C4-46BC-967E-B734FAD50842}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DCBC06B0-E1C4-46BC-967E-B734FAD50842}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DCBC06B0-E1C4-46BC-967E-B734FAD50842}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9C767F2D-D939-4769-AF38-698A5033C476}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9C767F2D-D939-4769-AF38-698A5033C476}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C767F2D-D939-4769-AF38-698A5033C476}.Release|Any CPU.ActiveCfg = Release|Any CPU
