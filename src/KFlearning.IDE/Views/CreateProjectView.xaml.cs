@@ -1,11 +1,11 @@
-﻿using MahApps.Metro.Controls.Dialogs;
+﻿using System.Windows.Controls;
 
 namespace KFlearning.IDE.Views
 {
     /// <summary>
     /// Interaction logic for CreateProjectView.xaml
     /// </summary>
-    public partial class CreateProjectView : CustomDialog
+    public partial class CreateProjectView : UserControl
     {
         public CreateProjectView()
         {

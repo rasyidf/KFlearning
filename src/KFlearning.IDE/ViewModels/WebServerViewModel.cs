@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows.Input;
-using KFlearning.ApplicationServices;
-using KFlearning.ApplicationServices.Models;
+using KFlearning.IDE.ApplicationServices;
 using KFlearning.IDE.Models;
 
 namespace KFlearning.IDE.ViewModels
 {
-    public class WebServerViewModel : ViewModelBase
+    public class WebServerViewModel : PropertyChangedBase
     {
         public ICommand ServerCommand { get; set; }
 
@@ -28,9 +29,10 @@ namespace KFlearning.IDE.ViewModels
 
         public WebServerViewModel()
         {
+            Task.Run(LoadData);
         }
 
-        protected override void OnBootstrap(AppEventArgs e)
+        private void LoadData()
         {
             Logs = new ObservableCollection<ServerLogItem>
             {
@@ -38,5 +40,7 @@ namespace KFlearning.IDE.ViewModels
                 new ServerLogItem(DateTime.Now.AddMinutes(20), "Server aktif.")
             };
         }
+
+
     }
 }

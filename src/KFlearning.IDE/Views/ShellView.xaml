@@ -6,8 +6,8 @@
                  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                  xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
                  xmlns:viewModels="clr-namespace:KFlearning.IDE.ViewModels"
-                 xmlns:applicationServices="clr-namespace:KFlearning.ApplicationServices;assembly=KFlearning.ApplicationServices"
-                 
+                 xmlns:applicationServices="clr-namespace:KFlearning.IDE.ApplicationServices"
+
                  mc:Ignorable="d"
                  d:DataContext="{d:DesignInstance viewModels:ShellViewModel, IsDesignTimeCreatable=False}"
                  applicationServices:ViewModelLocator.IsAutomaticLocator="True"
@@ -17,13 +17,13 @@
                  Height="478.361" Width="775.42">
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
-            <Button>
+            <Button Command="{Binding WebCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Width="24" Height="24" Kind="Web" />
                     <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Text="Kodesiana.com" />
                 </StackPanel>
             </Button>
-            <Button>
+            <Button Command="{Binding GitHubCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Width="24" Height="24" Kind="GithubCircle" />
                     <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Text="GitHub" />

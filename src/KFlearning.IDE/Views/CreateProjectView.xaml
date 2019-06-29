@@ -1,22 +1,21 @@
-﻿<mah:CustomDialog
+﻿<UserControl x:Class="KFlearning.IDE.Views.CreateProjectView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:viewModels="clr-namespace:KFlearning.IDE.ViewModels"
-             xmlns:applicationServices="clr-namespace:KFlearning.ApplicationServices;assembly=KFlearning.ApplicationServices"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-
-             xmlns:local="clr-namespace:KFlearning.IDE.Views"  x:Class="KFlearning.IDE.Views.CreateProjectView"
+             xmlns:local="clr-namespace:KFlearning.IDE.Views"
+             xmlns:applicationServices="clr-namespace:KFlearning.IDE.ApplicationServices"
 
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance {x:Type viewModels:CreateProjectViewModel}, IsDesignTimeCreatable=False}"
              d:DesignHeight="450" d:DesignWidth="800"
              applicationServices:ViewModelLocator.IsAutomaticLocator="True">
-    <mah:CustomDialog.Resources>
+    <UserControl.Resources>
         <Thickness x:Key="ButtonMargin" Left="5" Right="5" />
-    </mah:CustomDialog.Resources>
+    </UserControl.Resources>
     <StackPanel Orientation="Vertical">
         <TextBlock Text="Buat proyek baru." FontSize="48"/>
         <Grid Margin="0,20">
@@ -55,4 +54,4 @@
             </Button>
         </StackPanel>
     </StackPanel>
-</mah:CustomDialog>
+</UserControl>

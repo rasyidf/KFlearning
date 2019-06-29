@@ -6,26 +6,30 @@
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:viewModels="clr-namespace:KFlearning.IDE.ViewModels"
-             xmlns:applicationServices="clr-namespace:KFlearning.ApplicationServices;assembly=KFlearning.ApplicationServices"
+             xmlns:applicationServices="clr-namespace:KFlearning.IDE.ApplicationServices"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance viewModels:ArticleViewModel, IsDesignTimeCreatable=False}"
              applicationServices:ViewModelLocator.IsAutomaticLocator="True">
     <UserControl.Resources>
-        <Thickness x:Key="ButtonMargin" Left="5" Right="5" />
+        <ResourceDictionary>
+            <Thickness x:Key="ButtonMargin" Left="5" Right="5" />
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Text="Artikel." FontSize="48" Margin="{StaticResource ButtonMargin}"/>
-        <DockPanel Grid.Row="1" Margin="0,20">
+        <DockPanel Grid.Row="1" Margin="0,20" IsEnabled="{Binding CommandIsLoading, Converter={StaticResource InvertBoolConverter}}">
             <ComboBox Margin="{StaticResource ButtonMargin}" Width="150" DockPanel.Dock="Left" 
-                      ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}"
+                      ItemsSource="{Binding Series}" SelectedItem="{Binding SelectedSeries}"
                       mah:TextBoxHelper.ClearTextButton="False"
                       mah:TextBoxHelper.UseFloatingWatermark="True"
                       mah:TextBoxHelper.Watermark="Kategori" />
@@ -37,6 +41,7 @@
             </Button>
             <TextBox HorizontalAlignment="Right" DockPanel.Dock="Right" Width="200"
                      Style="{StaticResource SearchMetroTextBox}"
+                     Text="{Binding SearchText}"
                      mah:TextBoxHelper.ButtonCommand="{Binding SearchCommand, Mode=OneWay}"
                      mah:TextBoxHelper.UseFloatingWatermark="True"
                      mah:TextBoxHelper.Watermark="Cari...">
@@ -45,7 +50,21 @@
                 </TextBox.InputBindings>
             </TextBox>
         </DockPanel>
-        <ListView Grid.Row="2" ItemTemplate="{StaticResource ArticleItemTemplate}" ItemsSource="{Binding Articles}" />
-        <mah:ProgressRing Grid.Row="2" IsActive="{Binding LoadingIsActive}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <ListView Grid.Row="2" ItemTemplate="{StaticResource ArticleItemTemplate}" ItemsSource="{Binding Articles}" 
+                  Visibility="{Binding CommandIsLoading, Converter={StaticResource BoolToVisibilityConverter}}"
+                  x:Name="ArticleListView">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick" SourceObject="{Binding ElementName=ArticleListView}">
+                    <i:InvokeCommandAction Command="{Binding ArticleDoubleClickCommand}" 
+                                           CommandParameter="{Binding ElementName=ArticleListView, Path=SelectedItem}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListView>
+        <mah:ProgressRing Grid.Row="2" IsActive="{Binding CommandIsLoading}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <mah:ToggleSwitch Grid.Row="3" Margin="0,10,0,0" HorizontalAlignment="Left"
+                          OffLabel="Offline mode" OnLabel="Online mode"
+                          IsChecked="{Binding OnlineIsChecked}"
+                          CheckChangedCommand="{Binding OnlineChangedCommand}"
+                          IsEnabled="{Binding CommandIsLoading, Converter={StaticResource InvertBoolConverter}}"/>
     </Grid>
 </UserControl>

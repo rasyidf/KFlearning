@@ -1,7 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using Castle.Windsor;
-using KFlearning.ApplicationServices;
-using KFlearning.ApplicationServices.Models;
+using KFlearning.IDE.ApplicationServices;
+using KFlearning.IDE.Models;
 using KFlearning.IDE.Views;
 
 namespace KFlearning.IDE
@@ -19,27 +20,16 @@ namespace KFlearning.IDE
             InitializeComponent();
         }
 
-        protected override void OnStartup(StartupEventArgs e)
+        protected override void OnExit(ExitEventArgs e)
         {
-            InitializeViews();
-
-            MainWindow = ViewLocator.GetShell();
-            MainWindow?.Show();
-            Container.Resolve<IEventAggregator>().Publish(new AppEventArgs(AppAction.Bootstrap));
+            base.OnExit(e);
         }
 
-        private void InitializeViews()
+        protected override void OnStartup(StartupEventArgs e)
         {
-            ViewModelBase.AggregatorFunc = () => Container.Resolve<IEventAggregator>();
-            ViewModelLocator.ResolverFunc = t => Container.Resolve(t);
-
-            ViewLocator.RegisterShell(Container.Resolve<ShellView>());
-            ViewLocator.Register(Container.Resolve<ProjectView>());
-            ViewLocator.Register(Container.Resolve<ArticleView>());
-            ViewLocator.Register(Container.Resolve<WebServerView>());
-            ViewLocator.Register(Container.Resolve<AboutView>());
-            ViewLocator.Register(Container.Resolve<CreateProjectView>());
-            ViewLocator.Register(Container.Resolve<ReaderView>());
+            var window = Container.Resolve<ShellView>();
+            MainWindow = window;
+            MainWindow?.Show();
         }
     }
 }

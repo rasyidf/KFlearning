@@ -1,22 +1,22 @@
 ﻿using System;
-using KFlearning.ApplicationServices.Models;
+using KFlearning.DAL;
 using MahApps.Metro.IconPacks;
 
 namespace KFlearning.IDE.Models
 {
     public class ProjectItem
     {
-        public PackIconMaterialKind Icon { get; }
+        public PackIconMaterialKind Icon => ProjectTypeToMaterialIcon(Item.Type);
 
-        public string Title { get; }
+        public string Title => Item.Title;
 
-        public string Path { get; }
+        public string Path => Item.Path;
 
-        public ProjectItem(PackIconMaterialKind icon, string title, string path)
+        public Project Item { get; }
+
+        public ProjectItem(Project project)
         {
-            Icon = icon;
-            Title = title;
-            Path = path;
+            Item = project;
         }
 
         private PackIconMaterialKind ProjectTypeToMaterialIcon(ProjectType type)

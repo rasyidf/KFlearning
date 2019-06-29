@@ -5,14 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:viewModels="clr-namespace:KFlearning.IDE.ViewModels"
-             xmlns:applicationServices="clr-namespace:KFlearning.ApplicationServices;assembly=KFlearning.ApplicationServices"
-             
+             xmlns:applicationServices="clr-namespace:KFlearning.IDE.ApplicationServices"
+
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewModels:ProjectViewModel, IsDesignTimeCreatable=False}"
              d:DesignHeight="450" d:DesignWidth="800"
              applicationServices:ViewModelLocator.IsAutomaticLocator="True">
     <UserControl.Resources>
         <Thickness x:Key="ButtonMargin" Left="5" Right="5" />
+        <Thickness x:Key="ButtonFarMargin" Left="20" Right="5" />
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -46,7 +47,15 @@
                     <TextBlock Text="Impor" Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
+            <Button Margin="{StaticResource ButtonFarMargin}" Command="{Binding PurgeCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconMaterial Kind="DeleteForever" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="Purge" Margin="{StaticResource ButtonMargin}" />
+                </StackPanel>
+            </Button>
         </StackPanel>
-        <ListView Grid.Row="2" ItemTemplate="{StaticResource ProjectItemTemplate}" ItemsSource="{Binding Projects}" />
+
+        <ListView Grid.Row="2" ItemTemplate="{StaticResource ProjectItemTemplate}" 
+                  ItemsSource="{Binding Projects}" SelectedItem="{Binding SelectedProject}"/>
     </Grid>
 </UserControl>

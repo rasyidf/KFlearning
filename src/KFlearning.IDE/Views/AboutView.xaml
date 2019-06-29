@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:viewModels="clr-namespace:KFlearning.IDE.ViewModels"
-             xmlns:applicationServices="clr-namespace:KFlearning.ApplicationServices;assembly=KFlearning.ApplicationServices"
+             xmlns:applicationServices="clr-namespace:KFlearning.IDE.ApplicationServices"
+             xmlns:resources="clr-namespace:KFlearning.IDE.Resources"
 
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewModels:AboutViewModel, IsDesignTimeCreatable=False}"
@@ -15,11 +16,11 @@
         <Thickness x:Key="ButtonMargin" Left="5" Right="5" />
     </UserControl.Resources>
     <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-        <TextBlock Text="{x:Static applicationServices:Strings.AppName}" HorizontalAlignment="Center" FontSize="48"/>
-        <TextBlock Text="{x:Static applicationServices:Strings.AppDescription}" HorizontalAlignment="Center" FontSize="24"/>
+        <TextBlock Text="{x:Static resources:Strings.AppName}" HorizontalAlignment="Center" FontSize="48"/>
+        <TextBlock Text="{x:Static resources:Strings.AppDescription}" HorizontalAlignment="Center" FontSize="24"/>
 
-        <TextBlock Text="{x:Static applicationServices:Strings.CopyrightText}" Margin="0,40,0,0" HorizontalAlignment="Center" FontSize="12"/>
-        <TextBlock Text="{x:Static applicationServices:Strings.LicenseText}" Margin="0,10,0,0" HorizontalAlignment="Center" FontSize="12"/>
+        <TextBlock Text="{x:Static resources:Strings.CopyrightText}" Margin="0,40,0,0" HorizontalAlignment="Center" FontSize="12"/>
+        <TextBlock Text="{x:Static resources:Strings.LicenseText}" Margin="0,10,0,0" HorizontalAlignment="Center" FontSize="12"/>
 
         <StackPanel Orientation="Horizontal" Margin="0,40,0,0" HorizontalAlignment="Center">
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding WebCommand}">

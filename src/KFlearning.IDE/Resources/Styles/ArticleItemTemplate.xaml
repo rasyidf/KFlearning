@@ -23,11 +23,8 @@
                 <TextBlock Text="Level: " />
                 <TextBlock Text="{Binding Level}" Margin="{StaticResource LabelMargin}" />
 
-                <TextBlock Text="Kategori: " />
-                <TextBlock Text="{Binding Category}" Margin="{StaticResource LabelMargin}" />
-
-                <TextBlock Text="Dipos pada: " />
-                <TextBlock Text="{Binding ReleaseDate}" Margin="{StaticResource LabelMargin}" />
+                <TextBlock Text="Diupdate pada: " />
+                <TextBlock Text="{Binding Date}" Margin="{StaticResource LabelMargin}" />
             </StackPanel>
         </Grid>
     </DataTemplate>

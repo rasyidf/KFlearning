@@ -1,9 +1,10 @@
 ﻿using System.Windows.Input;
-using KFlearning.ApplicationServices;
+using KFlearning.IDE.ApplicationServices;
+using KFlearning.IDE.Resources;
 
 namespace KFlearning.IDE.ViewModels
 {
-    public class AboutViewModel : ViewModelBase
+    public class AboutViewModel : PropertyChangedBase
     {
         #region Properties
 

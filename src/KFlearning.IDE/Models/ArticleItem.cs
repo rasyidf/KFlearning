@@ -1,26 +1,41 @@
-﻿using System;
+﻿using KFlearning.DAL;
+using System;
+using KFlearning.API;
 
 namespace KFlearning.IDE.Models
 {
     public class ArticleItem
     {
-        public int Id { get; }
-
+        public DateTime Date { get; }
+        
         public string Title { get; }
-
-        public DateTime ReleaseDate { get; }
-
-        public string Category { get; }
 
         public int Level { get; }
 
-        public ArticleItem(int id, string title, DateTime releaseDate, string category, int level)
+        public string Series { get; }
+
+        public Uri Url { get; }
+
+        public object Item { get; }
+
+        public ArticleItem(Article article)
         {
-            Title = title;
-            ReleaseDate = releaseDate;
-            Category = category;
-            Level = level;
-            Id = id;
+            Item = article;
+            Date = article.Date;
+            Title = article.Title;
+            Level = article.Level;
+            Series = article.Series.Title;
+            Url = article.Url;
+        }
+
+        public ArticleItem(Post post)
+        {
+            Item = post;
+            Date = post.Date;
+            Title = post.Title;
+            Level = post.Level;
+            Series = post.Series;
+            Url = post.Url;
         }
     }
 }

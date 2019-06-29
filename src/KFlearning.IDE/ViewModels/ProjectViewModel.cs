@@ -1,9 +1,11 @@
 ﻿using System.Collections.ObjectModel;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using KFlearning.ApplicationServices;
-using KFlearning.ApplicationServices.Clients;
-using KFlearning.ApplicationServices.Models;
+using KFlearning.DAL;
+using KFlearning.IDE.ApplicationServices;
 using KFlearning.IDE.Models;
 using KFlearning.IDE.Views;
 using MahApps.Metro.Controls;
@@ -11,10 +13,16 @@ using MahApps.Metro.Controls.Dialogs;
 
 namespace KFlearning.IDE.ViewModels
 {
-    public class ProjectViewModel : ViewModelBase
+    public class ProjectViewModel : PropertyChangedBase
     {
-        private ProjectManager _repository;
-        private Vscode _vscode;
+        #region Fields
+
+        private readonly IDatabaseContext _database;
+        private readonly IApplicationHelpers _helpers;
+
+        #endregion
+
+        #region Properties
 
         public ICommand CreateCommand { get; set; }
 
@@ -24,27 +32,70 @@ namespace KFlearning.IDE.ViewModels
 
         public ICommand ExportCommand { get; set; }
 
-        [NotifyChanged]
-        public virtual ObservableCollection<ProjectItem> Projects { get; set; }
+        public ICommand PurgeCommand { get; set; }
 
-        public ProjectViewModel()
+        [NotifyChanged] public virtual ObservableCollection<ProjectItem> Projects { get; set; }
+
+        [NotifyChanged] public virtual ObservableCollection<ProjectItem> SelectedProject { get; set; }
+
+        #endregion
+
+        #region Constructor
+
+        public ProjectViewModel(IDatabaseContext database, IApplicationHelpers helpers)
         {
-            CreateCommand = new RelayCommand(CreateCommand_Handler);
+            _database = database;
+            _helpers = helpers;
+            CreateCommand = new RelayCommand(Create_Command);
+            DeleteCommand = new RelayCommand(Delete_Command);
+            ImportCommand = new RelayCommand(Import_Command);
+            ExportCommand = new RelayCommand(Export_Command);
+            PurgeCommand = new RelayCommand(Purge_Command);
+
+            Task.Run(LoadData);
         }
 
-        private void CreateCommand_Handler(object obj)
+        #endregion
+
+        #region Commands
+
+        private async void Create_Command(object obj)
         {
             var mainWindow = (MetroWindow) Application.Current.MainWindow;
-            var dialog = ViewLocator.GetView<CreateProjectView>();
-            ((CreateProjectViewModel) dialog.DataContext).DialogInstance = dialog;
-            mainWindow.ShowMetroDialogAsync(dialog).Wait();
-            
-
+            var dialog = _helpers.CreateDialog<CreateProjectView>();
+            await mainWindow.ShowMetroDialogAsync(dialog);
         }
 
-        protected override void OnBootstrap(AppEventArgs e)
+        private void Delete_Command(object obj)
         {
-            //Projects = new ObservableCollection<ProjectItem>(_repository.GetProjects());
+            throw new System.NotImplementedException();
         }
+
+        private void Import_Command(object obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void Export_Command(object obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void Purge_Command(object obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private async void LoadData()
+        {
+            var projects = await _database.Projects.Select(x => new ProjectItem(x)).ToListAsync();
+            Projects = new ObservableCollection<ProjectItem>(projects);
+        }
+
+        #endregion
     }
 }

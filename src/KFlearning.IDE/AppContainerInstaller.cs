@@ -1,7 +1,7 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using KFlearning.ApplicationServices;
+using KFlearning.IDE.ApplicationServices;
 using KFlearning.IDE.ViewModels;
 using KFlearning.IDE.Views;
 
@@ -11,16 +11,16 @@ namespace KFlearning.IDE
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            // Install application services
-            container.Install(new ApplicationServicesInstaller());
-
-            
-
             // Register Views and ViewModels
             container.Register(
-                Classes.FromThisAssembly().InSameNamespaceAs<ShellView>().Configure(x => x.LifestyleSingleton()),
+                Component.For<IApplicationHelpers>().ImplementedBy<ApplicationHelpers>().LifestyleSingleton(),
+
+                Component.For<NotifyPropertChangedInterceptor>(),
+                Component.For<IAutoNotifyPropertyChanged>().ImplementedBy<PropertyChangedBase>(),
+
+                Classes.FromThisAssembly().InSameNamespaceAs<ShellView>(),
                 Classes.FromThisAssembly().InSameNamespaceAs<ShellViewModel>()
-                    .Configure(x => x.Interceptors<NotifyPropertChangedInterceptor>().LifestyleSingleton())
+                    .Configure(x => x.Interceptors<NotifyPropertChangedInterceptor>())
             );
         }
     }

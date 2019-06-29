@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:viewModels="clr-namespace:KFlearning.IDE.ViewModels"
-             xmlns:applicationServices="clr-namespace:KFlearning.ApplicationServices;assembly=KFlearning.ApplicationServices"
+             xmlns:applicationServices="clr-namespace:KFlearning.IDE.ApplicationServices"
 
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewModels:WebServerViewModel, IsDesignTimeCreatable=False}"
