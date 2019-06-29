@@ -1,39 +1,29 @@
-﻿using KFlearning.API.Converters;
+﻿using System;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace KFlearning.API
 {
-    [JsonConverter(typeof(JsonPathConverter))]
     public class Post
     {
         [JsonProperty("id")]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("date")]
-        public DateTimeOffset Date { get; set; }
+        public DateTime Date { get; set; }
         
-        [JsonProperty("modified")]
-        public DateTimeOffset Modified { get; set; }
-        
-        [JsonProperty("link")]
-        public Uri Link { get; set; }
-
-        [JsonProperty("title.rendered")]
+        [JsonProperty("title")]
         public string Title { get; set; }
 
-        [JsonProperty("content.rendered")]
+        [JsonProperty("category")]
+        public string Series { get; set; }
+
+        [JsonProperty("level")]
+        public int Level { get; set; }
+
+        [JsonProperty("content")]
         public string Content { get; set; }
 
-        [JsonProperty("featured_media")]
-        public int FeaturedMedia { get; set; }
-        
-        [JsonProperty("categories")]
-        public List<int> Categories { get; set; }
-
-        [JsonProperty("tags")]
-        public List<int> Tags { get; set; }
+        [JsonProperty("link")]
+        public Uri Url { get; set; }
     }
 }

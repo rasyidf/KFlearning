@@ -1,80 +1,64 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace KFlearning.API
 {
     public class KodesianaService : IKodesianaService
     {
-        private const int TutorialCategoryId = 2;
+        private const string EndpointBase = "https://api.kodesiana.com";
 
-        private static HttpClient _client = new HttpClient();
-        
-        public async Task<PostInfo> GetPostsAsync(CancellationToken cancellation, IEnumerable<int> category = null, IEnumerable<int> tags = null, int offset = 0)
+        public static HttpClient Client = new HttpClient();
+
+        public async Task<bool> IsOnline()
         {
-            var uri = new Uri($"https://kodesiana.com/wp-json/wp/v2/posts" +
-                $"?offset={offset}" +
-                (category == null ? "": $"?category={ArrayToUri(category)}") +
-                (tags == null ? "" : $"?tag={tags}") +
-                $"&_field=id,date,modified,link,title,featured_media,cetegories,tags");
-            var result = await _client.GetAsync(uri, cancellation);
-            result.EnsureSuccessStatusCode();
+            try
+            {
+                var result = await Client.GetAsync(EndpointBase);
+                result.EnsureSuccessStatusCode();
 
-            var total = result.Headers.GetValues("X-WP-TotalPages");
-            var stream = await result.Content.ReadAsStreamAsync();
-            var posts = DeserializeStream<List<Post>>(stream);
-
-            return new PostInfo(Convert.ToInt32(total.First()), offset, posts);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
-
-        public async Task<IEnumerable<Taxonomy>> GetCategoriesAsync(CancellationToken cancellation, int offset = 0)
+        public async Task<IEnumerable<Post>> GetPostsAsync(string series = null)
         {
-            var uri = new Uri($"https://kodesiana.com/wp-json/wp/v2/categories" +
-                $"?offset={offset}" +
-                $"&_field=id,date,modified,link,title,featured_media,cetegories,tags");
-            var result = await _client.GetAsync(uri, cancellation);
-            result.EnsureSuccessStatusCode();
+            var uri = CreateUri(string.IsNullOrEmpty(series) ? "/posts" : "/posts?series=" + series);
+            var response = await Client.GetStreamAsync(uri);
 
-            var stream = await result.Content.ReadAsStreamAsync();
-            return DeserializeStream<List<Taxonomy>>(stream);
+            return DeserializeStream<List<Post>>(response);
         }
 
-        public async Task<IEnumerable<Taxonomy>> GetTagsAsync(CancellationToken cancellation, int offset = 0)
+        public async Task<IEnumerable<Post>> FindPostAsync(string title, string series = null)
         {
-            var uri = new Uri($"https://kodesiana.com/wp-json/wp/v2/tags" +
-                $"?offset={offset}" +
-                $"&_field=id,date,modified,link,title,featured_media,cetegories,tags");
-            var result = await _client.GetAsync(uri, cancellation);
-            result.EnsureSuccessStatusCode();
+            var uri = CreateUri(string.IsNullOrEmpty(series) ? "/find?q=" + title : $"/find?q={title}&series={series}");
+            var response = await Client.GetStreamAsync(uri);
 
-            var stream = await result.Content.ReadAsStreamAsync();
-            return DeserializeStream<List<Taxonomy>>(stream);
+            return DeserializeStream<List<Post>>(response);
         }
 
-        public async Task<Post> GetPostAsync(CancellationToken cancellation, int postId)
+        public async Task<IEnumerable<string>> GetSeriesAsync()
         {
-            var uri = new Uri($"https://kodesiana.com/wp-json/wp/v2/post/{postId}" +
-                $"&_field=id,date,modified,link,title,featured_media,cetegories,tags,content");
-            var result = await _client.GetAsync(uri, cancellation);
-            result.EnsureSuccessStatusCode();
+            var uri = CreateUri("/series");
+            var response = await Client.GetStreamAsync(uri);
 
-            var stream = await result.Content.ReadAsStreamAsync();
-            return DeserializeStream<Post>(stream);
+            return DeserializeStream<List<string>>(response);
         }
 
-        private string ArrayToUri<T>(IEnumerable<T> array)
+        private string CreateUri(string path)
         {
-            return string.Join(",", array);
+            return EndpointBase + path;
         }
-        
+
         private static T DeserializeStream<T>(Stream stream)
         {
             if (stream == null || !stream.CanSeek) return default(T);
@@ -90,6 +74,7 @@ namespace KFlearning.API
                         new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
                     }
                 };
+
                 return serializer.Deserialize<T>(jsonReader);
             }
         }
