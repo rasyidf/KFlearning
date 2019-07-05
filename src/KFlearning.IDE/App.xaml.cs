@@ -1,14 +1,18 @@
-﻿using System;
+﻿// // PROJECT :   KFlearning
+// // FILENAME :  App.xaml.cs
+// // AUTHOR  :   Fahmi Noor Fiqri
+// // NPM     :   065118116
+// //
+// // This file is part of KFlearning, licensed under MIT license.
+
 using System.Windows;
 using Castle.Windsor;
-using KFlearning.IDE.ApplicationServices;
-using KFlearning.IDE.Models;
 using KFlearning.IDE.Views;
 
 namespace KFlearning.IDE
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    ///     Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {

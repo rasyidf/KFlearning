@@ -1,4 +1,11 @@
-﻿using System;
+﻿// // PROJECT :   KFlearning
+// // FILENAME :  WebServerViewModel.cs
+// // AUTHOR  :   Fahmi Noor Fiqri
+// // NPM     :   065118116
+// //
+// // This file is part of KFlearning, licensed under MIT license.
+
+using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -10,6 +17,11 @@ namespace KFlearning.IDE.ViewModels
 {
     public class WebServerViewModel : PropertyChangedBase
     {
+        public WebServerViewModel()
+        {
+            Task.Run(LoadData);
+        }
+
         public ICommand ServerCommand { get; set; }
 
         public ICommand PhpInfoCommand { get; set; }
@@ -18,19 +30,11 @@ namespace KFlearning.IDE.ViewModels
 
         public ICommand WorkspaceCommand { get; set; }
 
-        [NotifyChanged]
-        public virtual bool ServerIsChecked { get; set; }
+        [NotifyChanged] public virtual bool ServerIsChecked { get; set; }
 
-        [NotifyChanged]
-        public virtual bool ServerIsEnabled { get; set; }
+        [NotifyChanged] public virtual bool ServerIsEnabled { get; set; }
 
-        [NotifyChanged]
-        public virtual ObservableCollection<ServerLogItem> Logs { get; set; }
-
-        public WebServerViewModel()
-        {
-            Task.Run(LoadData);
-        }
+        [NotifyChanged] public virtual ObservableCollection<ServerLogItem> Logs { get; set; }
 
         private void LoadData()
         {
@@ -40,7 +44,5 @@ namespace KFlearning.IDE.ViewModels
                 new ServerLogItem(DateTime.Now.AddMinutes(20), "Server aktif.")
             };
         }
-
-
     }
 }

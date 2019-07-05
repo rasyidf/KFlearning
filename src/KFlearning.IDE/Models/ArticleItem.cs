@@ -1,30 +1,25 @@
-﻿using KFlearning.DAL;
+﻿// // PROJECT :   KFlearning
+// // FILENAME :  ArticleItem.cs
+// // AUTHOR  :   Fahmi Noor Fiqri
+// // NPM     :   065118116
+// //
+// // This file is part of KFlearning, licensed under MIT license.
+
 using System;
 using KFlearning.API;
+using KFlearning.Core.Entities;
 
 namespace KFlearning.IDE.Models
 {
     public class ArticleItem
     {
-        public DateTime Date { get; }
-        
-        public string Title { get; }
-
-        public int Level { get; }
-
-        public string Series { get; }
-
-        public Uri Url { get; }
-
-        public object Item { get; }
-
         public ArticleItem(Article article)
         {
             Item = article;
             Date = article.Date;
             Title = article.Title;
             Level = article.Level;
-            Series = article.Series.Title;
+            Series = article.Series;
             Url = article.Url;
         }
 
@@ -37,5 +32,17 @@ namespace KFlearning.IDE.Models
             Series = post.Series;
             Url = post.Url;
         }
+
+        public DateTime Date { get; }
+
+        public string Title { get; }
+
+        public int Level { get; }
+
+        public string Series { get; }
+
+        public string Url { get; }
+
+        public object Item { get; }
     }
 }

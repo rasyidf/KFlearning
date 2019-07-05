@@ -1,4 +1,11 @@
-﻿using System.Windows.Input;
+﻿// // PROJECT :   KFlearning
+// // FILENAME :  ShellViewModel.cs
+// // AUTHOR  :   Fahmi Noor Fiqri
+// // NPM     :   065118116
+// //
+// // This file is part of KFlearning, licensed under MIT license.
+
+using System.Windows.Input;
 using KFlearning.IDE.ApplicationServices;
 using KFlearning.IDE.Resources;
 using KFlearning.IDE.Views;
@@ -9,24 +16,8 @@ namespace KFlearning.IDE.ViewModels
 {
     public class ShellViewModel : PropertyChangedBase
     {
-        #region Properties
-
-        public ICommand WebCommand { get; set; }
-
-        public ICommand GitHubCommand { get; set; }
-
-        public ICommand ItemClickCommand { get; set; }
-
-        [NotifyChanged] public virtual object PageContent { get; set; }
-
-        [NotifyChanged] public virtual HamburgerMenuItemCollection SidebarItems { get; set; }
-
-        [NotifyChanged] public virtual HamburgerMenuItemCollection SidebarOptionsItems { get; set; }
-
-        #endregion
-
         #region Constructor
-        
+
         public ShellViewModel(IApplicationHelpers helpers)
         {
             WebCommand = new RelayCommand(x => helpers.OpenUrl(Strings.WebUrl));
@@ -39,10 +30,10 @@ namespace KFlearning.IDE.ViewModels
         #endregion
 
         #region Commands
-        
+
         private void ItemClick_Command(object obj)
         {
-            PageContent = ((HamburgerMenuIconItem)obj).Tag;
+            PageContent = ((HamburgerMenuIconItem) obj).Tag;
         }
 
         #endregion
@@ -84,6 +75,22 @@ namespace KFlearning.IDE.ViewModels
 
             PageContent = SidebarItems[0].Tag;
         }
+
+        #endregion
+
+        #region Properties
+
+        public ICommand WebCommand { get; set; }
+
+        public ICommand GitHubCommand { get; set; }
+
+        public ICommand ItemClickCommand { get; set; }
+
+        [NotifyChanged] public virtual object PageContent { get; set; }
+
+        [NotifyChanged] public virtual HamburgerMenuItemCollection SidebarItems { get; set; }
+
+        [NotifyChanged] public virtual HamburgerMenuItemCollection SidebarOptionsItems { get; set; }
 
         #endregion
     }

@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
+﻿// // PROJECT :   KFlearning
+// // FILENAME :  ArticleViewModel.cs
+// // AUTHOR  :   Fahmi Noor Fiqri
+// // NPM     :   065118116
+// //
+// // This file is part of KFlearning, licensed under MIT license.
+
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Castle.MicroKernel;
-using KFlearning.API;
-using KFlearning.DAL;
 using KFlearning.IDE.ApplicationServices;
 using KFlearning.IDE.Models;
 using KFlearning.IDE.Views;
@@ -16,10 +19,47 @@ namespace KFlearning.IDE.ViewModels
     public class ArticleViewModel : PropertyChangedBase
     {
         #region Fields
-        
-        private readonly IDatabaseContext _database;
-        private readonly IKodesianaService _kodesiana;
-        
+
+        private readonly IArticleManager _articleManager;
+
+        #endregion
+
+        #region Constructor
+
+        public ArticleViewModel(IArticleManager articleManager)
+        {
+            _articleManager = articleManager;
+
+            RefreshCommand = new RelayCommand(Refresh_Command);
+            SearchCommand = new RelayCommand(Search_Command);
+            OnlineChangedCommand = new RelayCommand(Online_Command);
+            ArticleDoubleClickCommand = new RelayCommand(ArticleDoubleClick_Command);
+
+            Task.Run(LoadData);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private async Task LoadData()
+        {
+            CommandIsLoading = true;
+            _articleManager.Online = OnlineIsChecked;
+
+            var series = await _articleManager.GetSeries();
+            Series = new ObservableCollection<SeriesItem>(series);
+            SelectedSeries = Series.Count == 0 ? null : Series[0];
+
+            if (SelectedSeries != null)
+            {
+                var articles = await _articleManager.GetArticles(SelectedSeries);
+                Articles = new ObservableCollection<ArticleItem>(articles);
+            }
+
+            CommandIsLoading = false;
+        }
+
         #endregion
 
         #region Properties
@@ -32,40 +72,17 @@ namespace KFlearning.IDE.ViewModels
 
         public ICommand ArticleDoubleClickCommand { get; set; }
 
-        [NotifyChanged]
-        public virtual bool CommandIsLoading { get; set; }
+        [NotifyChanged] public virtual bool CommandIsLoading { get; set; }
 
-        [NotifyChanged]
-        public virtual ObservableCollection<ArticleItem> Articles { get; set; }
-        
-        [NotifyChanged]
-        public virtual ObservableCollection<Series> Series { get; set; }
-        
-        [NotifyChanged]
-        public virtual Series SelectedSeries { get; set; }
-        
-        [NotifyChanged]
-        public virtual bool OnlineIsChecked { get; set; }
-        
-        [NotifyChanged]
-        public virtual string SearchText { get;set; }
-        
-        #endregion
+        [NotifyChanged] public virtual ObservableCollection<ArticleItem> Articles { get; set; }
 
-        #region Constructor
+        [NotifyChanged] public virtual ObservableCollection<SeriesItem> Series { get; set; }
 
-        public ArticleViewModel(IDatabaseContext database, IKodesianaService kodesiana)
-        {
-            _database = database;
-            _kodesiana = kodesiana;
+        [NotifyChanged] public virtual SeriesItem SelectedSeries { get; set; }
 
-            RefreshCommand = new RelayCommand(Refresh_Command);
-            SearchCommand = new RelayCommand(Search_Command);
-            OnlineChangedCommand = new RelayCommand(Online_Command);
-            ArticleDoubleClickCommand = new RelayCommand(ArticleDoubleClick_Command);
+        [NotifyChanged] public virtual bool OnlineIsChecked { get; set; }
 
-            Task.Run(LoadData);
-        }
+        [NotifyChanged] public virtual string SearchText { get; set; }
 
         #endregion
 
@@ -94,60 +111,10 @@ namespace KFlearning.IDE.ViewModels
         private async void Search_Command(object obj)
         {
             CommandIsLoading = true;
-            if (OnlineIsChecked && await _kodesiana.IsOnline())
-            {
-                var result = await _kodesiana.FindPostAsync(SearchText, SelectedSeries.Title);
-                Articles = new ObservableCollection<ArticleItem>(result.Select(x => new ArticleItem(x)));
-            }
-            else
-            {
-                var result = await _database.Articles
-                    .Where(x => SelectedSeries.Title == x.Series.Title && x.Title.Contains(SearchText))
-                    .Select(x => new ArticleItem(x)).ToListAsync();
-                Articles = new ObservableCollection<ArticleItem>(result);
-            }
-
+            _articleManager.Online = OnlineIsChecked;
+            var result = await _articleManager.FindArticles(SearchText, SelectedSeries);
+            Articles = new ObservableCollection<ArticleItem>(result);
             CommandIsLoading = false;
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        private async Task LoadData()
-        {
-            CommandIsLoading = true;
-            if (OnlineIsChecked && await _kodesiana.IsOnline())
-            {
-                await LoadOnlineData();
-            }
-            else
-            {
-                await LoadDatabaseData();
-            }
-
-            CommandIsLoading = false;
-        }
-
-        private async Task LoadDatabaseData()
-        {
-            var series = await _database.Series.ToListAsync();
-            Series = new ObservableCollection<Series>(series);
-            SelectedSeries = Series.Count == 0 ? null : Series.First();
-
-            if (SelectedSeries == null) return;
-            var articles = await _database.Articles.Select(x => new ArticleItem(x)).ToListAsync();
-            Articles = new ObservableCollection<ArticleItem>(articles);
-        }
-
-        private async Task LoadOnlineData()
-        {
-            var cats = await _kodesiana.GetSeriesAsync();
-            Series = new ObservableCollection<Series>(cats.Select(x => new Series {Title = x}));
-            SelectedSeries = Series.First();
-
-            var articles = await _kodesiana.GetPostsAsync(SelectedSeries.Title);
-            Articles = new ObservableCollection<ArticleItem>(articles.Select(x => new ArticleItem(x)).ToList());
         }
 
         #endregion
