@@ -132,15 +132,8 @@
   <data name="MetadataFileName" xml:space="preserve">
     <value>kf-project.json</value>
   </data>
-  <data name="VirtualHostTemplate" xml:space="preserve">
-    <value>&lt;VirtualHost *:80&gt; 
-    DocumentRoot "{ROOT}"
-    ServerName {DOMAIN}
-    ServerAlias *.{DOMAIN}
-    &lt;Directory "{ROOT}"&gt;
-        AllowOverride All
-        Require all granted
-    &lt;/Directory&gt;
-&lt;/VirtualHost&gt;</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="VirtualHostTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\VirtualHostTemplate.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
 </root>

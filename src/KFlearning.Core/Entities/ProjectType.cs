@@ -1,4 +1,4 @@
-﻿namespace KFlearning.DAL
+﻿namespace KFlearning.Core.Entities
 {
     public enum ProjectType
     {

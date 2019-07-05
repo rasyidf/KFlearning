@@ -52,7 +52,7 @@ namespace KFlearning.Core.IO
         {
             var sb = new StringBuilder(path);
             sb.Replace("\\", "/");
-            if (sb[sb.Length] != '/') sb.Append("/");
+            if (sb[sb.Length - 1] != '/') sb.Append("/");
             return sb.ToString();
         }
 
@@ -60,6 +60,11 @@ namespace KFlearning.Core.IO
         {
             var processes = Process.GetProcessesByName("httpd");
             return processes.Length > 0;
+        }
+
+        public void Run(string filename, string args)
+        {
+            Process.Start(filename, args);
         }
 
         public void RunWait(string filename, string args)

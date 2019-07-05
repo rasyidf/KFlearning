@@ -28,9 +28,8 @@ namespace KFlearning.Core.Hosts
             return _processManager.IsRunning(Constants.HttpdProcessName);
         }
 
-        public void CreateAlias(string alias, string path)
+        public void CreateAlias(string domainName, string path)
         {
-            var domainName = CreateDomainName(alias);
             var aliasFileName = Path.Combine(_processManager.GetPath(PathKind.ApacheSitesRoot), domainName + ".conf");
 
             var sb = new StringBuilder(Constants.VirtualHostTemplate);
@@ -39,16 +38,10 @@ namespace KFlearning.Core.Hosts
             File.WriteAllText(aliasFileName, sb.ToString());
         }
 
-        public void RemoveAlias(string alias)
+        public void RemoveAlias(string domainName)
         {
-            var domainName = CreateDomainName(alias);
             var aliasFileName = Path.Combine(_processManager.GetPath(PathKind.ApacheSitesRoot), domainName + ".conf");
             File.Delete(aliasFileName);
-        }
-
-        public string CreateDomainName(string alias)
-        {
-            return $"{alias}.{Constants.DomainName}";
         }
     }
 }

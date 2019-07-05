@@ -106,15 +106,7 @@ namespace KFlearning.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;VirtualHost *:80&gt; 
-        ///    DocumentRoot &quot;{ROOT}&quot;
-        ///    ServerName {DOMAIN}
-        ///    ServerAlias *.{DOMAIN}
-        ///    &lt;Directory &quot;{ROOT}&quot;&gt;
-        ///        AllowOverride All
-        ///        Require all granted
-        ///    &lt;/Directory&gt;
-        ///&lt;/VirtualHost&gt;.
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string VirtualHostTemplate {
             get {

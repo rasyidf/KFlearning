@@ -7,6 +7,7 @@
 
         bool IsRunning(string name);
 
+        void Run(string filename, string args);
         void RunWait(string filename, string args);
         void RunJob(string filename, string args);
         void TerminateJob(string processName);

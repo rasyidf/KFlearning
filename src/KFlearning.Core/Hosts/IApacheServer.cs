@@ -6,8 +6,7 @@
         void Stop();
         bool IsRunning();
 
-        string CreateDomainName(string alias);
-        void CreateAlias(string alias, string path);
-        void RemoveAlias(string alias);
+        void CreateAlias(string domainName, string path);
+        void RemoveAlias(string domainName);
     }
 }

@@ -52,12 +52,16 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Hosts\ClientConfigurer.cs" />
+    <Compile Include="Entities\Article.cs" />
+    <Compile Include="Entities\Content.cs" />
+    <Compile Include="Entities\DatabaseContext.cs" />
+    <Compile Include="Entities\IDatabaseContext.cs" />
+    <Compile Include="Entities\Project.cs" />
+    <Compile Include="Entities\ProjectType.cs" />
+    <Compile Include="Entities\Series.cs" />
     <Compile Include="Hosts\ApacheServer.cs" />
     <Compile Include="Hosts\HostEntry.cs" />
     <Compile Include="Hosts\HostsFile.cs" />
@@ -73,10 +77,8 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="IO\IProcessManager.cs" />
-    <Compile Include="IO\IProjectManager.cs" />
     <Compile Include="IO\PathKind.cs" />
     <Compile Include="IO\ProcessManager.cs" />
-    <Compile Include="IO\ProjectManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -86,18 +88,12 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DotNetZip">
-      <Version>1.13.3</Version>
-    </PackageReference>
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>12.0.2</Version>
+    <PackageReference Include="LiteDB">
+      <Version>4.1.4</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KFlearning.DAL\KFlearning.DAL.csproj">
-      <Project>{a4ea938f-acab-4282-bbb2-747222b98170}</Project>
-      <Name>KFlearning.DAL</Name>
-    </ProjectReference>
+    <None Include="Resources\VirtualHostTemplate.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
