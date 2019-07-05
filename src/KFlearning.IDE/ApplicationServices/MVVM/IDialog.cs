@@ -1,4 +1,11 @@
-﻿using MahApps.Metro.Controls.Dialogs;
+﻿// // PROJECT :   KFlearning
+// // FILENAME :  IDialog.cs
+// // AUTHOR  :   Fahmi Noor Fiqri
+// // NPM     :   065118116
+// //
+// // This file is part of KFlearning, licensed under MIT license.
+
+using MahApps.Metro.Controls.Dialogs;
 
 namespace KFlearning.IDE.ApplicationServices
 {

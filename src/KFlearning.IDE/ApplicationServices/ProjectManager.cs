@@ -1,4 +1,11 @@
-﻿using System;
+﻿// // PROJECT :   KFlearning
+// // FILENAME :  ProjectManager.cs
+// // AUTHOR  :   Fahmi Noor Fiqri
+// // NPM     :   065118116
+// //
+// // This file is part of KFlearning, licensed under MIT license.
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,13 +22,14 @@ namespace KFlearning.IDE.ApplicationServices
 {
     public class ProjectManager : IProjectManager
     {
-        private readonly IDatabaseContext _database;
         private readonly IApacheServer _apache;
+        private readonly IDatabaseContext _database;
         private readonly IHostsFile _hosts;
-        private readonly IVscode _vscode;
         private readonly IProcessManager _pathManager;
+        private readonly IVscode _vscode;
 
-        public ProjectManager(IApacheServer apache, IHostsFile hosts, IProcessManager pathManager, IDatabaseContext database, IVscode vscode)
+        public ProjectManager(IApacheServer apache, IHostsFile hosts, IProcessManager pathManager,
+            IDatabaseContext database, IVscode vscode)
         {
             _apache = apache;
             _hosts = hosts;
@@ -82,7 +90,7 @@ namespace KFlearning.IDE.ApplicationServices
             {
                 if (!zip.EntryFileNames.Contains(Constants.MetadataFileName))
                     throw new InvalidOperationException("No metadata file exists on import ZIP file.");
-                
+
                 // extract the files
                 var extractPath = GetPathForProject(zip.Comment);
                 zip.ExtractAll(extractPath);
@@ -95,7 +103,7 @@ namespace KFlearning.IDE.ApplicationServices
                 if (project.Type != ProjectType.Web)
                 {
                     _apache.CreateAlias(project.DomainName, project.Path);
-                    _hosts.AddEntry(project.DomainName);    
+                    _hosts.AddEntry(project.DomainName);
                 }
 
                 _database.Projects.Insert(project);
@@ -111,7 +119,7 @@ namespace KFlearning.IDE.ApplicationServices
                 {
                     zip.AddFile(dire);
                 }
-                
+
                 zip.Comment = project.Title;
                 zip.Save();
             }
@@ -135,7 +143,7 @@ namespace KFlearning.IDE.ApplicationServices
         }
 
         #region Private Methods
-        
+
         private void SaveMetadata(Project project)
         {
             var path = Path.Combine(project.Path, Constants.MetadataFileName);
@@ -181,7 +189,7 @@ namespace KFlearning.IDE.ApplicationServices
             {
                 zip.ExtractAll(project.Path, ExtractExistingFileAction.OverwriteSilently);
             }
-        } 
+        }
 
         #endregion
     }

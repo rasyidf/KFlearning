@@ -1,4 +1,11 @@
-﻿using System;
+﻿// // PROJECT :   KFlearning
+// // FILENAME :  NotifyPropertChangedInterceptor.cs
+// // AUTHOR  :   Fahmi Noor Fiqri
+// // NPM     :   065118116
+// //
+// // This file is part of KFlearning, licensed under MIT license.
+
+using System;
 using System.Reflection;
 using Castle.DynamicProxy;
 

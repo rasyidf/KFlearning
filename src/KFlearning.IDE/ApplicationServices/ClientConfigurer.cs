@@ -1,4 +1,11 @@
-﻿using System;
+﻿// // PROJECT :   KFlearning
+// // FILENAME :  ClientConfigurer.cs
+// // AUTHOR  :   Fahmi Noor Fiqri
+// // NPM     :   065118116
+// //
+// // This file is part of KFlearning, licensed under MIT license.
+
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -19,7 +26,6 @@ namespace KFlearning.IDE.ApplicationServices
 
         public void Configure()
         {
-
         }
 
         private void ConfigureEnvironmentVars()
@@ -50,7 +56,6 @@ namespace KFlearning.IDE.ApplicationServices
 
         private void ConfigureApache()
         {
-
         }
 
         private void ConfigureMinGw()
@@ -59,7 +64,6 @@ namespace KFlearning.IDE.ApplicationServices
 
 
             // copy winbgim
-
         }
     }
 }

@@ -1,4 +1,11 @@
-﻿using System.Collections.Generic;
+﻿// // PROJECT :   KFlearning
+// // FILENAME :  ArticleManager.cs
+// // AUTHOR  :   Fahmi Noor Fiqri
+// // NPM     :   065118116
+// //
+// // This file is part of KFlearning, licensed under MIT license.
+
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using KFlearning.API;
@@ -9,26 +16,26 @@ namespace KFlearning.IDE.ApplicationServices
 {
     public class ArticleManager : IArticleManager
     {
-        #region Fields
-
-        private readonly IDatabaseContext _database;
-        private readonly IKodesianaService _kodesiana;
-
-        #endregion
-
-        #region Properties
-        
-        public bool Online { get; set; }
-
-        #endregion
-
         #region Constructor
-        
+
         public ArticleManager(IKodesianaService kodesiana, IDatabaseContext database)
         {
             _kodesiana = kodesiana;
             _database = database;
         }
+
+        #endregion
+
+        #region Properties
+
+        public bool Online { get; set; }
+
+        #endregion
+
+        #region Fields
+
+        private readonly IDatabaseContext _database;
+        private readonly IKodesianaService _kodesiana;
 
         #endregion
 
@@ -67,7 +74,7 @@ namespace KFlearning.IDE.ApplicationServices
 
             var result = await _kodesiana.FindPostAsync(title, series.Title);
             return result.Select(x => new ArticleItem(x)).ToList();
-        } 
+        }
 
         #endregion
     }

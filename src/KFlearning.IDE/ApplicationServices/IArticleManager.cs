@@ -1,8 +1,9 @@
-﻿// // PROJECT :
-// // PROGRAM :
+﻿// // PROJECT :   KFlearning
+// // FILENAME :  IArticleManager.cs
 // // AUTHOR  :   Fahmi Noor Fiqri
 // // NPM     :   065118116
-// // TANGGAL :   05 Mei 2019
+// //
+// // This file is part of KFlearning, licensed under MIT license.
 
 using System.Collections.Generic;
 using System.Threading.Tasks;

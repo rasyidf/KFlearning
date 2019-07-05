@@ -1,4 +1,11 @@
-﻿using System.Diagnostics;
+﻿// // PROJECT :   KFlearning
+// // FILENAME :  ApplicationHelpers.cs
+// // AUTHOR  :   Fahmi Noor Fiqri
+// // NPM     :   065118116
+// //
+// // This file is part of KFlearning, licensed under MIT license.
+
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 using KFlearning.IDE.Models;
@@ -38,7 +45,8 @@ namespace KFlearning.IDE.ApplicationServices
             return controller;
         }
 
-        public async Task<MessageDialogResult> CreateMessageDialog(string title, string message, MessageDialogStyle style = MessageDialogStyle.Affirmative)
+        public async Task<MessageDialogResult> CreateMessageDialog(string title, string message,
+            MessageDialogStyle style = MessageDialogStyle.Affirmative)
         {
             var window = (MetroWindow) Application.Current.MainWindow;
             return await window.ShowMessageAsync(title, message, style);
