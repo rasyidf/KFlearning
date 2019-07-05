@@ -1,6 +1,9 @@
-﻿using System;
-using System.Diagnostics;
-using System.Windows.Controls;
+﻿using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Windows;
+using KFlearning.IDE.Models;
+using KFlearning.IDE.Views;
+using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 
 namespace KFlearning.IDE.ApplicationServices
@@ -12,19 +15,33 @@ namespace KFlearning.IDE.ApplicationServices
             Process.Start(url);
         }
 
-        public void OpenUrl(Uri url)
+        public async Task<DialogResultState> CreateNewProjectDialog()
         {
-            OpenUrl(url.ToString());
-        }
-
-        public BaseMetroDialog CreateDialog<T>() where T : UserControl
-        {
+            var window = (MetroWindow) Application.Current.MainWindow;
             var dialog = new CustomDialog();
-            var view = App.Container.Resolve<T>();
-            ((IDialog) view.DataContext).DialogInstance = dialog;
+            var view = App.Container.Resolve<CreateProjectView>();
+            var vm = (IDialog) view.DataContext;
+            vm.DialogInstance = dialog;
             dialog.Content = view;
 
-            return dialog;
+            await window.ShowMetroDialogAsync(dialog);
+            await dialog.WaitUntilUnloadedAsync();
+
+            return new DialogResultState(vm.DialogResult, vm.State);
+        }
+
+        public async Task<ProgressDialogController> CreateProgressDialog(string title, string message)
+        {
+            var window = (MetroWindow) Application.Current.MainWindow;
+            var controller = await window.ShowProgressAsync(title, message);
+            controller.SetIndeterminate();
+            return controller;
+        }
+
+        public async Task<MessageDialogResult> CreateMessageDialog(string title, string message, MessageDialogStyle style = MessageDialogStyle.Affirmative)
+        {
+            var window = (MetroWindow) Application.Current.MainWindow;
+            return await window.ShowMessageAsync(title, message, style);
         }
     }
 }

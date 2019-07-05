@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Windows.Controls;
+using System.Threading.Tasks;
+using KFlearning.IDE.Models;
 using MahApps.Metro.Controls.Dialogs;
 
 namespace KFlearning.IDE.ApplicationServices
@@ -7,7 +8,9 @@ namespace KFlearning.IDE.ApplicationServices
     public interface IApplicationHelpers
     {
         void OpenUrl(string url);
-        void OpenUrl(Uri url);
-        BaseMetroDialog CreateDialog<T>() where T : UserControl;
+        Task<DialogResultState> CreateNewProjectDialog();
+        Task<ProgressDialogController> CreateProgressDialog(string title, string message);
+        Task<MessageDialogResult> CreateMessageDialog(string title, string message,
+            MessageDialogStyle style = MessageDialogStyle.Affirmative);
     }
 }
