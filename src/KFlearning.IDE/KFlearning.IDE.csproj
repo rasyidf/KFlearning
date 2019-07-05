@@ -14,6 +14,8 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -37,7 +39,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
+    <OutputPath>C:\kflearning\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -65,11 +67,11 @@
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="DotNetZip, Version=1.13.3.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DotNetZip.1.13.3\lib\net40\DotNetZip.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="LiteDB, Version=4.1.4.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\LiteDB.4.1.4\lib\net40\LiteDB.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MahApps.Metro.1.6.5\lib\net45\MahApps.Metro.dll</HintPath>
@@ -145,20 +147,31 @@
     </Compile>
     <Compile Include="AppContainerInstaller.cs" />
     <Compile Include="ApplicationServices\ApplicationHelpers.cs" />
+    <Compile Include="ApplicationServices\ArticleManager.cs" />
+    <Compile Include="ApplicationServices\ClientConfigurer.cs" />
     <Compile Include="ApplicationServices\IApplicationHelpers.cs" />
-    <Compile Include="ApplicationServices\IAutoNotifyPropertyChanged.cs" />
-    <Compile Include="ApplicationServices\IDialog.cs" />
-    <Compile Include="ApplicationServices\NotifyPropertChangedInterceptor.cs" />
-    <Compile Include="ApplicationServices\NotifyChangedAttribute.cs" />
-    <Compile Include="ApplicationServices\RelayCommand.cs" />
-    <Compile Include="ApplicationServices\PropertyChangedBase.cs" />
-    <Compile Include="ApplicationServices\ViewModelLocator.cs" />
+    <Compile Include="ApplicationServices\IArticleManager.cs" />
+    <Compile Include="ApplicationServices\IProjectManager.cs" />
+    <Compile Include="ApplicationServices\MVVM\IAutoNotifyPropertyChanged.cs" />
+    <Compile Include="ApplicationServices\MVVM\IDialog.cs" />
+    <Compile Include="ApplicationServices\MVVM\NotifyPropertChangedInterceptor.cs" />
+    <Compile Include="ApplicationServices\MVVM\NotifyChangedAttribute.cs" />
+    <Compile Include="ApplicationServices\ProjectManager.cs" />
+    <Compile Include="ApplicationServices\MVVM\RelayCommand.cs" />
+    <Compile Include="ApplicationServices\MVVM\PropertyChangedBase.cs" />
+    <Compile Include="ApplicationServices\MVVM\ViewModelLocator.cs" />
     <Compile Include="Models\ArticleItem.cs" />
+    <Compile Include="Models\CreateProjectState.cs" />
+    <Compile Include="Models\DialogResultState.cs" />
     <Compile Include="Models\ProjectItem.cs" />
+    <Compile Include="Models\ProjectTypeItem.cs" />
+    <Compile Include="Models\SeriesItem.cs" />
     <Compile Include="Models\ServerLogItem.cs" />
     <Compile Include="Resources\Converters\BoolToStatusKindConverter.cs" />
     <Compile Include="Resources\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Resources\Converters\InvertBoolConverter.cs" />
+    <Compile Include="Resources\Converters\ProjectPathConverter.cs" />
+    <Compile Include="Resources\Converters\ProjectTypeToPackIconMaterialKindConverter.cs" />
     <Compile Include="Resources\Strings.Designer.cs">
       <DependentUpon>Strings.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -242,10 +255,6 @@
     <ProjectReference Include="..\KFlearning.Core\KFlearning.Core.csproj">
       <Project>{ed0f38b7-33fe-4e24-bdad-58790ca85bcc}</Project>
       <Name>KFlearning.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\KFlearning.DAL\KFlearning.DAL.csproj">
-      <Project>{A4EA938F-ACAB-4282-BBB2-747222B98170}</Project>
-      <Name>KFlearning.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
