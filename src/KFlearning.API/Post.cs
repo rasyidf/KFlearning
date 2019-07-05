@@ -24,6 +24,9 @@ namespace KFlearning.API
         public string Content { get; set; }
 
         [JsonProperty("link")]
-        public Uri Url { get; set; }
+        public string Url { get; set; }
+        
+        [JsonProperty("link")]
+        public string SourceUrl { get; set; }
     }
 }
