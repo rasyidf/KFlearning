@@ -141,4 +141,7 @@
   <data name="WebUrl" xml:space="preserve">
     <value>https://kodesiana.com/?utm_source=kflearning_desktop&amp;utm_medium=about</value>
   </data>
+  <data name="PurgeConfirmMessage" xml:space="preserve">
+    <value>Apakah Anda yakin ingin melakukan PURGE? Semua proyek akan di hapus.</value>
+  </data>
 </root>

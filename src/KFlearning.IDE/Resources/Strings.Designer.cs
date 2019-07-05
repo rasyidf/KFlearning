@@ -115,6 +115,15 @@ namespace KFlearning.IDE.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apakah Anda yakin ingin melakukan PURGE? Semua proyek akan di hapus..
+        /// </summary>
+        public static string PurgeConfirmMessage {
+            get {
+                return ResourceManager.GetString("PurgeConfirmMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to https://twitter.com/fahminoorfiqri.
         /// </summary>
         public static string TwitterUrl {

@@ -1,5 +1,5 @@
 ﻿// // PROJECT :   KFlearning
-// // FILENAME :  BoolToVisibilityConverter.cs
+// // FILENAME :  ProjectPathConverter.cs
 // // AUTHOR  :   Fahmi Noor Fiqri
 // // NPM     :   065118116
 // //
@@ -7,16 +7,18 @@
 
 using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
+using KFlearning.IDE.ApplicationServices;
 
 namespace KFlearning.IDE.Resources.Converters
 {
-    public class BoolToVisibilityConverter : IValueConverter
+    public class ProjectPathConverter : IValueConverter
     {
+        private static IProjectManager _projectManager = App.Container.Resolve<IProjectManager>();
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool) value ? Visibility.Visible : Visibility.Hidden;
+            return value == null ? "" : _projectManager.GetPathForProject(value.ToString());
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

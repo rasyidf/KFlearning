@@ -1,5 +1,5 @@
 ﻿// // PROJECT :   KFlearning
-// // FILENAME :  BoolToStatusKindConverter.cs
+// // FILENAME :  ProjectTypeToPackIconMaterialKindConverter.cs
 // // AUTHOR  :   Fahmi Noor Fiqri
 // // NPM     :   065118116
 // //
@@ -8,21 +8,26 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
+using KFlearning.Core.Entities;
 using MahApps.Metro.IconPacks;
 
 namespace KFlearning.IDE.Resources.Converters
 {
-    [ValueConversion(typeof(bool), typeof(PackIconMaterialKind))]
-    public class BoolToStatusKindConverter : IValueConverter
+    public class ProjectTypeToPackIconMaterialKindConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool v)
+            switch ((ProjectType) value)
             {
-                return v ? PackIconMaterialKind.EmoticonExcited : PackIconMaterialKind.EmoticonSad;
+                case ProjectType.Web:
+                    return PackIconMaterialKind.Web;
+                case ProjectType.Cpp:
+                    return PackIconMaterialKind.LanguageCpp;
+                case ProjectType.Python:
+                    return PackIconMaterialKind.LanguagePython;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(value), value, null);
             }
-
-            return PackIconMaterialKind.EmoticonSad;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

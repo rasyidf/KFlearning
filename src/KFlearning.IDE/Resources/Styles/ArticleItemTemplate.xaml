@@ -18,7 +18,7 @@
 
             <iconPacks:PackIconMaterial Grid.Column="0" Grid.RowSpan="2" Kind="Book" Height="25" Width="25"
                                         VerticalAlignment="Center" HorizontalAlignment="Center" />
-            <TextBlock Grid.Column="1" Grid.Row="0"  Text="{Binding Title}" FontSize="15" VerticalAlignment="Bottom" />
+            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Title}" FontSize="15" VerticalAlignment="Bottom" />
             <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
                 <TextBlock Text="Level: " />
                 <TextBlock Text="{Binding Level}" Margin="{StaticResource LabelMargin}" />
