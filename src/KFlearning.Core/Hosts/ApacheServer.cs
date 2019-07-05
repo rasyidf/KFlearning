@@ -1,4 +1,12 @@
-﻿using System.IO;
+﻿// 
+//  PROJECT  :   KFlearning
+//  FILENAME :   ApacheServer.cs
+//  AUTHOR   :   Fahmi Noor Fiqri
+//  NPM      :   065118116
+// 
+//  This file is part of KFlearning, licensed under MIT license.
+
+using System.IO;
 using System.Text;
 using KFlearning.Core.IO;
 

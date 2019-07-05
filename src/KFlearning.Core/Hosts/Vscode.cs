@@ -1,4 +1,12 @@
-﻿using System.IO;
+﻿// 
+//  PROJECT  :   KFlearning
+//  FILENAME :   Vscode.cs
+//  AUTHOR   :   Fahmi Noor Fiqri
+//  NPM      :   065118116
+// 
+//  This file is part of KFlearning, licensed under MIT license.
+
+using System.IO;
 using KFlearning.Core.IO;
 
 namespace KFlearning.Core.Hosts
@@ -19,7 +27,8 @@ namespace KFlearning.Core.Hosts
 
         public void InstallExtension(string path)
         {
-            _pathManager.RunWait(_pathManager.GetPath(PathKind.VscodeExe), "--install-extension " + Path.GetFileName(path));
+            _pathManager.RunWait(_pathManager.GetPath(PathKind.VscodeExe),
+                "--install-extension " + Path.GetFileName(path));
         }
     }
 }

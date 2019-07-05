@@ -1,4 +1,12 @@
-﻿using System.Collections.Generic;
+﻿// 
+//  PROJECT  :   KFlearning
+//  FILENAME :   HostsFile.cs
+//  AUTHOR   :   Fahmi Noor Fiqri
+//  NPM      :   065118116
+// 
+//  This file is part of KFlearning, licensed under MIT license.
+
+using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using KFlearning.Core.IO;
@@ -32,6 +40,7 @@ namespace KFlearning.Core.Hosts
                 if (line.Contains(domain)) continue;
                 newLines.Add(line);
             }
+
             File.WriteAllLines(_processManager.GetPath(PathKind.HostsFile), newLines);
         }
 
@@ -40,11 +49,10 @@ namespace KFlearning.Core.Hosts
             var lines = File.ReadAllLines(_processManager.GetPath(PathKind.HostsFile));
             foreach (string line in lines)
             {
-                if (string.IsNullOrWhiteSpace(line) ||line.StartsWith("#")) continue;
+                if (string.IsNullOrWhiteSpace(line) || line.StartsWith("#")) continue;
                 var match = HostLinePattern.Match(line);
                 yield return new HostEntry(match.Groups["ip"].Value, match.Groups["host"].Value);
             }
         }
-        
     }
 }

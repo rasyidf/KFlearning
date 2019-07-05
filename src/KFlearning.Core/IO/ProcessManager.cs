@@ -1,4 +1,12 @@
-﻿using System;
+﻿// 
+//  PROJECT  :   KFlearning
+//  FILENAME :   ProcessManager.cs
+//  AUTHOR   :   Fahmi Noor Fiqri
+//  NPM      :   065118116
+// 
+//  This file is part of KFlearning, licensed under MIT license.
+
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;

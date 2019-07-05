@@ -1,8 +1,10 @@
-﻿// // PROJECT :
-// // PROGRAM :
-// // AUTHOR  :   Fahmi Noor Fiqri
-// // NPM     :   065118116
-// // TANGGAL :   05 Mei 2019
+﻿// 
+//  PROJECT  :   KFlearning
+//  FILENAME :   IHtmlTransformer.cs
+//  AUTHOR   :   Fahmi Noor Fiqri
+//  NPM      :   065118116
+// 
+//  This file is part of KFlearning, licensed under MIT license.
 
 namespace KFlearning.API
 {

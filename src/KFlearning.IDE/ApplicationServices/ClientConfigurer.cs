@@ -1,9 +1,10 @@
-﻿// // PROJECT :   KFlearning
-// // FILENAME :  ClientConfigurer.cs
-// // AUTHOR  :   Fahmi Noor Fiqri
-// // NPM     :   065118116
-// //
-// // This file is part of KFlearning, licensed under MIT license.
+﻿// 
+//  PROJECT  :   KFlearning
+//  FILENAME :   ClientConfigurer.cs
+//  AUTHOR   :   Fahmi Noor Fiqri
+//  NPM      :   065118116
+// 
+//  This file is part of KFlearning, licensed under MIT license.
 
 using System;
 using System.Diagnostics;

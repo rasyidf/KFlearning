@@ -1,10 +1,17 @@
-﻿using LiteDB;
+﻿// 
+//  PROJECT  :   KFlearning
+//  FILENAME :   Series.cs
+//  AUTHOR   :   Fahmi Noor Fiqri
+//  NPM      :   065118116
+// 
+//  This file is part of KFlearning, licensed under MIT license.
+
+using LiteDB;
 
 namespace KFlearning.Core.Entities
 {
-   public class Series
+    public class Series
     {
-        [BsonId]
-        public string Title { get; set; }
+        [BsonId] public string Title { get; set; }
     }
 }
