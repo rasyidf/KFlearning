@@ -6,19 +6,25 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <converters:BoolToStatusKindConverter x:Key="BoolToStatusKindConverter" />
+                    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+                    <converters:InvertBoolConverter x:Key="InvertBoolConverter" />
+                    <converters:ProjectPathConverter x:Key="ProjectPathConverter" />
+                    <converters:ProjectTypeToPackIconMaterialKindConverter
+                        x:Key="ProjectTypeToPackIconMaterialKindConverter" />
+                </ResourceDictionary>
+
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Red.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />
 
                 <ResourceDictionary Source="Resources/Styles/ArticleItemTemplate.xaml" />
                 <ResourceDictionary Source="Resources/Styles/ProjectItemTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
-            <converters:BoolToStatusKindConverter x:Key="BoolToStatusKindConverter" />
-            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-            <converters:InvertBoolConverter x:Key="InvertBoolConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
