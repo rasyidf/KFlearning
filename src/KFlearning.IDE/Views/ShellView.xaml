@@ -34,19 +34,23 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Themes/HamburgerMenuTemplate.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MahApps.Metro;component/Themes/HamburgerMenuTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <!--  This is the template for all menu items. In this sample we use the glyph items.  -->
             <DataTemplate x:Key="HamburgerMenuItem" DataType="{x:Type mah:HamburgerMenuIconItem}">
                 <DockPanel Height="48" LastChildFill="True">
                     <Grid x:Name="IconPart" Width="48" DockPanel.Dock="Left">
-                        <ContentPresenter Content="{Binding Icon}" Margin="12" HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+                        <ContentPresenter Content="{Binding Icon}" Margin="12" HorizontalAlignment="Center"
+                                          VerticalAlignment="Center" />
                     </Grid>
                     <TextBlock x:Name="TextPart" VerticalAlignment="Center" FontSize="16" Text="{Binding Label}" />
                 </DockPanel>
                 <DataTemplate.Triggers>
-                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:HamburgerMenu}}, Path=PanePlacement}" Value="Right">
+                    <DataTrigger
+                        Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:HamburgerMenu}}, Path=PanePlacement}"
+                        Value="Right">
                         <Setter TargetName="IconPart" Property="DockPanel.Dock" Value="Right" />
                         <Setter TargetName="TextPart" Property="Margin" Value="8 0 0 0" />
                     </DataTrigger>
@@ -55,16 +59,18 @@
         </ResourceDictionary>
     </Window.Resources>
     <mah:HamburgerMenu x:Name="Menu" DisplayMode="CompactInline" HamburgerWidth="48" SelectedIndex="0"
-                       IsPaneOpen="True" Content="{Binding PageContent}" VerticalScrollBarOnLeftSide="False" 
-                       ItemsSource="{Binding SidebarItems}" ItemTemplate="{StaticResource HamburgerMenuItem}" 
-                       OptionsItemsSource="{Binding SidebarOptionsItems}" OptionsItemTemplate="{StaticResource HamburgerMenuItem}"
+                       IsPaneOpen="True" Content="{Binding PageContent}" VerticalScrollBarOnLeftSide="False"
+                       ItemsSource="{Binding SidebarItems}" ItemTemplate="{StaticResource HamburgerMenuItem}"
+                       OptionsItemsSource="{Binding SidebarOptionsItems}"
+                       OptionsItemTemplate="{StaticResource HamburgerMenuItem}"
                        ItemCommand="{Binding ItemClickCommand}" OptionsItemCommand="{Binding ItemClickCommand}"
                        ItemCommandParameter="{Binding Path=SelectedItem, ElementName=Menu}"
                        OptionsItemCommandParameter="{Binding Path=SelectedOptionsItem, ElementName=Menu}">
         <!--  Header  -->
         <mah:HamburgerMenu.HamburgerMenuHeaderTemplate>
             <DataTemplate>
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Foreground="White" Text="KFlearning" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Foreground="White"
+                           Text="KFlearning" />
             </DataTemplate>
         </mah:HamburgerMenu.HamburgerMenuHeaderTemplate>
 
@@ -72,7 +78,7 @@
         <mah:HamburgerMenu.ContentTemplate>
             <DataTemplate>
                 <mah:TransitioningContentControl Content="{TemplateBinding Content}" Margin="20"
-                                                 RestartTransitionOnContentChange="True" Transition="Default"/>
+                                                 RestartTransitionOnContentChange="True" Transition="Default" />
             </DataTemplate>
         </mah:HamburgerMenu.ContentTemplate>
     </mah:HamburgerMenu>
