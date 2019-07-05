@@ -8,6 +8,6 @@ namespace KFlearning.API
 {
     public interface IHtmlTransformer
     {
-        string TransformHtml(string url);
+        string TransformHtml(string html);
     }
 }
