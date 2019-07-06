@@ -42,6 +42,12 @@ namespace KFlearning.IDE.ApplicationServices
             return projects.Select(x => new ProjectItem(x));
         }
 
+        public bool Exists(string title)
+        {
+            var path = GetPathForProject(title);
+            return Directory.Exists(path);
+        }
+
         public void Create(ProjectType type, string title)
         {
             var project = new Project

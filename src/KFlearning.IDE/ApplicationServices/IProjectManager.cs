@@ -15,6 +15,7 @@ namespace KFlearning.IDE.ApplicationServices
     public interface IProjectManager
     {
         IEnumerable<ProjectItem> GetProjects();
+        bool Exists(string title);
         void Create(ProjectType type, string title);
         void Launch(Project project);
         void Delete(Project project);

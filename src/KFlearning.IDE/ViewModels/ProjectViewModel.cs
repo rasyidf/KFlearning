@@ -99,6 +99,13 @@ namespace KFlearning.IDE.ViewModels
             if (dialog.Result != MessageDialogResult.Affirmative) return;
 
             var state = (CreateProjectState) dialog.State;
+            if (_projectManager.Exists(state.Name))
+            {
+                await _helpers.CreateMessageDialog("Proyek baru",
+                    "Tidak dapat membuat proyek baru karena proyek dengan nama yang sama sudah ada.");
+                return;
+            }
+
             var controller = await _helpers.CreateProgressDialog("Proyek baru", "Membuat proyek...");
             await Task.Run(() => _projectManager.Create(state.Type, state.Name))
                 .ContinueWith(x => controller.CloseAsync())
