@@ -8,6 +8,7 @@
 
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using KFlearning.Core.IO;
 
@@ -16,41 +17,32 @@ namespace KFlearning.Core.Hosts
     public class HostsFile : IHostsFile
     {
         private static readonly Regex HostLinePattern = new Regex("(?<ip>[0-9.]+)( +)(?<host>\\S+)");
-        private readonly IProcessManager _processManager;
+        private readonly IPathManager _pathManager;
 
-        public HostsFile(IProcessManager processManager)
+        public HostsFile(IPathManager pathManager)
         {
-            _processManager = processManager;
+            _pathManager = pathManager;
         }
 
         public void AddEntry(string domain)
         {
-            var lines = new List<string>();
-            lines.AddRange(File.ReadAllLines(_processManager.GetPath(PathKind.HostsFile)));
-            lines.Add($"127.0.0.1      {domain}      #KFLearning Magic");
-            File.WriteAllLines(_processManager.GetPath(PathKind.HostsFile), lines);
+            string content = $"127.0.0.1      {domain}      #KFLearning Magic";
+            File.AppendAllText(_pathManager.GetPath(TemplateFile.Hosts), content);
         }
 
         public void RemoveEntry(string domain)
         {
-            var lines = File.ReadAllLines(_processManager.GetPath(PathKind.HostsFile));
-            var newLines = new List<string>();
-            foreach (string line in lines)
-            {
-                if (line.Contains(domain)) continue;
-                newLines.Add(line);
-            }
-
-            File.WriteAllLines(_processManager.GetPath(PathKind.HostsFile), newLines);
+            var lines = File.ReadAllLines(_pathManager.GetPath(TemplateFile.Hosts))
+                .Where(line => !line.Contains(domain)).ToList();
+            File.WriteAllLines(_pathManager.GetPath(TemplateFile.Hosts), lines);
         }
 
         public IEnumerable<HostEntry> EnumerateDomains()
         {
-            var lines = File.ReadAllLines(_processManager.GetPath(PathKind.HostsFile));
-            foreach (string line in lines)
+            var lines = File.ReadAllLines(_pathManager.GetPath(TemplateFile.Hosts));
+            foreach (Match match in lines.Where(l => !string.IsNullOrWhiteSpace(l) && !l.StartsWith("#"))
+                .Select(x => HostLinePattern.Match(x)))
             {
-                if (string.IsNullOrWhiteSpace(line) || line.StartsWith("#")) continue;
-                var match = HostLinePattern.Match(line);
                 yield return new HostEntry(match.Groups["ip"].Value, match.Groups["host"].Value);
             }
         }

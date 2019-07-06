@@ -79,6 +79,37 @@ namespace KFlearning.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;/body&gt;&lt;/html&gt;.
+        /// </summary>
+        public static string HtmlBodyEnd {
+            get {
+                return ResourceManager.GetString("HtmlBodyEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html lang=&quot;en&quot;&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
+        ///    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+        ///    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+        ///    &lt;style&gt;
+        ///    body {
+        ///        background: #252525;
+        ///        color: #ffffff
+        ///    }
+        ///    &lt;/style&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;.
+        /// </summary>
+        public static string HtmlBodyStart {
+            get {
+                return ResourceManager.GetString("HtmlBodyStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to httpd.
         /// </summary>
         public static string HttpdProcessName {

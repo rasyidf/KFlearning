@@ -14,6 +14,7 @@ namespace KFlearning.Core.Hosts
 {
     public class ApacheServer : IApacheServer
     {
+        private readonly IPathManager _pathManager;
         private readonly IProcessManager _processManager;
 
         public ApacheServer(IProcessManager processManager)
@@ -23,7 +24,7 @@ namespace KFlearning.Core.Hosts
 
         public void Start()
         {
-            _processManager.RunJob(_processManager.GetPath(PathKind.HttpdExe), "");
+            _processManager.RunJob(_pathManager.GetPath(ExecutableFile.Httpd), "");
         }
 
         public void Stop()
@@ -38,17 +39,17 @@ namespace KFlearning.Core.Hosts
 
         public void CreateAlias(string domainName, string path)
         {
-            var aliasFileName = Path.Combine(_processManager.GetPath(PathKind.ApacheSitesRoot), domainName + ".conf");
+            var aliasFileName = Path.Combine(_pathManager.GetPath(PathKind.ApacheSitesAliasRoot), domainName + ".conf");
 
             var sb = new StringBuilder(Constants.VirtualHostTemplate);
-            sb.Replace("{ROOT}", _processManager.EnsureBackslashEnding(path));
+            sb.Replace("{ROOT}", _pathManager.EnsureBackslashEnding(path));
             sb.Replace("{DOMAIN}", domainName);
             File.WriteAllText(aliasFileName, sb.ToString());
         }
 
         public void RemoveAlias(string domainName)
         {
-            var aliasFileName = Path.Combine(_processManager.GetPath(PathKind.ApacheSitesRoot), domainName + ".conf");
+            var aliasFileName = Path.Combine(_pathManager.GetPath(PathKind.ApacheSitesAliasRoot), domainName + ".conf");
             File.Delete(aliasFileName);
         }
     }

@@ -13,21 +13,23 @@ namespace KFlearning.Core.Hosts
 {
     public class Vscode : IVscode
     {
-        private readonly IProcessManager _pathManager;
+        private readonly IPathManager _pathManager;
+        private readonly IProcessManager _processManager;
 
-        public Vscode(IProcessManager pathManager)
+        public Vscode(IProcessManager processManager, IPathManager pathManager)
         {
+            _processManager = processManager;
             _pathManager = pathManager;
         }
 
         public void OpenFolder(string path)
         {
-            _pathManager.Run(_pathManager.GetPath(PathKind.VscodeExe), path);
+            _processManager.Run(_pathManager.GetPath(ExecutableFile.Vscode), path);
         }
 
         public void InstallExtension(string path)
         {
-            _pathManager.RunWait(_pathManager.GetPath(PathKind.VscodeExe),
+            _processManager.RunWait(_pathManager.GetPath(ExecutableFile.Vscode),
                 "--install-extension " + Path.GetFileName(path));
         }
     }

@@ -12,16 +12,18 @@ namespace KFlearning.Core.Hosts
 {
     public class MariaDb : IMariaDb
     {
+        private readonly IPathManager _pathManager;
         private readonly IProcessManager _processManager;
 
-        public MariaDb(IProcessManager processManager)
+        public MariaDb(IProcessManager processManager, IPathManager pathManager)
         {
             _processManager = processManager;
+            _pathManager = pathManager;
         }
 
         public void Start()
         {
-            _processManager.RunJob(_processManager.GetPath(PathKind.MariadbExe), "--console");
+            _processManager.RunJob(_pathManager.GetPath(ExecutableFile.Mariadb), "--console");
         }
 
         public void Stop()
