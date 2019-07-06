@@ -50,10 +50,10 @@
     <Compile Include="Entities\Project.cs" />
     <Compile Include="Entities\ProjectType.cs" />
     <Compile Include="Entities\Series.cs" />
-    <Compile Include="Hosts\ApacheServer.cs" />
+    <Compile Include="Hosts\ApacheHttpd.cs" />
     <Compile Include="Hosts\HostEntry.cs" />
     <Compile Include="Hosts\HostsFile.cs" />
-    <Compile Include="Hosts\IApacheServer.cs" />
+    <Compile Include="Hosts\IApacheHttpd.cs" />
     <Compile Include="Hosts\IHostsFile.cs" />
     <Compile Include="Hosts\IMariaDb.cs" />
     <Compile Include="Hosts\IVscode.cs" />

@@ -8,13 +8,10 @@
 
 namespace KFlearning.Core.Hosts
 {
-    public interface IApacheServer
+    public interface IApacheHttpd
     {
         void Start();
         void Stop();
         bool IsRunning();
-
-        void CreateAlias(string domainName, string path);
-        void RemoveAlias(string domainName);
     }
 }
