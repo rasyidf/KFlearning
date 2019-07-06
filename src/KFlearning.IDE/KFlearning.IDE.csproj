@@ -148,7 +148,6 @@
     <Compile Include="AppContainerInstaller.cs" />
     <Compile Include="ApplicationServices\ApplicationHelpers.cs" />
     <Compile Include="ApplicationServices\ArticleManager.cs" />
-    <Compile Include="ApplicationServices\ClientConfigurer.cs" />
     <Compile Include="ApplicationServices\IApplicationHelpers.cs" />
     <Compile Include="ApplicationServices\IArticleManager.cs" />
     <Compile Include="ApplicationServices\IProjectManager.cs" />

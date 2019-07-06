@@ -6,14 +6,10 @@
 // 
 //  This file is part of KFlearning, licensed under MIT license.
 
-using System;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using KFlearning.Core.Hosts;
 using KFlearning.Core.IO;
 
-namespace KFlearning.IDE.ApplicationServices
+namespace KFlearning.Installer.ApplicationServices
 {
     public class ClientConfigurer
     {
