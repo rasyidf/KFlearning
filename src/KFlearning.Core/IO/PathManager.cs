@@ -58,6 +58,11 @@ namespace KFlearning.Core.IO
             }
         }
 
+        public string GetPathForAlias(string domainName)
+        {
+            return Path.Combine(GetPath(PathKind.ApacheSitesAliasRoot), domainName + ".conf");
+        }
+
         public string EnsureBackslashEnding(string path)
         {
             var sb = new StringBuilder(path);
