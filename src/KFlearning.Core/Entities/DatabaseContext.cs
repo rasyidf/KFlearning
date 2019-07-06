@@ -19,10 +19,10 @@ namespace KFlearning.Core.Entities
 
         public LiteDatabase Database { get; }
 
+        public LiteStorage Storage => Database.FileStorage;
+
         public LiteCollection<Article> Articles => Database.GetCollection<Article>();
-
-        public LiteCollection<Content> Contents => Database.GetCollection<Content>();
-
+        
         public LiteCollection<Project> Projects => Database.GetCollection<Project>();
 
         public LiteCollection<Series> Series => Database.GetCollection<Series>();

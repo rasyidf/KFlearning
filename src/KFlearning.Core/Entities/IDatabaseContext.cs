@@ -13,8 +13,8 @@ namespace KFlearning.Core.Entities
     public interface IDatabaseContext
     {
         LiteDatabase Database { get; }
+        LiteStorage Storage { get; }
         LiteCollection<Article> Articles { get; }
-        LiteCollection<Content> Contents { get; }
         LiteCollection<Project> Projects { get; }
         LiteCollection<Series> Series { get; }
     }
