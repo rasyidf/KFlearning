@@ -152,6 +152,7 @@
     <Compile Include="ApplicationServices\IApplicationHelpers.cs" />
     <Compile Include="ApplicationServices\IArticleManager.cs" />
     <Compile Include="ApplicationServices\IProjectManager.cs" />
+    <Compile Include="ApplicationServices\IWebServer.cs" />
     <Compile Include="ApplicationServices\MVVM\IAutoNotifyPropertyChanged.cs" />
     <Compile Include="ApplicationServices\MVVM\IDialog.cs" />
     <Compile Include="ApplicationServices\MVVM\NotifyPropertChangedInterceptor.cs" />
@@ -161,6 +162,8 @@
     <Compile Include="ApplicationServices\MVVM\RelayCommand.cs" />
     <Compile Include="ApplicationServices\MVVM\PropertyChangedBase.cs" />
     <Compile Include="ApplicationServices\MVVM\ViewModelLocator.cs" />
+    <Compile Include="ApplicationServices\StatusChangedEventArgs.cs" />
+    <Compile Include="ApplicationServices\WebServer.cs" />
     <Compile Include="Models\ArticleItem.cs" />
     <Compile Include="Models\CreateProjectState.cs" />
     <Compile Include="Models\DialogResultState.cs" />
