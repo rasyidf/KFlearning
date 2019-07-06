@@ -6,6 +6,8 @@
 // 
 //  This file is part of KFlearning, licensed under MIT license.
 
+using MahApps.Metro.Controls;
+
 namespace KFlearning.IDE.Views
 {
     /// <summary>
@@ -16,6 +18,11 @@ namespace KFlearning.IDE.Views
         public ShellView()
         {
             InitializeComponent();
+        }
+
+        private void Menu_OnItemClick(object sender, ItemClickEventArgs e)
+        {
+            Menu.IsPaneOpen = false;
         }
     }
 }

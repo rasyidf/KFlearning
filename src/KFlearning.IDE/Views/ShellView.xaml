@@ -60,6 +60,7 @@
     </Window.Resources>
     <mah:HamburgerMenu x:Name="Menu" DisplayMode="CompactInline" HamburgerWidth="48" SelectedIndex="0"
                        IsPaneOpen="True" Content="{Binding PageContent}" VerticalScrollBarOnLeftSide="False"
+                       ItemClick="Menu_OnItemClick" OptionsItemClick="Menu_OnItemClick"
                        ItemsSource="{Binding SidebarItems}" ItemTemplate="{StaticResource HamburgerMenuItem}"
                        OptionsItemsSource="{Binding SidebarOptionsItems}"
                        OptionsItemTemplate="{StaticResource HamburgerMenuItem}"
