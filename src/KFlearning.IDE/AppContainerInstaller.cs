@@ -9,10 +9,6 @@
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using KFlearning.Core.API;
-using KFlearning.Core.Entities;
-using KFlearning.Core.Hosts;
-using KFlearning.Core.IO;
 using KFlearning.IDE.ApplicationServices;
 using KFlearning.IDE.ViewModels;
 using KFlearning.IDE.Views;
