@@ -475,6 +475,15 @@ namespace KFlearning.IDE.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Log server:.
+        /// </summary>
+        public static string ServerLogText {
+            get {
+                return ResourceManager.GetString("ServerLogText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Proyek baru.
         /// </summary>
         public static string TitleCreateProject {

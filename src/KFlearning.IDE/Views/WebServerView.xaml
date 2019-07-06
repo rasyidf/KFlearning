@@ -72,7 +72,7 @@
             </Button>
         </StackPanel>
 
-        <TextBlock Margin="0,10,0,10" Text="Log server:" DockPanel.Dock="Top" />
+        <TextBlock Margin="0,10,0,10" Text="{x:Static resources:Texts.ServerLogText}" DockPanel.Dock="Top" />
         <DataGrid IsReadOnly="True" ItemsSource="{Binding Logs}" />
     </DockPanel>
 </UserControl>

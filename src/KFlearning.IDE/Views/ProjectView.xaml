@@ -40,13 +40,13 @@
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding ExportCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="Export" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="{x:Static resources:Texts.ExportMessage}" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionExport}" Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding ImportCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="Import" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="{x:Static resources:Texts.ImportMessage}" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionImport}" Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
             <Button Margin="{StaticResource ButtonFarMargin}" Command="{Binding PurgeCommand}">

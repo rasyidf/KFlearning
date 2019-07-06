@@ -282,4 +282,7 @@
   <data name="ViewTitleProjects" xml:space="preserve">
     <value>Proyek Anda.</value>
   </data>
+  <data name="ServerLogText" xml:space="preserve">
+    <value>Log server:</value>
+  </data>
 </root>
