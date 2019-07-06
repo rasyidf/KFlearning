@@ -10,8 +10,8 @@ namespace KFlearning.Core.Hosts
 {
     public interface IApacheHttpd
     {
+        bool IsRunning { get; }
         void Start();
         void Stop();
-        bool IsRunning();
     }
 }

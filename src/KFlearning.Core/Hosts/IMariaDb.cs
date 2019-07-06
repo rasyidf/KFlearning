@@ -10,7 +10,7 @@ namespace KFlearning.Core.Hosts
 {
     public interface IMariaDb
     {
-        bool IsRunning();
+        bool IsRunning { get; }
         void Start();
         void Stop();
     }

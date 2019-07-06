@@ -15,6 +15,8 @@ namespace KFlearning.Core.Hosts
         private readonly IPathManager _pathManager;
         private readonly IProcessManager _processManager;
 
+        public bool IsRunning => _processManager.IsRunning(Constants.MariadbProcessName);
+
         public MariaDb(IProcessManager processManager, IPathManager pathManager)
         {
             _processManager = processManager;
@@ -29,11 +31,6 @@ namespace KFlearning.Core.Hosts
         public void Stop()
         {
             _processManager.TerminateJob(Constants.MariadbProcessName);
-        }
-
-        public bool IsRunning()
-        {
-            return _processManager.IsRunning(Constants.MariadbProcessName);
         }
     }
 }
