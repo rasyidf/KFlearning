@@ -10,9 +10,6 @@ namespace KFlearning.Core.IO
 {
     public interface IProcessManager
     {
-        string GetPath(PathKind path);
-        string EnsureBackslashEnding(string path);
-
         bool IsRunning(string name);
 
         void Run(string filename, string args);

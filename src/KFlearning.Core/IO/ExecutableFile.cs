@@ -1,17 +1,16 @@
 ﻿// 
 //  PROJECT  :   KFlearning
-//  FILENAME :   PathKind.cs
+//  FILENAME :   ExecutableFile.cs
 //  AUTHOR   :   Fahmi Noor Fiqri
 //  NPM      :   065118116
 // 
 //  This file is part of KFlearning, licensed under MIT license.
-
 namespace KFlearning.Core.IO
 {
-    public enum PathKind
+    public enum ExecutableFile
     {
-        BasePath,
-        ReposRoot,
-        ApacheSitesAliasRoot,
+        Httpd,
+        Mariadb,
+        Vscode,
     }
 }
