@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -61,6 +62,16 @@ namespace KFlearning.Core.IO
         public string GetPathForAlias(string domainName)
         {
             return Path.Combine(GetPath(PathKind.ApacheSitesAliasRoot), domainName + ".conf");
+        }
+
+        public void LaunchUri(string uri)
+        {
+            Process.Start(uri);
+        }
+
+        public void LaunchExplorer(string path)
+        {
+            Process.Start("explorer.exe", path);
         }
 
         public string EnsureBackslashEnding(string path)

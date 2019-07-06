@@ -13,6 +13,8 @@ namespace KFlearning.Core.IO
         string GetPath(ExecutableFile file);
         string GetPath(TemplateFile file);
         string GetPathForAlias(string domainName);
+        void LaunchUri(string uri);
+        void LaunchExplorer(string path);
         string EnsureBackslashEnding(string path);
     }
 }
