@@ -115,6 +115,15 @@ namespace KFlearning.IDE.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Berkas ZIP yang Anda pilih tidak sesuai dengan format impor!.
+        /// </summary>
+        public static string ImportIncompatibleMessage {
+            get {
+                return ResourceManager.GetString("ImportIncompatibleMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to https://www.instagram.com/fahminoorfiqri.
         /// </summary>
         public static string InstagramUrl {

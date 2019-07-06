@@ -122,6 +122,12 @@ namespace KFlearning.IDE.ViewModels
         private async void Import_Command(object obj)
         {
             if (_sfd.ShowDialog() == false) return;
+            if (!_projectManager.CheckImportZip(_sfd.FileName))
+            {
+                await _helpers.CreateMessageDialog(Texts.TitleImport, Strings.ImportIncompatibleMessage);
+                return;
+            }
+
             var controller = await _helpers.CreateProgressDialog(Texts.TitleImport, Texts.ImportMessage);
             await Task.Run(() => _projectManager.Import(_sfd.FileName))
                 .ContinueWith(x => controller.CloseAsync())

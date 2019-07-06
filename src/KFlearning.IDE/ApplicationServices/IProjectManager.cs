@@ -19,6 +19,7 @@ namespace KFlearning.IDE.ApplicationServices
         void Create(ProjectType type, string title);
         void Launch(Project project);
         void Delete(Project project);
+        bool CheckImportZip(string zipFile);
         void Import(string zipFile);
         void Export(Project project, string savePath);
 

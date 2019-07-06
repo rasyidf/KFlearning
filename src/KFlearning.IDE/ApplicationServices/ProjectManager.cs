@@ -86,13 +86,18 @@ namespace KFlearning.IDE.ApplicationServices
             _database.Projects.Delete(project.ProjectId);
         }
 
+        public bool CheckImportZip(string zipFile)
+        {
+            using (var zip = new ZipFile(zipFile))
+            {
+                return zip.EntryFileNames.Contains(Constants.MetadataFileName);
+            }
+        }
+
         public void Import(string zipFile)
         {
             using (var zip = new ZipFile(zipFile))
             {
-                if (!zip.EntryFileNames.Contains(Constants.MetadataFileName))
-                    throw new InvalidOperationException("No metadata file exists on import ZIP file.");
-
                 // extract the files
                 var extractPath = GetPathForProject(zip.Comment);
                 zip.ExtractAll(extractPath);
