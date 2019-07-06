@@ -6,6 +6,7 @@
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:viewModels="clr-namespace:KFlearning.IDE.ViewModels"
              xmlns:applicationServices="clr-namespace:KFlearning.IDE.ApplicationServices"
+             xmlns:resources="clr-namespace:KFlearning.IDE.Resources"
 
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance viewModels:WebServerViewModel, IsDesignTimeCreatable=False}"
@@ -15,7 +16,7 @@
         <Thickness x:Key="ButtonMargin">5</Thickness>
     </UserControl.Resources>
     <DockPanel>
-        <TextBlock Text="Web Server." FontSize="48" Margin="0,0,0,20" DockPanel.Dock="Top" />
+        <TextBlock Text="{x:Static resources:Texts.ViewTitleApps}" FontSize="48" Margin="0,0,0,20" DockPanel.Dock="Top" />
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
             <ToggleButton x:Name="ServerButton" Margin="5,5,20,5" Command="{Binding ServerCommand}"
                           IsChecked="{Binding ServerIsChecked}" IsEnabled="{Binding ServerIsEnabled}">
@@ -40,11 +41,10 @@
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="Margin" Value="{StaticResource ButtonMargin}" />
                                 <Setter Property="HorizontalAlignment" Value="Center" />
-                                <Setter Property="Text" Value="Start Server" />
+                                <Setter Property="Text" Value="{x:Static resources:Texts.ActionStartServer}" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Path=IsChecked, ElementName=ServerButton}"
-                                                 Value="True">
-                                        <Setter Property="Text" Value="Stop Server" />
+                                    <DataTrigger Binding="{Binding Path=IsChecked, ElementName=ServerButton}" Value="True">
+                                        <Setter Property="Text" Value="{x:Static resources:Texts.ActionStopServer}" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -55,19 +55,19 @@
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding PhpInfoCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="LanguagePhp" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="PHP Info" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionPhpInfo}" Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding PhpMyAdminCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="Database" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="phpMyAdmin" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionPhpmyadmin}" Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding WorkspaceCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="FolderOpen" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="Workspace" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionOpenRepos}" Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
         </StackPanel>

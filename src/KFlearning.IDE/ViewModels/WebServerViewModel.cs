@@ -13,6 +13,7 @@ using System.Windows.Input;
 using KFlearning.Core.IO;
 using KFlearning.IDE.ApplicationServices;
 using KFlearning.IDE.Models;
+using KFlearning.IDE.Resources;
 
 namespace KFlearning.IDE.ViewModels
 {
@@ -100,7 +101,7 @@ namespace KFlearning.IDE.ViewModels
         {
             Logs = new ObservableCollection<ServerLogItem>
             {
-                new ServerLogItem(DateTime.Now, "Server siap."),
+                new ServerLogItem(DateTime.Now, Texts.WebServerStatusReady),
             };
         } 
 

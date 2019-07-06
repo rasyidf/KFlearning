@@ -61,29 +61,47 @@ namespace KFlearning.IDE.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to E-learning terpadu by Kodesiana.com.
+        ///   Looks up a localized string similar to ?utm_source=kflearning_desktop&amp;utm_medium=.
         /// </summary>
-        public static string AppDescription {
+        public static string AnalyticsCampaignQuery {
             get {
-                return ResourceManager.GetString("AppDescription", resourceCulture);
+                return ResourceManager.GetString("AnalyticsCampaignQuery", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to KFlearning.
+        ///   Looks up a localized string similar to about.
         /// </summary>
-        public static string AppName {
+        public static string CampaignAbout {
             get {
-                return ResourceManager.GetString("AppName", resourceCulture);
+                return ResourceManager.GetString("CampaignAbout", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hak Cipta (C) Fahmi Noor Fiqri, Kodesiana.com 2019.
+        ///   Looks up a localized string similar to reader.
         /// </summary>
-        public static string CopyrightText {
+        public static string CampaignReader {
             get {
-                return ResourceManager.GetString("CopyrightText", resourceCulture);
+                return ResourceManager.GetString("CampaignReader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to KFlearning ZIP archive (*.zip)|*.zip.
+        /// </summary>
+        public static string FilterZip {
+            get {
+                return ResourceManager.GetString("FilterZip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to zip.
+        /// </summary>
+        public static string FilterZipExtension {
+            get {
+                return ResourceManager.GetString("FilterZipExtension", resourceCulture);
             }
         }
         
@@ -106,24 +124,6 @@ namespace KFlearning.IDE.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to KFlearning merupakan aplikasi sumber terbuka, dilisensikan di bawah lisensi permisif MIT..
-        /// </summary>
-        public static string LicenseText {
-            get {
-                return ResourceManager.GetString("LicenseText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Apakah Anda yakin ingin melakukan PURGE? Semua proyek akan di hapus..
-        /// </summary>
-        public static string PurgeConfirmMessage {
-            get {
-                return ResourceManager.GetString("PurgeConfirmMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to https://twitter.com/fahminoorfiqri.
         /// </summary>
         public static string TwitterUrl {
@@ -133,7 +133,7 @@ namespace KFlearning.IDE.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://kodesiana.com/?utm_source=kflearning_desktop&amp;utm_medium=about.
+        ///   Looks up a localized string similar to https://kodesiana.com/.
         /// </summary>
         public static string WebUrl {
             get {

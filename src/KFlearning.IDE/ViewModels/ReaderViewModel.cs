@@ -13,6 +13,7 @@ using KFlearning.Core.API;
 using KFlearning.Core.Entities;
 using KFlearning.IDE.ApplicationServices;
 using KFlearning.IDE.Models;
+using KFlearning.IDE.Resources;
 
 namespace KFlearning.IDE.ViewModels
 {
@@ -72,7 +73,7 @@ namespace KFlearning.IDE.ViewModels
 
         private void OpenWeb_Command(object obj)
         {
-            _helpers.OpenUrl(_item.Url);
+            _helpers.OpenUrl(_item.Url, Strings.CampaignReader);
         }
 
         private void OpenSource_Command(object obj)

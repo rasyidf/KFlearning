@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:viewModels="clr-namespace:KFlearning.IDE.ViewModels"
-             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:local="clr-namespace:KFlearning.IDE.Views"
              xmlns:applicationServices="clr-namespace:KFlearning.IDE.ApplicationServices"
+             xmlns:resources="clr-namespace:KFlearning.IDE.Resources"
 
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance {x:Type viewModels:CreateProjectViewModel}, IsDesignTimeCreatable=False}"
@@ -17,7 +17,7 @@
         <Thickness x:Key="ButtonMargin" Left="5" Right="5" />
     </UserControl.Resources>
     <StackPanel Orientation="Vertical">
-        <TextBlock Text="Buat proyek baru." FontSize="48" />
+        <TextBlock Text="{x:Static resources:Texts.TitleCreateProject}" FontSize="48" />
         <Grid Margin="0,20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="120" />
@@ -29,16 +29,16 @@
                 <RowDefinition Height="40" />
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="Nama proyek" VerticalAlignment="Center" />
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static resources:Texts.CueProjectName}" VerticalAlignment="Center" />
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ProjectName}" Width="200" Height="26"
                      HorizontalAlignment="Left" />
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="Jenis proyek" VerticalAlignment="Center" />
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static resources:Texts.CueProjectType}" VerticalAlignment="Center" />
             <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding ProjectTypes}" DisplayMemberPath="DisplayName"
                       SelectedItem="{Binding SelectedType}" SelectedIndex="0" Width="200" Height="26"
                       HorizontalAlignment="Left" />
 
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="Lokasi proyek" VerticalAlignment="Center" />
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static resources:Texts.CueProjectPath}" VerticalAlignment="Center" />
             <TextBox Grid.Row="2" Grid.Column="1"
                      Text="{Binding ProjectName, Converter={StaticResource ProjectPathConverter}}" Height="26"
                      IsReadOnly="True" />
@@ -47,14 +47,14 @@
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding CreateCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="Plus" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="Buat Proyek" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionCreateProject}" Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding CancelCommand}"
                     CommandParameter="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CreateProjectView}}}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="Cancel" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="Batal" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionCancel}" Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
         </StackPanel>

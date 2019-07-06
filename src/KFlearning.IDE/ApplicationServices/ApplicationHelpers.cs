@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Castle.MicroKernel;
 using KFlearning.IDE.Models;
+using KFlearning.IDE.Resources;
 using KFlearning.IDE.ViewModels;
 using KFlearning.IDE.Views;
 using MahApps.Metro.Controls;
@@ -24,6 +25,11 @@ namespace KFlearning.IDE.ApplicationServices
         public void OpenUrl(string url)
         {
             Process.Start(url);
+        }
+
+        public void OpenUrl(string url, string campaign)
+        {
+            OpenUrl(url + Strings.AnalyticsCampaignQuery + campaign);
         }
 
         public async Task<DialogResultState> CreateNewProjectDialog()

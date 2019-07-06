@@ -8,6 +8,7 @@
                  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                  xmlns:applicationServices="clr-namespace:KFlearning.IDE.ApplicationServices"
                  xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                 xmlns:resources="clr-namespace:KFlearning.IDE.Resources"
 
                  mc:Ignorable="d"
                  d:DataContext="{d:DesignInstance viewModels:ReaderViewModel, IsDesignTimeCreatable=False}"
@@ -41,27 +42,26 @@
                                 <Setter Property="Margin" Value="{StaticResource ButtonMargin}" />
                                 <Setter Property="Kind" Value="ContentSave" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Path=IsChecked, ElementName=SaveButton}"
-                                                 Value="True">
+                                    <DataTrigger Binding="{Binding Path=IsChecked, ElementName=SaveButton}" Value="True">
                                         <Setter Property="Kind" Value="Check" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
                         </iconPacks:PackIconMaterial.Style>
                     </iconPacks:PackIconMaterial>
-                    <TextBlock Text="Simpan Offline" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionSaveOffline}" Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </ToggleButton>
             <Button Margin="{StaticResource ButtonFarMargin}" Command="{Binding OpenWebCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="Web" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="Buka di Web" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionOpenInBrowser}" Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding OpenSourceCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="OpenInApp" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="Source Code" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionOpenSource}" Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
         </StackPanel>

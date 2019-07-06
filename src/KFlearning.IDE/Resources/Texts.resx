@@ -117,31 +117,169 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GitHubUrl" xml:space="preserve">
-    <value>https://github.com/Kodesiana/KFlearning</value>
+  <data name="AppDescription" xml:space="preserve">
+    <value>E-learning terpadu by Kodesiana.com</value>
   </data>
-  <data name="InstagramUrl" xml:space="preserve">
-    <value>https://www.instagram.com/fahminoorfiqri</value>
+  <data name="AppName" xml:space="preserve">
+    <value>KFlearning</value>
   </data>
-  <data name="TwitterUrl" xml:space="preserve">
-    <value>https://twitter.com/fahminoorfiqri</value>
+  <data name="CopyrightText" xml:space="preserve">
+    <value>Hak Cipta (C) Fahmi Noor Fiqri, Kodesiana.com 2019</value>
   </data>
-  <data name="WebUrl" xml:space="preserve">
-    <value>https://kodesiana.com/</value>
+  <data name="DialogImportTitle" xml:space="preserve">
+    <value>Pilih file untuk di impor.</value>
   </data>
-  <data name="AnalyticsCampaignQuery" xml:space="preserve">
-    <value>?utm_source=kflearning_desktop&amp;utm_medium=</value>
+  <data name="LicenseText" xml:space="preserve">
+    <value>KFlearning merupakan aplikasi sumber terbuka, dilisensikan di bawah lisensi permisif MIT.</value>
   </data>
-  <data name="FilterZip" xml:space="preserve">
-    <value>KFlearning ZIP archive (*.zip)|*.zip</value>
+  <data name="ProjectCppName" xml:space="preserve">
+    <value>C/C++ Project</value>
   </data>
-  <data name="FilterZipExtension" xml:space="preserve">
-    <value>zip</value>
+  <data name="ProjectPythonName" xml:space="preserve">
+    <value>Python Project</value>
   </data>
-  <data name="CampaignReader" xml:space="preserve">
-    <value>reader</value>
+  <data name="ProjectWebName" xml:space="preserve">
+    <value>Web PHP Project</value>
   </data>
-  <data name="CampaignAbout" xml:space="preserve">
-    <value>about</value>
+  <data name="PurgeConfirmMessage" xml:space="preserve">
+    <value>Apakah Anda yakin ingin melakukan PURGE? Semua proyek akan di hapus.</value>
+  </data>
+  <data name="DialogExportTitle" xml:space="preserve">
+    <value>Pilih lokasi file untuk di ekspor.</value>
+  </data>
+  <data name="TitlePurge" xml:space="preserve">
+    <value>Operasi Purge</value>
+  </data>
+  <data name="PurgeProcessMessage" xml:space="preserve">
+    <value>Menghapus semua proyek...</value>
+  </data>
+  <data name="TitleExport" xml:space="preserve">
+    <value>Ekspor proyek</value>
+  </data>
+  <data name="ExportMessage" xml:space="preserve">
+    <value>Mengekspor proyek...</value>
+  </data>
+  <data name="TitleImport" xml:space="preserve">
+    <value>Impor proyek</value>
+  </data>
+  <data name="ImportMessage" xml:space="preserve">
+    <value>Mengimpor proyek...</value>
+  </data>
+  <data name="TitleDelete" xml:space="preserve">
+    <value>Hapus proyek</value>
+  </data>
+  <data name="DeleteMessage" xml:space="preserve">
+    <value>Menghapus proyek...</value>
+  </data>
+  <data name="TitleCreateProject" xml:space="preserve">
+    <value>Proyek baru</value>
+  </data>
+  <data name="CreateProjectMessage" xml:space="preserve">
+    <value>Membuat proyek...</value>
+  </data>
+  <data name="CreateProjectDuplicateMessage" xml:space="preserve">
+    <value>Tidak dapat membuat proyek baru karena proyek dengan nama yang sama sudah ada.</value>
+  </data>
+  <data name="NavbarAbout" xml:space="preserve">
+    <value>Tentang</value>
+  </data>
+  <data name="NavbarApps" xml:space="preserve">
+    <value>Apps</value>
+  </data>
+  <data name="NavbarArticles" xml:space="preserve">
+    <value>Artikel</value>
+  </data>
+  <data name="NavbarProject" xml:space="preserve">
+    <value>Proyek</value>
+  </data>
+  <data name="WebServerStatusReady" xml:space="preserve">
+    <value>Server siap.</value>
+  </data>
+  <data name="ActionArticleRefresh" xml:space="preserve">
+    <value>Perbarui</value>
+  </data>
+  <data name="ActionArticleSearch" xml:space="preserve">
+    <value>Cari...</value>
+  </data>
+  <data name="ActionCancel" xml:space="preserve">
+    <value>Batal</value>
+  </data>
+  <data name="ActionCreateProject" xml:space="preserve">
+    <value>Buat Proyek</value>
+  </data>
+  <data name="ActionDelete" xml:space="preserve">
+    <value>Hapus</value>
+  </data>
+  <data name="ActionExport" xml:space="preserve">
+    <value>Ekspor</value>
+  </data>
+  <data name="ActionImport" xml:space="preserve">
+    <value>Impor</value>
+  </data>
+  <data name="ActionOpenGithub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="ActionOpenInBrowser" xml:space="preserve">
+    <value>Buka di Browser</value>
+  </data>
+  <data name="ActionOpenInstagram" xml:space="preserve">
+    <value>Instagram</value>
+  </data>
+  <data name="ActionOpenRepos" xml:space="preserve">
+    <value>Buka Workspace</value>
+  </data>
+  <data name="ActionOpenSource" xml:space="preserve">
+    <value>Buka Source Code</value>
+  </data>
+  <data name="ActionOpenTwitter" xml:space="preserve">
+    <value>Twitter</value>
+  </data>
+  <data name="ActionOpenWeb" xml:space="preserve">
+    <value>Kodesiana.com</value>
+  </data>
+  <data name="ActionPhpInfo" xml:space="preserve">
+    <value>PHP Info</value>
+  </data>
+  <data name="ActionPhpmyadmin" xml:space="preserve">
+    <value>phpMyAdmin</value>
+  </data>
+  <data name="ActionPurge" xml:space="preserve">
+    <value>Purge</value>
+  </data>
+  <data name="ActionSaveOffline" xml:space="preserve">
+    <value>Simpan Offline</value>
+  </data>
+  <data name="ActionStartServer" xml:space="preserve">
+    <value>Buka Server</value>
+  </data>
+  <data name="ActionStopServer" xml:space="preserve">
+    <value>Tutup Server</value>
+  </data>
+  <data name="CueArticleSeries" xml:space="preserve">
+    <value>Seri</value>
+  </data>
+  <data name="CueOfflineMode" xml:space="preserve">
+    <value>Mode daring</value>
+  </data>
+  <data name="CueOnlineMode" xml:space="preserve">
+    <value>Mode luring</value>
+  </data>
+  <data name="CueProjectName" xml:space="preserve">
+    <value>Nama proyek</value>
+  </data>
+  <data name="CueProjectPath" xml:space="preserve">
+    <value>Lokasi proyek</value>
+  </data>
+  <data name="CueProjectType" xml:space="preserve">
+    <value>Jenis proyek</value>
+  </data>
+  <data name="ViewTitleApps" xml:space="preserve">
+    <value>Web server.</value>
+  </data>
+  <data name="ViewTitleArticles" xml:space="preserve">
+    <value>Artikel.</value>
+  </data>
+  <data name="ViewTitleProjects" xml:space="preserve">
+    <value>Proyek Anda.</value>
   </data>
 </root>

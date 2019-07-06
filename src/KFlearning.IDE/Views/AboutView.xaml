@@ -16,37 +16,36 @@
         <Thickness x:Key="ButtonMargin" Left="5" Right="5" />
     </UserControl.Resources>
     <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-        <TextBlock Text="{x:Static resources:Strings.AppName}" HorizontalAlignment="Center" FontSize="48" />
-        <TextBlock Text="{x:Static resources:Strings.AppDescription}" HorizontalAlignment="Center" FontSize="24" />
-
-        <TextBlock Text="{x:Static resources:Strings.CopyrightText}" Margin="0,40,0,0" HorizontalAlignment="Center"
-                   FontSize="12" />
-        <TextBlock Text="{x:Static resources:Strings.LicenseText}" Margin="0,10,0,0" HorizontalAlignment="Center"
-                   FontSize="12" />
+        <TextBlock Text="{x:Static resources:Texts.AppName}" HorizontalAlignment="Center" FontSize="48" />
+        <TextBlock Text="{x:Static resources:Texts.AppDescription}" HorizontalAlignment="Center" FontSize="24" />
+        <TextBlock Text="{x:Static resources:Texts.CopyrightText}" Margin="0,40,0,0" 
+                   HorizontalAlignment="Center" FontSize="12" />
+        <TextBlock Text="{x:Static resources:Texts.LicenseText}" Margin="0,10,0,0" 
+                   HorizontalAlignment="Center" FontSize="12" />
 
         <StackPanel Orientation="Horizontal" Margin="0,40,0,0" HorizontalAlignment="Center">
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding WebCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="Web" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="Kodesiana.com" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionOpenWeb}" Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding GitHubCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="GithubCircle" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="GitHub" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionOpenGithub}" Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding TwitterCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="Twitter" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="Twitter" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionOpenTwitter}" Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding InstagramCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="Instagram" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="Instagram" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionOpenInstagram}" Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
         </StackPanel>

@@ -7,6 +7,7 @@
              xmlns:viewModels="clr-namespace:KFlearning.IDE.ViewModels"
              xmlns:applicationServices="clr-namespace:KFlearning.IDE.ApplicationServices"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:resources="clr-namespace:KFlearning.IDE.Resources"
 
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance viewModels:ProjectViewModel, IsDesignTimeCreatable=False}"
@@ -22,36 +23,36 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="Selamat datang!" FontSize="48" />
+        <TextBlock Grid.Row="0" Text="{x:Static resources:Texts.ViewTitleProjects}" FontSize="48" />
         <StackPanel Grid.Row="1" Orientation="Horizontal" DockPanel.Dock="Bottom" Margin="0,20,0,20">
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding CreateCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="Plus" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="Baru..." Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionCreateProject}" Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding DeleteCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="Delete" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="Hapus" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionDelete}" Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding ExportCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="Export" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="Ekspor" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ExportMessage}" Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding ImportCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="Import" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="Impor" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ImportMessage}" Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
             <Button Margin="{StaticResource ButtonFarMargin}" Command="{Binding PurgeCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="DeleteForever" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="Purge" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionPurge}" Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
         </StackPanel>

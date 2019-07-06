@@ -48,19 +48,19 @@ namespace KFlearning.IDE.ViewModels
                 new HamburgerMenuIconItem
                 {
                     Icon = new PackIconMaterial {Kind = PackIconMaterialKind.Archive},
-                    Label = "Proyek",
+                    Label = Texts.NavbarProject,
                     Tag = App.Container.Resolve<ProjectView>()
                 },
                 new HamburgerMenuIconItem
                 {
                     Icon = new PackIconMaterial {Kind = PackIconMaterialKind.Newspaper},
-                    Label = "Artikel",
+                    Label = Texts.NavbarArticles,
                     Tag = App.Container.Resolve<ArticleView>()
                 },
                 new HamburgerMenuIconItem
                 {
                     Icon = new PackIconMaterial {Kind = PackIconMaterialKind.Approval},
-                    Label = "Apps",
+                    Label = Texts.NavbarApps,
                     Tag = App.Container.Resolve<WebServerView>()
                 }
             };
@@ -69,7 +69,7 @@ namespace KFlearning.IDE.ViewModels
                 new HamburgerMenuIconItem
                 {
                     Icon = new PackIconMaterial {Kind = PackIconMaterialKind.Information},
-                    Label = "Tentang",
+                    Label = Texts.NavbarAbout,
                     Tag = App.Container.Resolve<AboutView>()
                 }
             };

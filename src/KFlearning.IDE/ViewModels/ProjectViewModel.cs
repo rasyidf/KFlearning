@@ -28,16 +28,16 @@ namespace KFlearning.IDE.ViewModels
 
             _ofd = new OpenFileDialog
             {
-                DefaultExt = "zip",
-                Filter = "KFlearning ZIP archive (*.zip)|*.zip",
+                DefaultExt = Strings.FilterZipExtension,
+                Filter = Strings.FilterZip,
                 Multiselect = false,
-                Title = "Pilih file untuk di impor."
+                Title = Texts.DialogImportTitle
             };
             _sfd = new SaveFileDialog
             {
-                DefaultExt = ".zip",
-                Filter = "KFlearning ZIP archive (*.zip)|*.zip",
-                Title = "Pilih lokasi file untuk di ekspor."
+                DefaultExt = Strings.FilterZipExtension,
+                Filter = Strings.FilterZip,
+                Title = Texts.DialogExportTitle
             };
 
             CreateCommand = new RelayCommand(Create_Command);
@@ -101,12 +101,11 @@ namespace KFlearning.IDE.ViewModels
             var state = (CreateProjectState) dialog.State;
             if (_projectManager.Exists(state.Name))
             {
-                await _helpers.CreateMessageDialog("Proyek baru",
-                    "Tidak dapat membuat proyek baru karena proyek dengan nama yang sama sudah ada.");
+                await _helpers.CreateMessageDialog(Texts.TitleCreateProject, Texts.CreateProjectDuplicateMessage);
                 return;
             }
 
-            var controller = await _helpers.CreateProgressDialog("Proyek baru", "Membuat proyek...");
+            var controller = await _helpers.CreateProgressDialog(Texts.TitleCreateProject, Texts.CreateProjectMessage);
             await Task.Run(() => _projectManager.Create(state.Type, state.Name))
                 .ContinueWith(x => controller.CloseAsync())
                 .ContinueWith(x => LoadData());
@@ -114,7 +113,7 @@ namespace KFlearning.IDE.ViewModels
 
         private async void Delete_Command(object obj)
         {
-            var controller = await _helpers.CreateProgressDialog("Hapus proyek", "Menghapus proyek...");
+            var controller = await _helpers.CreateProgressDialog(Texts.TitleDelete, Texts.DeleteMessage);
             await Task.Run(() => _projectManager.Delete(SelectedProject.Item))
                 .ContinueWith(x => controller.CloseAsync())
                 .ContinueWith(x => LoadData());
@@ -123,7 +122,7 @@ namespace KFlearning.IDE.ViewModels
         private async void Import_Command(object obj)
         {
             if (_sfd.ShowDialog() == false) return;
-            var controller = await _helpers.CreateProgressDialog("Impor proyek", "Mengimpor proyek...");
+            var controller = await _helpers.CreateProgressDialog(Texts.TitleImport, Texts.ImportMessage);
             await Task.Run(() => _projectManager.Import(_sfd.FileName))
                 .ContinueWith(x => controller.CloseAsync())
                 .ContinueWith(x => LoadData());
@@ -132,7 +131,7 @@ namespace KFlearning.IDE.ViewModels
         private async void Export_Command(object obj)
         {
             if (_ofd.ShowDialog() == false) return;
-            var controller = await _helpers.CreateProgressDialog("Ekspor proyek", "Mengekspor proyek...");
+            var controller = await _helpers.CreateProgressDialog(Texts.TitleExport, Texts.ExportMessage);
             await Task.Run(() => _projectManager.Export(SelectedProject.Item, _ofd.FileName))
                 .ContinueWith(x => controller.CloseAsync())
                 .ContinueWith(x => LoadData());
@@ -140,10 +139,10 @@ namespace KFlearning.IDE.ViewModels
 
         private async void Purge_Command(object obj)
         {
-            var result = await _helpers.CreateMessageDialog("Operasi Purge", Strings.PurgeConfirmMessage,
+            var result = await _helpers.CreateMessageDialog(Texts.TitlePurge, Texts.PurgeConfirmMessage,
                 MessageDialogStyle.AffirmativeAndNegative);
             if (result != MessageDialogResult.Affirmative) return;
-            var controller = await _helpers.CreateProgressDialog("Purge", "Menghapus semua proyek...");
+            var controller = await _helpers.CreateProgressDialog(Texts.TitlePurge, Texts.PurgeProcessMessage);
             await Task.Run(() => _projectManager.Purge())
                 .ContinueWith(x => controller.CloseAsync())
                 .ContinueWith(x => LoadData());

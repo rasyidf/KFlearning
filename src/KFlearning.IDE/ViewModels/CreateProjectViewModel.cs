@@ -12,6 +12,7 @@ using System.Windows.Input;
 using KFlearning.Core.Entities;
 using KFlearning.IDE.ApplicationServices;
 using KFlearning.IDE.Models;
+using KFlearning.IDE.Resources;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 
@@ -78,9 +79,9 @@ namespace KFlearning.IDE.ViewModels
         {
             ProjectTypes = new ObservableCollection<ProjectTypeItem>
             {
-                new ProjectTypeItem(ProjectType.Cpp, "C/C++ Project"),
-                new ProjectTypeItem(ProjectType.Web, "Web PHP Project"),
-                new ProjectTypeItem(ProjectType.Python, "Python Project")
+                new ProjectTypeItem(ProjectType.Cpp, Texts.ProjectCppName),
+                new ProjectTypeItem(ProjectType.Web, Texts.ProjectWebName),
+                new ProjectTypeItem(ProjectType.Python, Texts.ProjectPythonName)
             };
         }
 

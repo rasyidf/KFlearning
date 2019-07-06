@@ -6,14 +6,11 @@
 // 
 //  This file is part of KFlearning, licensed under MIT license.
 
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Castle.MicroKernel;
 using KFlearning.IDE.ApplicationServices;
 using KFlearning.IDE.Models;
-using KFlearning.IDE.Views;
 
 namespace KFlearning.IDE.ViewModels
 {

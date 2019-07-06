@@ -16,6 +16,7 @@ namespace KFlearning.IDE.ApplicationServices
     public interface IApplicationHelpers
     {
         void OpenUrl(string url);
+        void OpenUrl(string url, string campaign);
 
         void ShowReaderWindow(ArticleItem item);
         Task<DialogResultState> CreateNewProjectDialog();

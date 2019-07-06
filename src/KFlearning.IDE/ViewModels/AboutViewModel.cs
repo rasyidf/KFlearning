@@ -18,7 +18,7 @@ namespace KFlearning.IDE.ViewModels
 
         public AboutViewModel(IApplicationHelpers helpers)
         {
-            WebCommand = new RelayCommand(x => helpers.OpenUrl(Strings.WebUrl));
+            WebCommand = new RelayCommand(x => helpers.OpenUrl(Strings.WebUrl, Strings.CampaignAbout));
             GitHubCommand = new RelayCommand(x => helpers.OpenUrl(Strings.GitHubUrl));
             TwitterCommand = new RelayCommand(x => helpers.OpenUrl(Strings.TwitterUrl));
             InstagramCommand = new RelayCommand(x => helpers.OpenUrl(Strings.InstagramUrl));

@@ -7,24 +7,26 @@
                  xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
                  xmlns:viewModels="clr-namespace:KFlearning.IDE.ViewModels"
                  xmlns:applicationServices="clr-namespace:KFlearning.IDE.ApplicationServices"
+                 xmlns:resources="clr-namespace:KFlearning.IDE.Resources"
 
                  mc:Ignorable="d"
                  d:DataContext="{d:DesignInstance viewModels:ShellViewModel, IsDesignTimeCreatable=False}"
                  applicationServices:ViewModelLocator.IsAutomaticLocator="True"
                  GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
-                 Title="KFlearning" Height="478.361" Width="775.42">
+                 Title="{x:Static resources:Texts.AppName}"
+                 Height="478.361" Width="775.42">
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
             <Button Command="{Binding WebCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Width="24" Height="24" Kind="Web" />
-                    <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Text="Kodesiana.com" />
+                    <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Text="{x:Static resources:Texts.ActionOpenWeb}" />
                 </StackPanel>
             </Button>
             <Button Command="{Binding GitHubCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Width="24" Height="24" Kind="GithubCircle" />
-                    <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Text="GitHub" />
+                    <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Text="{x:Static resources:Texts.ActionOpenGithub}" />
                 </StackPanel>
             </Button>
         </mah:WindowCommands>
@@ -68,7 +70,7 @@
         <mah:HamburgerMenu.HamburgerMenuHeaderTemplate>
             <DataTemplate>
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Foreground="White"
-                           Text="KFlearning" />
+                           Text="{x:Static resources:Texts.AppName}" />
             </DataTemplate>
         </mah:HamburgerMenu.HamburgerMenuHeaderTemplate>
 
