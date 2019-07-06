@@ -14,7 +14,7 @@ namespace KFlearning.Core.Entities
     {
         public DatabaseContext()
         {
-            Database = new LiteDatabase("database.db");
+            Database = new LiteDatabase(Constants.DatabaseConnectionString);
         }
 
         public LiteDatabase Database { get; }

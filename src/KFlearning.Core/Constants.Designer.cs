@@ -61,6 +61,15 @@ namespace KFlearning.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to database.db.
+        /// </summary>
+        public static string DatabaseConnectionString {
+            get {
+                return ResourceManager.GetString("DatabaseConnectionString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to dev.
         /// </summary>
         public static string DomainName {
