@@ -9,7 +9,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using KFlearning.API;
+using KFlearning.Core.API;
 using KFlearning.Core.Entities;
 using KFlearning.IDE.Models;
 
@@ -57,7 +57,7 @@ namespace KFlearning.IDE.ApplicationServices
         {
             if (!Online)
             {
-                return _database.Articles.Find(x => x.Title == series.Title)
+                return _database.Articles.Find(x => x.Series == series.Title)
                     .Select(x => new ArticleItem(x)).ToList();
             }
 

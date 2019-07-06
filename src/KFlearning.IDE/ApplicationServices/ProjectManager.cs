@@ -26,10 +26,10 @@ namespace KFlearning.IDE.ApplicationServices
         private readonly IApacheServer _apache;
         private readonly IDatabaseContext _database;
         private readonly IHostsFile _hosts;
-        private readonly IProcessManager _pathManager;
+        private readonly IPathManager _pathManager;
         private readonly IVscode _vscode;
 
-        public ProjectManager(IApacheServer apache, IHostsFile hosts, IProcessManager pathManager,
+        public ProjectManager(IApacheServer apache, IHostsFile hosts, IPathManager pathManager,
             IDatabaseContext database, IVscode vscode)
         {
             _apache = apache;
@@ -174,13 +174,13 @@ namespace KFlearning.IDE.ApplicationServices
             switch (project.Type)
             {
                 case ProjectType.Web:
-                    path = _pathManager.GetPath(PathKind.VscodeWebZip);
+                    path = _pathManager.GetPath(TemplateFile.Web);
                     break;
                 case ProjectType.Cpp:
-                    path = _pathManager.GetPath(PathKind.VscodeCppZip);
+                    path = _pathManager.GetPath(TemplateFile.Cpp);
                     break;
                 case ProjectType.Python:
-                    path = _pathManager.GetPath(PathKind.VscodePythonZip);
+                    path = _pathManager.GetPath(TemplateFile.Python);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(project.Type), project.Type, null);

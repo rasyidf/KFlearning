@@ -156,6 +156,7 @@
     <Compile Include="ApplicationServices\MVVM\IDialog.cs" />
     <Compile Include="ApplicationServices\MVVM\NotifyPropertChangedInterceptor.cs" />
     <Compile Include="ApplicationServices\MVVM\NotifyChangedAttribute.cs" />
+    <Compile Include="ApplicationServices\MVVM\WebBrowserUtility.cs" />
     <Compile Include="ApplicationServices\ProjectManager.cs" />
     <Compile Include="ApplicationServices\MVVM\RelayCommand.cs" />
     <Compile Include="ApplicationServices\MVVM\PropertyChangedBase.cs" />
@@ -246,12 +247,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\KFlearning.API\KFlearning.API.csproj">
-      <Project>{2582302E-404A-470F-98E6-6291B6FD5D37}</Project>
-      <Name>KFlearning.API</Name>
-    </ProjectReference>
     <ProjectReference Include="..\KFlearning.Core\KFlearning.Core.csproj">
       <Project>{ed0f38b7-33fe-4e24-bdad-58790ca85bcc}</Project>
       <Name>KFlearning.Core</Name>

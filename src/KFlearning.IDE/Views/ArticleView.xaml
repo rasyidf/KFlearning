@@ -9,7 +9,6 @@
              xmlns:applicationServices="clr-namespace:KFlearning.IDE.ApplicationServices"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
 
-
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance viewModels:ArticleViewModel, IsDesignTimeCreatable=False}"
@@ -32,6 +31,7 @@
                    IsEnabled="{Binding CommandIsLoading, Converter={StaticResource InvertBoolConverter}}">
             <ComboBox Margin="{StaticResource ButtonMargin}" Width="150" DockPanel.Dock="Left"
                       ItemsSource="{Binding Series}" SelectedItem="{Binding SelectedSeries}"
+                      DisplayMemberPath="Title"
                       mah:TextBoxHelper.ClearTextButton="False"
                       mah:TextBoxHelper.UseFloatingWatermark="True"
                       mah:TextBoxHelper.Watermark="Kategori" />
@@ -53,7 +53,6 @@
             </TextBox>
         </DockPanel>
         <ListView Grid.Row="2" ItemTemplate="{StaticResource ArticleItemTemplate}" ItemsSource="{Binding Articles}"
-                  Visibility="{Binding CommandIsLoading, Converter={StaticResource BoolToVisibilityConverter}}"
                   x:Name="ArticleListView">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick" SourceObject="{Binding ElementName=ArticleListView}">

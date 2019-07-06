@@ -21,15 +21,17 @@ namespace KFlearning.IDE.ViewModels
     {
         #region Fields
 
+        private readonly IApplicationHelpers _helpers;
         private readonly IArticleManager _articleManager;
 
         #endregion
 
         #region Constructor
 
-        public ArticleViewModel(IArticleManager articleManager)
+        public ArticleViewModel(IArticleManager articleManager, IApplicationHelpers helpers)
         {
             _articleManager = articleManager;
+            _helpers = helpers;
 
             RefreshCommand = new RelayCommand(Refresh_Command);
             SearchCommand = new RelayCommand(Search_Command);
@@ -91,12 +93,7 @@ namespace KFlearning.IDE.ViewModels
 
         private void ArticleDoubleClick_Command(object obj)
         {
-            var args = new Dictionary<string, object>
-            {
-                {"item", obj}
-            };
-
-            App.Container.Resolve<ReaderView>(Arguments.FromNamed(args)).Show();
+            _helpers.ShowReaderWindow((ArticleItem) obj);
         }
 
         private async void Online_Command(object obj)

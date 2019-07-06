@@ -11,10 +11,8 @@
                  mc:Ignorable="d"
                  d:DataContext="{d:DesignInstance viewModels:ShellViewModel, IsDesignTimeCreatable=False}"
                  applicationServices:ViewModelLocator.IsAutomaticLocator="True"
-                 GlowBrush="{DynamicResource AccentColorBrush}"
-                 WindowStartupLocation="CenterScreen"
-                 Title="KFlearning"
-                 Height="478.361" Width="775.42">
+                 GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
+                 Title="KFlearning" Height="478.361" Width="775.42">
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
             <Button Command="{Binding WebCommand}">

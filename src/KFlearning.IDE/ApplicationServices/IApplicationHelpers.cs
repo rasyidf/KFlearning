@@ -16,9 +16,10 @@ namespace KFlearning.IDE.ApplicationServices
     public interface IApplicationHelpers
     {
         void OpenUrl(string url);
+
+        void ShowReaderWindow(ArticleItem item);
         Task<DialogResultState> CreateNewProjectDialog();
         Task<ProgressDialogController> CreateProgressDialog(string title, string message);
-
         Task<MessageDialogResult> CreateMessageDialog(string title, string message,
             MessageDialogStyle style = MessageDialogStyle.Affirmative);
     }

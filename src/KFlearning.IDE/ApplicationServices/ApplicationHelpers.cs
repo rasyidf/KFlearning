@@ -6,10 +6,13 @@
 // 
 //  This file is part of KFlearning, licensed under MIT license.
 
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
+using Castle.MicroKernel;
 using KFlearning.IDE.Models;
+using KFlearning.IDE.ViewModels;
 using KFlearning.IDE.Views;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
@@ -36,6 +39,18 @@ namespace KFlearning.IDE.ApplicationServices
             await dialog.WaitUntilUnloadedAsync();
 
             return new DialogResultState(vm.DialogResult, vm.State);
+        }
+
+        public void ShowReaderWindow(ArticleItem item)
+        {
+            var args = new Dictionary<string, object>
+            {
+                {"item", item}
+            };
+            var view = App.Container.Resolve<ReaderView>();
+            view.DataContext = App.Container.Resolve<ReaderViewModel>(Arguments.FromNamed(args));
+            
+            view.Show();
         }
 
         public async Task<ProgressDialogController> CreateProgressDialog(string title, string message)

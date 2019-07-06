@@ -7,7 +7,7 @@
 //  This file is part of KFlearning, licensed under MIT license.
 
 using System;
-using KFlearning.API;
+using KFlearning.Core.API;
 using KFlearning.Core.Entities;
 
 namespace KFlearning.IDE.Models
