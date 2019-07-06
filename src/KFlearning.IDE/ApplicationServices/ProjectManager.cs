@@ -23,17 +23,14 @@ namespace KFlearning.IDE.ApplicationServices
 {
     public class ProjectManager : IProjectManager
     {
-        private readonly IApacheServer _apache;
+        private readonly IWebServer _webServer;
         private readonly IDatabaseContext _database;
-        private readonly IHostsFile _hosts;
         private readonly IPathManager _pathManager;
         private readonly IVscode _vscode;
 
-        public ProjectManager(IApacheServer apache, IHostsFile hosts, IPathManager pathManager,
-            IDatabaseContext database, IVscode vscode)
+        public ProjectManager(IWebServer webServer, IPathManager pathManager, IDatabaseContext database, IVscode vscode)
         {
-            _apache = apache;
-            _hosts = hosts;
+            _webServer = webServer;
             _pathManager = pathManager;
             _database = database;
             _vscode = vscode;
@@ -58,8 +55,7 @@ namespace KFlearning.IDE.ApplicationServices
 
             if (type == ProjectType.Web)
             {
-                _apache.CreateAlias(project.DomainName, project.Path);
-                _hosts.AddEntry(project.DomainName);
+                _webServer.CreateAlias(project.DomainName, project.Path);
             }
 
             ExtractTemplate(project);
@@ -78,8 +74,7 @@ namespace KFlearning.IDE.ApplicationServices
             Directory.Delete(project.Path, true);
             if (project.Type == ProjectType.Web)
             {
-                _apache.RemoveAlias(project.DomainName);
-                _hosts.RemoveEntry(project.DomainName);
+                _webServer.RemoveAlias(project.DomainName);
             }
 
             _database.Projects.Delete(project.ProjectId);
@@ -101,10 +96,9 @@ namespace KFlearning.IDE.ApplicationServices
                 var project = JsonConvert.DeserializeObject<Project>(File.ReadAllText(metadataFile));
                 project.Path = extractPath; // save new project path
 
-                if (project.Type != ProjectType.Web)
+                if (project.Type == ProjectType.Web)
                 {
-                    _apache.CreateAlias(project.DomainName, project.Path);
-                    _hosts.AddEntry(project.DomainName);
+                    _webServer.CreateAlias(project.DomainName, project.Path);
                 }
 
                 _database.Projects.Insert(project);
