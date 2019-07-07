@@ -64,13 +64,20 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Installer\IPackageInstaller.cs" />
-    <Compile Include="Installer\MingwInstaller.cs" />
-    <Compile Include="Installer\ProgressChangedEventArgs.cs" />
+    <Compile Include="Installer\Graph\DeleteFilesTask.cs" />
+    <Compile Include="Installer\Graph\DownloadTask.cs" />
+    <Compile Include="Installer\Graph\ExtractTask.cs" />
+    <Compile Include="Installer\Graph\Impl\MariaDbTask.cs" />
+    <Compile Include="Installer\Graph\Impl\MingwTask.cs" />
+    <Compile Include="Installer\Graph\InstallGraph.cs" />
+    <Compile Include="Installer\Graph\ITaskNode.cs" />
+    <Compile Include="Installer\Graph\KillProcessTask.cs" />
+    <Compile Include="Installer\Graph\TaskGraph.cs" />
+    <Compile Include="Installer\InstallationManager.cs" />
+    <Compile Include="Installer\InstallMode.cs" />
     <Compile Include="IO\ExecutableFile.cs" />
     <Compile Include="IO\IPathManager.cs" />
     <Compile Include="IO\IProcessManager.cs" />
-    <Compile Include="Installer\PackageManager.cs" />
     <Compile Include="IO\PathKind.cs" />
     <Compile Include="IO\PathManager.cs" />
     <Compile Include="IO\ProcessManager.cs" />
@@ -84,6 +91,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="DotNetZip">
+      <Version>1.13.3</Version>
+    </PackageReference>
     <PackageReference Include="LiteDB">
       <Version>4.1.4</Version>
     </PackageReference>
