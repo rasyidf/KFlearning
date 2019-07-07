@@ -15,6 +15,7 @@
                  d:DesignHeight="450" d:DesignWidth="800"
                  applicationServices:ViewModelLocator.IsAutomaticLocator="False"
                  x:Name="RootWindow" WindowStartupLocation="CenterScreen" 
+                 Icon="../Resources/kflearning-logo.ico"
                  GlowBrush="{DynamicResource AccentColorBrush}" Title="{Binding Title}">
     <mah:MetroWindow.Resources>
         <Thickness x:Key="ButtonMargin" Left="5" Right="5" />

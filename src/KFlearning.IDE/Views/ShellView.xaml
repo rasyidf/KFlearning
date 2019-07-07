@@ -13,6 +13,7 @@
                  d:DataContext="{d:DesignInstance viewModels:ShellViewModel, IsDesignTimeCreatable=False}"
                  applicationServices:ViewModelLocator.IsAutomaticLocator="True"
                  GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
+                 Icon="../Resources/kflearning-logo.ico"
                  Title="{x:Static resources:Texts.AppName}"
                  Height="478.361" Width="775.42">
     <mah:MetroWindow.RightWindowCommands>
