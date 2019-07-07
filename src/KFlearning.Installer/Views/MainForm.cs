@@ -8,5 +8,15 @@ namespace KFlearning.Installer.Views
         {
             InitializeComponent();
         }
+        
+        private void CmdInstall_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void CmdOpen_Click(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }
