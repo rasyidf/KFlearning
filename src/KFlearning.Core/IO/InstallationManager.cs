@@ -7,9 +7,8 @@
 //  This file is part of KFlearning, licensed under MIT license.
 
 using KFlearning.Core.Hosts;
-using KFlearning.Core.IO;
 
-namespace KFlearning.Core.Installer
+namespace KFlearning.Core.IO
 {
     public class InstallationManager
     {

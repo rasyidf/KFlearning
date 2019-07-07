@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 
-namespace KFlearning.Core.Installer.Graph
+namespace KFlearning.Core.Graph
 {
     public class DeleteFilesTask : ITaskNode
     {

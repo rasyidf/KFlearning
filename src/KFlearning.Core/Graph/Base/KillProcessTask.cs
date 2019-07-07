@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 
-namespace KFlearning.Core.Installer.Graph
+namespace KFlearning.Core.Graph
 {
     public class KillProcessTask : ITaskNode
     {

@@ -32,6 +32,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -43,6 +44,7 @@
     <Compile Include="API\IHtmlTransformer.cs" />
     <Compile Include="API\IKodesianaService.cs" />
     <Compile Include="API\KodesianaService.cs" />
+    <Compile Include="API\PackageConfig.cs" />
     <Compile Include="API\Post.cs" />
     <Compile Include="Entities\Article.cs" />
     <Compile Include="Entities\DatabaseContext.cs" />
@@ -64,17 +66,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Installer\Graph\DeleteFilesTask.cs" />
-    <Compile Include="Installer\Graph\DownloadTask.cs" />
-    <Compile Include="Installer\Graph\ExtractTask.cs" />
-    <Compile Include="Installer\Graph\Impl\MariaDbTask.cs" />
-    <Compile Include="Installer\Graph\Impl\MingwTask.cs" />
-    <Compile Include="Installer\Graph\InstallGraph.cs" />
-    <Compile Include="Installer\Graph\ITaskNode.cs" />
-    <Compile Include="Installer\Graph\KillProcessTask.cs" />
-    <Compile Include="Installer\Graph\TaskGraph.cs" />
-    <Compile Include="Installer\InstallationManager.cs" />
-    <Compile Include="Installer\InstallMode.cs" />
+    <Compile Include="Graph\Base\DeleteFilesTask.cs" />
+    <Compile Include="Graph\Base\DownloadTask.cs" />
+    <Compile Include="Graph\Base\ExtractTask.cs" />
+    <Compile Include="Graph\Impl\MariaDbTask.cs" />
+    <Compile Include="Graph\Impl\MingwTask.cs" />
+    <Compile Include="Graph\InstallGraph.cs" />
+    <Compile Include="Graph\ITaskNode.cs" />
+    <Compile Include="Graph\Base\KillProcessTask.cs" />
+    <Compile Include="Graph\TaskGraph.cs" />
+    <Compile Include="IO\InstallationManager.cs" />
+    <Compile Include="IO\InstallerDefinition.cs" />
+    <Compile Include="IO\InstallMode.cs" />
     <Compile Include="IO\ExecutableFile.cs" />
     <Compile Include="IO\IPathManager.cs" />
     <Compile Include="IO\IProcessManager.cs" />

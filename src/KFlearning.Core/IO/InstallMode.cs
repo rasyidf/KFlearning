@@ -1,4 +1,4 @@
-﻿namespace KFlearning.Core.Installer
+﻿namespace KFlearning.Core.IO
 {
     public enum InstallMode
     {

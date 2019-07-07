@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
+using KFlearning.Core.IO;
 
-namespace KFlearning.Core.Installer.Graph
+namespace KFlearning.Core.Graph
 {
     public interface ITaskNode
     {
@@ -9,6 +10,7 @@ namespace KFlearning.Core.Installer.Graph
         bool HasDependencies { get; }
         Queue<ITaskNode> Dependencies { get; }
 
+        void Configure(InstallerDefinition definition);
         bool Run(CancellationToken cancellation);
     }
 }

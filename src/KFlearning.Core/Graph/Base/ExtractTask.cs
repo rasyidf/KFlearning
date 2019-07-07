@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Ionic.Zip;
 
-namespace KFlearning.Core.Installer.Graph
+namespace KFlearning.Core.Graph
 {
     public class ExtractTask : ITaskNode
     {

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Threading;
+using KFlearning.Core.IO;
 
-namespace KFlearning.Core.Installer.Graph
+namespace KFlearning.Core.Graph
 {
     public class TaskGraph
     {
@@ -10,16 +11,17 @@ namespace KFlearning.Core.Installer.Graph
             
         }
 
-        private void InternalRunGraph(ITaskNode rootNode, CancellationToken token)
+        private void InternalRunGraph(InstallerDefinition definition, ITaskNode rootNode, CancellationToken token)
         {
+            rootNode.Configure(definition);
             if (rootNode.HasDependencies)
             {
                 foreach (ITaskNode nodeDependency in rootNode.Dependencies)
                 {
-                    InternalRunGraph(nodeDependency, token);
+                    InternalRunGraph(definition, nodeDependency, token);
                 }
             }
-
+            
             rootNode.Run(token);
             if (rootNode is IDisposable disposable) disposable.Dispose();
         }

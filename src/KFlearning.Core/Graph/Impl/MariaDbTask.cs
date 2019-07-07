@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace KFlearning.Core.Installer.Graph.Impl
+namespace KFlearning.Core.Graph.Impl
 {
     public class MariaDbTask : ITaskNode
     {
