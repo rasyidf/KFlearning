@@ -52,6 +52,9 @@
     <Compile Include="Entities\Project.cs" />
     <Compile Include="Entities\ProjectType.cs" />
     <Compile Include="Entities\Series.cs" />
+    <Compile Include="Graph\Impl\VscodeTask.cs" />
+    <Compile Include="Graph\IProgressBroker.cs" />
+    <Compile Include="Graph\ITaskGraph.cs" />
     <Compile Include="Hosts\ApacheHttpd.cs" />
     <Compile Include="Hosts\HostEntry.cs" />
     <Compile Include="Hosts\HostsFile.cs" />
@@ -109,6 +112,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\HtmlBodyStart.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MariaDbConfig.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
