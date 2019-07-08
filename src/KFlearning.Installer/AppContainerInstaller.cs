@@ -14,11 +14,9 @@ using KFlearning.Core.Entities;
 using KFlearning.Core.Graph;
 using KFlearning.Core.Hosts;
 using KFlearning.Core.IO;
-using KFlearning.IDE.ApplicationServices;
-using KFlearning.IDE.ViewModels;
-using KFlearning.IDE.Views;
+using KFlearning.Installer.Views;
 
-namespace KFlearning.IDE
+namespace KFlearning.Installer
 {
     public class AppContainerInstaller : IWindsorInstaller
     {
@@ -39,13 +37,8 @@ namespace KFlearning.IDE
                     .WithServiceDefaultInterfaces().LifestyleSingleton(),
 
                 // application specific
-                Classes.FromThisAssembly().InSameNamespaceAs<IApplicationHelpers>().WithServiceDefaultInterfaces()
-                    .ConfigureFor<NotifyPropertChangedInterceptor>(x => x.LifestyleTransient())
-                    .ConfigureFor<PropertyChangedBase>(x => x.LifestyleTransient())
-                    .Configure(x => x.LifestyleSingleton()),
-                Classes.FromThisAssembly().InSameNamespaceAs<ShellView>().LifestyleTransient(),
-                Classes.FromThisAssembly().InSameNamespaceAs<ShellViewModel>()
-                    .Configure(x => x.Interceptors<NotifyPropertChangedInterceptor>().LifestyleTransient())
+                Component.For<IProgressBroker>().ImplementedBy<ProgressBroker>().LifestyleSingleton(),
+                Classes.FromThisAssembly().InSameNamespaceAs<MainForm>().LifestyleTransient()
             );
         }
     }
