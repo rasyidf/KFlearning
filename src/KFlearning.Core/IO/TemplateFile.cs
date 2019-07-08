@@ -9,6 +9,7 @@ namespace KFlearning.Core.IO
 {
     public enum TemplateFile
     {
+        RootDir,
         Hosts,
         Web,
         Cpp,

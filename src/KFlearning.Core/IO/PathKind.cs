@@ -13,5 +13,12 @@ namespace KFlearning.Core.IO
         BasePath,
         ReposRoot,
         ApacheSitesAliasRoot,
+
+        VscodeInstallRoot,
+        MingwInstallRoot,
+        ApacheInstallRoot,
+        MariaDbInstallRoot,
+        PhpInstallRoot,
+        
     }
 }

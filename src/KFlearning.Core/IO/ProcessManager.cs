@@ -8,6 +8,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace KFlearning.Core.IO
 {
@@ -19,24 +20,29 @@ namespace KFlearning.Core.IO
             return processes.Length > 0;
         }
 
-        public void Run(string filename, string args)
+        public void Run(string filename, string args, bool show = false)
         {
             Process.Start(filename, args);
         }
 
-        public void RunWait(string filename, string args)
+        public void RunWait(string filename, string args, bool show = false)
         {
-            throw new NotImplementedException();
+            Process.Start(filename, args)?.WaitForExit();
         }
 
-        public void RunJob(string filename, string args)
+        public void RunJob(string filename, string args, bool show = false)
         {
-            throw new NotImplementedException();
+            Process.Start(filename, args);
         }
 
         public void TerminateJob(string processName)
         {
-            throw new NotImplementedException();
+            var processes = Process.GetProcessesByName(processName);
+            if (!processes.Any()) return;
+            foreach (Process process in processes)
+            {
+                process.Kill();
+            }
         }
     }
 }

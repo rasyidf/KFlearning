@@ -12,9 +12,9 @@ namespace KFlearning.Core.IO
     {
         bool IsRunning(string name);
 
-        void Run(string filename, string args);
-        void RunWait(string filename, string args);
-        void RunJob(string filename, string args);
+        void Run(string filename, string args, bool show = false);
+        void RunWait(string filename, string args, bool show = false);
+        void RunJob(string filename, string args, bool show = false);
         void TerminateJob(string processName);
     }
 }
