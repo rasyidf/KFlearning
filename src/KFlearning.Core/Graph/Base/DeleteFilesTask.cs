@@ -2,60 +2,79 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using KFlearning.Core.IO;
 
 namespace KFlearning.Core.Graph
 {
     public class DeleteFilesTask : ITaskNode
     {
+        #region Fields
+        
+        private IPathManager _pathManager;
+        private IProgressBroker _broker;
         private readonly string _path;
 
+        #endregion
+
+        #region ITaskNode Properties
+        
         public string TaskName => "Delete files";
         public bool HasDependencies => false;
         public Queue<ITaskNode> Dependencies => null;
 
+        #endregion
+
+        #region Constructor
+        
         public DeleteFilesTask(string path)
         {
             _path = path;
+        }
+
+        #endregion
+
+        #region ITaskNode Methods
+
+        public void Configure(InstallerDefinition definition)
+        {
+            _pathManager = definition.ResolveService<IPathManager>();
+            _broker = definition.ResolveService<IProgressBroker>();
         }
 
         public bool Run(CancellationToken cancellation)
         {
             try
             {
-                if (!Directory.Exists(_path) && !File.Exists(_path)) return false;
+                _broker.ReportMessage("Deleting files...");
+                if (!Directory.Exists(_path) && !File.Exists(_path))
+                {
+                    _broker.ReportMessage("No file or folder to delete.");
+                    _broker.ReportProgress(100);
+                    return false;
+                }
+
+                _broker.ReportProgress(-1);
                 if (Directory.Exists(_path))
                 {
-                    InternalRecursiveDelete(_path);
+                    _pathManager.RecursiveDelete(_path, cancellation);
                 }
                 else
                 {
                     File.Delete(_path);
                 }
 
+                _broker.ReportMessage("All files or folders deleted.");
+                _broker.ReportProgress(100);
                 return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                _broker.ReportMessage(e.ToString());
+                _broker.ReportProgress(100);
                 return false;
             }
-        }
+        } 
 
-        private void InternalRecursiveDelete(string path)
-        {
-            foreach (string file in Directory.EnumerateFiles(path))
-            {
-                File.SetAttributes(file, FileAttributes.Normal);
-                File.Delete(file);
-            }
-
-            foreach (string currentDir in Directory.EnumerateDirectories(path))
-            {
-                InternalRecursiveDelete(currentDir);
-            }
-
-            Directory.Delete(path);
-        }
-
+        #endregion
     }
 }
