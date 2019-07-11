@@ -53,6 +53,7 @@
     <Compile Include="Entities\ProjectType.cs" />
     <Compile Include="Entities\Series.cs" />
     <Compile Include="Graph\Impl\InitializeDirectoriesTask.cs" />
+    <Compile Include="Graph\Impl\KflearningTask.cs" />
     <Compile Include="Graph\Impl\VscodeTask.cs" />
     <Compile Include="Graph\IProgressBroker.cs" />
     <Compile Include="Graph\ITaskGraph.cs" />
@@ -116,6 +117,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\VscodeConfig.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

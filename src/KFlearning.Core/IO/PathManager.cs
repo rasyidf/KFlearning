@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using IWshRuntimeLibrary;
+using File = System.IO.File;
 
 namespace KFlearning.Core.IO
 {
@@ -41,7 +43,8 @@ namespace KFlearning.Core.IO
                     {PathKind.PathMingwRoot, Path.Combine(basePath, @"bin\mingw")},
                     {PathKind.PathApacheRoot, Path.Combine(basePath, @"bin\httpd")},
                     {PathKind.PathMariaDbRoot, Path.Combine(basePath, @"bin\mariadb")},
-                    {PathKind.PathPhpRoot, Path.Combine(basePath, @"bin\php")}
+                    {PathKind.PathPhpRoot, Path.Combine(basePath, @"bin\php")},
+                    {PathKind.PathKflearningRoot, Path.Combine(basePath, "ide")}
                 };
 
                 // app-specific executable paths
@@ -102,6 +105,17 @@ namespace KFlearning.Core.IO
         public void LaunchExplorer(string path)
         {
             Process.Start("explorer.exe", path);
+        }
+
+        public void CreateShortcutOnDesktop(string linkName, string description, string path)
+        {
+            object shDesktop = "Desktop";
+            var shell = new WshShell();
+            string shortcutAddress = shell.SpecialFolders.Item(ref shDesktop) + $@"\{linkName}.lnk";
+            var shortcut = (IWshShortcut) shell.CreateShortcut(shortcutAddress);
+            shortcut.Description = description;
+            shortcut.TargetPath = path;
+            shortcut.Save();
         }
 
         public void RecursiveDelete(string path)

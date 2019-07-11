@@ -24,6 +24,7 @@ namespace KFlearning.Core.IO
 
         void LaunchUri(string uri);
         void LaunchExplorer(string path);
+        void CreateShortcutOnDesktop(string linkName, string description, string path);
 
         void RecursiveDelete(string path);
         void RecursiveDelete(string path, CancellationToken token);
