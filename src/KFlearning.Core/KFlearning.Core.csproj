@@ -79,7 +79,6 @@
     <Compile Include="Graph\ITaskNode.cs" />
     <Compile Include="Graph\Base\KillProcessTask.cs" />
     <Compile Include="Graph\TaskGraph.cs" />
-    <Compile Include="IO\InstallationManager.cs" />
     <Compile Include="IO\InstallerDefinition.cs" />
     <Compile Include="IO\InstallMode.cs" />
     <Compile Include="IO\IPathManager.cs" />
