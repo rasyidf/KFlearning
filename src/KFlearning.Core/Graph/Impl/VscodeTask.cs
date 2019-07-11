@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using KFlearning.Core.Hosts;
 using KFlearning.Core.IO;
@@ -115,6 +116,12 @@ namespace KFlearning.Core.Graph
                 _broker.ReportProgress(percentage);
                 _vscode.InstallExtension(ses[i]);
             }
+
+            // save settings
+            var vscodeSettingsFile = Path.Combine(vscodeRoot, @"data\user-data\settings.json");
+            var settings = new StringBuilder(Constants.VscodeConfig);
+            settings.Replace("{PHP_PATH}", _pathManager.GetPath(PathKind.PhpInstallRoot));
+            File.WriteAllText(vscodeSettingsFile, settings.ToString());
 
             // add to environment variable
             _broker.ReportProgress(80);

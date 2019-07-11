@@ -178,5 +178,28 @@ namespace KFlearning.Core {
                 return ResourceManager.GetString("VirtualHostTemplate", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///    &quot;terminal.integrated.shell.windows&quot;: &quot;C:/Windows/System32/cmd.exe&quot;,
+        ///    &quot;terminal.integrated.rendererType&quot;: &quot;dom&quot;,
+        ///	
+        ///	&quot;vsintellicode.modify.editor.suggestSelection&quot;: &quot;automaticallyOverrodeDefaultValue&quot;,
+        ///
+        ///	&quot;editor.suggestSelection&quot;: &quot;first&quot;,
+        ///    &quot;[json]&quot;: {
+        ///        &quot;editor.defaultFormatter&quot;: &quot;HookyQR.beautify&quot;
+        ///    },	
+        ///
+        ///    &quot;php.validate.executablePath&quot;: &quot;{PHP_PATH}&quot;,
+        ///    &quot;php.executablePath&quot;: &quot;{PHP_PATH}&quot;,
+        ///    &quot;php.suggest.basic&quot;: false,   
+        ///}.
+        /// </summary>
+        public static string VscodeConfig {
+            get {
+                return ResourceManager.GetString("VscodeConfig", resourceCulture);
+            }
+        }
     }
 }

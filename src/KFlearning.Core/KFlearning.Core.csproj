@@ -116,5 +116,8 @@
   <ItemGroup>
     <None Include="Resources\MariaDbConfig.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VscodeConfig.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
