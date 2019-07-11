@@ -53,6 +53,7 @@ namespace KFlearning.Core.Graph
         {
             try
             {
+                _pathManager.InitializePaths();
                 _broker.ReportProgress(0);
                 if (_mode == InstallMode.Install)
                 {
