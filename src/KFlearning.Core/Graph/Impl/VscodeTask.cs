@@ -118,10 +118,11 @@ namespace KFlearning.Core.Graph
             }
 
             // save settings
+            _broker.ReportMessage("Saving global settings...");
             var vscodeSettingsFile = Path.Combine(vscodeRoot, @"data\user-data\settings.json");
             var phpExePath = _pathManager.FindFile(_pathManager.GetPath(PathKind.PathPhpRoot), "php.exe");
             var settings = new StringBuilder(Constants.VscodeConfig);
-            settings.Replace("{PHP_PATH}", phpExePath);
+            settings.Replace("{PHP_PATH}", _pathManager.EnsureForwardSlash(phpExePath));
             File.WriteAllText(vscodeSettingsFile, settings.ToString());
 
             // add to environment variable
