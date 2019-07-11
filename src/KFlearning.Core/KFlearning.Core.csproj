@@ -52,6 +52,7 @@
     <Compile Include="Entities\Project.cs" />
     <Compile Include="Entities\ProjectType.cs" />
     <Compile Include="Entities\Series.cs" />
+    <Compile Include="Graph\Impl\InitializeDirectoriesTask.cs" />
     <Compile Include="Graph\Impl\VscodeTask.cs" />
     <Compile Include="Graph\IProgressBroker.cs" />
     <Compile Include="Graph\ITaskGraph.cs" />

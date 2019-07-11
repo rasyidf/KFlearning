@@ -10,14 +10,16 @@ namespace KFlearning.Core.Graph
         public bool HasDependencies => true;
         public Queue<ITaskNode> Dependencies { get; }
 
-        public InstallGraph(MingwTask mingw, MariaDbTask mariaDb, VscodeTask vscode)
+        public InstallGraph(MingwTask mingw, MariaDbTask mariaDb, VscodeTask vscode, InitializeDirectoriesTask initializeDirectories)
         {
             Dependencies = new Queue<ITaskNode>();
+            Dependencies.Enqueue(initializeDirectories);
             Dependencies.Enqueue(mingw);
             // apache
             // php
             Dependencies.Enqueue(mariaDb);
             Dependencies.Enqueue(vscode);
+            // kflearning
         }
         
         public void Configure(InstallerDefinition definition)
