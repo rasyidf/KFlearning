@@ -16,7 +16,7 @@ namespace KFlearning.Core.Graph
 
         #endregion
 
-        #region Properties
+        #region ITaskNode Properties
         
         public string TaskName => "Initialize directories";
         public bool HasDependencies => false;
@@ -24,7 +24,7 @@ namespace KFlearning.Core.Graph
 
         #endregion
 
-        #region Public Methods
+        #region ITaskNode Methods
 
         public void Configure(InstallerDefinition definition)
         {
