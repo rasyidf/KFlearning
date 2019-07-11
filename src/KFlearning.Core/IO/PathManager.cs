@@ -25,7 +25,7 @@ namespace KFlearning.Core.IO
         {
             var basePath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);
             Debug.Assert(basePath != null);
-            var lastIndex = basePath.LastIndexOf("/", StringComparison.InvariantCultureIgnoreCase);
+            var lastIndex = basePath.LastIndexOf(@"\", StringComparison.InvariantCultureIgnoreCase);
             BasePath = basePath.Substring(0, basePath.Length - (basePath.Length - lastIndex));
         }
 
@@ -157,9 +157,12 @@ namespace KFlearning.Core.IO
 
         public void RecursiveMoveDirectory(string source, string destination, CancellationToken token)
         {
+            Directory.CreateDirectory(destination);
             foreach (string libFile in Directory.EnumerateFiles(source))
             {
-                File.Move(libFile, Path.Combine(destination, Path.GetFileName(libFile)));
+                var name = Path.GetFileName(libFile);
+                Debug.Assert(name != null);
+                File.Move(libFile, Path.Combine(destination, name));
             }
 
             foreach (string name in Directory.EnumerateDirectories(source).Select(Path.GetFileName))
@@ -170,6 +173,8 @@ namespace KFlearning.Core.IO
                 Directory.CreateDirectory(destToProcess);
                 RecursiveMoveDirectory(sourceToProcess, destToProcess, token);
             }
+
+            Directory.Delete(source);
         }
 
         public void AddPathEnvironmentVar(string path)
