@@ -8,13 +8,23 @@ namespace KFlearning.Core.Graph
 {
     public class InitializeDirectoriesTask : ITaskNode
     {
+        #region Fields
+        
         private IPathManager _pathManager;
         private IProgressBroker _broker;
         private InstallMode _mode;
 
+        #endregion
+
+        #region Properties
+        
         public string TaskName => "Initialize directories";
         public bool HasDependencies => false;
         public Queue<ITaskNode> Dependencies => null;
+
+        #endregion
+
+        #region Public Methods
 
         public void Configure(InstallerDefinition definition)
         {
@@ -70,6 +80,8 @@ namespace KFlearning.Core.Graph
                 _broker.ReportMessage(e.ToString());
                 return false;
             }
-        }
+        } 
+
+        #endregion
     }
 }
