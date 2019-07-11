@@ -81,13 +81,11 @@
     <Compile Include="IO\InstallationManager.cs" />
     <Compile Include="IO\InstallerDefinition.cs" />
     <Compile Include="IO\InstallMode.cs" />
-    <Compile Include="IO\ExecutableFile.cs" />
     <Compile Include="IO\IPathManager.cs" />
     <Compile Include="IO\IProcessManager.cs" />
     <Compile Include="IO\PathKind.cs" />
     <Compile Include="IO\PathManager.cs" />
     <Compile Include="IO\ProcessManager.cs" />
-    <Compile Include="IO\TemplateFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

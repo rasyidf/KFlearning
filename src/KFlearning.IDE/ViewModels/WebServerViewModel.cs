@@ -67,7 +67,7 @@ namespace KFlearning.IDE.ViewModels
 
         private void Workspace_Command(object obj)
         {
-            _pathManager.LaunchExplorer(_pathManager.GetPath(PathKind.ReposRoot));
+            _pathManager.LaunchExplorer(_pathManager.GetPath(PathKind.PathReposRoot));
         }
 
         private void PhpMyAdmin_Command(object obj)

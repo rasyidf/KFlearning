@@ -133,7 +133,7 @@ namespace KFlearning.IDE.ApplicationServices
 
         public void Purge()
         {
-            var dirs = Directory.EnumerateDirectories(_pathManager.GetPath(PathKind.ReposRoot), "*",
+            var dirs = Directory.EnumerateDirectories(_pathManager.GetPath(PathKind.PathReposRoot), "*",
                 SearchOption.TopDirectoryOnly);
             foreach (string dir in dirs)
             {
@@ -145,7 +145,7 @@ namespace KFlearning.IDE.ApplicationServices
 
         public string GetPathForProject(string title)
         {
-            return Path.Combine(_pathManager.GetPath(PathKind.ReposRoot), StripDirectoryPath(title));
+            return Path.Combine(_pathManager.GetPath(PathKind.PathReposRoot), StripDirectoryPath(title));
         }
 
         #region Private Methods
@@ -179,13 +179,13 @@ namespace KFlearning.IDE.ApplicationServices
             switch (project.Type)
             {
                 case ProjectType.Web:
-                    path = _pathManager.GetPath(TemplateFile.Web);
+                    path = _pathManager.GetPath(PathKind.TemplateWeb);
                     break;
                 case ProjectType.Cpp:
-                    path = _pathManager.GetPath(TemplateFile.Cpp);
+                    path = _pathManager.GetPath(PathKind.TemplateCpp);
                     break;
                 case ProjectType.Python:
-                    path = _pathManager.GetPath(TemplateFile.Python);
+                    path = _pathManager.GetPath(PathKind.TemplatePython);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(project.Type), project.Type, null);

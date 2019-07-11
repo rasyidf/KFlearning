@@ -25,7 +25,7 @@ namespace KFlearning.Core.Hosts
 
         public void Start()
         {
-            _processManager.RunJob(_pathManager.GetPath(ExecutableFile.Mariadb), "--console");
+            _processManager.RunJob(_pathManager.GetPath(PathKind.ExeMariadb), "--console");
         }
 
         public void Stop()

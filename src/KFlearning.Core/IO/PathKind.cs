@@ -10,15 +10,23 @@ namespace KFlearning.Core.IO
 {
     public enum PathKind
     {
-        BasePath,
-        ReposRoot,
-        ApacheSitesAliasRoot,
+        PathBase,
+        PathReposRoot,
+        PathSitesAliasRoot,
 
-        VscodeInstallRoot,
-        MingwInstallRoot,
-        ApacheInstallRoot,
-        MariaDbInstallRoot,
-        PhpInstallRoot,
-        
+        PathVscodeRoot,
+        PathMingwRoot,
+        PathApacheRoot,
+        PathMariaDbRoot,
+        PathPhpRoot,
+
+        TemplateHosts,
+        TemplateWeb,
+        TemplateCpp,
+        TemplatePython,
+
+        ExeHttpd,
+        ExeMariadb,
+        ExeVscode,
     }
 }

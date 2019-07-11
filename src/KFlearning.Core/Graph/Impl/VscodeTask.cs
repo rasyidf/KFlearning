@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using KFlearning.Core.Hosts;
 using KFlearning.Core.IO;
 
 namespace KFlearning.Core.Graph
@@ -13,9 +12,9 @@ namespace KFlearning.Core.Graph
     {
         #region Fields
         
-        private IProgressBroker _broker;
+        private IProcessManager _processManager;
         private IPathManager _pathManager;
-        private IVscode _vscode;
+        private IProgressBroker _broker;
         private InstallMode _mode; 
 
         #endregion
@@ -32,9 +31,9 @@ namespace KFlearning.Core.Graph
 
         public void Configure(InstallerDefinition definition)
         {
+            _processManager = definition.ResolveService<IProcessManager>();
             _pathManager = definition.ResolveService<IPathManager>();
             _broker = definition.ResolveService<IProgressBroker>();
-            _vscode = definition.ResolveService<IVscode>();
             _mode = definition.Mode;
 
             Dependencies = new Queue<ITaskNode>();
@@ -44,7 +43,7 @@ namespace KFlearning.Core.Graph
                 var savePath = _pathManager.GetPathForTemp(fileName);
 
                 Dependencies.Enqueue(new DownloadTask(definition.Packages.VscodeUri, savePath));
-                Dependencies.Enqueue(new ExtractTask(savePath, _pathManager.GetPath(PathKind.VscodeInstallRoot)));
+                Dependencies.Enqueue(new ExtractTask(savePath, _pathManager.GetPath(PathKind.PathVscodeRoot)));
                 foreach (Uri extUri in definition.Packages.VscodeExtensions)
                 {
                     fileName = Path.GetFileName(extUri.AbsoluteUri);
@@ -56,14 +55,14 @@ namespace KFlearning.Core.Graph
                 foreach (Uri extUri in definition.Packages.ProjectTemplates)
                 {
                     fileName = Path.GetFileName(extUri.AbsoluteUri);
-                    savePath = Path.Combine(_pathManager.GetPath(TemplateFile.RootDir), fileName);
+                    savePath = Path.Combine(_pathManager.GetPath(PathKind.PathBase), @"etc\templates", fileName);
 
                     Dependencies.Enqueue(new DownloadTask(extUri, savePath));
                 }
             }
             else
             {
-                Dependencies.Enqueue(new DeleteFilesTask(_pathManager.GetPath(PathKind.VscodeInstallRoot)));
+                Dependencies.Enqueue(new DeleteFilesTask(_pathManager.GetPath(PathKind.PathVscodeRoot)));
             }
         }
 
@@ -99,8 +98,8 @@ namespace KFlearning.Core.Graph
 
         private void InternalInstall()
         {
-            var vscodeRoot = _pathManager.GetPath(PathKind.VscodeInstallRoot);
-            var extRoot = _pathManager.GetPathForTemp("");
+            var vscodeRoot = _pathManager.GetPath(PathKind.PathVscodeRoot);
+            var extRoot = _pathManager.GetPathForTemp();
 
             // create data directory
             _broker.ReportMessage("Creating data directory...");
@@ -114,13 +113,14 @@ namespace KFlearning.Core.Graph
                 var percentage = (int) Math.Round((double) (i + 1) / ses.Count * 100, 0);
 
                 _broker.ReportProgress(percentage);
-                _vscode.InstallExtension(ses[i]);
+                InstallExtension(ses[i]);
             }
 
             // save settings
             var vscodeSettingsFile = Path.Combine(vscodeRoot, @"data\user-data\settings.json");
+            var phpExePath = _pathManager.FindFile(_pathManager.GetPath(PathKind.PathPhpRoot), "php.exe");
             var settings = new StringBuilder(Constants.VscodeConfig);
-            settings.Replace("{PHP_PATH}", _pathManager.GetPath(PathKind.PhpInstallRoot));
+            settings.Replace("{PHP_PATH}", phpExePath);
             File.WriteAllText(vscodeSettingsFile, settings.ToString());
 
             // add to environment variable
@@ -137,9 +137,19 @@ namespace KFlearning.Core.Graph
             _broker.ReportProgress(70);
             _broker.ReportMessage("Removing Visual Studio Code from environment variable...");
             
-            _pathManager.RemovePathEnvironmentVar(_pathManager.GetPath(PathKind.VscodeInstallRoot));
+            _pathManager.RemovePathEnvironmentVar(_pathManager.GetPath(PathKind.PathVscodeRoot));
         }
+
+        #endregion
+
+        #region Private Methods
         
+        private void InstallExtension(string path)
+        {
+            _processManager.RunWait(_pathManager.GetPath(PathKind.ExeVscode),
+                $"--install-extension \"{Path.GetFileName(path)}\"");
+        } 
+
         #endregion
     }
 }

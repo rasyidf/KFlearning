@@ -27,19 +27,19 @@ namespace KFlearning.Core.Hosts
         public void AddEntry(string domain)
         {
             string content = $"127.0.0.1      {domain}      #KFLearning Magic";
-            File.AppendAllText(_pathManager.GetPath(TemplateFile.Hosts), content);
+            File.AppendAllText(_pathManager.GetPath(PathKind.TemplateHosts), content);
         }
 
         public void RemoveEntry(string domain)
         {
-            var lines = File.ReadAllLines(_pathManager.GetPath(TemplateFile.Hosts))
+            var lines = File.ReadAllLines(_pathManager.GetPath(PathKind.TemplateHosts))
                 .Where(line => !line.Contains(domain)).ToList();
-            File.WriteAllLines(_pathManager.GetPath(TemplateFile.Hosts), lines);
+            File.WriteAllLines(_pathManager.GetPath(PathKind.TemplateHosts), lines);
         }
 
         public IEnumerable<HostEntry> EnumerateDomains()
         {
-            var lines = File.ReadAllLines(_pathManager.GetPath(TemplateFile.Hosts));
+            var lines = File.ReadAllLines(_pathManager.GetPath(PathKind.TemplateHosts));
             foreach (Match match in lines.Where(l => !string.IsNullOrWhiteSpace(l) && !l.StartsWith("#"))
                 .Select(x => HostLinePattern.Match(x)))
             {

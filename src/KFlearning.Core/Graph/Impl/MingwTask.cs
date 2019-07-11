@@ -40,16 +40,16 @@ namespace KFlearning.Core.Graph
                 var fileName = Path.GetFileName(definition.Packages.MingwUri.AbsoluteUri);
                 var savePath = _pathManager.GetPathForTemp(fileName);
                 Dependencies.Enqueue(new DownloadTask(definition.Packages.MingwUri, savePath));
-                Dependencies.Enqueue(new ExtractTask(savePath, _pathManager.GetPath(PathKind.MingwInstallRoot)));
+                Dependencies.Enqueue(new ExtractTask(savePath, _pathManager.GetPath(PathKind.PathMingwRoot)));
 
                 fileName = Path.GetFileName(definition.Packages.GlutUri.AbsoluteUri);
                 savePath = _pathManager.GetPathForTemp(fileName);
                 Dependencies.Enqueue(new DownloadTask(definition.Packages.GlutUri, savePath));
-                Dependencies.Enqueue(new ExtractTask(savePath, _pathManager.GetPathForTemp("")));
+                Dependencies.Enqueue(new ExtractTask(savePath, _pathManager.GetPathForTemp()));
             }
             else
             {
-                Dependencies.Enqueue(new DeleteFilesTask(_pathManager.GetPath(PathKind.MingwInstallRoot)));
+                Dependencies.Enqueue(new DeleteFilesTask(_pathManager.GetPath(PathKind.PathMingwRoot)));
             }
         } 
 
@@ -85,7 +85,7 @@ namespace KFlearning.Core.Graph
         
         private void InternalInstall()
         {
-            var root = _pathManager.GetPath(PathKind.MingwInstallRoot);
+            var root = _pathManager.GetPath(PathKind.PathMingwRoot);
 
             // install using mingw-get
             var file = Path.Combine(root, @"bin\mingw-get.exe");
@@ -115,7 +115,7 @@ namespace KFlearning.Core.Graph
             _broker.ReportProgress(70);
             _broker.ReportMessage("Removing MinGW Compiler Suite from environment variable...");
             
-            _pathManager.RemovePathEnvironmentVar(_pathManager.GetPath(PathKind.MingwInstallRoot));
+            _pathManager.RemovePathEnvironmentVar(_pathManager.GetPath(PathKind.PathMingwRoot));
         }
         
         #endregion

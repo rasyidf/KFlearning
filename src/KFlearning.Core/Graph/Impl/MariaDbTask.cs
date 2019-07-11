@@ -41,11 +41,11 @@ namespace KFlearning.Core.Graph
                 var savePath = _pathManager.GetPathForTemp(fileName);
                 
                 Dependencies.Enqueue(new DownloadTask(definition.Packages.MariaDbUri, savePath));
-                Dependencies.Enqueue(new ExtractTask(savePath, _pathManager.GetPath(PathKind.MariaDbInstallRoot)));
+                Dependencies.Enqueue(new ExtractTask(savePath, _pathManager.GetPath(PathKind.PathMariaDbRoot)));
             }
             else
             {
-                Dependencies.Enqueue(new DeleteFilesTask(_pathManager.GetPath(PathKind.MariaDbInstallRoot)));
+                Dependencies.Enqueue(new DeleteFilesTask(_pathManager.GetPath(PathKind.PathMariaDbRoot)));
             }
         }
 
@@ -82,7 +82,7 @@ namespace KFlearning.Core.Graph
         private void InternalInstall()
         {
             // find root directory
-            var rootDir = Directory.GetDirectories(_pathManager.GetPath(PathKind.MariaDbInstallRoot), "*",
+            var rootDir = Directory.GetDirectories(_pathManager.GetPath(PathKind.PathMariaDbRoot), "*",
                 SearchOption.TopDirectoryOnly).First();
             var rootDirBackslash = _pathManager.EnsureBackslashEnding(rootDir);
 
@@ -110,7 +110,7 @@ namespace KFlearning.Core.Graph
             _broker.ReportProgress(70);
             _broker.ReportMessage("Removing MariaDB from environment variable...");
 
-            _pathManager.RemovePathEnvironmentVar(_pathManager.GetPath(PathKind.MariaDbInstallRoot));
+            _pathManager.RemovePathEnvironmentVar(_pathManager.GetPath(PathKind.PathMariaDbRoot));
         }
 
         #endregion

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 
 namespace KFlearning.Core.IO
@@ -14,101 +13,85 @@ namespace KFlearning.Core.IO
         
         private const string EnvironmentVariablePath = "path";
 
-        private static readonly string BasePath;
-        private string _httpd, _mariadb, _vscode; 
+        private Dictionary<PathKind, string> _cachedPaths;
+        private static readonly object SyncLock = new object();
 
         #endregion
-
-        #region Static Constructor
-
-        static PathManager()
-        {
-            var basePath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);
-            Debug.Assert(basePath != null);
-            var lastIndex = basePath.LastIndexOf(@"\", StringComparison.InvariantCultureIgnoreCase);
-            BasePath = basePath.Substring(0, basePath.Length - (basePath.Length - lastIndex));
-        }
-
-        #endregion
-
+        
         #region Public Methods
+
+        public void InitializePaths()
+        {
+            lock (SyncLock)
+            {
+                // find base path, relative one level up from this executable
+                string basePath = GetBasePath();
+                string systemRoot = Path.GetPathRoot(Environment.SystemDirectory);
+
+                // cache paths
+                _cachedPaths = new Dictionary<PathKind, string>
+                {
+                    // common paths
+                    {PathKind.PathBase, basePath},
+                    {PathKind.PathReposRoot, Path.Combine(basePath, "repos")},
+                    {PathKind.PathSitesAliasRoot, Path.Combine(basePath, @"etc\apache\sites-enabled")},
+
+                    // app-specific installation dir
+                    {PathKind.PathVscodeRoot, Path.Combine(basePath, @"bin\vscode")},
+                    {PathKind.PathMingwRoot, Path.Combine(basePath, @"bin\mingw")},
+                    {PathKind.PathApacheRoot, Path.Combine(basePath, @"bin\httpd")},
+                    {PathKind.PathMariaDbRoot, Path.Combine(basePath, @"bin\mariadb")},
+                    {PathKind.PathPhpRoot, Path.Combine(basePath, @"bin\php")}
+                };
+
+                // app-specific executable paths
+                _cachedPaths.Add(PathKind.ExeHttpd, FindFile(_cachedPaths[PathKind.PathApacheRoot], "httpd.exe"));
+                _cachedPaths.Add(PathKind.ExeMariadb, FindFile(_cachedPaths[PathKind.PathMariaDbRoot], "mysqld.exe"));
+                _cachedPaths.Add(PathKind.ExeVscode, FindFile(_cachedPaths[PathKind.PathVscodeRoot], "Code.exe"));
+
+                // project templates
+                var templateRoot = Path.Combine(basePath, @"etc\templates");
+                _cachedPaths.Add(PathKind.TemplateWeb, Path.Combine(templateRoot, "web.zip"));
+                _cachedPaths.Add(PathKind.TemplateCpp, Path.Combine(templateRoot, "cpp.zip"));
+                _cachedPaths.Add(PathKind.TemplatePython, Path.Combine(templateRoot, "python.zip"));
+                _cachedPaths.Add(PathKind.TemplateHosts,
+                    Path.Combine(systemRoot, @"Windows\System32\drivers\etc\hosts"));
+            }
+        }
 
         public string GetPath(PathKind path)
         {
-            switch (path)
-            {
-                case PathKind.BasePath:
-                    return BasePath;
-                case PathKind.ReposRoot:
-                    return Path.Combine(BasePath, "repos");
-                case PathKind.ApacheSitesAliasRoot:
-                    return Path.Combine(BasePath, @"etc\apache\sites-enabled");
-                case PathKind.VscodeInstallRoot:
-                    return Path.Combine(BasePath, @"bin\vscode");
-                case PathKind.MingwInstallRoot:
-                    return Path.Combine(BasePath, @"bin\mingw");
-                case PathKind.ApacheInstallRoot:
-                    return Path.Combine(BasePath, @"bin\httpd");
-                case PathKind.MariaDbInstallRoot:
-                    return Path.Combine(BasePath, @"bin\mariadb");
-                case PathKind.PhpInstallRoot:
-                    return Path.Combine(BasePath, @"bin\php");
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(path), path, null);
-            }
-        }
-
-        public string GetPath(ExecutableFile file)
-        {
-            switch (file)
-            {
-                case ExecutableFile.Httpd:
-                    return _httpd ?? (_httpd = FindEnumerate(GetPath(PathKind.ApacheInstallRoot), "httpd.exe"));
-                case ExecutableFile.Mariadb:
-                    return _mariadb ?? (_mariadb = FindEnumerate(GetPath(PathKind.MariaDbInstallRoot), "mysqld.exe"));
-                case ExecutableFile.Vscode:
-                    return _vscode ?? (_vscode = FindEnumerate(GetPath(PathKind.VscodeInstallRoot), "Code.exe"));
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(file), file, null);
-            }
-        }
-
-        public string GetPath(TemplateFile file)
-        {
-            switch (file)
-            {
-                case TemplateFile.RootDir:
-                    return Path.Combine(BasePath, @"etc\vscode\templates");
-                case TemplateFile.Hosts:
-                    return Path.Combine(Path.GetPathRoot(Environment.SystemDirectory),
-                        @"Windows\System32\drivers\etc\hosts");
-                case TemplateFile.Web:
-                    return Path.Combine(GetPath(TemplateFile.RootDir), "web.zip");
-                case TemplateFile.Cpp:
-                    return Path.Combine(GetPath(TemplateFile.RootDir), "cpp.zip");
-                case TemplateFile.Python:
-                    return Path.Combine(GetPath(TemplateFile.RootDir), "python.zip");
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(file), file, null);
-            }
+            if (_cachedPaths == null) InitializePaths();
+            return _cachedPaths[path];
         }
 
         public string GetPathForAlias(string domainName)
         {
-            return Path.Combine(GetPath(PathKind.ApacheSitesAliasRoot), domainName + ".conf");
+            return Path.Combine(GetPath(PathKind.PathSitesAliasRoot), domainName + ".conf");
         }
 
-        public string GetPathForTemp(string filename)
+        public string GetPathForTemp(string filename = "")
         {
             return Path.Combine(Path.GetTempPath(), "kflearning", filename);
         }
 
+        public string FindFile(string searchPath, string filename)
+        {
+            return Directory.EnumerateFiles(searchPath, filename, SearchOption.AllDirectories).FirstOrDefault();
+        }
+
+        public string EnsureForwardSlash(string path)
+        {
+            return path.Replace(@"\", "/");
+        }
+
         public string EnsureBackslashEnding(string path)
         {
-            var sb = new StringBuilder(path);
-            sb.Replace("\\", "/");
-            if (sb[sb.Length - 1] != '/') sb.Append("/");
-            return sb.ToString();
+            bool useForwardSlash = path.Contains("/");
+            bool shouldAddSlash = useForwardSlash ? path.EndsWith("/") : path.EndsWith(@"\");
+
+            if (!shouldAddSlash) return path;
+            return useForwardSlash ? EnsureForwardSlash(path) + "/" : path + @"\";
         }
 
         public void LaunchUri(string uri)
@@ -201,11 +184,6 @@ namespace KFlearning.Core.IO
 
         #region Private Methods
 
-        private static string FindEnumerate(string searchPath, string filename)
-        {
-            return Directory.EnumerateFiles(searchPath, filename, SearchOption.AllDirectories).FirstOrDefault();
-        }
-
         private static List<string> GetEnvironmentPath()
         {
             var originalPaths = Environment.GetEnvironmentVariable(EnvironmentVariablePath, EnvironmentVariableTarget.User);
@@ -217,7 +195,15 @@ namespace KFlearning.Core.IO
         {
             var revisedPath = string.Join(";", paths);
             Environment.SetEnvironmentVariable(EnvironmentVariablePath, revisedPath, EnvironmentVariableTarget.User);
-        } 
+        }
+
+        private static string GetBasePath()
+        {
+            var basePath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);
+            Debug.Assert(basePath != null);
+            int lastIndex = basePath.LastIndexOf(@"\", StringComparison.InvariantCultureIgnoreCase);
+            return basePath.Substring(0, lastIndex);
+        }
 
         #endregion
     }

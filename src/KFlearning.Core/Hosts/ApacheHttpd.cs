@@ -25,7 +25,7 @@ namespace KFlearning.Core.Hosts
 
         public void Start()
         {
-            _processManager.RunJob(_pathManager.GetPath(ExecutableFile.Httpd), "");
+            _processManager.RunJob(_pathManager.GetPath(PathKind.ExeHttpd), "");
         }
 
         public void Stop()

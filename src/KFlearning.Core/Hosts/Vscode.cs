@@ -24,13 +24,7 @@ namespace KFlearning.Core.Hosts
 
         public void OpenFolder(string path)
         {
-            _processManager.Run(_pathManager.GetPath(ExecutableFile.Vscode), path);
-        }
-
-        public void InstallExtension(string path)
-        {
-            _processManager.RunWait(_pathManager.GetPath(ExecutableFile.Vscode),
-                "--install-extension " + Path.GetFileName(path));
+            _processManager.Run(_pathManager.GetPath(PathKind.ExeVscode), path);
         }
     }
 }
