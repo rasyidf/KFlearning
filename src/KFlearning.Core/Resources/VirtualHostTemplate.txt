@@ -1,0 +1,9 @@
+<VirtualHost *:80> 
+    DocumentRoot "{REPO_PATH}"
+    ServerName {REPO_DOMAIN}
+    ServerAlias *.{REPO_DOMAIN}
+    <Directory "{REPO_PATH}">
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>

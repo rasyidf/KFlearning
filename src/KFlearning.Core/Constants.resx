@@ -142,9 +142,6 @@
   <data name="VirtualHostTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\VirtualHostTemplate.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="DatabaseConnectionString" xml:space="preserve">
-    <value>database.db</value>
-  </data>
   <data name="MariaDbConfig" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\MariaDbConfig.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
@@ -156,5 +153,14 @@
   </data>
   <data name="ComposerBatch" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\ComposerBatch.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="AliasTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\AliasTemplate.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="DatabaseConnectionString" xml:space="preserve">
+    <value>database.db</value>
+  </data>
+  <data name="HttpdConfig" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\HttpdConfig.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
 </root>

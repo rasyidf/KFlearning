@@ -61,6 +61,20 @@ namespace KFlearning.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alias /{ALIAS_NAME} &quot;{ALIAS_PATH}&quot;
+        ///&lt;Directory &quot;{ALIAS_PATH}&quot;&gt;
+        ///	Options Indexes FollowSymLinks MultiViews
+        ///	AllowOverride all  
+        ///	Require local
+        ///&lt;/Directory&gt;.
+        /// </summary>
+        public static string AliasTemplate {
+            get {
+                return ResourceManager.GetString("AliasTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to @php &quot;%~dp0composer.phar&quot; %*.
         /// </summary>
         public static string ComposerBatch {
@@ -124,6 +138,36 @@ namespace KFlearning.Core {
         public static string HtmlBodyStart {
             get {
                 return ResourceManager.GetString("HtmlBodyStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Define SRVROOT &quot;{HTTPD_ROOT}&quot;
+        ///ServerRoot &quot;${SRVROOT}&quot;
+        ///Define ENABLE_TLS13 &quot;Yes&quot;
+        ///Listen 80
+        ///
+        ///DocumentRoot &quot;{DOCUMENT_ROOT}&quot;
+        ///
+        ///ServerAdmin admin@example.com
+        ///ServerName KFLearning
+        ///
+        ///ErrorLog &quot;logs/error.log&quot;
+        ///LogLevel error
+        ///
+        ///EnableMMAP off
+        ///EnableSendfile on
+        ///AcceptFilter http none
+        ///AcceptFilter https none
+        ///
+        ///LoadModule access_compat_module modules/mod_access_compat.so
+        ///LoadModule actions_module modules/mod_actions.so
+        ///LoadModule alias_module modules/mod_alias.so
+        ///LoadModule allowmethods_module module [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string HttpdConfig {
+            get {
+                return ResourceManager.GetString("HttpdConfig", resourceCulture);
             }
         }
         
@@ -211,7 +255,15 @@ namespace KFlearning.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to &lt;VirtualHost *:80&gt; 
+        ///    DocumentRoot &quot;{REPO_PATH}&quot;
+        ///    ServerName {REPO_DOMAIN}
+        ///    ServerAlias *.{REPO_DOMAIN}
+        ///    &lt;Directory &quot;{REPO_PATH}&quot;&gt;
+        ///        AllowOverride All
+        ///        Require all granted
+        ///    &lt;/Directory&gt;
+        ///&lt;/VirtualHost&gt;.
         /// </summary>
         public static string VirtualHostTemplate {
             get {

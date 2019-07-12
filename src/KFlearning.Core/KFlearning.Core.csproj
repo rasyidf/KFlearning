@@ -46,43 +46,44 @@
     <Compile Include="API\KodesianaService.cs" />
     <Compile Include="API\PackageConfig.cs" />
     <Compile Include="API\Post.cs" />
-    <Compile Include="Entities\Article.cs" />
-    <Compile Include="Entities\DatabaseContext.cs" />
-    <Compile Include="Entities\IDatabaseContext.cs" />
-    <Compile Include="Entities\Project.cs" />
-    <Compile Include="Entities\ProjectType.cs" />
-    <Compile Include="Entities\Series.cs" />
-    <Compile Include="Graph\Impl\InitializeDirectoriesTask.cs" />
-    <Compile Include="Graph\Impl\KflearningTask.cs" />
-    <Compile Include="Graph\Impl\PhpTask.cs" />
-    <Compile Include="Graph\Impl\VscodeTask.cs" />
-    <Compile Include="Graph\IProgressBroker.cs" />
-    <Compile Include="Graph\ITaskGraph.cs" />
-    <Compile Include="Hosts\ApacheHttpd.cs" />
-    <Compile Include="Hosts\HostEntry.cs" />
-    <Compile Include="Hosts\HostsFile.cs" />
-    <Compile Include="Hosts\IApacheHttpd.cs" />
-    <Compile Include="Hosts\IHostsFile.cs" />
-    <Compile Include="Hosts\IMariaDb.cs" />
-    <Compile Include="Hosts\IVscode.cs" />
-    <Compile Include="Hosts\MariaDb.cs" />
-    <Compile Include="Hosts\Vscode.cs" />
+    <Compile Include="DAL\Article.cs" />
+    <Compile Include="DAL\DatabaseContext.cs" />
+    <Compile Include="DAL\IDatabaseContext.cs" />
+    <Compile Include="DAL\Project.cs" />
+    <Compile Include="DAL\ProjectType.cs" />
+    <Compile Include="DAL\Series.cs" />
+    <Compile Include="Services\Graph\Impl\HttpdTask.cs" />
+    <Compile Include="Services\Graph\Impl\InitializeDirectoriesTask.cs" />
+    <Compile Include="Services\Graph\Impl\KflearningTask.cs" />
+    <Compile Include="Services\Graph\Impl\PhpTask.cs" />
+    <Compile Include="Services\Graph\Impl\VscodeTask.cs" />
+    <Compile Include="Services\Graph\IProgressBroker.cs" />
+    <Compile Include="Services\Graph\ITaskGraph.cs" />
+    <Compile Include="Services\Hosts\ApacheHttpd.cs" />
+    <Compile Include="Services\Hosts\HostEntry.cs" />
+    <Compile Include="Services\Hosts\HostsFile.cs" />
+    <Compile Include="Services\Hosts\IApacheHttpd.cs" />
+    <Compile Include="Services\Hosts\IHostsFile.cs" />
+    <Compile Include="Services\Hosts\IMariaDb.cs" />
+    <Compile Include="Services\Hosts\IVscode.cs" />
+    <Compile Include="Services\Hosts\MariaDb.cs" />
+    <Compile Include="Services\Hosts\Vscode.cs" />
     <Compile Include="Constants.Designer.cs">
       <DependentUpon>Constants.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Graph\Base\DeleteFilesTask.cs" />
-    <Compile Include="Graph\Base\DownloadTask.cs" />
-    <Compile Include="Graph\Base\ExtractTask.cs" />
-    <Compile Include="Graph\Impl\MariaDbTask.cs" />
-    <Compile Include="Graph\Impl\MingwTask.cs" />
-    <Compile Include="Graph\InstallGraph.cs" />
-    <Compile Include="Graph\ITaskNode.cs" />
-    <Compile Include="Graph\Base\KillProcessTask.cs" />
-    <Compile Include="Graph\TaskGraph.cs" />
-    <Compile Include="IO\InstallerDefinition.cs" />
-    <Compile Include="IO\InstallMode.cs" />
+    <Compile Include="Services\Graph\Base\DeleteFilesTask.cs" />
+    <Compile Include="Services\Graph\Base\DownloadTask.cs" />
+    <Compile Include="Services\Graph\Base\ExtractTask.cs" />
+    <Compile Include="Services\Graph\Impl\MariaDbTask.cs" />
+    <Compile Include="Services\Graph\Impl\MingwTask.cs" />
+    <Compile Include="Services\Graph\InstallGraph.cs" />
+    <Compile Include="Services\Graph\ITaskNode.cs" />
+    <Compile Include="Services\Graph\Base\KillProcessTask.cs" />
+    <Compile Include="Services\Graph\TaskGraph.cs" />
+    <Compile Include="Services\Graph\InstallerDefinition.cs" />
+    <Compile Include="Services\Graph\InstallMode.cs" />
     <Compile Include="IO\IPathManager.cs" />
     <Compile Include="IO\IProcessManager.cs" />
     <Compile Include="IO\PathKind.cs" />
@@ -90,6 +91,11 @@
     <Compile Include="IO\ProcessManager.cs" />
     <Compile Include="IO\TransformingConfigFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IProjectManager.cs" />
+    <Compile Include="Services\IWebServer.cs" />
+    <Compile Include="Services\ProjectManager.cs" />
+    <Compile Include="Services\StatusChangedEventArgs.cs" />
+    <Compile Include="Services\WebServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Constants.resx">
@@ -136,6 +142,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ComposerBatch.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AliasTemplate.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HttpdConfig.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
