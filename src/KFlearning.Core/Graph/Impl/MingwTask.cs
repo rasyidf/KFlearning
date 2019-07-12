@@ -21,7 +21,7 @@ namespace KFlearning.Core.Graph
         
         public string TaskName => "MinGW Compiler Suite";
         public bool HasDependencies => true;
-        public Queue<ITaskNode> Dependencies { get; private set; }
+        public Queue<ITaskNode> Dependencies { get; } = new Queue<ITaskNode>();
 
         #endregion
 
@@ -34,7 +34,6 @@ namespace KFlearning.Core.Graph
             _broker = definition.ResolveService<IProgressBroker>();
             _mode = definition.Mode;
 
-            Dependencies = new Queue<ITaskNode>();
             if (definition.Mode == InstallMode.Install)
             {
                 var fileName = Path.GetFileName(definition.Packages.MingwUri.AbsoluteUri);
@@ -57,7 +56,6 @@ namespace KFlearning.Core.Graph
         {
             try
             {
-                _pathManager.InitializePaths();
                 _broker.ReportProgress(-1);
                 if (_mode == InstallMode.Install)
                 {
@@ -76,6 +74,7 @@ namespace KFlearning.Core.Graph
             {
                 _broker.ReportProgress(100);
                 _broker.ReportMessage(e.ToString());
+
                 return false;
             }
         }
@@ -86,14 +85,16 @@ namespace KFlearning.Core.Graph
         
         private void InternalInstall()
         {
-            var root = _pathManager.GetPath(PathKind.PathMingwRoot);
+            // invalidate path caches
+            _pathManager.InitializePaths();
+            var root = _pathManager.GetPath(PathKind.PathPhpRoot);
 
             // install using mingw-get
             var file = Path.Combine(root, @"bin\mingw-get.exe");
             _processManager.RunWait(file, "install gcc g++ gdb mingw32-make");
 
             // install glut library to mingw
-            var glutPath = Path.Combine(_pathManager.GetPathForTemp(""), "GLUTMingw32");
+            var glutPath = Path.Combine(_pathManager.GetPathForTemp(), "GLUTMingw32");
             _pathManager.RecursiveMoveDirectory(Path.Combine(glutPath, "lib"), Path.Combine(root, "lib"));
             _pathManager.RecursiveMoveDirectory(Path.Combine(glutPath, "include"), Path.Combine(root, "include"));
             
@@ -105,9 +106,7 @@ namespace KFlearning.Core.Graph
             // add to environment variable
             _broker.ReportProgress(80);
             _broker.ReportMessage("Adding MinGW Compiler Suite to environment variable...");
-
-            var path = Path.Combine(root, "bin");
-            _pathManager.AddPathEnvironmentVar(path);
+            _pathManager.AddPathEnvironmentVar(Path.Combine(root, "bin"));
         }
 
         private void InternalUninstall()
@@ -115,7 +114,6 @@ namespace KFlearning.Core.Graph
             // remove from environment variable
             _broker.ReportProgress(70);
             _broker.ReportMessage("Removing MinGW Compiler Suite from environment variable...");
-            
             _pathManager.RemovePathEnvironmentVar(_pathManager.GetPath(PathKind.PathMingwRoot));
         }
         

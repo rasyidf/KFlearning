@@ -58,6 +58,7 @@ namespace KFlearning.Core.Graph
             {
                 _broker.ReportProgress(100);
                 _broker.ReportMessage(e.ToString());
+
                 return false;
             }
         } 

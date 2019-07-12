@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using KFlearning.Core.IO;
 
@@ -23,7 +22,7 @@ namespace KFlearning.Core.Graph
 
         public string TaskName => "Visual Studio Code";
         public bool HasDependencies => true;
-        public Queue<ITaskNode> Dependencies { get; private set; } 
+        public Queue<ITaskNode> Dependencies { get; } = new Queue<ITaskNode>();
 
         #endregion
 
@@ -36,7 +35,6 @@ namespace KFlearning.Core.Graph
             _broker = definition.ResolveService<IProgressBroker>();
             _mode = definition.Mode;
 
-            Dependencies = new Queue<ITaskNode>();
             if (definition.Mode == InstallMode.Install)
             {
                 var fileName = Path.GetFileName(definition.Packages.VscodeUri.AbsoluteUri);
@@ -70,7 +68,6 @@ namespace KFlearning.Core.Graph
         {
             try
             {
-                _pathManager.InitializePaths();
                 _broker.ReportProgress(0);
                 if (_mode == InstallMode.Install)
                 {
@@ -99,38 +96,39 @@ namespace KFlearning.Core.Graph
 
         private void InternalInstall()
         {
+            // invalidate path caches
+            _pathManager.InitializePaths();
             var vscodeRoot = _pathManager.GetPath(PathKind.PathVscodeRoot);
-            var extRoot = _pathManager.GetPathForTemp();
-
+            
             // create data directory
             _broker.ReportMessage("Creating data directory...");
             Directory.CreateDirectory(Path.Combine(vscodeRoot, "data"));
+            Directory.CreateDirectory(Path.Combine(vscodeRoot, @"data\user-data"));
             
             // install extensions
             _broker.ReportMessage("Installing extensions...");
-            List<string> ses = Directory.EnumerateFiles(extRoot, "*.vsix").ToList();
-            for (var i = 0; i < ses.Count; i++)
+            var extRoot = _pathManager.GetPathForTemp();
+            List<string> extFiles = Directory.EnumerateFiles(extRoot, "*.vsix").ToList();
+            for (var i = 0; i < extFiles.Count; i++)
             {
-                var percentage = (int) Math.Round((double) (i + 1) / ses.Count * 100, 0);
-
+                var percentage = (int) Math.Round((double) (i + 1) / extFiles.Count * 100, 0);
                 _broker.ReportProgress(percentage);
-                InstallExtension(ses[i]);
+                InstallExtension(extFiles[i]);
             }
 
             // save settings
             _broker.ReportMessage("Saving global settings...");
             var vscodeSettingsFile = Path.Combine(vscodeRoot, @"data\user-data\settings.json");
-            var phpExePath = _pathManager.FindFile(_pathManager.GetPath(PathKind.PathPhpRoot), "php.exe");
-            var settings = new StringBuilder(Constants.VscodeConfig);
-            settings.Replace("{PHP_PATH}", _pathManager.EnsureForwardSlash(phpExePath));
-            File.WriteAllText(vscodeSettingsFile, settings.ToString());
+            using (var config = new TransformingConfigFile(vscodeSettingsFile, Constants.VscodeConfig))
+            {
+                var phpExePath = Path.Combine(_pathManager.GetPath(PathKind.PathPhpRoot), "php.exe");
+                config.Transform("{PHP_PATH}", _pathManager.EnsureForwardSlash(phpExePath));
+            }
 
             // add to environment variable
             _broker.ReportProgress(80);
             _broker.ReportMessage("Adding Visual Studio Code to environment variable...");
-
-            var path = Path.Combine(vscodeRoot, "bin");
-            _pathManager.AddPathEnvironmentVar(path);
+            _pathManager.AddPathEnvironmentVar(Path.Combine(vscodeRoot, "bin"));
         }
 
         private void InternalUninstall()
@@ -138,7 +136,6 @@ namespace KFlearning.Core.Graph
             // remove from environment variable
             _broker.ReportProgress(70);
             _broker.ReportMessage("Removing Visual Studio Code from environment variable...");
-            
             _pathManager.RemovePathEnvironmentVar(_pathManager.GetPath(PathKind.PathVscodeRoot));
         }
 

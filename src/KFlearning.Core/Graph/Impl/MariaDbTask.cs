@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using KFlearning.Core.IO;
 
@@ -22,7 +21,7 @@ namespace KFlearning.Core.Graph
         
         public string TaskName => "MariaDB";
         public bool HasDependencies => true;
-        public Queue<ITaskNode> Dependencies { get; private set; }
+        public Queue<ITaskNode> Dependencies { get; } = new Queue<ITaskNode>();
 
         #endregion
 
@@ -34,7 +33,6 @@ namespace KFlearning.Core.Graph
             _broker = definition.ResolveService<IProgressBroker>();
             _mode = definition.Mode;
 
-            Dependencies = new Queue<ITaskNode>();
             if (definition.Mode == InstallMode.Install)
             {
                 var fileName = Path.GetFileName(definition.Packages.MariaDbUri.AbsoluteUri);
@@ -53,7 +51,6 @@ namespace KFlearning.Core.Graph
         {
             try
             {
-                _pathManager.InitializePaths();
                 _broker.ReportProgress(0);
                 if (_mode == InstallMode.Install)
                 {
@@ -72,6 +69,7 @@ namespace KFlearning.Core.Graph
             {
                 _broker.ReportProgress(100);
                 _broker.ReportMessage(e.ToString());
+
                 return false;
             }
         } 
@@ -82,27 +80,27 @@ namespace KFlearning.Core.Graph
         
         private void InternalInstall()
         {
-            // find root directory
-            var rootDir = Directory.GetDirectories(_pathManager.GetPath(PathKind.PathMariaDbRoot), "*",
-                SearchOption.TopDirectoryOnly).First();
-            var rootDirBackslash = _pathManager.EnsureBackslashEnding(rootDir);
+            // invalidate path caches
+            _pathManager.InitializePaths();
 
+            // find root directory
+            var root = _pathManager.GetPath(PathKind.PathMariaDbRoot);
+            var rootNested = Directory.GetDirectories(root, "*",SearchOption.TopDirectoryOnly).First();
+            _pathManager.RecursiveMoveDirectory(rootNested, root);
+            
             // create config (my.ini)
             _broker.ReportProgress(50);
             _broker.ReportMessage("Configuring MariaDB...");
-
-            var template = new StringBuilder(Constants.MariaDbConfig);
-            template.Replace("{MARIADB_INSTALL_ROOT}", rootDirBackslash);
-
-            var myiniPath = Path.Combine(rootDir, "my.ini");
-            File.WriteAllText(myiniPath, template.ToString());
+            using (var config = new TransformingConfigFile(Path.Combine(root, "my.ini"), Constants.MariaDbConfig))
+            {
+                var rootDirBackslash = _pathManager.EnsureBackslashEnding(root);
+                config.Transform("{MARIADB_INSTALL_ROOT}", rootDirBackslash);
+            }
 
             // add to env vars
             _broker.ReportProgress(80);
             _broker.ReportMessage("Adding MariaDB to environment variable...");
-
-            var path = Path.Combine(rootDir, "bin");
-            _pathManager.AddPathEnvironmentVar(path);
+            _pathManager.AddPathEnvironmentVar(Path.Combine(root, "bin"));
         }
 
         private void InternalUninstall()
@@ -110,7 +108,6 @@ namespace KFlearning.Core.Graph
             // remove from env vars
             _broker.ReportProgress(70);
             _broker.ReportMessage("Removing MariaDB from environment variable...");
-
             _pathManager.RemovePathEnvironmentVar(_pathManager.GetPath(PathKind.PathMariaDbRoot));
         }
 
