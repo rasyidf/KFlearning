@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using KFlearning.Core.API;
 using KFlearning.Core.IO;
 using KFlearning.Core.Services.Graph;
+using KFlearning.Installer.ApplicationServices;
 
 namespace KFlearning.Installer.Views
 {
@@ -18,13 +19,18 @@ namespace KFlearning.Installer.Views
         {
             InitializeComponent();
         }
-        
-        private void CmdInstall_Click(object sender, EventArgs e)
+
+        protected override void OnLoad(EventArgs e)
         {
             var broker = (ProgressBroker) ProgressBroker;
             broker.MessageAction = MessageAction;
             broker.ProgressAction= ProgressAction;
 
+            base.OnLoad(e);
+        }
+
+        private void CmdInstall_Click(object sender, EventArgs e)
+        {
             var def = new InstallerDefinition(t=>Program.Container.Resolve(t))
             {
                 Mode = InstallMode.Install,

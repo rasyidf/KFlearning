@@ -14,6 +14,7 @@ using KFlearning.Core.DAL;
 using KFlearning.Core.IO;
 using KFlearning.Core.Services;
 using KFlearning.Core.Services.Graph;
+using KFlearning.Installer.ApplicationServices;
 using KFlearning.Installer.Views;
 
 namespace KFlearning.Installer

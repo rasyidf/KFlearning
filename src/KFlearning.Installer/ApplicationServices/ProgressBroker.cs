@@ -9,7 +9,7 @@
 using System;
 using KFlearning.Core.Services.Graph;
 
-namespace KFlearning.Installer.Views
+namespace KFlearning.Installer.ApplicationServices
 {
     internal class ProgressBroker : IProgressBroker
     {
