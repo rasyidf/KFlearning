@@ -13,6 +13,7 @@ namespace KFlearning.Core.IO
         PathBase,
         PathReposRoot,
         PathSitesAliasRoot,
+        PathVirtualHostRoot,
 
         PathVscodeRoot,
         PathMingwRoot,

@@ -15,8 +15,10 @@ namespace KFlearning.Core.IO
         void InitializePaths();
 
         string GetPath(PathKind path);
+        string GetPathForVirtualHost(string domainName);
         string GetPathForAlias(string domainName);
         string GetPathForTemp(string filename = "");
+        string StripInvalidFileName(string path);
         string FindFile(string searchPath, string filename);
 
         string EnsureForwardSlash(string path);

@@ -15,8 +15,11 @@ namespace KFlearning.Core.IO
         
         private const string EnvironmentVariablePath = "path";
 
-        private Dictionary<PathKind, string> _cachedPaths;
+        private static readonly char[] InvalidPathChars = Path.GetInvalidPathChars();
+        private static readonly char[] InvalidFileNameChars = Path.GetInvalidFileNameChars();
         private static readonly object SyncLock = new object();
+
+        private Dictionary<PathKind, string> _cachedPaths;
 
         #endregion
         
@@ -36,7 +39,8 @@ namespace KFlearning.Core.IO
                     // common paths
                     {PathKind.PathBase, basePath},
                     {PathKind.PathReposRoot, Path.Combine(basePath, "repos")},
-                    {PathKind.PathSitesAliasRoot, Path.Combine(basePath, @"etc\apache\sites-enabled")},
+                    {PathKind.PathSitesAliasRoot, Path.Combine(basePath, @"etc\apache\alias")},
+                    {PathKind.PathVirtualHostRoot, Path.Combine(basePath, @"etc\apache\sites-enabled")},
 
                     // app-specific installation dir
                     {PathKind.PathVscodeRoot, Path.Combine(basePath, @"bin\vscode")},
@@ -68,6 +72,11 @@ namespace KFlearning.Core.IO
             return _cachedPaths[path];
         }
 
+        public string GetPathForVirtualHost(string domainName)
+        {
+            return Path.Combine(GetPath(PathKind.PathVirtualHostRoot), domainName + ".conf");
+        }
+
         public string GetPathForAlias(string domainName)
         {
             return Path.Combine(GetPath(PathKind.PathSitesAliasRoot), domainName + ".conf");
@@ -76,6 +85,11 @@ namespace KFlearning.Core.IO
         public string GetPathForTemp(string filename = "")
         {
             return Path.Combine(Path.GetTempPath(), "kflearning", filename);
+        }
+
+        public string StripInvalidFileName(string path)
+        {
+            return InvalidFileNameChars.Aggregate(path, (current, x) => current.Replace(x.ToString(), string.Empty));
         }
 
         public string FindFile(string searchPath, string filename)
