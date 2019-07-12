@@ -8,7 +8,7 @@
 
 using System;
 using KFlearning.Core.API;
-using KFlearning.Core.Entities;
+using KFlearning.Core.DAL;
 
 namespace KFlearning.IDE.Models
 {

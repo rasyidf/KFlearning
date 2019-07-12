@@ -6,7 +6,7 @@
 // 
 //  This file is part of KFlearning, licensed under MIT license.
 
-using KFlearning.Core.Entities;
+using KFlearning.Core.DAL;
 
 namespace KFlearning.IDE.Models
 {

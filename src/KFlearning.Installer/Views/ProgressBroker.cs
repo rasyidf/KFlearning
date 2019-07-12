@@ -7,7 +7,7 @@
 //  This file is part of KFlearning, licensed under MIT license.
 
 using System;
-using KFlearning.Core.Graph;
+using KFlearning.Core.Services.Graph;
 
 namespace KFlearning.Installer.Views
 {

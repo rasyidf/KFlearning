@@ -10,10 +10,10 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using KFlearning.Core.API;
-using KFlearning.Core.Entities;
-using KFlearning.Core.Graph;
-using KFlearning.Core.Hosts;
+using KFlearning.Core.DAL;
 using KFlearning.Core.IO;
+using KFlearning.Core.Services;
+using KFlearning.Core.Services.Graph;
 using KFlearning.Installer.Views;
 
 namespace KFlearning.Installer

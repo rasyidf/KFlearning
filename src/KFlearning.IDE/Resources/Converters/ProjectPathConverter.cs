@@ -9,7 +9,7 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
-using KFlearning.IDE.ApplicationServices;
+using KFlearning.Core.Services;
 
 namespace KFlearning.IDE.Resources.Converters
 {

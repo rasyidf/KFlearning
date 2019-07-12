@@ -9,7 +9,7 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
-using KFlearning.Core.Entities;
+using KFlearning.Core.DAL;
 using KFlearning.IDE.ApplicationServices;
 using KFlearning.IDE.Models;
 using KFlearning.IDE.Resources;

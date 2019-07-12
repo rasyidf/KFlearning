@@ -4,8 +4,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KFlearning.Core.API;
-using KFlearning.Core.Graph;
 using KFlearning.Core.IO;
+using KFlearning.Core.Services.Graph;
 
 namespace KFlearning.Installer.Views
 {

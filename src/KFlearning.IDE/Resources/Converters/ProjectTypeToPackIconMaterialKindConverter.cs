@@ -9,7 +9,7 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
-using KFlearning.Core.Entities;
+using KFlearning.Core.DAL;
 using MahApps.Metro.IconPacks;
 
 namespace KFlearning.IDE.Resources.Converters

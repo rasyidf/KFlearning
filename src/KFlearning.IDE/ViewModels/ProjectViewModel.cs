@@ -7,8 +7,10 @@
 //  This file is part of KFlearning, licensed under MIT license.
 
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using KFlearning.Core.Services;
 using KFlearning.IDE.ApplicationServices;
 using KFlearning.IDE.Models;
 using KFlearning.IDE.Resources;
@@ -56,7 +58,7 @@ namespace KFlearning.IDE.ViewModels
 
         private void LoadData()
         {
-            var result = _projectManager.GetProjects();
+            var result = _projectManager.GetProjects().Select(x => new ProjectItem(x));
             Projects = new ObservableCollection<ProjectItem>(result);
         }
 
