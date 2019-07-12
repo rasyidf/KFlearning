@@ -45,6 +45,7 @@
     <Compile Include="API\IKodesianaService.cs" />
     <Compile Include="API\KodesianaService.cs" />
     <Compile Include="API\PackageConfig.cs" />
+    <Compile Include="API\PackagePlatform.cs" />
     <Compile Include="API\Post.cs" />
     <Compile Include="DAL\Article.cs" />
     <Compile Include="DAL\DatabaseContext.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Services\Graph\Impl\VscodeTask.cs" />
     <Compile Include="Services\Graph\IProgressBroker.cs" />
     <Compile Include="Services\Graph\ITaskGraph.cs" />
+    <Compile Include="Services\Graph\UninstallGraph.cs" />
     <Compile Include="Services\Hosts\ApacheHttpd.cs" />
     <Compile Include="Services\Hosts\HostEntry.cs" />
     <Compile Include="Services\Hosts\HostsFile.cs" />
