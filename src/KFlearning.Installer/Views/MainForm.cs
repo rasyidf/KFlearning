@@ -28,7 +28,7 @@ namespace KFlearning.Installer.Views
             var def = new InstallerDefinition(t=>Program.Container.Resolve(t))
             {
                 Mode = InstallMode.Install,
-                Packages = new PackageConfig
+                Packages = new PackageCatalog
                 {
                     MingwUri = new Uri("https://osdn.net/dl/mingw/mingw-get-0.6.3-mingw32-pre-20170905-1-bin.zip")
                 }

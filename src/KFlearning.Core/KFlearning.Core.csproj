@@ -44,7 +44,7 @@
     <Compile Include="API\IHtmlTransformer.cs" />
     <Compile Include="API\IKodesianaService.cs" />
     <Compile Include="API\KodesianaService.cs" />
-    <Compile Include="API\PackageConfig.cs" />
+    <Compile Include="API\PackageCatalog.cs" />
     <Compile Include="API\PackagePlatform.cs" />
     <Compile Include="API\Post.cs" />
     <Compile Include="DAL\Article.cs" />

@@ -14,7 +14,7 @@ namespace KFlearning.Core.Services.Graph
 
         public InstallMode Mode { get; set; }
 
-        public PackageConfig Packages { get; set; }
+        public PackageCatalog Packages { get; set; }
         
         public T ResolveService<T>()
         {

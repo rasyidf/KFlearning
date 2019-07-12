@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace KFlearning.Core.API
 {
-    public class PackageConfig
+    public class PackageCatalog
     {
         public Uri MingwUri { get; set; }
         public Uri GlutUri { get; set; }
