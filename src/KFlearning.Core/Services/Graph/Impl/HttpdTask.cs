@@ -90,7 +90,7 @@ namespace KFlearning.Core.Services.Graph
 
             // find root directory
             var root = _pathManager.GetPath(PathKind.PathApacheRoot);
-            var rootNested = Directory.EnumerateDirectories(root, "*", SearchOption.TopDirectoryOnly).First();
+            var rootNested = Directory.EnumerateDirectories(root, "Apache*", SearchOption.TopDirectoryOnly).First();
             _pathManager.RecursiveMoveDirectory(rootNested, root);
 
             // save settings (httpd.conf)
