@@ -93,6 +93,21 @@ namespace KFlearning.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;VirtualHost _default_:80&gt;
+        ///    &lt;Directory &quot;{KFLEARNING_DIR_ROOT}&quot;&gt;
+        ///        AllowOverride All
+        ///        Require all granted
+        ///    &lt;/Directory&gt;
+        ///&lt;/VirtualHost&gt;
+        ///.
+        /// </summary>
+        public static string DefaultVirtualHost {
+            get {
+                return ResourceManager.GetString("DefaultVirtualHost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to dev.
         /// </summary>
         public static string DomainName {

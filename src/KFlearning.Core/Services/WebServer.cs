@@ -59,10 +59,10 @@ namespace KFlearning.Core.Services
 
         public void CreateAlias(string domainName, string path)
         {
-            var docPath = _pathManager.EnsureBackslashEnding(path);
+            var docPath = _pathManager.EnsureBackslashEnding(_pathManager.EnsureForwardSlash(path));
 
             // create alias
-            var aliasFileName = _pathManager.GetPathForVirtualHost(domainName);
+            var aliasFileName = _pathManager.GetPathForAlias(domainName);
             using (var alias = new TransformingConfigFile(aliasFileName, Constants.AliasTemplate))
             {
                 alias.Transform("{ALIAS_PATH}", docPath);

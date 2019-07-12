@@ -149,5 +149,8 @@
   <ItemGroup>
     <None Include="Resources\HttpdConfig.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DefaultVirtualHost.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

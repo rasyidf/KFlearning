@@ -20,8 +20,8 @@ namespace KFlearning.Core.Services.Graph
             Dependencies = new Queue<ITaskNode>();
             Dependencies.Enqueue(definition.ResolveService<InitializeDirectoriesTask>());
             Dependencies.Enqueue(definition.ResolveService<MingwTask>());
-            //Dependencies.Enqueue(definition.ResolveService<InitializeDirectoriesTask>()); - apache
-            //Dependencies.Enqueue(definition.ResolveService<InitializeDirectoriesTask>()); - php
+            Dependencies.Enqueue(definition.ResolveService<PhpTask>());
+            Dependencies.Enqueue(definition.ResolveService<HttpdTask>());
             Dependencies.Enqueue(definition.ResolveService<MariaDbTask>());
             Dependencies.Enqueue(definition.ResolveService<VscodeTask>());
             Dependencies.Enqueue(definition.ResolveService<KflearningTask>());

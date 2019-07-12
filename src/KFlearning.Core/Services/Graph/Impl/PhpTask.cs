@@ -8,8 +8,8 @@ namespace KFlearning.Core.Services.Graph
 {
     public class PhpTask : ITaskNode
     {
-         #region Fields
-        
+        #region Fields
+
         private IProgressBroker _broker;
         private IPathManager _pathManager;
         private InstallMode _mode;
@@ -17,7 +17,7 @@ namespace KFlearning.Core.Services.Graph
         #endregion
 
         #region ITaskNode Properties
-        
+
         public string TaskName => "PHP Interpreter";
         public bool HasDependencies => true;
         public Queue<ITaskNode> Dependencies { get; } = new Queue<ITaskNode>();
@@ -25,7 +25,7 @@ namespace KFlearning.Core.Services.Graph
         #endregion
 
         #region ITaskNode Methods
-        
+
         public void Configure(InstallerDefinition definition)
         {
             _pathManager = definition.ResolveService<IPathManager>();
@@ -53,7 +53,7 @@ namespace KFlearning.Core.Services.Graph
             {
                 Dependencies.Enqueue(new DeleteFilesTask(_pathManager.GetPath(PathKind.PathPhpRoot)));
             }
-        } 
+        }
 
         public bool Run(CancellationToken cancellation)
         {
@@ -113,7 +113,7 @@ namespace KFlearning.Core.Services.Graph
             {
                 config.Transform("{XDEBUG_PATH}", _pathManager.EnsureForwardSlash(xdebugInstallPath));
             }
-            
+
             // add to env path
             _broker.ReportMessage("Adding PHP to environment variable...");
             _pathManager.AddPathEnvironmentVar(root);

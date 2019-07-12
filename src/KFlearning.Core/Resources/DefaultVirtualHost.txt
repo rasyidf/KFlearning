@@ -1,0 +1,6 @@
+<VirtualHost _default_:80>
+    <Directory "{KFLEARNING_DIR_ROOT}">
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
