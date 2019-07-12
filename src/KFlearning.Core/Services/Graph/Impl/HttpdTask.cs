@@ -95,7 +95,7 @@ namespace KFlearning.Core.Services.Graph
 
             // save settings (httpd.conf)
             _broker.ReportMessage("Configuring Apache...");
-            using (var config = new TransformingConfigFile(Path.Combine(root, @"conf\php.ini"), Constants.HttpdConfig))
+            using (var config = new TransformingConfigFile(Path.Combine(root, @"conf\httpd.conf"), Constants.HttpdConfig))
             {
                 config.Transform("{HTTPD_ROOT}", _pathManager.EnsureForwardSlash(root));
                 config.Transform("{DOCUMENT_ROOT}",
@@ -129,6 +129,7 @@ namespace KFlearning.Core.Services.Graph
             }
 
             // add default site alias
+            _broker.ReportMessage("Configuring Apache HTTPD...");
             var indexPath = Path.Combine(_pathManager.GetPath(PathKind.PathBase), @"etc\kflearning");
             indexPath = _pathManager.EnsureBackslashEnding(_pathManager.EnsureForwardSlash(indexPath));
             var defaultAliasPath = Path.Combine(_pathManager.GetPath(PathKind.PathBase), @"etc\apache\alias\0-default.conf");
