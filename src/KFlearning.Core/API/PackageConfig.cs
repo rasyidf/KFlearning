@@ -13,6 +13,7 @@ namespace KFlearning.Core.API
         public Uri MariaDbUri { get; set; }
 
         public Uri PhpUri { get; set; }
+        public Uri ComposerUri { get; set; }
         public Uri Xdebuguri { get; set; }
         public Uri PhpmyadminUri { get; set; }
 

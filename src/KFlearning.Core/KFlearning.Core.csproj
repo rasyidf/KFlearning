@@ -54,6 +54,7 @@
     <Compile Include="Entities\Series.cs" />
     <Compile Include="Graph\Impl\InitializeDirectoriesTask.cs" />
     <Compile Include="Graph\Impl\KflearningTask.cs" />
+    <Compile Include="Graph\Impl\PhpTask.cs" />
     <Compile Include="Graph\Impl\VscodeTask.cs" />
     <Compile Include="Graph\IProgressBroker.cs" />
     <Compile Include="Graph\ITaskGraph.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="IO\PathKind.cs" />
     <Compile Include="IO\PathManager.cs" />
     <Compile Include="IO\ProcessManager.cs" />
+    <Compile Include="IO\TransformingConfigFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +130,12 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PhpConfig.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ComposerBatch.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

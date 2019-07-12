@@ -61,6 +61,15 @@ namespace KFlearning.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to @php &quot;%~dp0composer.phar&quot; %*.
+        /// </summary>
+        public static string ComposerBatch {
+            get {
+                return ResourceManager.GetString("ComposerBatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to database.db.
         /// </summary>
         public static string DatabaseConnectionString {
@@ -167,6 +176,37 @@ namespace KFlearning.Core {
         public static string MetadataFileName {
             get {
                 return ResourceManager.GetString("MetadataFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [PHP]
+        ///engine = On
+        ///short_open_tag = Off
+        ///precision = 14
+        ///output_buffering = 4096
+        ///zlib.output_compression = Off
+        ///implicit_flush = Off
+        ///unserialize_callback_func =
+        ///serialize_precision = -1
+        ///disable_functions =
+        ///disable_classes =
+        ///zend.enable_gc = On
+        ///expose_php = On
+        ///max_execution_time = 36000
+        ///max_input_time = 60
+        ///memory_limit = 512M
+        ///error_reporting = E_ALL
+        ///display_errors = On
+        ///display_startup_errors = On
+        ///log_errors = On
+        ///log_errors_max_len = 1024
+        ///ignore_repeated_errors = Off
+        ///ignore_repeated_source = [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string PhpConfig {
+            get {
+                return ResourceManager.GetString("PhpConfig", resourceCulture);
             }
         }
         
