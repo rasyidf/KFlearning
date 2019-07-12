@@ -48,9 +48,9 @@ namespace KFlearning.Core.IO
                 };
 
                 // app-specific executable paths
-                _cachedPaths.Add(PathKind.ExeHttpd, FindFile(_cachedPaths[PathKind.PathApacheRoot], "httpd.exe"));
-                _cachedPaths.Add(PathKind.ExeMariadb, FindFile(_cachedPaths[PathKind.PathMariaDbRoot], "mysqld.exe"));
-                _cachedPaths.Add(PathKind.ExeVscode, FindFile(_cachedPaths[PathKind.PathVscodeRoot], "Code.exe"));
+                _cachedPaths.Add(PathKind.ExeHttpd, Path.Combine(_cachedPaths[PathKind.PathApacheRoot], "httpd.exe"));
+                _cachedPaths.Add(PathKind.ExeMariadb, Path.Combine(_cachedPaths[PathKind.PathMariaDbRoot], "mysqld.exe"));
+                _cachedPaths.Add(PathKind.ExeVscode, Path.Combine(_cachedPaths[PathKind.PathVscodeRoot], "Code.exe"));
 
                 // project templates
                 var templateRoot = Path.Combine(basePath, @"etc\templates");
