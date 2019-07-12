@@ -33,19 +33,19 @@ namespace KFlearning.IDE
                     .WithServiceDefaultInterfaces().LifestyleSingleton(),
                 Classes.FromAssemblyNamed("KFlearning.Core").InSameNamespaceAs<ITaskGraph>()
                     .WithServiceDefaultInterfaces().LifestyleSingleton(),
-                Classes.FromAssemblyNamed("KFlearning.Core").InSameNamespaceAs<IApacheHttpd>()
+                Classes.FromAssemblyNamed("KFlearning.Core").InSameNamespaceAs<IProjectManager>()
                     .WithServiceDefaultInterfaces().LifestyleSingleton(),
                 Classes.FromAssemblyNamed("KFlearning.Core").InSameNamespaceAs<IPathManager>()
                     .WithServiceDefaultInterfaces().LifestyleSingleton(),
 
                 // application specific
+                Classes.FromThisAssembly().InSameNamespaceAs<ShellView>().LifestyleTransient(),
+                Classes.FromThisAssembly().InSameNamespaceAs<ShellViewModel>()
+                    .Configure(x => x.Interceptors<NotifyPropertChangedInterceptor>().LifestyleTransient()),
                 Classes.FromThisAssembly().InSameNamespaceAs<IApplicationHelpers>().WithServiceDefaultInterfaces()
                     .ConfigureFor<NotifyPropertChangedInterceptor>(x => x.LifestyleTransient())
                     .ConfigureFor<PropertyChangedBase>(x => x.LifestyleTransient())
-                    .Configure(x => x.LifestyleSingleton()),
-                Classes.FromThisAssembly().InSameNamespaceAs<ShellView>().LifestyleTransient(),
-                Classes.FromThisAssembly().InSameNamespaceAs<ShellViewModel>()
-                    .Configure(x => x.Interceptors<NotifyPropertChangedInterceptor>().LifestyleTransient())
+                    .Configure(x => x.LifestyleSingleton())
             );
         }
     }

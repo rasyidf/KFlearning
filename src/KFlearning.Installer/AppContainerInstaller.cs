@@ -32,7 +32,7 @@ namespace KFlearning.Installer
                     .WithServiceDefaultInterfaces().LifestyleSingleton(),
                 Classes.FromAssemblyNamed("KFlearning.Core").InSameNamespaceAs<ITaskGraph>()
                     .WithServiceDefaultInterfaces().LifestyleSingleton(),
-                Classes.FromAssemblyNamed("KFlearning.Core").InSameNamespaceAs<IApacheHttpd>()
+                Classes.FromAssemblyNamed("KFlearning.Core").InSameNamespaceAs<IProjectManager>()
                     .WithServiceDefaultInterfaces().LifestyleSingleton(),
                 Classes.FromAssemblyNamed("KFlearning.Core").InSameNamespaceAs<IPathManager>()
                     .WithServiceDefaultInterfaces().LifestyleSingleton(),
