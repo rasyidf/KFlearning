@@ -49,13 +49,13 @@ namespace KFlearning.Core.Graph
                     Directory.CreateDirectory(Path.Combine(baseDir, @"bin\mariadb"));
                     Directory.CreateDirectory(Path.Combine(baseDir, @"bin\mingw"));
                     Directory.CreateDirectory(Path.Combine(baseDir, @"bin\php"));
+                    Directory.CreateDirectory(Path.Combine(baseDir, @"bin\composer"));
                     Directory.CreateDirectory(Path.Combine(baseDir, @"bin\vscode"));
-
+                    
                     Directory.CreateDirectory(Path.Combine(baseDir, "etc"));
                     Directory.CreateDirectory(Path.Combine(baseDir, @"etc\apache"));
                     Directory.CreateDirectory(Path.Combine(baseDir, @"etc\apache\alias"));
                     Directory.CreateDirectory(Path.Combine(baseDir, @"etc\apache\sites-enabled"));
-                    Directory.CreateDirectory(Path.Combine(baseDir, @"etc\composer"));
                     Directory.CreateDirectory(Path.Combine(baseDir, @"etc\kflearning"));
                     Directory.CreateDirectory(Path.Combine(baseDir, @"etc\phpMyAdmin"));
                     Directory.CreateDirectory(Path.Combine(baseDir, @"etc\templates"));
