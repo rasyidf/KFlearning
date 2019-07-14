@@ -2,7 +2,7 @@
 using System.Threading;
 using KFlearning.Core.IO;
 
-namespace KFlearning.Core.Services.Graph
+namespace KFlearning.Core.Services.Sequence.Impl
 {
     public class ComposerTask : ITaskNode
     {

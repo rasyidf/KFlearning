@@ -56,17 +56,17 @@
     <Compile Include="DAL\Series.cs" />
     <Compile Include="IO\ZipExtractEventArgs.cs" />
     <Compile Include="IO\ZipExtractor.cs" />
-    <Compile Include="Services\Graph\Impl\ComposerTask.cs" />
-    <Compile Include="Services\Graph\Impl\EnvironmentPathTask.cs" />
-    <Compile Include="Services\Graph\Impl\GlutTask.cs" />
-    <Compile Include="Services\Graph\Impl\HttpdTask.cs" />
-    <Compile Include="Services\Graph\Impl\InitializeDirectoriesTask.cs" />
-    <Compile Include="Services\Graph\Impl\KflearningTask.cs" />
-    <Compile Include="Services\Graph\Impl\PhpMyAdminTask.cs" />
-    <Compile Include="Services\Graph\Impl\PhpTask.cs" />
-    <Compile Include="Services\Graph\Impl\VscodeTask.cs" />
-    <Compile Include="Services\Graph\IProgressBroker.cs" />
-    <Compile Include="Services\Graph\ITaskGraph.cs" />
+    <Compile Include="Services\Sequence\Impl\ComposerTask.cs" />
+    <Compile Include="Services\Sequence\Impl\EnvironmentPathTask.cs" />
+    <Compile Include="Services\Sequence\Impl\GlutTask.cs" />
+    <Compile Include="Services\Sequence\Impl\HttpdTask.cs" />
+    <Compile Include="Services\Sequence\Impl\InitializeDirectoriesTask.cs" />
+    <Compile Include="Services\Sequence\Impl\KflearningTask.cs" />
+    <Compile Include="Services\Sequence\Impl\PhpMyAdminTask.cs" />
+    <Compile Include="Services\Sequence\Impl\PhpTask.cs" />
+    <Compile Include="Services\Sequence\Impl\VscodeTask.cs" />
+    <Compile Include="Services\Sequence\IProgressBroker.cs" />
+    <Compile Include="Services\Sequence\ITaskGraph.cs" />
     <Compile Include="Services\Hosts\ApacheHttpd.cs" />
     <Compile Include="Services\Hosts\HostEntry.cs" />
     <Compile Include="Services\Hosts\HostsFile.cs" />
@@ -81,13 +81,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Services\Graph\Impl\DownloadTask.cs" />
-    <Compile Include="Services\Graph\Impl\MariaDbTask.cs" />
-    <Compile Include="Services\Graph\Impl\MingwTask.cs" />
-    <Compile Include="Services\Graph\SequenceFactory.cs" />
-    <Compile Include="Services\Graph\ITaskNode.cs" />
-    <Compile Include="Services\Graph\TaskGraph.cs" />
-    <Compile Include="Services\Graph\InstallerDefinition.cs" />
+    <Compile Include="Services\Sequence\Impl\DownloadTask.cs" />
+    <Compile Include="Services\Sequence\Impl\MariaDbTask.cs" />
+    <Compile Include="Services\Sequence\Impl\MingwTask.cs" />
+    <Compile Include="Services\Sequence\SequenceFactory.cs" />
+    <Compile Include="Services\Sequence\ITaskNode.cs" />
+    <Compile Include="Services\Sequence\TaskGraph.cs" />
+    <Compile Include="Services\Sequence\InstallerDefinition.cs" />
     <Compile Include="IO\IPathManager.cs" />
     <Compile Include="IO\IProcessManager.cs" />
     <Compile Include="IO\PathKind.cs" />

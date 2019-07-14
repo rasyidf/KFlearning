@@ -8,7 +8,7 @@
 
 using System.Collections.Generic;
 
-namespace KFlearning.Core.Services.Graph
+namespace KFlearning.Core.Services.Sequence
 {
     public interface ITaskGraph
     {

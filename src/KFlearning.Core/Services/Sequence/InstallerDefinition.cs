@@ -1,7 +1,7 @@
 ﻿using System;
 using KFlearning.Core.API;
 
-namespace KFlearning.Core.Services.Graph
+namespace KFlearning.Core.Services.Sequence
 {
     public class InstallerDefinition
     {

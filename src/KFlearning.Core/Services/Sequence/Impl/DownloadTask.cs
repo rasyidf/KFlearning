@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using System.Threading;
 
-namespace KFlearning.Core.Services.Graph
+namespace KFlearning.Core.Services.Sequence.Impl
 {
     public class DownloadTask : ITaskNode, IDisposable
     {
