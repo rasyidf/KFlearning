@@ -20,6 +20,7 @@ namespace KFlearning.Core.IO
         PathApacheRoot,
         PathMariaDbRoot,
         PathPhpRoot,
+        PathComposerRoot,
         PathKflearningRoot,
 
         TemplateHosts,

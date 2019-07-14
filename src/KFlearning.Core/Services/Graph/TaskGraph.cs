@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace KFlearning.Core.Services.Graph
@@ -12,7 +13,7 @@ namespace KFlearning.Core.Services.Graph
         private CancellationTokenSource _tokenSource;
         private Thread _thread;
         private InstallerDefinition _definition;
-        private ITaskNode _rootNode;
+        private Queue<ITaskNode> _sequence;
 
         #endregion
 
@@ -33,14 +34,14 @@ namespace KFlearning.Core.Services.Graph
 
         #region Public Methods
 
-        public void RunGraph(InstallerDefinition definition, ITaskNode rootNode)
+        public void RunSequence(InstallerDefinition definition, Queue<ITaskNode> sequence)
         {
             Cancel();
             _definition = definition;
-            _rootNode = rootNode;
+            _sequence = sequence;
 
             _tokenSource = new CancellationTokenSource();
-            _thread = new Thread(ThreadCallback);
+            _thread = new Thread(ThreadCallback) {IsBackground = true};
             _thread.Start();
         }
 
@@ -62,41 +63,28 @@ namespace KFlearning.Core.Services.Graph
         {
             try
             {
-                InternalRunGraph(_definition, _rootNode);
+                while (_sequence.Count > 0)
+                {
+                    var node = _sequence.Dequeue();
+                    node.Run(_definition, _tokenSource.Token);
+
+                    if (node is IDisposable disposable)
+                    {
+                        disposable.Dispose();
+                    }
+                }
             }
             catch (OperationCanceledException)
             {
                 _progressBroker.ReportMessage("OPERATION CANCELED.");
-                _progressBroker.ReportProgress(100);
+                _progressBroker.ReportSequenceProgress(100);
             }
             catch (Exception ex)
             {
                 _progressBroker.ReportMessage("OPERATION FAULTED.\r\n" + ex);
-                _progressBroker.ReportProgress(100);
+                _progressBroker.ReportSequenceProgress(100);
             }
         }
-
-        private void InternalRunGraph(InstallerDefinition definition, ITaskNode rootNode)
-        {
-            _progressBroker.ReportMessage("Running node: " + rootNode.TaskName);
-            rootNode.Configure(definition);
-            if (rootNode.HasDependencies)
-            {
-                _progressBroker.ReportMessage($"Node has {rootNode.Dependencies.Count} dependencies, running dependencies...");
-                foreach (ITaskNode nodeDependency in rootNode.Dependencies)
-                {
-                    _progressBroker.ReportMessage("Running dependency: " + rootNode.TaskName);
-                    InternalRunGraph(definition, nodeDependency);
-                }
-            }
-
-            rootNode.Run(_tokenSource.Token);
-            _progressBroker.ReportMessage("Node finished: " + rootNode.TaskName);
-
-            if (!(rootNode is IDisposable disposable)) return;
-            disposable.Dispose();
-            _progressBroker.ReportMessage("Node disposed: " + rootNode.TaskName);
-        } 
 
         #endregion
     }

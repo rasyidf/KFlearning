@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading;
@@ -22,9 +21,46 @@ namespace KFlearning.Core.Services.Graph
 
         #region ITaskNode Properties
         
-        public string TaskName => "Download file";
-        public bool HasDependencies => false;
-        public Queue<ITaskNode> Dependencies => null;
+        public string TaskName => "Downloading: " + _uri;
+
+        public void Run(InstallerDefinition definition, CancellationToken cancellation)
+        {
+            _broker = definition.ResolveService<IProgressBroker>();
+
+            try
+            {
+                var dir = Path.GetDirectoryName(_savePath) ?? "";
+                Directory.CreateDirectory(dir);
+
+                _client.DownloadFileAsync(_uri, _savePath);
+                _resetEvent.Wait(cancellation);
+
+                _broker.ReportNodeProgress(100);
+                if (_error != null)
+                {
+                    _broker.ReportMessage("Download error. " + _error);
+                }
+                else
+                {
+                    _broker.ReportMessage("Download completed.");
+                }
+            }
+            catch (OperationCanceledException)
+            {
+                _client.CancelAsync();
+                _broker.ReportMessage("Download canceled.");
+                _broker.ReportNodeProgress(100);
+            }
+            catch (Exception e)
+            {
+                _broker.ReportMessage(e.ToString());
+                _broker.ReportNodeProgress(100);
+            }
+            finally
+            {
+                _resetEvent.Set();
+            }
+        }
 
         #endregion
 
@@ -35,57 +71,13 @@ namespace KFlearning.Core.Services.Graph
             _uri = uri;
             _savePath = savePath;
 
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Ssl3;
             
             _resetEvent = new ManualResetEventSlim(false);
             _client = new WebClient();
             _client.Headers.Add("User-Agent", "Wget/1.13.4 (linux-gnu)");
             _client.DownloadProgressChanged += Client_DownloadProgressChanged;
             _client.DownloadFileCompleted += Client_DownloadFileCompleted;
-        }
-
-        #endregion
-
-        #region ITaskNode Methods
-
-        public void Configure(InstallerDefinition definition)
-        {
-            _broker = definition.ResolveService<IProgressBroker>();
-        }
-
-        public bool Run(CancellationToken cancellation)
-        {
-            try
-            {
-                var dir = Path.GetDirectoryName(_savePath);
-                Directory.CreateDirectory(dir);
-
-                _client.DownloadFileAsync(_uri, _savePath);
-                _resetEvent.Wait(cancellation);
-
-                _broker.ReportProgress(100);
-                if (_error != null)
-                {
-                    _broker.ReportMessage("Download error. " + _error);
-                    return false;
-                }
-
-                _broker.ReportMessage("Download completed.");
-                return true;
-            }
-            catch (OperationCanceledException)
-            {
-                _client.CancelAsync();
-                _broker.ReportMessage("Download canceled.");
-                _broker.ReportProgress(100);
-                return false;
-            }
-            catch (Exception e)
-            {
-                _broker.ReportMessage(e.ToString());
-                _broker.ReportProgress(100);
-                return false;
-            }
         }
 
         #endregion
@@ -100,7 +92,7 @@ namespace KFlearning.Core.Services.Graph
 
         private void Client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            _broker.ReportProgress(e.ProgressPercentage);
+            _broker.ReportNodeProgress(e.ProgressPercentage);
         }
 
         #endregion

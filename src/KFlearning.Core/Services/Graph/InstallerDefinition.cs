@@ -11,11 +11,11 @@ namespace KFlearning.Core.Services.Graph
         {
             _resolveFunc = resolveFunc;
         }
-
-        public InstallMode Mode { get; set; }
-
-        public PackageCatalog Packages { get; set; }
         
+        public PackageCatalog Packages { get; set; }
+
+        public string DataPath { get; set; }
+
         public T ResolveService<T>()
         {
             return (T) _resolveFunc(typeof(T));

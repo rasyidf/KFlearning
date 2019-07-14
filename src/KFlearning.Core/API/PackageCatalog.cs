@@ -5,22 +5,22 @@ namespace KFlearning.Core.API
 {
     public class PackageCatalog
     {
-        public Uri MingwUri { get; set; }
-        public Uri GlutUri { get; set; }
+        public PackageEntry Mingw { get; set; }
+        public PackageEntry Glut { get; set; }
 
-        public Uri ApacheUri { get; set; }
-        public Uri PhpmyadminUri { get; set; }
+        public PackageEntry Httpd { get; set; }
+        public PackageEntry PhpMyAdmin { get; set; }
 
-        public Uri MariaDbUri { get; set; }
+        public PackageEntry MariaDb { get; set; }
 
-        public Uri PhpUri { get; set; }
-        public Uri ComposerUri { get; set; }
-        public Uri Xdebuguri { get; set; }
+        public PackageEntry Php { get; set; }
+        public PackageEntry Composer { get; set; }
+        public PackageEntry Xdebug { get; set; }
 
-        public Uri VscodeUri { get; set; }
-        public List<Uri> VscodeExtensions { get; set; }
-        public List<Uri> ProjectTemplates { get; set; }
+        public PackageEntry Vscode { get; set; }
+        public List<string> VscodeExtensions { get; set; }
+        public List<PackageEntry> ProjectTemplates { get; set; }
 
-        public Uri KflearningUri { get; set; }
+        public PackageEntry Kflearning { get; set; }
     }
 }

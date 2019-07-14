@@ -3,6 +3,7 @@
     public interface IProgressBroker
     {
         void ReportMessage(string message);
-        void ReportProgress(int progressPercentage);
+        void ReportNodeProgress(int progressPercentage);
+        void ReportSequenceProgress(int progressPercentage);
     }
 }

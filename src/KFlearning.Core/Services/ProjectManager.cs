@@ -9,7 +9,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Ionic.Zip;
+using ICSharpCode.SharpZipLib.Core;
+using ICSharpCode.SharpZipLib.Zip;
 using KFlearning.Core.DAL;
 using KFlearning.Core.IO;
 using LiteDB;
@@ -85,7 +86,7 @@ namespace KFlearning.Core.Services
         {
             using (var zip = new ZipFile(zipFile))
             {
-                return zip.EntryFileNames.Contains(Constants.MetadataFileName);
+                return zip.FindEntry(Constants.MetadataFileName, true) != -1;
             }
         }
 
@@ -94,8 +95,24 @@ namespace KFlearning.Core.Services
             using (var zip = new ZipFile(zipFile))
             {
                 // extract the files
-                var extractPath = GetPathForProject(zip.Comment);
-                zip.ExtractAll(extractPath);
+                var extractPath = GetPathForProject(zip.ZipFileComment);
+                foreach (ZipEntry entry in zip)
+                {
+                    if (!entry.IsFile) continue;		
+                    
+                    string entryFileName = entry.Name;
+                    byte[] buffer = new byte[4096];
+                    
+                    string fullZipToPath = Path.Combine(extractPath, entryFileName);
+                    string directoryName = Path.GetDirectoryName(fullZipToPath);
+                    if (directoryName?.Length > 0) Directory.CreateDirectory(directoryName);
+
+                    using (FileStream streamWriter = File.Create(fullZipToPath)) 
+                    {
+                        Stream zipStream = zip.GetInputStream(entry);
+                        StreamUtils.Copy(zipStream, streamWriter, buffer);
+                    }
+                }
 
                 // save metadata to db
                 var metadataFile = Path.Combine(extractPath, Constants.MetadataFileName);
@@ -118,11 +135,11 @@ namespace KFlearning.Core.Services
                 var files = Directory.EnumerateFiles(project.Path, "*", SearchOption.AllDirectories);
                 foreach (string dire in files)
                 {
-                    zip.AddFile(dire);
+                    zip.Add(dire, CompressionMethod.Deflated);
                 }
 
-                zip.Comment = project.Title;
-                zip.Save();
+                zip.SetComment(project.Title);
+                zip.CommitUpdate();
             }
         }
 
@@ -180,7 +197,23 @@ namespace KFlearning.Core.Services
 
             using (var zip = new ZipFile(path))
             {
-                zip.ExtractAll(project.Path, ExtractExistingFileAction.OverwriteSilently);
+                foreach (ZipEntry entry in zip)
+                {
+                    if (!entry.IsFile) continue;		
+                    
+                    string entryFileName = entry.Name;
+                    byte[] buffer = new byte[4096];
+                    
+                    string fullZipToPath = Path.Combine(project.Path, entryFileName);
+                    string directoryName = Path.GetDirectoryName(fullZipToPath);
+                    if (directoryName?.Length > 0) Directory.CreateDirectory(directoryName);
+
+                    using (FileStream streamWriter = File.Create(fullZipToPath)) 
+                    {
+                        Stream zipStream = zip.GetInputStream(entry);
+                        StreamUtils.Copy(zipStream, streamWriter, buffer);
+                    }
+                }
             }
         }
 

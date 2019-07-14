@@ -48,6 +48,7 @@ namespace KFlearning.Core.IO
                     {PathKind.PathApacheRoot, Path.Combine(basePath, @"bin\httpd")},
                     {PathKind.PathMariaDbRoot, Path.Combine(basePath, @"bin\mariadb")},
                     {PathKind.PathPhpRoot, Path.Combine(basePath, @"bin\php")},
+                    {PathKind.PathComposerRoot, Path.Combine(basePath, @"bin\composer")},
                     {PathKind.PathKflearningRoot, Path.Combine(basePath, "ide")}
                 };
 
@@ -171,9 +172,15 @@ namespace KFlearning.Core.IO
             Directory.CreateDirectory(destination);
             foreach (string libFile in Directory.EnumerateFiles(source))
             {
-                var name = Path.GetFileName(libFile);
-                Debug.Assert(name != null);
-                File.Move(libFile, Path.Combine(destination, name));
+                var destPath = Path.Combine(destination, Path.GetFileName(libFile) ?? "");
+                if (File.Exists(destPath
+                ))
+                {
+                    File.SetAttributes(destPath, FileAttributes.Normal);
+                    File.Delete(destPath);
+                }
+
+                File.Move(libFile, destPath);
             }
 
             foreach (string name in Directory.EnumerateDirectories(source).Select(Path.GetFileName))

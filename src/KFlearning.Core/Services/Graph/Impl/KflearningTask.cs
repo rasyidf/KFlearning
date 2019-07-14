@@ -8,61 +8,54 @@ namespace KFlearning.Core.Services.Graph
 {
     public class KflearningTask : ITaskNode
     {
-        #region Fields
-        
-        private IProgressBroker _broker;
-        private IPathManager _pathManager;
-        private InstallMode _mode;
-
-        #endregion
-
-        #region ITaskNode Properties
-        
         public string TaskName => "KFlearning IDE";
-        public bool HasDependencies => _mode == InstallMode.Install;
-        public Queue<ITaskNode> Dependencies { get; private set; }
 
-        #endregion
-
-        #region ITaskNode Methods
-
-        public void Configure(InstallerDefinition definition)
+        public void Run(InstallerDefinition definition, CancellationToken cancellation)
         {
-            _pathManager = definition.ResolveService<IPathManager>();
-            _broker = definition.ResolveService<IProgressBroker>();
-            _mode = definition.Mode;
+            var path = definition.ResolveService<IPathManager>();
+            
+            // find zip and extract
+            var apacheZip = path.FindFile(definition.DataPath, "kflearning-ide*");
+            var extractor = new ZipExtractor();
+            extractor.ExtractAll(apacheZip, path.GetPath(PathKind.PathKflearningRoot));
 
-            if (definition.Mode != InstallMode.Install) return;
-            var fileName = Path.GetFileName(definition.Packages.KflearningUri.AbsoluteUri);
-            var savePath = _pathManager.GetPathForTemp(fileName);
+            // create shortcut
+            var exePath = Path.Combine(path.GetPath(PathKind.PathKflearningRoot), "KFlearning.IDE.exe");
+            path.CreateShortcutOnDesktop("KFlearning", "KFlearning", exePath);
 
-            Dependencies = new Queue<ITaskNode>();
-            Dependencies.Enqueue(new DownloadTask(definition.Packages.KflearningUri, savePath));
-            Dependencies.Enqueue(new ExtractTask(savePath, _pathManager.GetPath(PathKind.PathKflearningRoot)));
+            // save content
+            // TODO: save content
+
+            // add default site alias
+            var indexPath = Path.Combine(path.GetPath(PathKind.PathBase), @"etc\kflearning");
+            indexPath = path.EnsureBackslashEnding(path.EnsureForwardSlash(indexPath));
+            var defaultAliasPath = Path.Combine(path.GetPath(PathKind.PathBase), @"etc\apache\alias\0-default.conf");
+            using (var alias = new TransformingConfigFile(defaultAliasPath, Constants.AliasTemplate))
+            {
+                alias.Transform("{ALIAS_NAME}", "kflearning");
+                alias.Transform("{ALIAS_PATH}", indexPath);
+            }
+
+            // add default site virtual host
+            var defaultHostPath = Path.Combine(path.GetPath(PathKind.PathBase), @"etc\apache\sites-enabled\0-default.conf");
+            using (var config = new TransformingConfigFile(defaultHostPath, Constants.DefaultVirtualHost))
+            {
+                config.Transform("{KFLEARNING_DIR_ROOT}", indexPath);
+            }
+
+            // copy templates
+            var templatePatterns = new List<Tuple<string, PathKind>>
+            {
+                new Tuple<string, PathKind>("template-cpp*", PathKind.TemplateCpp),
+                new Tuple<string, PathKind>("template-web*", PathKind.TemplateCpp),
+                new Tuple<string, PathKind>("template-python*", PathKind.TemplateCpp),
+            };
+
+            for (int i = 0; i < templatePatterns.Count; i++)
+            {
+                var item = templatePatterns[i];
+                File.Copy(path.FindFile(definition.DataPath, item.Item1), path.GetPath(item.Item2));
+            }
         }
-
-        public bool Run(CancellationToken cancellation)
-        {
-            if (_mode == InstallMode.Uninstall) return true;
-            try
-            {
-                _pathManager.InitializePaths();
-                _broker.ReportProgress(-1);
-
-                var exePath = Path.Combine(_pathManager.GetPath(PathKind.PathKflearningRoot), "KFlearning.IDE.exe");
-                _pathManager.CreateShortcutOnDesktop("KFlearning", "KFlearning", exePath);
-
-                return true;
-            }
-            catch (Exception e)
-            {
-                _broker.ReportProgress(100);
-                _broker.ReportMessage(e.ToString());
-
-                return false;
-            }
-        } 
-
-        #endregion
     }
 }

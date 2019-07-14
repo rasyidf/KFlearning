@@ -6,11 +6,13 @@
 // 
 //  This file is part of KFlearning, licensed under MIT license.
 
+using System.Collections.Generic;
+
 namespace KFlearning.Core.Services.Graph
 {
     public interface ITaskGraph
     {
-        void RunGraph(InstallerDefinition definition, ITaskNode rootNode);
+        void RunSequence(InstallerDefinition definition, Queue<ITaskNode> sequence);
         void Cancel();
     }
 }
