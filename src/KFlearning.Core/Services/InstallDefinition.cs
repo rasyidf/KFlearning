@@ -1,5 +1,6 @@
 ﻿using System;
-using KFlearning.Core.API;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace KFlearning.Core.Services
 {
@@ -7,14 +8,16 @@ namespace KFlearning.Core.Services
     {
         private readonly Func<Type, object> _resolveFunc;
 
-        public InstallDefinition(Func<Type, object> resolveFunc)
+        public string DataPath { get; }
+
+        public List<string> VscodeExtensions { get; }
+
+        public InstallDefinition(string dataPath, IEnumerable<string> vscodeExtensions, Func<Type, object> resolveFunc)
         {
+            DataPath = dataPath;
+            VscodeExtensions = vscodeExtensions.ToList();
             _resolveFunc = resolveFunc;
         }
-        
-        public PackageCatalog Packages { get; set; }
-
-        public string DataPath { get; set; }
 
         public T ResolveService<T>()
         {

@@ -31,7 +31,7 @@ namespace KFlearning.Core.Services.Sequence
             
             // install extensions
             _progress.ReportMessage("Installing extensions...");
-            var extensions = definition.Packages.VscodeExtensions;
+            var extensions = definition.VscodeExtensions;
             for (var i = 0; i < extensions.Count; i++)
             {
                 process.RunWait(path.GetPath(PathKind.ExeVscode), $"--install-extension {extensions[i]}");
