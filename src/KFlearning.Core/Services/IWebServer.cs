@@ -19,7 +19,7 @@ namespace KFlearning.Core.Services
 
         void Start();
         void Stop();
-        string CreateDomainName(string title);
+        string GenerateDomainName(string title);
         void CreateAlias(string domainName, string path);
         void RemoveAlias(string domainName);
     }

@@ -52,7 +52,7 @@ namespace KFlearning.Core.Services
             _mariaDb.Stop();
         }
 
-        public string CreateDomainName(string title)
+        public string GenerateDomainName(string title)
         {
             return $"{_pathManager.StripInvalidFileName(title).ToLowerInvariant()}.{Constants.DomainName}";
         }
