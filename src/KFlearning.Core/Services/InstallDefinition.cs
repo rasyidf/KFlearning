@@ -1,13 +1,13 @@
 ﻿using System;
 using KFlearning.Core.API;
 
-namespace KFlearning.Core.Services.Sequence
+namespace KFlearning.Core.Services
 {
-    public class InstallerDefinition
+    public class InstallDefinition
     {
         private readonly Func<Type, object> _resolveFunc;
 
-        public InstallerDefinition(Func<Type, object> resolveFunc)
+        public InstallDefinition(Func<Type, object> resolveFunc)
         {
             _resolveFunc = resolveFunc;
         }

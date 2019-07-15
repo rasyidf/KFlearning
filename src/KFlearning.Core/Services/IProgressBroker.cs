@@ -1,4 +1,4 @@
-﻿namespace KFlearning.Core.Services.Sequence
+﻿namespace KFlearning.Core.Services
 {
     public interface IProgressBroker
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using KFlearning.Core.IO;
 
-namespace KFlearning.Core.Services.Sequence.Impl
+namespace KFlearning.Core.Services.Sequence
 {
     public class KflearningTask : ITaskNode
     {
@@ -11,7 +11,7 @@ namespace KFlearning.Core.Services.Sequence.Impl
 
         public string TaskName => "KFlearning IDE";
 
-        public void Run(InstallerDefinition definition, CancellationToken cancellation)
+        public void Run(InstallDefinition definition, CancellationToken cancellation)
         {
             _progress = definition.ResolveService<IProgressBroker>();
             var fileSystem = definition.ResolveService<IFileSystemManager>();

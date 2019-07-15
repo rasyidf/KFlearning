@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace KFlearning.Core.Services.Sequence
+namespace KFlearning.Core.Services
 {
     public class TaskGraph : ITaskGraph
     {
@@ -12,7 +12,7 @@ namespace KFlearning.Core.Services.Sequence
 
         private CancellationTokenSource _tokenSource;
         private Thread _thread;
-        private InstallerDefinition _definition;
+        private InstallDefinition _definition;
         private Queue<ITaskNode> _sequence;
 
         #endregion
@@ -34,7 +34,7 @@ namespace KFlearning.Core.Services.Sequence
 
         #region Public Methods
 
-        public void RunSequence(InstallerDefinition definition, Queue<ITaskNode> sequence)
+        public void RunSequence(InstallDefinition definition, Queue<ITaskNode> sequence)
         {
             Cancel();
             _definition = definition;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using KFlearning.Core.Services.Sequence.Impl;
+using KFlearning.Core.Services.Sequence;
 
-namespace KFlearning.Core.Services.Sequence
+namespace KFlearning.Core.Services
 {
     public class SequenceFactory
     {

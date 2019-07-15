@@ -8,11 +8,11 @@
 
 using System.Collections.Generic;
 
-namespace KFlearning.Core.Services.Sequence
+namespace KFlearning.Core.Services
 {
     public interface ITaskGraph
     {
-        void RunSequence(InstallerDefinition definition, Queue<ITaskNode> sequence);
+        void RunSequence(InstallDefinition definition, Queue<ITaskNode> sequence);
         void Cancel();
     }
 }

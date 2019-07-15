@@ -1,13 +1,13 @@
 ﻿using System.Threading;
 using KFlearning.Core.IO;
 
-namespace KFlearning.Core.Services.Sequence.Impl
+namespace KFlearning.Core.Services.Sequence
 {
     public class ComposerTask : ITaskNode
     {
         public string TaskName => "Composer Installation";
 
-        public void Run(InstallerDefinition definition, CancellationToken cancellation)
+        public void Run(InstallDefinition definition, CancellationToken cancellation)
         {
             var progress = definition.ResolveService<IProgressBroker>();
             var path = definition.ResolveService<IPathManager>();
