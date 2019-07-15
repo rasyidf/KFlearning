@@ -1,6 +1,6 @@
 ﻿// 
 //  PROJECT  :   KFlearning
-//  FILENAME :   ITaskGraph.cs
+//  FILENAME :   ISequenceFactory.cs
 //  AUTHOR   :   Fahmi Noor Fiqri
 //  NPM      :   065118116
 // 
@@ -10,10 +10,9 @@ using System.Collections.Generic;
 
 namespace KFlearning.Core.Services
 {
-    public interface ITaskGraph
+    public interface ISequenceFactory
     {
-        bool IsInstalled();
-        void RunSequence(InstallDefinition definition, Queue<ITaskNode> sequence);
-        void Cancel();
+        Queue<ITaskNode> GetInstallSequence();
+        Queue<ITaskNode> GetUninstallSequence();
     }
 }

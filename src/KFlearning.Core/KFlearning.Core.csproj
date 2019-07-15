@@ -55,6 +55,7 @@
     <Compile Include="IO\IFileSystemManager.cs" />
     <Compile Include="IO\ZipExtractEventArgs.cs" />
     <Compile Include="IO\ZipExtractor.cs" />
+    <Compile Include="Services\ISequenceFactory.cs" />
     <Compile Include="Services\MathHelper.cs" />
     <Compile Include="Services\Sequence\ComposerTask.cs" />
     <Compile Include="Services\Sequence\EnvironmentPathTask.cs" />

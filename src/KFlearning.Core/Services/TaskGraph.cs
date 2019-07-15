@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
+using KFlearning.Core.IO;
 
 namespace KFlearning.Core.Services
 {
@@ -9,6 +11,7 @@ namespace KFlearning.Core.Services
         #region Fields
         
         private readonly IProgressBroker _progressBroker;
+        private readonly IPathManager _pathManager;
 
         private CancellationTokenSource _tokenSource;
         private Thread _thread;
@@ -25,14 +28,20 @@ namespace KFlearning.Core.Services
 
         #region Constructor
         
-        public TaskGraph(IProgressBroker progressBroker)
+        public TaskGraph(IProgressBroker progressBroker, IPathManager pathManager)
         {
             _progressBroker = progressBroker;
+            _pathManager = pathManager;
         }
 
         #endregion
 
         #region Public Methods
+
+        public bool IsInstalled()
+        {
+            return Directory.Exists(_pathManager.Combine(PathKind.PathBase, "ide"));
+        }
 
         public void RunSequence(InstallDefinition definition, Queue<ITaskNode> sequence)
         {
@@ -71,12 +80,7 @@ namespace KFlearning.Core.Services
 
                     _progressBroker.ReportMessage("[ RUNNING ] " + node.TaskName);
                     node.Run(_definition, _tokenSource.Token);
-
-                    if (node is IDisposable disposable)
-                    {
-                        disposable.Dispose();
-                    }
-
+                    
                     _progressBroker.ReportMessage("[ FINISHED ] " + node.TaskName);
                     _progressBroker.ReportSequenceProgress(MathHelper.CalculatePercentage(++count, total));
                 }

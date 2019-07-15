@@ -3,9 +3,9 @@ using KFlearning.Core.Services.Sequence;
 
 namespace KFlearning.Core.Services
 {
-    public class SequenceFactory
+    public class SequenceFactory : ISequenceFactory
     {
-        public Queue<ITaskNode> GetInstallGraph()
+        public Queue<ITaskNode> GetInstallSequence()
         {
             var dependencies = new Queue<ITaskNode>();
             dependencies.Enqueue(new InitializeDirectoriesTask(true));
@@ -23,7 +23,7 @@ namespace KFlearning.Core.Services
             return dependencies;
         }
 
-        public Queue<ITaskNode> GetUninstallGraph()
+        public Queue<ITaskNode> GetUninstallSequence()
         {
             var dependencies = new Queue<ITaskNode>();
             dependencies.Enqueue(new InitializeDirectoriesTask(false));
