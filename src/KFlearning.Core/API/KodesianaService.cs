@@ -38,15 +38,7 @@ namespace KFlearning.Core.API
                 return false;
             }
         }
-
-        public async Task<PackageCatalog> GetPackageCatalog(PackagePlatform platform)
-        {
-            var uri = CreateUri("/package-catalog/" + platform);
-            var response = await Client.GetStreamAsync(uri);
-
-            return DeserializeStream<PackageCatalog>(response);
-        }
-
+        
         public async Task<IEnumerable<Post>> GetPostsAsync(string series = null)
         {
             var uri = CreateUri(string.IsNullOrEmpty(series) ? "/posts" : "/posts?series=" + series);
