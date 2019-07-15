@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
 using KFlearning.Core.DAL;
@@ -20,17 +21,18 @@ namespace KFlearning.Core.Services
 {
     public class ProjectManager : IProjectManager
     {
-        private readonly IWebServer _webServer;
         private readonly IDatabaseContext _database;
         private readonly IPathManager _pathManager;
         private readonly IVscode _vscode;
+        private readonly Dictionary<ProjectType, IProjectHandler> _projectHandlers;
 
-        public ProjectManager(IWebServer webServer, IPathManager pathManager, IDatabaseContext database, IVscode vscode)
+        public ProjectManager(IPathManager pathManager, IDatabaseContext database, IVscode vscode)
         {
-            _webServer = webServer;
             _pathManager = pathManager;
             _database = database;
             _vscode = vscode;
+
+            _projectHandlers = new Dictionary<ProjectType, IProjectHandler>();
         }
 
         public IEnumerable<Project> GetProjects()
@@ -46,23 +48,11 @@ namespace KFlearning.Core.Services
 
         public void Create(ProjectType type, string title)
         {
-            var project = new Project
-            {
-                Title = title,
-                Type = type,
-                Path = GetPathForProject(title),
-                DomainName = type == ProjectType.Web ? _webServer.CreateDomainName(title) : "",
-            };
-            Directory.CreateDirectory(project.Path);
+            var path = GetPathForProject(title);
+            var handler = _projectHandlers[type];
+            var project = handler.Initialize(title, path);
 
-            if (type == ProjectType.Web)
-            {
-                _webServer.CreateAlias(project.DomainName, project.Path);
-            }
-
-            ExtractTemplate(project);
             SaveMetadata(project);
-
             _database.Projects.Insert(project);
         }
 
@@ -73,12 +63,8 @@ namespace KFlearning.Core.Services
 
         public void Delete(Project project)
         {
-            Directory.Delete(project.Path, true);
-            if (project.Type == ProjectType.Web)
-            {
-                _webServer.RemoveAlias(project.DomainName);
-            }
-
+            var handler = _projectHandlers[project.Type];
+            handler.Uninitialize(project);
             _database.Projects.Delete(project.ProjectId);
         }
 
@@ -96,33 +82,18 @@ namespace KFlearning.Core.Services
             {
                 // extract the files
                 var extractPath = GetPathForProject(zip.ZipFileComment);
-                foreach (ZipEntry entry in zip)
-                {
-                    if (!entry.IsFile) continue;		
-                    
-                    string entryFileName = entry.Name;
-                    byte[] buffer = new byte[4096];
-                    
-                    string fullZipToPath = Path.Combine(extractPath, entryFileName);
-                    string directoryName = Path.GetDirectoryName(fullZipToPath);
-                    if (directoryName?.Length > 0) Directory.CreateDirectory(directoryName);
-
-                    using (FileStream streamWriter = File.Create(fullZipToPath)) 
-                    {
-                        Stream zipStream = zip.GetInputStream(entry);
-                        StreamUtils.Copy(zipStream, streamWriter, buffer);
-                    }
-                }
+                zip.ExtractAll(extractPath);
 
                 // save metadata to db
                 var metadataFile = Path.Combine(extractPath, Constants.MetadataFileName);
                 var project = JsonConvert.DeserializeObject<Project>(File.ReadAllText(metadataFile));
-                project.Path = extractPath; // save new project path
 
-                if (project.Type == ProjectType.Web)
-                {
-                    _webServer.CreateAlias(project.DomainName, project.Path);
-                }
+                // save new project path
+                project.Path = extractPath;
+
+                // initialize project
+                var handler = _projectHandlers[project.Type];
+                handler.Initialize(project);
 
                 _database.Projects.Insert(project);
             }
@@ -197,25 +168,11 @@ namespace KFlearning.Core.Services
 
             using (var zip = new ZipFile(path))
             {
-                foreach (ZipEntry entry in zip)
-                {
-                    if (!entry.IsFile) continue;		
-                    
-                    string entryFileName = entry.Name;
-                    byte[] buffer = new byte[4096];
-                    
-                    string fullZipToPath = Path.Combine(project.Path, entryFileName);
-                    string directoryName = Path.GetDirectoryName(fullZipToPath);
-                    if (directoryName?.Length > 0) Directory.CreateDirectory(directoryName);
-
-                    using (FileStream streamWriter = File.Create(fullZipToPath)) 
-                    {
-                        Stream zipStream = zip.GetInputStream(entry);
-                        StreamUtils.Copy(zipStream, streamWriter, buffer);
-                    }
-                }
+                zip.ExtractAll(project.Path);
             }
         }
+
+        
 
         #endregion
     }

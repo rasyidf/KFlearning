@@ -53,8 +53,13 @@
     <Compile Include="DAL\Series.cs" />
     <Compile Include="IO\FileSystemManager.cs" />
     <Compile Include="IO\IFileSystemManager.cs" />
+    <Compile Include="IO\IOHelpers.cs" />
     <Compile Include="IO\ZipExtractEventArgs.cs" />
     <Compile Include="IO\ZipExtractor.cs" />
+    <Compile Include="Services\Handlers\CppProjectHandler.cs" />
+    <Compile Include="Services\Handlers\PythonProjectHandler.cs" />
+    <Compile Include="Services\Handlers\WebProjectHandler.cs" />
+    <Compile Include="Services\IProjectHandler.cs" />
     <Compile Include="Services\ISequenceFactory.cs" />
     <Compile Include="Services\MathHelper.cs" />
     <Compile Include="Services\Sequence\ComposerTask.cs" />
