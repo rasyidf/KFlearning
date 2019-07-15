@@ -54,8 +54,11 @@
     <Compile Include="DAL\Project.cs" />
     <Compile Include="DAL\ProjectType.cs" />
     <Compile Include="DAL\Series.cs" />
+    <Compile Include="IO\FileSystemManager.cs" />
+    <Compile Include="IO\IFileSystemManager.cs" />
     <Compile Include="IO\ZipExtractEventArgs.cs" />
     <Compile Include="IO\ZipExtractor.cs" />
+    <Compile Include="Services\MathHelper.cs" />
     <Compile Include="Services\Sequence\Impl\ComposerTask.cs" />
     <Compile Include="Services\Sequence\Impl\EnvironmentPathTask.cs" />
     <Compile Include="Services\Sequence\Impl\GlutTask.cs" />
