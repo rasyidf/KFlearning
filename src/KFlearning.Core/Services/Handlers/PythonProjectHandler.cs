@@ -5,7 +5,7 @@ using KFlearning.Core.IO;
 
 namespace KFlearning.Core.Services.Handlers
 {
-    class PythonProjectHandler : IProjectHandler
+    public class PythonProjectHandler : ProjectHandlerBase
     {
         private readonly IFileSystemManager _fileSystem;
 
@@ -14,7 +14,7 @@ namespace KFlearning.Core.Services.Handlers
             _fileSystem = fileSystem;
         }
 
-        public Project Initialize(string title, string path)
+        public override Project Create(string title, string path)
         {
             var project = new Project
             {
@@ -23,16 +23,17 @@ namespace KFlearning.Core.Services.Handlers
                 Path = path
             };
             Directory.CreateDirectory(project.Path);
+            SaveMetadata(project);
 
             return project;
         }
 
-        public void Initialize(Project project)
+        public override void Import(Project project)
         {
             
         }
 
-        public void Uninitialize(Project project)
+        public override void Destroy(Project project)
         {
             _fileSystem.DeleteDirectory(project.Path, CancellationToken.None);
         }

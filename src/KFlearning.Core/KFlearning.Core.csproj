@@ -62,6 +62,7 @@
     <Compile Include="Services\IProjectHandler.cs" />
     <Compile Include="Services\ISequenceFactory.cs" />
     <Compile Include="Services\MathHelper.cs" />
+    <Compile Include="Services\ProjectHandlerBase.cs" />
     <Compile Include="Services\Sequence\ComposerTask.cs" />
     <Compile Include="Services\Sequence\EnvironmentPathTask.cs" />
     <Compile Include="Services\Sequence\GlutTask.cs" />

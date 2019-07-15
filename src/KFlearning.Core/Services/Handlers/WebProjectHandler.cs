@@ -5,7 +5,7 @@ using KFlearning.Core.IO;
 
 namespace KFlearning.Core.Services.Handlers
 {
-    public class WebProjectHandler : IProjectHandler
+    public class WebProjectHandler : ProjectHandlerBase
     {
         private readonly IWebServer _webServer;
         private readonly IFileSystemManager _fileSystem;
@@ -16,7 +16,7 @@ namespace KFlearning.Core.Services.Handlers
             _fileSystem = fileSystem;
         }
 
-        public Project Initialize(string title, string path)
+        public override Project Create(string title, string path)
         {
             var project = new Project
             {
@@ -26,17 +26,18 @@ namespace KFlearning.Core.Services.Handlers
                 DomainName = _webServer.GenerateDomainName(title)
             };
             Directory.CreateDirectory(project.Path);
-            Initialize(project);
-            
+            Import(project);
+            SaveMetadata(project);
+
             return project;
         }
 
-        public void Initialize(Project project)
+        public override void Import(Project project)
         {
             _webServer.CreateAlias(project.DomainName, project.Path);
         }
 
-        public void Uninitialize(Project project)
+        public override void Destroy(Project project)
         {
             _webServer.RemoveAlias(project.DomainName);
             _fileSystem.DeleteDirectory(project.Path, CancellationToken.None);

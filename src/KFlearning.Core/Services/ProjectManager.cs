@@ -6,14 +6,12 @@
 // 
 //  This file is part of KFlearning, licensed under MIT license.
 
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading;
-using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
 using KFlearning.Core.DAL;
 using KFlearning.Core.IO;
+using KFlearning.Core.Services.Handlers;
 using LiteDB;
 using Newtonsoft.Json;
 
@@ -26,13 +24,19 @@ namespace KFlearning.Core.Services
         private readonly IVscode _vscode;
         private readonly Dictionary<ProjectType, IProjectHandler> _projectHandlers;
 
-        public ProjectManager(IPathManager pathManager, IDatabaseContext database, IVscode vscode)
+        public ProjectManager(IPathManager pathManager, IDatabaseContext database, IVscode vscode,
+            CppProjectHandler cppHandler, WebProjectHandler webHandler, PythonProjectHandler pythonHandler)
         {
             _pathManager = pathManager;
             _database = database;
             _vscode = vscode;
 
-            _projectHandlers = new Dictionary<ProjectType, IProjectHandler>();
+            _projectHandlers = new Dictionary<ProjectType, IProjectHandler>
+            {
+                {ProjectType.Cpp, cppHandler},
+                {ProjectType.Web, webHandler},
+                {ProjectType.Python, pythonHandler}
+            };
         }
 
         public IEnumerable<Project> GetProjects()
@@ -50,9 +54,8 @@ namespace KFlearning.Core.Services
         {
             var path = GetPathForProject(title);
             var handler = _projectHandlers[type];
-            var project = handler.Initialize(title, path);
+            var project = handler.Create(title, path);
 
-            SaveMetadata(project);
             _database.Projects.Insert(project);
         }
 
@@ -64,7 +67,7 @@ namespace KFlearning.Core.Services
         public void Delete(Project project)
         {
             var handler = _projectHandlers[project.Type];
-            handler.Uninitialize(project);
+            handler.Destroy(project);
             _database.Projects.Delete(project.ProjectId);
         }
 
@@ -93,7 +96,7 @@ namespace KFlearning.Core.Services
 
                 // initialize project
                 var handler = _projectHandlers[project.Type];
-                handler.Initialize(project);
+                handler.Import(project);
 
                 _database.Projects.Insert(project);
             }
@@ -131,49 +134,5 @@ namespace KFlearning.Core.Services
             return Path.Combine(_pathManager.GetPath(PathKind.PathReposRoot),
                 _pathManager.StripInvalidFileName(title).ToLowerInvariant());
         }
-
-        #region Private Methods
-
-        private void SaveMetadata(Project project)
-        {
-            var path = Path.Combine(project.Path, Constants.MetadataFileName);
-            using (var streamWriter = new StreamWriter(path))
-            {
-                var serializer = new Newtonsoft.Json.JsonSerializer
-                {
-                    Formatting = Formatting.Indented
-                };
-
-                serializer.Serialize(streamWriter, project);
-            }
-        }
-
-        private void ExtractTemplate(Project project)
-        {
-            string path;
-            switch (project.Type)
-            {
-                case ProjectType.Web:
-                    path = _pathManager.GetPath(PathKind.TemplateWeb);
-                    break;
-                case ProjectType.Cpp:
-                    path = _pathManager.GetPath(PathKind.TemplateCpp);
-                    break;
-                case ProjectType.Python:
-                    path = _pathManager.GetPath(PathKind.TemplatePython);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(project.Type), project.Type, null);
-            }
-
-            using (var zip = new ZipFile(path))
-            {
-                zip.ExtractAll(project.Path);
-            }
-        }
-
-        
-
-        #endregion
     }
 }

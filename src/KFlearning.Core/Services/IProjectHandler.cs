@@ -4,8 +4,8 @@ namespace KFlearning.Core.Services
 {
     public interface IProjectHandler
     {
-        Project Initialize(string title, string path);
-        void Initialize(Project project);
-        void Uninitialize(Project project);
+        Project Create(string title, string path);
+        void Import(Project project);
+        void Destroy(Project project);
     }
 }
