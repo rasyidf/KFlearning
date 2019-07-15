@@ -10,12 +10,15 @@ namespace KFlearning.Installer.Views
     public partial class MainForm : Form
     {
         private ViewState _viewState;
+        private bool _isInstall;
 
         private enum ViewState
         {
             Install,
             Uninstall,
-            Cancel
+            Cancel,
+            WaitOpen,
+            WaitExit
         }
 
         #region Properties
@@ -58,20 +61,37 @@ namespace KFlearning.Installer.Views
 
         private void CmdInstall_Click(object sender, EventArgs e)
         {
-            if (_viewState == ViewState.Cancel)
+            switch (_viewState)
             {
-                cmdInstall.Enabled = false;
-                TaskGraph.Cancel();
-            }
-            else
-            {
-                var path = PathManager.Combine(PathKind.PathBase, @"installer\data");
-                var extensions = File.ReadAllLines(PathManager.Combine(path, "vscode-extensions.txt"));
-                var definition = new InstallDefinition(path, extensions, x => Program.Container.Resolve(x));
-                var sequence = _viewState == ViewState.Install
-                    ? SequenceFactory.GetInstallSequence()
-                    : SequenceFactory.GetUninstallSequence();
-                TaskGraph.RunSequence(definition, sequence);
+                case ViewState.Cancel:
+                    cmdInstall.Enabled = false;
+                    TaskGraph.Cancel();
+                    break;
+
+                case ViewState.WaitExit:
+                    Application.Exit();
+                    break;
+
+                case ViewState.WaitOpen:
+                {
+                    var path = PathManager.Combine(PathKind.PathKflearningRoot, "kflearning.ide.exe");
+                    PathManager.LaunchUri(path);
+                    break;
+                }
+
+                default:
+                {
+                    var path = PathManager.Combine(PathKind.PathBase, @"installer\data");
+                    var extensions = File.ReadAllLines(PathManager.Combine(path, "vscode-extensions.txt"));
+                    var definition = new InstallDefinition(path, extensions, x => Program.Container.Resolve(x));
+                    var sequence = _viewState == ViewState.Install
+                        ? SequenceFactory.GetInstallSequence()
+                        : SequenceFactory.GetUninstallSequence();
+
+                    _isInstall = _viewState == ViewState.Install;
+                    TaskGraph.RunSequence(definition, sequence);
+                    break;
+                }
             }
         }
 
@@ -102,6 +122,10 @@ namespace KFlearning.Installer.Views
                     progressBar.Style = ProgressBarStyle.Blocks;
                     progressBar.Value = obj;
                 }
+
+                if (!overall || obj != 100) return;
+                _viewState = _isInstall ? ViewState.WaitOpen : ViewState.WaitExit;
+                UpdateViewState();
             }
         }
 
@@ -138,6 +162,9 @@ namespace KFlearning.Installer.Views
                         break;
                     case ViewState.Cancel:
                         cmdInstall.Text = "Batal";
+                        break;
+                    case ViewState.WaitExit:
+                        cmdInstall.Text = "Keluar";
                         break;
                     default:
                         throw new ArgumentOutOfRangeException(nameof(_viewState), _viewState, null);
