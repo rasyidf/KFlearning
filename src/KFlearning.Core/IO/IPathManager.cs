@@ -12,27 +12,20 @@ namespace KFlearning.Core.IO
 {
     public interface IPathManager
     {
-        void InitializePaths();
-
+        string Combine(PathKind path, params string[] parts);
+        string Combine(params string[] parts);
         string GetPath(PathKind path);
         string GetPathForVirtualHost(string domainName);
         string GetPathForAlias(string domainName);
         string GetPathForTemp(string filename = "");
+        string GetFileName(string path);
         string StripInvalidFileName(string path);
-        string FindFile(string searchPath, string filename);
-
         string EnsureForwardSlash(string path);
         string EnsureBackslashEnding(string path);
 
         void LaunchUri(string uri);
         void LaunchExplorer(string path);
-        void CreateShortcutOnDesktop(string linkName, string description, string path);
-
-        void RecursiveDelete(string path);
-        void RecursiveDelete(string path, CancellationToken token);
-        void RecursiveMoveDirectory(string source, string destination);
-        void RecursiveMoveDirectory(string source, string destination, CancellationToken token);
-
+        
         void AddPathEnvironmentVar(string path);
         void RemovePathEnvironmentVar(string path);
     }

@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading;
-using IWshRuntimeLibrary;
-using File = System.IO.File;
 
 namespace KFlearning.Core.IO
 {
@@ -15,17 +12,141 @@ namespace KFlearning.Core.IO
         
         private const string EnvironmentVariablePath = "path";
 
-        private static readonly char[] InvalidPathChars = Path.GetInvalidPathChars();
         private static readonly char[] InvalidFileNameChars = Path.GetInvalidFileNameChars();
         private static readonly object SyncLock = new object();
 
         private Dictionary<PathKind, string> _cachedPaths;
 
         #endregion
-        
+
         #region Public Methods
 
-        public void InitializePaths()
+        #region Path Manipulations
+        
+        public string Combine(PathKind path, params string[] parts)
+        {
+            var aggregate = new List<string>();
+            aggregate.Add(GetPath(path));
+            aggregate.AddRange(parts);
+            return Combine(aggregate.ToArray());
+        }
+
+        public string Combine(params string[] parts)
+        {
+            return Path.Combine(parts);
+        }
+
+        public string GetPath(PathKind path)
+        {
+            if (_cachedPaths == null) InitializePaths();
+            return _cachedPaths[path];
+        }
+
+        public string GetPathForVirtualHost(string domainName)
+        {
+            return Path.Combine(GetPath(PathKind.PathVirtualHostRoot), domainName + ".conf");
+        }
+
+        public string GetPathForAlias(string domainName)
+        {
+            return Path.Combine(GetPath(PathKind.PathSitesAliasRoot), domainName + ".conf");
+        }
+
+        public string GetPathForTemp(string filename = "")
+        {
+            return Path.Combine(Path.GetTempPath(), "kflearning", filename);
+        }
+
+        public string GetFileName(string path)
+        {
+            return Path.GetFileName(path);
+        }
+
+        public string StripInvalidFileName(string path)
+        {
+            return InvalidFileNameChars.Aggregate(path, (current, x) => current.Replace(x.ToString(), string.Empty));
+        } 
+
+        public string EnsureForwardSlash(string path)
+        {
+            return path.Replace(@"\", "/");
+        }
+
+        public string EnsureBackslashEnding(string path)
+        {
+            bool useForwardSlash = path.Contains("/");
+            bool shouldAddSlash = useForwardSlash ? path.EndsWith("/") : path.EndsWith(@"\");
+
+            if (!shouldAddSlash) return path;
+            return useForwardSlash ? EnsureForwardSlash(path) + "/" : path + @"\";
+        }
+
+        #endregion
+
+        #region Shell Operations
+
+        public void LaunchUri(string uri)
+        {
+            Process.Start(uri);
+        }
+
+        public void LaunchExplorer(string path)
+        {
+            Process.Start("explorer.exe", path);
+        }
+
+        #endregion
+
+        #region Environment Paths
+
+        public void AddPathEnvironmentVar(string path)
+        {
+            var parts = GetEnvironmentPath();
+            if (parts == null) return;
+            if (parts.Contains(path)) return;
+
+            parts.Add(path);
+            SetEnvironmentPath(parts);
+        }
+
+        public void RemovePathEnvironmentVar(string path)
+        {
+            var parts = GetEnvironmentPath();
+            if (parts == null) return;
+            if (parts.Count(x => x.Contains(path)) == 0) return;
+
+            parts.RemoveAll(x => x.Contains(path));
+            SetEnvironmentPath(parts);
+        }  
+
+        #endregion
+
+        #endregion
+
+        #region Private Methods
+
+        private static List<string> GetEnvironmentPath()
+        {
+            var originalPaths = Environment.GetEnvironmentVariable(EnvironmentVariablePath, EnvironmentVariableTarget.User);
+            if (originalPaths == null) return null;
+            return new List<string>(originalPaths.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries));
+        }
+
+        private static void SetEnvironmentPath(IEnumerable<string> paths)
+        {
+            var revisedPath = string.Join(";", paths);
+            Environment.SetEnvironmentVariable(EnvironmentVariablePath, revisedPath, EnvironmentVariableTarget.User);
+        }
+
+        private static string GetBasePath()
+        {
+            var basePath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);
+            Debug.Assert(basePath != null);
+            int lastIndex = basePath.LastIndexOf(@"\", StringComparison.InvariantCultureIgnoreCase);
+            return basePath.Substring(0, lastIndex);
+        }
+
+        private void InitializePaths()
         {
             lock (SyncLock)
             {
@@ -65,179 +186,6 @@ namespace KFlearning.Core.IO
                 _cachedPaths.Add(PathKind.TemplateHosts,
                     Path.Combine(systemRoot, @"Windows\System32\drivers\etc\hosts"));
             }
-        }
-
-        public string GetPath(PathKind path)
-        {
-            if (_cachedPaths == null) InitializePaths();
-            return _cachedPaths[path];
-        }
-
-        public string GetPathForVirtualHost(string domainName)
-        {
-            return Path.Combine(GetPath(PathKind.PathVirtualHostRoot), domainName + ".conf");
-        }
-
-        public string GetPathForAlias(string domainName)
-        {
-            return Path.Combine(GetPath(PathKind.PathSitesAliasRoot), domainName + ".conf");
-        }
-
-        public string GetPathForTemp(string filename = "")
-        {
-            return Path.Combine(Path.GetTempPath(), "kflearning", filename);
-        }
-
-        public string StripInvalidFileName(string path)
-        {
-            return InvalidFileNameChars.Aggregate(path, (current, x) => current.Replace(x.ToString(), string.Empty));
-        }
-
-        public string FindFile(string searchPath, string filename)
-        {
-            return Directory.EnumerateFiles(searchPath, filename, SearchOption.AllDirectories).FirstOrDefault();
-        }
-
-        public string EnsureForwardSlash(string path)
-        {
-            return path.Replace(@"\", "/");
-        }
-
-        public string EnsureBackslashEnding(string path)
-        {
-            bool useForwardSlash = path.Contains("/");
-            bool shouldAddSlash = useForwardSlash ? path.EndsWith("/") : path.EndsWith(@"\");
-
-            if (!shouldAddSlash) return path;
-            return useForwardSlash ? EnsureForwardSlash(path) + "/" : path + @"\";
-        }
-
-        public void LaunchUri(string uri)
-        {
-            Process.Start(uri);
-        }
-
-        public void LaunchExplorer(string path)
-        {
-            Process.Start("explorer.exe", path);
-        }
-
-        public void CreateShortcutOnDesktop(string linkName, string description, string path)
-        {
-            object shDesktop = "Desktop";
-            var shell = new WshShell();
-            string shortcutAddress = shell.SpecialFolders.Item(ref shDesktop) + $@"\{linkName}.lnk";
-            var shortcut = (IWshShortcut) shell.CreateShortcut(shortcutAddress);
-            shortcut.Description = description;
-            shortcut.TargetPath = path;
-            shortcut.Save();
-        }
-
-        public void RecursiveDelete(string path)
-        {
-            RecursiveDelete(path, CancellationToken.None);
-        }
-
-        public void RecursiveDelete(string path, CancellationToken token)
-        {
-            try
-            {
-                foreach (string file in Directory.EnumerateFiles(path))
-                {
-                    token.ThrowIfCancellationRequested();
-                    File.SetAttributes(file, FileAttributes.Normal);
-                    File.Delete(file);
-                }
-
-                foreach (string currentDir in Directory.EnumerateDirectories(path))
-                {
-                    token.ThrowIfCancellationRequested();
-                    RecursiveDelete(currentDir, token);
-                }
-
-                Directory.Delete(path);
-            }
-            catch (OperationCanceledException)
-            {
-            }
-        }
-
-        public void RecursiveMoveDirectory(string source, string destination)
-        {
-            RecursiveMoveDirectory(source, destination, CancellationToken.None);
-        }
-
-        public void RecursiveMoveDirectory(string source, string destination, CancellationToken token)
-        {
-            Directory.CreateDirectory(destination);
-            foreach (string libFile in Directory.EnumerateFiles(source))
-            {
-                var destPath = Path.Combine(destination, Path.GetFileName(libFile) ?? "");
-                if (File.Exists(destPath
-                ))
-                {
-                    File.SetAttributes(destPath, FileAttributes.Normal);
-                    File.Delete(destPath);
-                }
-
-                File.Move(libFile, destPath);
-            }
-
-            foreach (string name in Directory.EnumerateDirectories(source).Select(Path.GetFileName))
-            {
-                var sourceToProcess = Path.Combine(source, name);
-                var destToProcess = Path.Combine(destination, name);
-
-                Directory.CreateDirectory(destToProcess);
-                RecursiveMoveDirectory(sourceToProcess, destToProcess, token);
-            }
-
-            Directory.Delete(source);
-        }
-
-        public void AddPathEnvironmentVar(string path)
-        {
-            var parts = GetEnvironmentPath();
-            if (parts == null) return;
-            if (parts.Contains(path)) return;
-
-            parts.Add(path);
-            SetEnvironmentPath(parts);
-        }
-
-        public void RemovePathEnvironmentVar(string path)
-        {
-            var parts = GetEnvironmentPath();
-            if (parts == null) return;
-            if (parts.Count(x => x.Contains(path)) == 0) return;
-
-            parts.RemoveAll(x => x.Contains(path));
-            SetEnvironmentPath(parts);
-        } 
-
-        #endregion
-
-        #region Private Methods
-
-        private static List<string> GetEnvironmentPath()
-        {
-            var originalPaths = Environment.GetEnvironmentVariable(EnvironmentVariablePath, EnvironmentVariableTarget.User);
-            if (originalPaths == null) return null;
-            return new List<string>(originalPaths.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries));
-        }
-
-        private static void SetEnvironmentPath(IEnumerable<string> paths)
-        {
-            var revisedPath = string.Join(";", paths);
-            Environment.SetEnvironmentVariable(EnvironmentVariablePath, revisedPath, EnvironmentVariableTarget.User);
-        }
-
-        private static string GetBasePath()
-        {
-            var basePath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);
-            Debug.Assert(basePath != null);
-            int lastIndex = basePath.LastIndexOf(@"\", StringComparison.InvariantCultureIgnoreCase);
-            return basePath.Substring(0, lastIndex);
         }
 
         #endregion
