@@ -13,7 +13,7 @@ using KFlearning.Core.API;
 using KFlearning.Core.DAL;
 using KFlearning.Core.IO;
 using KFlearning.Core.Services;
-using KFlearning.Core.Services.Graph;
+using KFlearning.Core.Services.Sequence;
 using KFlearning.IDE.ApplicationServices;
 using KFlearning.IDE.ViewModels;
 using KFlearning.IDE.Views;
