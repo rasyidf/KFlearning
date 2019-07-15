@@ -5,13 +5,13 @@ namespace KFlearning.Core.Services.Sequence
 {
     public class GlutTask : ITaskNode
     {
-        private IProgressBroker _progress;
+        
 
         public string TaskName => "GLUT Installation";
 
         public void Run(InstallDefinition definition, CancellationToken cancellation)
         {
-            _progress = definition.ResolveService<IProgressBroker>();
+            var progress = definition.ResolveService<IProgressBroker>();
             var fileSystem = definition.ResolveService<IFileSystemManager>();
             var path = definition.ResolveService<IPathManager>();
             
@@ -19,26 +19,21 @@ namespace KFlearning.Core.Services.Sequence
             var extractPath = path.GetPathForTemp();
 
             // find zip and extract
-            _progress.ReportMessage("Extracting freeglut...");
+            progress.ReportMessage("Extracting freeglut...");
             var glutZipPath = fileSystem.FindFile(definition.DataPath, "freeglut-*");
-            var extractor = new ZipExtractor();
-            extractor.StatusChanged += Extractor_StatusChanged;
-            extractor.ExtractAll(glutZipPath, extractPath);
-            extractor.StatusChanged -= Extractor_StatusChanged;
+            using (var extractor = new ZipExtractor((s, e) => progress.ReportNodeProgress(e.ProgressPercentage)))
+            {
+                extractor.ExtractAll(glutZipPath, extractPath);
+            }
             
             // install glut to MinGW
-            _progress.ReportNodeProgress(-1);
-            _progress.ReportMessage("Installing freeglut to MinGW...");
+            progress.ReportNodeProgress(-1);
+            progress.ReportMessage("Installing freeglut to MinGW...");
             fileSystem.CopyDirectory(path.Combine(extractPath, "freeglut"), root, cancellation);
 
             // install lib to MinGW 8.2.0
             var destPath = path.Combine(root, @"lib\gcc\mingw32\8.2.0");
             fileSystem.CopyDirectory(path.Combine(extractPath, @"freeglut\lib"), destPath, cancellation);
-        }
-
-        private void Extractor_StatusChanged(object sender, ZipExtractEventArgs e)
-        {
-            _progress.ReportNodeProgress(e.ProgressPercentage);
         }
     }
 }
