@@ -91,6 +91,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Views\LogForm.resx">
       <DependentUpon>LogForm.cs</DependentUpon>
@@ -124,6 +125,9 @@
     <PackageReference Include="Castle.Windsor">
       <Version>5.0.0</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KFlearning.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
