@@ -23,8 +23,14 @@ namespace KFlearning.Core.Services.Sequence
                 extractor.ExtractAll(apacheZip, path.GetPath(PathKind.PathKflearningRoot));
             }
 
-            // TODO: save content
+            // save content
             progress.ReportMessage("Creating default hosts...");
+            var contentPath = path.Combine(PathKind.PathBase, @"etc\kflearning\index.html");
+            fileSystem.WriteFile(contentPath, Constants.IndexPageHtml);
+
+            contentPath = path.Combine(PathKind.PathBase, @"etc\kflearning\phpinfo.php");
+            fileSystem.WriteFile(contentPath, Constants.PhpInfoPage);
+
 
             // add default site alias
             progress.ReportMessage("Creating HTTPD alias...");

@@ -156,5 +156,11 @@
   <ItemGroup>
     <None Include="Resources\DefaultVirtualHost.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IndexPageHtml.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PhpInfoPage.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

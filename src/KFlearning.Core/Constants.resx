@@ -166,4 +166,10 @@
   <data name="DefaultVirtualHost" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\DefaultVirtualHost.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="IndexPageHtml" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\IndexPageHtml.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="PhpInfoPage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\PhpInfoPage.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
 </root>

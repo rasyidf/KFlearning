@@ -196,6 +196,30 @@ namespace KFlearning.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html lang=&quot;en&quot;&gt;
+        ///
+        ///&lt;head&gt;
+        ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
+        ///    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+        ///    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+        ///    &lt;!--&lt;meta http-equiv=&quot;refresh&quot; content=&quot;10; url=https://kodesiana.com&quot;&gt;--&gt;
+        ///    &lt;title&gt;KFlearning&lt;/title&gt;
+        ///
+        ///    &lt;style&gt;
+        ///        body,
+        ///        html {
+        ///            height: 90%;
+        ///            display: grid;
+        ///            font-family: &apos;Lucida Sans&apos;, &apos;Lucida Sans Regular&apos;, &apos;Lucida Grande&apos;, &apos;Lucida Sans  [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string IndexPageHtml {
+            get {
+                return ResourceManager.GetString("IndexPageHtml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [client-server]
         ///# Uncomment these if you want to use a nonstandard connection to MariaDB
         ///#socket=/tmp/mysql.sock
@@ -266,6 +290,15 @@ namespace KFlearning.Core {
         public static string PhpConfig {
             get {
                 return ResourceManager.GetString("PhpConfig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?php phpinfo(); ?&gt;.
+        /// </summary>
+        public static string PhpInfoPage {
+            get {
+                return ResourceManager.GetString("PhpInfoPage", resourceCulture);
             }
         }
         
