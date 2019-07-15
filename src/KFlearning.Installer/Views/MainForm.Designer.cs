@@ -37,9 +37,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.prgOverall = new System.Windows.Forms.ProgressBar();
             this.prgCurrent = new System.Windows.Forms.ProgressBar();
-            this.txtLog = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cmdOpen = new System.Windows.Forms.Button();
+            this.cmdLog = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,16 +46,16 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(429, 78);
+            this.panel1.Size = new System.Drawing.Size(182, 280);
             this.panel1.TabIndex = 0;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 47);
+            this.label2.Location = new System.Drawing.Point(17, 133);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(157, 15);
             this.label2.TabIndex = 1;
@@ -67,18 +65,18 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(12, 95);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(267, 37);
+            this.label1.Size = new System.Drawing.Size(155, 37);
             this.label1.TabIndex = 0;
-            this.label1.Text = "KFlearning Installer";
+            this.label1.Text = "KFlearning";
             // 
             // cmdInstall
             // 
             this.cmdInstall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmdInstall.Location = new System.Drawing.Point(16, 95);
+            this.cmdInstall.Location = new System.Drawing.Point(483, 239);
             this.cmdInstall.Name = "cmdInstall";
-            this.cmdInstall.Size = new System.Drawing.Size(113, 39);
+            this.cmdInstall.Size = new System.Drawing.Size(92, 26);
             this.cmdInstall.TabIndex = 1;
             this.cmdInstall.Text = "Install";
             this.cmdInstall.UseVisualStyleBackColor = true;
@@ -87,7 +85,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(144, 89);
+            this.label3.Location = new System.Drawing.Point(251, 76);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(84, 15);
             this.label3.TabIndex = 2;
@@ -96,7 +94,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(144, 134);
+            this.label4.Location = new System.Drawing.Point(251, 121);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(112, 15);
             this.label4.TabIndex = 3;
@@ -104,57 +102,36 @@
             // 
             // prgOverall
             // 
-            this.prgOverall.Location = new System.Drawing.Point(147, 152);
+            this.prgOverall.Location = new System.Drawing.Point(254, 139);
             this.prgOverall.Name = "prgOverall";
             this.prgOverall.Size = new System.Drawing.Size(266, 21);
             this.prgOverall.TabIndex = 4;
             // 
             // prgCurrent
             // 
-            this.prgCurrent.Location = new System.Drawing.Point(147, 107);
+            this.prgCurrent.Location = new System.Drawing.Point(254, 94);
             this.prgCurrent.Name = "prgCurrent";
             this.prgCurrent.Size = new System.Drawing.Size(266, 21);
             this.prgCurrent.TabIndex = 5;
             // 
-            // txtLog
+            // cmdLog
             // 
-            this.txtLog.Location = new System.Drawing.Point(12, 211);
-            this.txtLog.Multiline = true;
-            this.txtLog.Name = "txtLog";
-            this.txtLog.ReadOnly = true;
-            this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtLog.Size = new System.Drawing.Size(405, 170);
-            this.txtLog.TabIndex = 6;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(17, 191);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(67, 15);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Log proses:";
-            // 
-            // cmdOpen
-            // 
-            this.cmdOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmdOpen.Location = new System.Drawing.Point(16, 140);
-            this.cmdOpen.Name = "cmdOpen";
-            this.cmdOpen.Size = new System.Drawing.Size(113, 33);
-            this.cmdOpen.TabIndex = 8;
-            this.cmdOpen.Text = "Buka KFlearning";
-            this.cmdOpen.UseVisualStyleBackColor = true;
-            this.cmdOpen.Click += new System.EventHandler(this.CmdOpen_Click);
+            this.cmdLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmdLog.Location = new System.Drawing.Point(385, 239);
+            this.cmdLog.Name = "cmdLog";
+            this.cmdLog.Size = new System.Drawing.Size(92, 26);
+            this.cmdLog.TabIndex = 8;
+            this.cmdLog.Text = "Log";
+            this.cmdLog.UseVisualStyleBackColor = true;
+            this.cmdLog.Click += new System.EventHandler(this.CmdLog_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
-            this.ClientSize = new System.Drawing.Size(429, 396);
-            this.Controls.Add(this.cmdOpen);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtLog);
+            this.ClientSize = new System.Drawing.Size(590, 280);
+            this.Controls.Add(this.cmdLog);
             this.Controls.Add(this.prgCurrent);
             this.Controls.Add(this.prgOverall);
             this.Controls.Add(this.label4);
@@ -186,9 +163,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ProgressBar prgOverall;
         private System.Windows.Forms.ProgressBar prgCurrent;
-        private System.Windows.Forms.TextBox txtLog;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button cmdOpen;
+        private System.Windows.Forms.Button cmdLog;
     }
 }
 

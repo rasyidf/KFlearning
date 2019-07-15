@@ -7,23 +7,29 @@
 //  This file is part of KFlearning, licensed under MIT license.
 
 using System;
-using KFlearning.Core.Services.Graph;
+using KFlearning.Core.Services.Sequence;
 
 namespace KFlearning.Installer.ApplicationServices
 {
     internal class ProgressBroker : IProgressBroker
     {
         public Action<string> MessageAction { get; set; }
-        public Action<int> ProgressAction { get; set; }
+        public Action<int> ProgressCurrentAction { get; set; }
+        public Action<int> ProgressOverallAction { get; set; }
 
         public void ReportMessage(string message)
         {
             MessageAction?.Invoke(message);
         }
 
-        public void ReportProgress(int progressPercentage)
+        public void ReportNodeProgress(int progressPercentage)
         {
-            ProgressAction?.Invoke(progressPercentage);
+            ProgressCurrentAction?.Invoke(progressPercentage);
+        }
+
+        public void ReportSequenceProgress(int progressPercentage)
+        {
+            ProgressOverallAction?.Invoke(progressPercentage);
         }
     }
 }

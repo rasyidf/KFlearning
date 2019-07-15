@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
 using KFlearning.Core.API;
-using KFlearning.Core.Services.Graph;
+using KFlearning.Core.Services.Sequence;
 using KFlearning.Installer.ApplicationServices;
 
 namespace KFlearning.Installer.Views
@@ -13,6 +13,7 @@ namespace KFlearning.Installer.Views
         public IProgressBroker ProgressBroker { get; set; }
         public ITaskGraph TaskGraph { get; set; }
         public IKodesianaService KodesianaService { get; set; }
+        public LogForm Log { get; set; }
 
         public MainForm()
         {
@@ -23,17 +24,18 @@ namespace KFlearning.Installer.Views
         {
             var broker = (ProgressBroker) ProgressBroker;
             broker.MessageAction = MessageAction;
-            broker.ProgressAction= ProgressAction;
+            broker.ProgressOverallAction = x => ProgressAction(x, true);
+            broker.ProgressCurrentAction = x => ProgressAction(x, false);
 
             base.OnLoad(e);
         }
 
-        private async void CmdInstall_Click(object sender, EventArgs e)
+        private void CmdInstall_Click(object sender, EventArgs e)
         {
             //var catalog = await KodesianaService.GetPackageCatalog(PackagePlatform.x86);
             var definition = new InstallerDefinition(x => Program.Container.Resolve(x))
             {
-                Mode = InstallMode.Install,
+                DataPath = @"D:\Programming\Sandbox\KFlearning\vendor-x86",
                 //Packages = catalog
                 Packages = new PackageCatalog
                 {
@@ -44,7 +46,8 @@ namespace KFlearning.Installer.Views
                     },
                     Glut = new PackageEntry
                     {
-                        Uri = new Uri("https://www.transmissionzero.co.uk/files/software/development/GLUT/GLUT-MinGW-3.7.6-6.mp.zip"),
+                        Uri = new Uri(
+                            "https://www.transmissionzero.co.uk/files/software/development/GLUT/GLUT-MinGW-3.7.6-6.mp.zip"),
                         FileName = "GLUT-MinGW-3.7.6-6.mp.zip"
                     },
 
@@ -61,7 +64,8 @@ namespace KFlearning.Installer.Views
 
                     MariaDb = new PackageEntry
                     {
-                        Uri = new Uri("https://downloads.mariadb.org/f/mariadb-10.4.6/win32-packages/mariadb-10.4.6-win32.zip"),
+                        Uri = new Uri(
+                            "https://downloads.mariadb.org/f/mariadb-10.4.6/win32-packages/mariadb-10.4.6-win32.zip"),
                         FileName = "mariadb-10.4.6-win32.zip"
                     },
 
@@ -87,47 +91,52 @@ namespace KFlearning.Installer.Views
                         Uri = new Uri("https://go.microsoft.com/fwlink/?LinkID=623231"),
                         FileName = "VSCode-win32-ia32-1.34.0.zip"
                     },
-                    VscodeExtensions = new List<string> {"ms-python.python"},
+                    VscodeExtensions = new List<string>(), // {"ms-python.python"},
                     ProjectTemplates = new List<PackageEntry>
                     {
                         new PackageEntry
                         {
-                            Uri = new Uri("https://docs.google.com/uc?export=download&id=1hB2-1iZRoy-6SYgVuivBXahR6c4VKSIG"),
+                            Uri = new Uri(
+                                "https://docs.google.com/uc?export=download&id=1hB2-1iZRoy-6SYgVuivBXahR6c4VKSIG"),
                             FileName = "cpp.zip"
                         }
                     },
 
                     Kflearning = new PackageEntry
                     {
-                        Uri = new Uri("https://docs.google.com/uc?export=download&id=18DiEVB2hSb-yNDl9Vppvt90Hg88ffM_c"),
+                        Uri = new Uri(
+                            "https://docs.google.com/uc?export=download&id=18DiEVB2hSb-yNDl9Vppvt90Hg88ffM_c"),
                         FileName = "kflearning-ide.zip"
                     }
                 }
             };
-            TaskGraph.RunGraph(definition, Program.Container.Resolve<InstallGraph>());
+            
+            var factory = new SequenceFactory();
+            TaskGraph.RunSequence(definition, factory.GetUninstallGraph());
         }
 
-        private void CmdOpen_Click(object sender, System.EventArgs e)
+        private void CmdLog_Click(object sender, System.EventArgs e)
         {
-            TaskGraph.Cancel();
+            Log.Show();
         }
 
-        private void ProgressAction(int obj)
+        private void ProgressAction(int obj, bool overall)
         {
             if (InvokeRequired)
             {
-                Invoke(new Action<int>(ProgressAction), obj);
+                Invoke(new Action<int, bool>(ProgressAction), obj, overall);
             }
             else
             {
+                var progressBar = overall ? prgOverall : prgCurrent;
                 if (obj > 100 || obj < 0)
                 {
-                    prgCurrent.Style = ProgressBarStyle.Marquee;
+                    progressBar.Style = ProgressBarStyle.Marquee;
                 }
                 else
                 {
-                    prgCurrent.Style = ProgressBarStyle.Blocks;
-                    prgCurrent.Value = obj;
+                    progressBar.Style = ProgressBarStyle.Blocks;
+                    progressBar.Value = obj;
                 }
             }
         }
@@ -141,8 +150,9 @@ namespace KFlearning.Installer.Views
             else
             {
                 Debug.Print(obj);
-                txtLog.AppendText(obj);
-                txtLog.AppendText(Environment.NewLine);
+                Log.AppendLog($"[{DateTime.Now}] {Environment.NewLine}");
+                Log.AppendLog(obj);
+                Log.AppendLog(Environment.NewLine + Environment.NewLine);
             }
         }
     }
