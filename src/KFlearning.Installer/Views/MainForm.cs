@@ -9,9 +9,8 @@ namespace KFlearning.Installer.Views
 {
     public partial class MainForm : Form
     {
-        private ViewState _viewState;
-        private bool _isInstall;
-
+        #region Fields
+        
         private enum ViewState
         {
             Install,
@@ -20,6 +19,11 @@ namespace KFlearning.Installer.Views
             WaitOpen,
             WaitExit
         }
+
+        private ViewState _viewState;
+        private bool _isInstall; 
+
+        #endregion
 
         #region Properties
         
