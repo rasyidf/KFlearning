@@ -7,7 +7,19 @@ namespace KFlearning.Core.IO
 {
     public class ZipExtractor
     {
+        private readonly EventHandler<ZipExtractEventArgs> _statusChangedHandler;
+        
         public event EventHandler<ZipExtractEventArgs> StatusChanged;
+
+        public ZipExtractor()
+        {
+        }
+
+        public ZipExtractor(EventHandler<ZipExtractEventArgs> statusChangedHandler)
+        {
+            _statusChangedHandler = statusChangedHandler;
+            StatusChanged += statusChangedHandler;
+        }
 
         public void ExtractAll(string zipPath, string outputPath)
         {
@@ -39,6 +51,14 @@ namespace KFlearning.Core.IO
                     var progress = (int) Math.Round((double) i / count * 100, 0);
                     OnStatusChanged(new ZipExtractEventArgs(progress));
                 }   
+            }
+        }
+
+        public void RemoveHandler()
+        {
+            if (_statusChangedHandler != null)
+            {
+                StatusChanged -= _statusChangedHandler;
             }
         }
 
