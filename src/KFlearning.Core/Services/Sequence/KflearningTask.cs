@@ -50,23 +50,7 @@ namespace KFlearning.Core.Services.Sequence
             {
                 config.Transform("{KFLEARNING_DIR_ROOT}", indexPath);
             }
-
-            // copy templates
-            var templatePatterns = new List<Tuple<string, PathKind>>
-            {
-                new Tuple<string, PathKind>("template-cpp*", PathKind.TemplateCpp),
-                new Tuple<string, PathKind>("template-web*", PathKind.TemplateWeb),
-                new Tuple<string, PathKind>("template-python*", PathKind.TemplatePython),
-            };
-
-            progress.ReportMessage("Copying templates...");
-            for (int i = 0; i < templatePatterns.Count; i++)
-            {
-                var item = templatePatterns[i];
-                fileSystem.CopyFile(fileSystem.FindFile(definition.DataPath, item.Item1), path.GetPath(item.Item2));
-                progress.ReportNodeProgress(MathHelper.CalculatePercentage(i + 1, templatePatterns.Count));
-            }
-
+            
             // create shortcut
             progress.ReportNodeProgress(-1);
             progress.ReportMessage("Creating desktop shortcut...");
