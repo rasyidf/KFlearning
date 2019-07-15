@@ -5,7 +5,7 @@ using ICSharpCode.SharpZipLib.Zip;
 
 namespace KFlearning.Core.IO
 {
-    public class ZipExtractor
+    public class ZipExtractor : IDisposable
     {
         private readonly EventHandler<ZipExtractEventArgs> _statusChangedHandler;
         
@@ -54,14 +54,14 @@ namespace KFlearning.Core.IO
             }
         }
 
-        public void RemoveHandler()
+        public void Dispose()
         {
             if (_statusChangedHandler != null)
             {
                 StatusChanged -= _statusChangedHandler;
-            }
+            } 
         }
-
+        
         protected virtual void OnStatusChanged(ZipExtractEventArgs e)
         {
             StatusChanged?.Invoke(this, e);
