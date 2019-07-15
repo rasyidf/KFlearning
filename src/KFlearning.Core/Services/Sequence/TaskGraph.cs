@@ -63,25 +63,35 @@ namespace KFlearning.Core.Services.Sequence
         {
             try
             {
+                int count = 0, total = _sequence.Count;
                 while (_sequence.Count > 0)
                 {
+                    _tokenSource.Token.ThrowIfCancellationRequested();
                     var node = _sequence.Dequeue();
+
+                    _progressBroker.ReportMessage("[ RUNNING ] " + node.TaskName);
                     node.Run(_definition, _tokenSource.Token);
 
                     if (node is IDisposable disposable)
                     {
                         disposable.Dispose();
                     }
+
+                    _progressBroker.ReportMessage("[ FINISHED ] " + node.TaskName);
+                    _progressBroker.ReportSequenceProgress(MathHelper.CalculatePercentage(++count, total));
                 }
+
+                _progressBroker.ReportMessage("[ FINISHED ]");
+                _progressBroker.ReportSequenceProgress(100);
             }
             catch (OperationCanceledException)
             {
-                _progressBroker.ReportMessage("OPERATION CANCELED.");
+                _progressBroker.ReportMessage("[ CANCELED ]");
                 _progressBroker.ReportSequenceProgress(100);
             }
             catch (Exception ex)
             {
-                _progressBroker.ReportMessage("OPERATION FAULTED.\r\n" + ex);
+                _progressBroker.ReportMessage($"[ FAULTED ]{Environment.NewLine}{ex}");
                 _progressBroker.ReportSequenceProgress(100);
             }
         }

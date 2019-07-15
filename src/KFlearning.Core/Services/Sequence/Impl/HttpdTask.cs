@@ -1,30 +1,38 @@
-﻿using System.IO;
-using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using KFlearning.Core.IO;
 
 namespace KFlearning.Core.Services.Sequence.Impl
 {
     public class HttpdTask : ITaskNode
     {
+        private IProgressBroker _progress;
+
         public string TaskName => "Apache HTTPD";
 
         public void Run(InstallerDefinition definition, CancellationToken cancellation)
         {
+            _progress = definition.ResolveService<IProgressBroker>();
+            var fileSystem = definition.ResolveService<IFileSystemManager>();
             var path = definition.ResolveService<IPathManager>();
             var root = path.GetPath(PathKind.PathApacheRoot);
 
             // find zip and extract
-            var apacheZip = path.FindFile(definition.DataPath, "httpd*");
+            _progress.ReportMessage("Extracting httpd...");
+            var apacheZip = fileSystem.FindFile(definition.DataPath, "httpd-*");
             var extractor = new ZipExtractor();
+            extractor.StatusChanged += Extractor_StatusChanged;
             extractor.ExtractAll(apacheZip, root);
+            extractor.StatusChanged -= Extractor_StatusChanged;
 
             // move directory (un-nesting)
-            var rootNested = Directory.EnumerateDirectories(root, "Apache*", SearchOption.TopDirectoryOnly).First();
-            path.RecursiveMoveDirectory(rootNested, root, cancellation);
+            _progress.ReportNodeProgress(-1);
+            _progress.ReportMessage("Un-nesting httpd...");
+            var rootNested = fileSystem.FindDirectory(root, "Apache*");
+            fileSystem.MoveDirectory(rootNested, root, cancellation);
 
             // config apache
-            var configFile = Path.Combine(root, @"conf\httpd.conf");
+            _progress.ReportMessage("Configuring httpd...");
+            var configFile = path.Combine(root, @"conf\httpd.conf");
             using (var config = new TransformingConfigFile(configFile, Constants.HttpdConfig))
             {
                 config.Transform("{HTTPD_ROOT}", path.EnsureForwardSlash(root));
@@ -36,9 +44,14 @@ namespace KFlearning.Core.Services.Sequence.Impl
                     path.EnsureForwardSlash(path.GetPath(PathKind.PathVirtualHostRoot)));
                 config.Transform("{PHP_PATH}",
                     path.EnsureForwardSlash(path.GetPath(PathKind.PathPhpRoot)));
-                var phpModule = path.EnsureForwardSlash(Path.Combine(path.GetPath(PathKind.PathPhpRoot), "php7apache2_4.dll"));
+                var phpModule = path.EnsureForwardSlash(path.Combine(PathKind.PathPhpRoot, "php7apache2_4.dll"));
                 config.Transform("{PHP_MODULE_PATH}", phpModule);
             }
+        }
+
+        private void Extractor_StatusChanged(object sender, ZipExtractEventArgs e)
+        {
+            _progress.ReportNodeProgress(e.ProgressPercentage);
         }
     }
 }

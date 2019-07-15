@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Threading;
+﻿using System.Threading;
 using KFlearning.Core.IO;
 
 namespace KFlearning.Core.Services.Sequence.Impl
@@ -10,16 +9,20 @@ namespace KFlearning.Core.Services.Sequence.Impl
 
         public void Run(InstallerDefinition definition, CancellationToken cancellation)
         {
+            var progress = definition.ResolveService<IProgressBroker>();
             var path = definition.ResolveService<IPathManager>();
+            var fileSystem = definition.ResolveService<IFileSystemManager>();
 
             // install composer
-            var composerFile = Path.Combine(definition.DataPath, "composer.phar");
-            var composerInstallPath = Path.Combine(path.GetPath(PathKind.PathComposerRoot), @"composer.phar");
-            File.Move(composerFile, composerInstallPath);
+            progress.ReportNodeProgress(-1);
+            progress.ReportMessage("Installing composer...");
+            var composerFile = path.Combine(definition.DataPath, "composer.phar");
+            var composerInstallPath = path.Combine(PathKind.PathComposerRoot, "composer.phar");
+            fileSystem.CopyFile(composerFile, composerInstallPath);
 
             // create batch execution file
-            var composerBatchPath = Path.Combine(path.GetPath(PathKind.PathComposerRoot), @"composer.bat");
-            File.WriteAllText(composerBatchPath, Constants.ComposerBatch);
+            var composerBatchPath = path.Combine(PathKind.PathComposerRoot, "composer.bat");
+            fileSystem.WriteFile(composerBatchPath, Constants.ComposerBatch);
         }
     }
 }

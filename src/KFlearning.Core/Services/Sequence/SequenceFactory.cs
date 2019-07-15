@@ -12,6 +12,7 @@ namespace KFlearning.Core.Services.Sequence
             dependencies.Enqueue(new MingwTask());
             dependencies.Enqueue(new GlutTask());
             dependencies.Enqueue(new PhpTask());
+            dependencies.Enqueue(new ComposerTask());
             dependencies.Enqueue(new HttpdTask());
             dependencies.Enqueue(new PhpMyAdminTask());
             dependencies.Enqueue(new MariaDbTask());

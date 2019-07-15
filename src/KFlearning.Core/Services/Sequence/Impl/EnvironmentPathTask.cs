@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Threading;
+﻿using System.Threading;
 using KFlearning.Core.IO;
 
 namespace KFlearning.Core.Services.Sequence.Impl
@@ -8,7 +7,7 @@ namespace KFlearning.Core.Services.Sequence.Impl
     {
         private readonly bool _install;
 
-        public string TaskName => "Add environment variables...";
+        public string TaskName => "Setup Environment Variable";
 
         public EnvironmentPathTask(bool install)
         {
@@ -17,17 +16,20 @@ namespace KFlearning.Core.Services.Sequence.Impl
 
         public void Run(InstallerDefinition definition, CancellationToken cancellation)
         {
+            var progress = definition.ResolveService<IProgressBroker>();
             var path = definition.ResolveService<IPathManager>();
 
             var paths = new[]
             {
-                Path.Combine(path.GetPath(PathKind.PathMingwRoot), "bin"),
+                path.Combine(PathKind.PathMingwRoot, "bin"),
                 path.GetPath(PathKind.PathMariaDbRoot),
                 path.GetPath(PathKind.PathApacheRoot),
                 path.GetPath(PathKind.PathVscodeRoot),
-                path.GetPath(PathKind.PathPhpRoot)
+                path.GetPath(PathKind.PathPhpRoot),
+                path.GetPath(PathKind.PathComposerRoot)
             };
 
+            progress.ReportMessage("Processing environment variables...");
             for (int i = 0; i < paths.Length; i++)
             {
                 if (_install)
@@ -38,6 +40,8 @@ namespace KFlearning.Core.Services.Sequence.Impl
                 {
                     path.RemovePathEnvironmentVar(paths[i]);
                 }
+
+                progress.ReportNodeProgress(MathHelper.CalculatePercentage(i + 1, paths.Length));
             }
         }
     }

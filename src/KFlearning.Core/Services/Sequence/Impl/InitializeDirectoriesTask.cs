@@ -1,4 +1,4 @@
-﻿using System.IO;
+﻿using System.Runtime.InteropServices;
 using System.Threading;
 using KFlearning.Core.IO;
 
@@ -17,36 +17,39 @@ namespace KFlearning.Core.Services.Sequence.Impl
 
         public void Run(InstallerDefinition definition, CancellationToken cancellation)
         {
+            var progress = definition.ResolveService<IProgressBroker>();
+            var fileSystem = definition.ResolveService<IFileSystemManager>();
             var path = definition.ResolveService<IPathManager>();
             var baseDir = path.GetPath(PathKind.PathBase);
 
+            progress.ReportNodeProgress(-1);
             if (_install)
             {
-                Directory.CreateDirectory(baseDir);
-                Directory.CreateDirectory(Path.Combine(baseDir, "bin"));
-                Directory.CreateDirectory(Path.Combine(baseDir, @"bin\httpd"));
-                Directory.CreateDirectory(Path.Combine(baseDir, @"bin\mariadb"));
-                Directory.CreateDirectory(Path.Combine(baseDir, @"bin\mingw"));
-                Directory.CreateDirectory(Path.Combine(baseDir, @"bin\php"));
-                Directory.CreateDirectory(Path.Combine(baseDir, @"bin\composer"));
-                Directory.CreateDirectory(Path.Combine(baseDir, @"bin\vscode"));
+                fileSystem.CreateDirectory(baseDir);
+                fileSystem.CreateDirectory(path.Combine(baseDir, "bin"));
+                fileSystem.CreateDirectory(path.Combine(baseDir, @"bin\httpd"));
+                fileSystem.CreateDirectory(path.Combine(baseDir, @"bin\mariadb"));
+                fileSystem.CreateDirectory(path.Combine(baseDir, @"bin\mingw"));
+                fileSystem.CreateDirectory(path.Combine(baseDir, @"bin\php"));
+                fileSystem.CreateDirectory(path.Combine(baseDir, @"bin\composer"));
+                fileSystem.CreateDirectory(path.Combine(baseDir, @"bin\vscode"));
 
-                Directory.CreateDirectory(Path.Combine(baseDir, "etc"));
-                Directory.CreateDirectory(Path.Combine(baseDir, @"etc\apache"));
-                Directory.CreateDirectory(Path.Combine(baseDir, @"etc\apache\alias"));
-                Directory.CreateDirectory(Path.Combine(baseDir, @"etc\apache\sites-enabled"));
-                Directory.CreateDirectory(Path.Combine(baseDir, @"etc\kflearning"));
-                Directory.CreateDirectory(Path.Combine(baseDir, @"etc\phpMyAdmin"));
-                Directory.CreateDirectory(Path.Combine(baseDir, @"etc\templates"));
+                fileSystem.CreateDirectory(path.Combine(baseDir, "etc"));
+                fileSystem.CreateDirectory(path.Combine(baseDir, @"etc\apache"));
+                fileSystem.CreateDirectory(path.Combine(baseDir, @"etc\apache\alias"));
+                fileSystem.CreateDirectory(path.Combine(baseDir, @"etc\apache\sites-enabled"));
+                fileSystem.CreateDirectory(path.Combine(baseDir, @"etc\kflearning"));
+                fileSystem.CreateDirectory(path.Combine(baseDir, @"etc\phpMyAdmin"));
+                fileSystem.CreateDirectory(path.Combine(baseDir, @"etc\templates"));
 
-                Directory.CreateDirectory(Path.Combine(baseDir, "ide"));
-                Directory.CreateDirectory(Path.Combine(baseDir, "repos"));
+                fileSystem.CreateDirectory(path.Combine(baseDir, "ide"));
+                fileSystem.CreateDirectory(path.Combine(baseDir, "repos"));
             }
             else
             {
-                path.RecursiveDelete(Path.Combine(baseDir, "bin"), cancellation);
-                path.RecursiveDelete(Path.Combine(baseDir, "etc"), cancellation);
-                path.RecursiveDelete(Path.Combine(baseDir, "ide"), cancellation);
+                fileSystem.DeleteDirectory(path.Combine(baseDir, "bin"), cancellation);
+                fileSystem.DeleteDirectory(path.Combine(baseDir, "etc"), cancellation);
+                fileSystem.DeleteDirectory(path.Combine(baseDir, "ide"), cancellation);
             }
         }
     }
