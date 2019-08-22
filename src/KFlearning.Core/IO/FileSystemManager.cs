@@ -1,7 +1,23 @@
-﻿using System;
+﻿// 
+//  PROJECT  :   KFlearning
+//  FILENAME :   FileSystemManager.cs
+//  AUTHOR   :   Fahmi Noor Fiqri
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
+// 
+//  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
+
+#region
+
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using IWshRuntimeLibrary;
+using File = System.IO.File;
+
+#endregion
 
 namespace KFlearning.Core.IO
 {
@@ -14,7 +30,8 @@ namespace KFlearning.Core.IO
 
         public string FindDirectory(string searchPath, string directoryName)
         {
-            return Directory.EnumerateDirectories(searchPath, directoryName, SearchOption.TopDirectoryOnly).FirstOrDefault();
+            return Directory.EnumerateDirectories(searchPath, directoryName, SearchOption.TopDirectoryOnly)
+                .FirstOrDefault();
         }
 
         public void CreateDirectory(string path)
@@ -88,7 +105,7 @@ namespace KFlearning.Core.IO
                 // ignored
             }
         }
-        
+
         public void CopyDirectory(string source, string destination, CancellationToken token)
         {
             try
@@ -155,9 +172,9 @@ namespace KFlearning.Core.IO
         public void CreateShortcutOnDesktop(string linkName, string description, string path)
         {
             object shDesktop = "Desktop";
-            var shell = new IWshRuntimeLibrary.WshShell();
+            var shell = new WshShell();
             string shortcutAddress = shell.SpecialFolders.Item(ref shDesktop) + $@"\{linkName}.lnk";
-            var shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(shortcutAddress);
+            var shortcut = (IWshShortcut) shell.CreateShortcut(shortcutAddress);
             shortcut.Description = description;
             shortcut.TargetPath = path;
             shortcut.Save();

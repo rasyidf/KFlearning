@@ -1,15 +1,29 @@
-﻿using System;
+﻿// 
+//  PROJECT  :   KFlearning
+//  FILENAME :   PathManager.cs
+//  AUTHOR   :   Fahmi Noor Fiqri
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
+// 
+//  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
+
+#region
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+
+#endregion
 
 namespace KFlearning.Core.IO
 {
     public class PathManager : IPathManager
     {
         #region Fields
-        
+
         private const string EnvironmentVariablePath = "path";
 
         private static readonly char[] InvalidFileNameChars = Path.GetInvalidFileNameChars();
@@ -22,7 +36,7 @@ namespace KFlearning.Core.IO
         #region Public Methods
 
         #region Path Manipulations
-        
+
         public string Combine(PathKind path, params string[] parts)
         {
             var aggregate = new List<string>();
@@ -65,7 +79,7 @@ namespace KFlearning.Core.IO
         public string StripInvalidFileName(string path)
         {
             return InvalidFileNameChars.Aggregate(path, (current, x) => current.Replace(x.ToString(), string.Empty));
-        } 
+        }
 
         public string EnsureForwardSlash(string path)
         {
@@ -117,7 +131,7 @@ namespace KFlearning.Core.IO
 
             parts.RemoveAll(x => x.Contains(path));
             SetEnvironmentPath(parts);
-        }  
+        }
 
         #endregion
 
@@ -127,9 +141,10 @@ namespace KFlearning.Core.IO
 
         private static List<string> GetEnvironmentPath()
         {
-            var originalPaths = Environment.GetEnvironmentVariable(EnvironmentVariablePath, EnvironmentVariableTarget.User);
+            var originalPaths =
+                Environment.GetEnvironmentVariable(EnvironmentVariablePath, EnvironmentVariableTarget.User);
             if (originalPaths == null) return null;
-            return new List<string>(originalPaths.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries));
+            return new List<string>(originalPaths.Split(new[] {";"}, StringSplitOptions.RemoveEmptyEntries));
         }
 
         private static void SetEnvironmentPath(IEnumerable<string> paths)
@@ -175,7 +190,8 @@ namespace KFlearning.Core.IO
 
                 // app-specific executable paths
                 _cachedPaths.Add(PathKind.ExeHttpd, Path.Combine(_cachedPaths[PathKind.PathApacheRoot], "httpd.exe"));
-                _cachedPaths.Add(PathKind.ExeMariadb, Path.Combine(_cachedPaths[PathKind.PathMariaDbRoot], "mysqld.exe"));
+                _cachedPaths.Add(PathKind.ExeMariadb,
+                    Path.Combine(_cachedPaths[PathKind.PathMariaDbRoot], "mysqld.exe"));
                 _cachedPaths.Add(PathKind.ExeVscode, Path.Combine(_cachedPaths[PathKind.PathVscodeRoot], "Code.exe"));
 
                 // project templates

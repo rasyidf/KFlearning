@@ -1,12 +1,18 @@
 ﻿// 
 //  PROJECT  :   KFlearning
-//  FILENAME :   ApacheServer.cs
+//  FILENAME :   ApacheHttpd.cs
 //  AUTHOR   :   Fahmi Noor Fiqri
-//  NPM      :   065118116
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
 // 
 //  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
+
+#region
 
 using KFlearning.Core.IO;
+
+#endregion
 
 namespace KFlearning.Core.Services
 {
@@ -16,7 +22,7 @@ namespace KFlearning.Core.Services
         private readonly IProcessManager _processManager;
 
         public bool IsRunning => _processManager.IsRunning(Constants.HttpdProcessName);
-        
+
         public ApacheHttpd(IProcessManager processManager, IPathManager pathManager)
         {
             _processManager = processManager;

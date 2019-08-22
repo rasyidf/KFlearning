@@ -2,20 +2,24 @@
 //  PROJECT  :   KFlearning
 //  FILENAME :   ProjectManager.cs
 //  AUTHOR   :   Fahmi Noor Fiqri
-//  NPM      :   065118116
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
 // 
 //  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
 
-using System;
+#region
+
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using ICSharpCode.SharpZipLib.Zip;
 using KFlearning.Core.DAL;
 using KFlearning.Core.IO;
 using LiteDB;
 using Newtonsoft.Json;
+
+#endregion
 
 namespace KFlearning.Core.Services
 {
@@ -25,8 +29,9 @@ namespace KFlearning.Core.Services
         private readonly IProjectHandler _projectHandler;
         private readonly IFileSystemManager _fileSystem;
         private readonly IPathManager _pathManager;
-        
-        public ProjectManager(IPathManager pathManager, IDatabaseContext database, IProjectHandler projectHandler, IFileSystemManager fileSystem)
+
+        public ProjectManager(IPathManager pathManager, IDatabaseContext database, IProjectHandler projectHandler,
+            IFileSystemManager fileSystem)
         {
             _pathManager = pathManager;
             _database = database;
@@ -54,7 +59,7 @@ namespace KFlearning.Core.Services
                 Path = path
             };
 
-            
+
             _database.Projects.Insert(project);
         }
 

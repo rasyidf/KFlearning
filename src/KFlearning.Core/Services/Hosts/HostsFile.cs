@@ -2,15 +2,21 @@
 //  PROJECT  :   KFlearning
 //  FILENAME :   HostsFile.cs
 //  AUTHOR   :   Fahmi Noor Fiqri
-//  NPM      :   065118116
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
 // 
 //  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
+
+#region
 
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using KFlearning.Core.IO;
+
+#endregion
 
 namespace KFlearning.Core.Services
 {

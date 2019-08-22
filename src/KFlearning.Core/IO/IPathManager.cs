@@ -2,11 +2,11 @@
 //  PROJECT  :   KFlearning
 //  FILENAME :   IPathManager.cs
 //  AUTHOR   :   Fahmi Noor Fiqri
-//  NPM      :   065118116
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
 // 
 //  This file is part of KFlearning, licensed under MIT license.
-
-using System.Threading;
+//  See this code in repository URL above!
 
 namespace KFlearning.Core.IO
 {
@@ -25,7 +25,7 @@ namespace KFlearning.Core.IO
 
         void LaunchUri(string uri);
         void LaunchExplorer(string path);
-        
+
         void AddPathEnvironmentVar(string path);
         void RemovePathEnvironmentVar(string path);
     }

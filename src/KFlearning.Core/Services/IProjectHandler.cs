@@ -8,7 +8,11 @@
 //  This file is part of KFlearning, licensed under MIT license.
 //  See this code in repository URL above!
 
+#region
+
 using KFlearning.Core.DAL;
+
+#endregion
 
 namespace KFlearning.Core.Services
 {

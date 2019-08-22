@@ -1,15 +1,29 @@
-﻿using System;
+﻿// 
+//  PROJECT  :   KFlearning
+//  FILENAME :   TaskGraph.cs
+//  AUTHOR   :   Fahmi Noor Fiqri
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
+// 
+//  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
+
+#region
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using KFlearning.Core.IO;
+
+#endregion
 
 namespace KFlearning.Core.Services.Installer
 {
     public class TaskGraph : ITaskGraph
     {
         #region Fields
-        
+
         private readonly IProgressBroker _progressBroker;
         private readonly IPathManager _pathManager;
 
@@ -21,13 +35,13 @@ namespace KFlearning.Core.Services.Installer
         #endregion
 
         #region Properties
-        
+
         public bool IsRunning => _tokenSource != null;
 
         #endregion
 
         #region Constructor
-        
+
         public TaskGraph(IProgressBroker progressBroker, IPathManager pathManager)
         {
             _progressBroker = progressBroker;
@@ -80,7 +94,7 @@ namespace KFlearning.Core.Services.Installer
 
                     _progressBroker.ReportMessage("[ RUNNING ] " + node.TaskName);
                     node.Run(_definition, _tokenSource.Token);
-                    
+
                     _progressBroker.ReportMessage("[ FINISHED ] " + node.TaskName);
                     _progressBroker.ReportSequenceProgress(MathHelper.CalculatePercentage(++count, total));
                 }

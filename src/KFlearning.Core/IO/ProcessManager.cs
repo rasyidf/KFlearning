@@ -2,13 +2,18 @@
 //  PROJECT  :   KFlearning
 //  FILENAME :   ProcessManager.cs
 //  AUTHOR   :   Fahmi Noor Fiqri
-//  NPM      :   065118116
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
 // 
 //  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
 
-using System;
+#region
+
 using System.Diagnostics;
 using System.Linq;
+
+#endregion
 
 namespace KFlearning.Core.IO
 {

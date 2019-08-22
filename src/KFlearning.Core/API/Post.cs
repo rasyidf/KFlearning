@@ -2,13 +2,19 @@
 //  PROJECT  :   KFlearning
 //  FILENAME :   Post.cs
 //  AUTHOR   :   Fahmi Noor Fiqri
-//  NPM      :   065118116
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
 // 
 //  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
+
+#region
 
 using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+
+#endregion
 
 namespace KFlearning.Core.API
 {
@@ -16,7 +22,8 @@ namespace KFlearning.Core.API
     {
         [JsonProperty("id")] public int Id { get; set; }
 
-        [JsonProperty("date"), JsonConverter(typeof(UnixDateTimeConverter))] 
+        [JsonProperty("date")]
+        [JsonConverter(typeof(UnixDateTimeConverter))]
         public DateTime Date { get; set; }
 
         [JsonProperty("title")] public string Title { get; set; }

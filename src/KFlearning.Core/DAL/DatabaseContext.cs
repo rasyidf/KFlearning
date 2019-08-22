@@ -2,11 +2,17 @@
 //  PROJECT  :   KFlearning
 //  FILENAME :   DatabaseContext.cs
 //  AUTHOR   :   Fahmi Noor Fiqri
-//  NPM      :   065118116
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
 // 
 //  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
+
+#region
 
 using LiteDB;
+
+#endregion
 
 namespace KFlearning.Core.DAL
 {
@@ -22,7 +28,7 @@ namespace KFlearning.Core.DAL
         public LiteStorage Storage => Database.FileStorage;
 
         public LiteCollection<Article> Articles => Database.GetCollection<Article>();
-        
+
         public LiteCollection<Project> Projects => Database.GetCollection<Project>();
 
         public LiteCollection<Series> Series => Database.GetCollection<Series>();

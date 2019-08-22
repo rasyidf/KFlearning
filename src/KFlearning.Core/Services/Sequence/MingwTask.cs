@@ -1,6 +1,20 @@
-﻿using System.Threading;
+﻿// 
+//  PROJECT  :   KFlearning
+//  FILENAME :   MingwTask.cs
+//  AUTHOR   :   Fahmi Noor Fiqri
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
+// 
+//  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
+
+#region
+
+using System.Threading;
 using KFlearning.Core.IO;
 using KFlearning.Core.Services.Installer;
+
+#endregion
 
 namespace KFlearning.Core.Services.Sequence
 {

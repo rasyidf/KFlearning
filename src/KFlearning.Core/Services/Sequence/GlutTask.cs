@@ -1,13 +1,25 @@
-﻿using System.Threading;
+﻿// 
+//  PROJECT  :   KFlearning
+//  FILENAME :   GlutTask.cs
+//  AUTHOR   :   Fahmi Noor Fiqri
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
+// 
+//  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
+
+#region
+
+using System.Threading;
 using KFlearning.Core.IO;
 using KFlearning.Core.Services.Installer;
+
+#endregion
 
 namespace KFlearning.Core.Services.Sequence
 {
     public class GlutTask : ITaskNode
     {
-        
-
         public string TaskName => "GLUT Installation";
 
         public void Run(InstallDefinition definition, CancellationToken cancellation)
@@ -15,7 +27,7 @@ namespace KFlearning.Core.Services.Sequence
             var progress = definition.ResolveService<IProgressBroker>();
             var fileSystem = definition.ResolveService<IFileSystemManager>();
             var path = definition.ResolveService<IPathManager>();
-            
+
             var root = path.GetPath(PathKind.PathMingwRoot);
             var extractPath = path.GetPathForTemp();
 
@@ -26,7 +38,7 @@ namespace KFlearning.Core.Services.Sequence
             {
                 extractor.ExtractAll(glutZipPath, extractPath);
             }
-            
+
             // install glut to MinGW
             progress.ReportNodeProgress(-1);
             progress.ReportMessage("Installing freeglut to MinGW...");

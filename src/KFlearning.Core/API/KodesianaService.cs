@@ -2,9 +2,13 @@
 //  PROJECT  :   KFlearning
 //  FILENAME :   KodesianaService.cs
 //  AUTHOR   :   Fahmi Noor Fiqri
-//  NPM      :   065118116
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
 // 
 //  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
+
+#region
 
 using System;
 using System.Collections.Generic;
@@ -14,6 +18,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+
+#endregion
 
 namespace KFlearning.Core.API
 {
@@ -38,7 +44,7 @@ namespace KFlearning.Core.API
                 return false;
             }
         }
-        
+
         public async Task<IEnumerable<Post>> GetPostsAsync(string series = null)
         {
             var uri = CreateUri(string.IsNullOrEmpty(series) ? "/posts" : "/posts?series=" + series);
@@ -49,7 +55,9 @@ namespace KFlearning.Core.API
 
         public async Task<IEnumerable<Post>> FindPostAsync(string title, string series = null)
         {
-            var uri = CreateUri(string.IsNullOrEmpty(series) ? "/posts/find?q=" + title : $"/posts/find?q={title}&series={series}");
+            var uri = CreateUri(string.IsNullOrEmpty(series)
+                ? "/posts/find?q=" + title
+                : $"/posts/find?q={title}&series={series}");
             var response = await Client.GetStreamAsync(uri);
 
             return DeserializeStream<List<Post>>(response);
@@ -70,7 +78,7 @@ namespace KFlearning.Core.API
 
         private static T DeserializeStream<T>(Stream stream)
         {
-            if (stream == null) return default(T);
+            if (stream == null) return default;
             using (var reader = new StreamReader(stream))
             using (var jsonReader = new JsonTextReader(reader))
             {

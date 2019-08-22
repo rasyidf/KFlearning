@@ -1,4 +1,14 @@
-﻿namespace KFlearning.Core.Services.Installer
+﻿// 
+//  PROJECT  :   KFlearning
+//  FILENAME :   IProgressBroker.cs
+//  AUTHOR   :   Fahmi Noor Fiqri
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
+// 
+//  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
+
+namespace KFlearning.Core.Services.Installer
 {
     public interface IProgressBroker
     {
