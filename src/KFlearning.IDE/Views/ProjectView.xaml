@@ -28,7 +28,8 @@
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding CreateCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="Plus" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="{x:Static resources:Texts.ActionCreateProject}" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionCreateProject}"
+                               Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding DeleteCommand}">
@@ -59,6 +60,33 @@
 
         <ListView x:Name="ProjectListView" Grid.Row="2" ItemTemplate="{StaticResource ProjectItemTemplate}"
                   ItemsSource="{Binding Projects}" SelectedItem="{Binding SelectedProject}">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Hapus" Command="{Binding DeleteCommand}">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="Delete" Style="{StaticResource ContextMenuPackIconStyle}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Ekspor" Command="{Binding ExportCommand}">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="Export" Style="{StaticResource ContextMenuPackIconStyle}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="Buat Alias" Command="{Binding CreateAliasCommand}">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="AutoFix"
+                                                        Style="{StaticResource ContextMenuPackIconStyle}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Hapus Alias" Command="{Binding DeleteAliasCommand}">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="DeleteEmpty"
+                                                        Style="{StaticResource ContextMenuPackIconStyle}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </ListView.ContextMenu>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick" SourceObject="{Binding ElementName=ProjectListView}">
                     <i:InvokeCommandAction Command="{Binding ProjectDoubleClickCommand}" />

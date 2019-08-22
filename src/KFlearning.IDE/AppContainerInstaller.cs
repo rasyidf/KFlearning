@@ -2,20 +2,22 @@
 //  PROJECT  :   KFlearning
 //  FILENAME :   AppContainerInstaller.cs
 //  AUTHOR   :   Fahmi Noor Fiqri
-//  NPM      :   065118116
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
 // 
 //  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
+
+#region
 
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using KFlearning.Core.API;
-using KFlearning.Core.DAL;
-using KFlearning.Core.IO;
-using KFlearning.Core.Services;
 using KFlearning.IDE.ApplicationServices;
 using KFlearning.IDE.ViewModels;
 using KFlearning.IDE.Views;
+
+#endregion
 
 namespace KFlearning.IDE
 {
@@ -26,16 +28,7 @@ namespace KFlearning.IDE
             // Register Views and ViewModels
             container.Register(
                 // common core
-                Classes.FromAssemblyNamed("KFlearning.Core").InSameNamespaceAs<IKodesianaService>()
-                    .WithServiceDefaultInterfaces().LifestyleSingleton(),
-                Classes.FromAssemblyNamed("KFlearning.Core").InSameNamespaceAs<IDatabaseContext>()
-                    .WithServiceDefaultInterfaces().LifestyleSingleton(),
-                Classes.FromAssemblyNamed("KFlearning.Core").InSameNamespaceAs<ITaskGraph>()
-                    .WithServiceDefaultInterfaces().LifestyleSingleton(),
-                Classes.FromAssemblyNamed("KFlearning.Core").InSameNamespaceAs<IProjectManager>()
-                    .WithServiceDefaultInterfaces().LifestyleSingleton(),
-                Classes.FromAssemblyNamed("KFlearning.Core").InSameNamespaceAs<IPathManager>()
-                    .WithServiceDefaultInterfaces().LifestyleSingleton(),
+                Classes.FromAssemblyNamed("KFlearning.Core").Pick().WithServiceAllInterfaces().LifestyleSingleton(),
 
                 // application specific
                 Classes.FromThisAssembly().InSameNamespaceAs<ShellView>().LifestyleTransient(),

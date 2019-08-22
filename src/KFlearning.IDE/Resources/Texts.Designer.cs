@@ -241,6 +241,42 @@ namespace KFlearning.IDE.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alias sudah ada untuk project ini..
+        /// </summary>
+        public static string AliasAlreadyExists {
+            get {
+                return ResourceManager.GetString("AliasAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Membuat virtual host dan alias....
+        /// </summary>
+        public static string AliasCreatingMessage {
+            get {
+                return ResourceManager.GetString("AliasCreatingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tidak ada alias untuk project ini..
+        /// </summary>
+        public static string AliasNotExists {
+            get {
+                return ResourceManager.GetString("AliasNotExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Menghapus virtual host dan alias....
+        /// </summary>
+        public static string AliasRemovingMessage {
+            get {
+                return ResourceManager.GetString("AliasRemovingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to E-learning terpadu by Kodesiana.com.
         /// </summary>
         public static string AppDescription {
@@ -480,6 +516,15 @@ namespace KFlearning.IDE.Resources {
         public static string ServerLogText {
             get {
                 return ResourceManager.GetString("ServerLogText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual Host Alias.
+        /// </summary>
+        public static string TitleAlias {
+            get {
+                return ResourceManager.GetString("TitleAlias", resourceCulture);
             }
         }
         

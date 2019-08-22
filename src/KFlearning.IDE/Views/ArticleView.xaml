@@ -25,8 +25,8 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" FontSize="48" Margin="{StaticResource ButtonMargin}" 
-                   Text="{x:Static resources:Texts.ViewTitleArticles}"/>
+        <TextBlock Grid.Row="0" FontSize="48" Margin="{StaticResource ButtonMargin}"
+                   Text="{x:Static resources:Texts.ViewTitleArticles}" />
         <DockPanel Grid.Row="1" Margin="0,20"
                    IsEnabled="{Binding CommandIsLoading, Converter={StaticResource InvertBoolConverter}}">
             <ComboBox Margin="{StaticResource ButtonMargin}" Width="150" DockPanel.Dock="Left"
@@ -38,7 +38,8 @@
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding RefreshCommand}" DockPanel.Dock="Left">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="CloudSearch" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="{x:Static resources:Texts.ActionArticleRefresh}" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionArticleRefresh}"
+                               Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
             <TextBox HorizontalAlignment="Right" DockPanel.Dock="Right" Width="200"
@@ -64,8 +65,8 @@
         <mah:ProgressRing Grid.Row="2" IsActive="{Binding CommandIsLoading}" VerticalAlignment="Center"
                           HorizontalAlignment="Center" />
         <mah:ToggleSwitch Grid.Row="3" Margin="0,10,0,0" HorizontalAlignment="Left"
-                          IsChecked="{Binding OnlineIsChecked}" CheckChangedCommand="{Binding OnlineChangedCommand}"
-                          IsEnabled="{Binding CommandIsLoading, Converter={StaticResource InvertBoolConverter}}" 
+                          IsChecked="{Binding OfflineIsChecked}" CheckChangedCommand="{Binding OnlineChangedCommand}"
+                          IsEnabled="{Binding CommandIsLoading, Converter={StaticResource InvertBoolConverter}}"
                           OnLabel="{x:Static resources:Texts.CueOnlineMode}"
                           OffLabel="{x:Static resources:Texts.CueOnlineMode}" />
     </Grid>

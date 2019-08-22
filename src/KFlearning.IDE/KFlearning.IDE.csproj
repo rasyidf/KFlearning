@@ -58,7 +58,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>kflearning-logo.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\kflearning-logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
@@ -106,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Resources\Styles\ContextMenuPackIconStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Styles\ProjectItemTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -138,7 +142,6 @@
     <Compile Include="ApplicationServices\ApplicationHelpers.cs" />
     <Compile Include="ApplicationServices\IApplicationHelpers.cs" />
     <Compile Include="ApplicationServices\MVVM\IAutoNotifyPropertyChanged.cs" />
-    <Compile Include="ApplicationServices\MVVM\IDialog.cs" />
     <Compile Include="ApplicationServices\MVVM\NotifyPropertChangedInterceptor.cs" />
     <Compile Include="ApplicationServices\MVVM\NotifyChangedAttribute.cs" />
     <Compile Include="ApplicationServices\MVVM\WebBrowserUtility.cs" />
@@ -146,17 +149,13 @@
     <Compile Include="ApplicationServices\MVVM\PropertyChangedBase.cs" />
     <Compile Include="ApplicationServices\MVVM\ViewModelLocator.cs" />
     <Compile Include="Models\ArticleItem.cs" />
-    <Compile Include="Models\CreateProjectState.cs" />
-    <Compile Include="Models\DialogResultState.cs" />
     <Compile Include="Models\ProjectItem.cs" />
-    <Compile Include="Models\ProjectTypeItem.cs" />
     <Compile Include="Models\SeriesItem.cs" />
     <Compile Include="Models\ServerLogItem.cs" />
     <Compile Include="Resources\Converters\BoolToStatusKindConverter.cs" />
     <Compile Include="Resources\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Resources\Converters\InvertBoolConverter.cs" />
     <Compile Include="Resources\Converters\ProjectPathConverter.cs" />
-    <Compile Include="Resources\Converters\ProjectTypeToPackIconMaterialKindConverter.cs" />
     <Compile Include="Resources\Strings.Designer.cs">
       <DependentUpon>Strings.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -170,7 +169,6 @@
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\WebServerViewModel.cs" />
     <Compile Include="ViewModels\ArticleViewModel.cs" />
-    <Compile Include="ViewModels\CreateProjectViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="ViewModels\ReaderViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
@@ -190,19 +188,12 @@
       <DependentUpon>ShellView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\CreateProjectView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\ProjectView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Views\CreateProjectView.xaml.cs">
-      <DependentUpon>CreateProjectView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ProjectView.xaml.cs">
       <DependentUpon>ProjectView.xaml</DependentUpon>
     </Compile>
@@ -248,9 +239,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\kflearning-logo.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="kflearning-logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

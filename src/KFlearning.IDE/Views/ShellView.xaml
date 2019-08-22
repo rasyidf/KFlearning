@@ -21,13 +21,15 @@
             <Button Command="{Binding WebCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Width="24" Height="24" Kind="Web" />
-                    <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Text="{x:Static resources:Texts.ActionOpenWeb}" />
+                    <TextBlock Margin="4 0 0 0" VerticalAlignment="Center"
+                               Text="{x:Static resources:Texts.ActionOpenWeb}" />
                 </StackPanel>
             </Button>
             <Button Command="{Binding GitHubCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Width="24" Height="24" Kind="GithubCircle" />
-                    <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Text="{x:Static resources:Texts.ActionOpenGithub}" />
+                    <TextBlock Margin="4 0 0 0" VerticalAlignment="Center"
+                               Text="{x:Static resources:Texts.ActionOpenGithub}" />
                 </StackPanel>
             </Button>
         </mah:WindowCommands>

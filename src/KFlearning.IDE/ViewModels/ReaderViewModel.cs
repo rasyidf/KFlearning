@@ -2,10 +2,15 @@
 //  PROJECT  :   KFlearning
 //  FILENAME :   ReaderViewModel.cs
 //  AUTHOR   :   Fahmi Noor Fiqri
-//  NPM      :   065118116
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
 // 
 //  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
 
+#region
+
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -14,6 +19,8 @@ using KFlearning.Core.DAL;
 using KFlearning.IDE.ApplicationServices;
 using KFlearning.IDE.Models;
 using KFlearning.IDE.Resources;
+
+#endregion
 
 namespace KFlearning.IDE.ViewModels
 {
@@ -35,7 +42,7 @@ namespace KFlearning.IDE.ViewModels
 
             LoadPage();
         }
-        
+
         #endregion
 
         #region Fields
@@ -49,13 +56,13 @@ namespace KFlearning.IDE.ViewModels
         #endregion
 
         #region Properties
-        
+
         public ICommand WindowClosingCommand { get; set; }
 
         public ICommand OpenWebCommand { get; set; }
 
         public ICommand OpenSourceCommand { get; set; }
-        
+
         [NotifyChanged] public virtual string Title { get; set; }
 
         [NotifyChanged] public virtual string PageSource { get; set; }
@@ -78,9 +85,9 @@ namespace KFlearning.IDE.ViewModels
 
         private void OpenSource_Command(object obj)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
-        
+
         #endregion
 
         #region Private Methods
@@ -123,7 +130,7 @@ namespace KFlearning.IDE.ViewModels
             if (SavedIsChecked)
             {
                 if (!(_item.Item is Post post)) return;
-                
+
                 // add series, if not already added
                 if (!_database.Series.Exists(x => x.Title == post.Series))
                 {
@@ -137,7 +144,7 @@ namespace KFlearning.IDE.ViewModels
                     Series = post.Series,
                     Level = post.Level,
                     Title = post.Title,
-                    Url = post.Url,
+                    Url = post.Url
                 };
                 var id = _database.Articles.Insert(item);
 

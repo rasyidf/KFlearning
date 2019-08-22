@@ -11,8 +11,6 @@
                     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
                     <converters:InvertBoolConverter x:Key="InvertBoolConverter" />
                     <converters:ProjectPathConverter x:Key="ProjectPathConverter" />
-                    <converters:ProjectTypeToPackIconMaterialKindConverter
-                        x:Key="ProjectTypeToPackIconMaterialKindConverter" />
                 </ResourceDictionary>
 
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
@@ -24,6 +22,7 @@
 
                 <ResourceDictionary Source="Resources/Styles/ArticleItemTemplate.xaml" />
                 <ResourceDictionary Source="Resources/Styles/ProjectItemTemplate.xaml" />
+                <ResourceDictionary Source="Resources/Styles/ContextMenuPackIconStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

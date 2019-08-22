@@ -285,4 +285,19 @@
   <data name="ServerLogText" xml:space="preserve">
     <value>Log server:</value>
   </data>
+  <data name="TitleAlias" xml:space="preserve">
+    <value>Virtual Host Alias</value>
+  </data>
+  <data name="AliasAlreadyExists" xml:space="preserve">
+    <value>Alias sudah ada untuk project ini.</value>
+  </data>
+  <data name="AliasCreatingMessage" xml:space="preserve">
+    <value>Membuat virtual host dan alias...</value>
+  </data>
+  <data name="AliasNotExists" xml:space="preserve">
+    <value>Tidak ada alias untuk project ini.</value>
+  </data>
+  <data name="AliasRemovingMessage" xml:space="preserve">
+    <value>Menghapus virtual host dan alias...</value>
+  </data>
 </root>

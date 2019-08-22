@@ -2,13 +2,19 @@
 //  PROJECT  :   KFlearning
 //  FILENAME :   NotifyPropertChangedInterceptor.cs
 //  AUTHOR   :   Fahmi Noor Fiqri
-//  NPM      :   065118116
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
 // 
 //  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
+
+#region
 
 using System;
 using System.Reflection;
 using Castle.DynamicProxy;
+
+#endregion
 
 namespace KFlearning.IDE.ApplicationServices
 {

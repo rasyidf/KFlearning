@@ -43,7 +43,8 @@
                                 <Setter Property="HorizontalAlignment" Value="Center" />
                                 <Setter Property="Text" Value="{x:Static resources:Texts.ActionStartServer}" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Path=IsChecked, ElementName=ServerButton}" Value="True">
+                                    <DataTrigger Binding="{Binding Path=IsChecked, ElementName=ServerButton}"
+                                                 Value="True">
                                         <Setter Property="Text" Value="{x:Static resources:Texts.ActionStopServer}" />
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -61,7 +62,8 @@
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding PhpMyAdminCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="Database" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="{x:Static resources:Texts.ActionPhpmyadmin}" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionPhpmyadmin}"
+                               Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding WorkspaceCommand}">

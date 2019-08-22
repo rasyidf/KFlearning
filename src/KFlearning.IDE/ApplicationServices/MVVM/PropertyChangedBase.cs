@@ -2,14 +2,20 @@
 //  PROJECT  :   KFlearning
 //  FILENAME :   PropertyChangedBase.cs
 //  AUTHOR   :   Fahmi Noor Fiqri
-//  NPM      :   065118116
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
 // 
 //  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
+
+#region
 
 using System;
 using System.ComponentModel;
 using System.Windows.Threading;
 using Castle.Core.Logging;
+
+#endregion
 
 namespace KFlearning.IDE.ApplicationServices
 {

@@ -2,11 +2,17 @@
 //  PROJECT  :   KFlearning
 //  FILENAME :   ProjectItem.cs
 //  AUTHOR   :   Fahmi Noor Fiqri
-//  NPM      :   065118116
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
 // 
 //  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
+
+#region
 
 using KFlearning.Core.DAL;
+
+#endregion
 
 namespace KFlearning.IDE.Models
 {
@@ -16,8 +22,6 @@ namespace KFlearning.IDE.Models
         {
             Item = project;
         }
-
-        public ProjectType Type => Item.Type;
 
         public string Title => Item.Title;
 

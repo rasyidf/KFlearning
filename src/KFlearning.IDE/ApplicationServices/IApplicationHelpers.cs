@@ -2,14 +2,19 @@
 //  PROJECT  :   KFlearning
 //  FILENAME :   IApplicationHelpers.cs
 //  AUTHOR   :   Fahmi Noor Fiqri
-//  NPM      :   065118116
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
 // 
 //  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
 
-using System;
+#region
+
 using System.Threading.Tasks;
 using KFlearning.IDE.Models;
 using MahApps.Metro.Controls.Dialogs;
+
+#endregion
 
 namespace KFlearning.IDE.ApplicationServices
 {
@@ -19,8 +24,9 @@ namespace KFlearning.IDE.ApplicationServices
         void OpenUrl(string url, string campaign);
 
         void ShowReaderWindow(ArticleItem item);
-        Task<DialogResultState> CreateNewProjectDialog();
+        Task<string> CreateNewProjectDialog();
         Task<ProgressDialogController> CreateProgressDialog(string title, string message);
+
         Task<MessageDialogResult> CreateMessageDialog(string title, string message,
             MessageDialogStyle style = MessageDialogStyle.Affirmative);
     }

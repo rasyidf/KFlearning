@@ -2,9 +2,13 @@
 //  PROJECT  :   KFlearning
 //  FILENAME :   ApplicationHelpers.cs
 //  AUTHOR   :   Fahmi Noor Fiqri
-//  NPM      :   065118116
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
 // 
 //  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
+
+#region
 
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,6 +21,8 @@ using KFlearning.IDE.ViewModels;
 using KFlearning.IDE.Views;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+
+#endregion
 
 namespace KFlearning.IDE.ApplicationServices
 {
@@ -32,19 +38,10 @@ namespace KFlearning.IDE.ApplicationServices
             OpenUrl(url + Strings.AnalyticsCampaignQuery + campaign);
         }
 
-        public async Task<DialogResultState> CreateNewProjectDialog()
+        public async Task<string> CreateNewProjectDialog()
         {
             var window = (MetroWindow) Application.Current.MainWindow;
-            var dialog = new CustomDialog();
-            var view = App.Container.Resolve<CreateProjectView>();
-            var vm = (IDialog) view.DataContext;
-            vm.DialogInstance = dialog;
-            dialog.Content = view;
-
-            await window.ShowMetroDialogAsync(dialog);
-            await dialog.WaitUntilUnloadedAsync();
-
-            return new DialogResultState(vm.DialogResult, vm.State);
+            return await window.ShowInputAsync("Buat Project baru", "Nama project");
         }
 
         public void ShowReaderWindow(ArticleItem item)
@@ -55,7 +52,7 @@ namespace KFlearning.IDE.ApplicationServices
             };
             var view = App.Container.Resolve<ReaderView>();
             view.DataContext = App.Container.Resolve<ReaderViewModel>(Arguments.FromNamed(args));
-            
+
             view.Show();
         }
 

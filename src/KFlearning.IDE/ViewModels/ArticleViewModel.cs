@@ -2,9 +2,13 @@
 //  PROJECT  :   KFlearning
 //  FILENAME :   ArticleViewModel.cs
 //  AUTHOR   :   Fahmi Noor Fiqri
-//  NPM      :   065118116
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
 // 
 //  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
+
+#region
 
 using System;
 using System.Collections.Generic;
@@ -16,6 +20,8 @@ using KFlearning.Core.API;
 using KFlearning.Core.DAL;
 using KFlearning.IDE.ApplicationServices;
 using KFlearning.IDE.Models;
+
+#endregion
 
 namespace KFlearning.IDE.ViewModels
 {
@@ -65,7 +71,7 @@ namespace KFlearning.IDE.ViewModels
 
         [NotifyChanged] public virtual SeriesItem SelectedSeries { get; set; }
 
-        [NotifyChanged] public virtual bool OnlineIsChecked { get; set; }
+        [NotifyChanged] public virtual bool OfflineIsChecked { get; set; }
 
         [NotifyChanged] public virtual string SearchText { get; set; }
 
@@ -80,12 +86,32 @@ namespace KFlearning.IDE.ViewModels
 
         private async void Online_Command(object obj)
         {
-            await LoadData();
+            try
+            {
+                CommandIsLoading = true;
+                await LoadData();
+            }
+            catch (Exception)
+            {
+                await _helpers.CreateMessageDialog("Error", "Maaf, tidak dapat memuat daftar artikel. Coba lagi.");
+            }
+
+            CommandIsLoading = false;
         }
 
         private async void Refresh_Command(object obj)
         {
-            await LoadData();
+            try
+            {
+                CommandIsLoading = true;
+                await LoadData();
+            }
+            catch (Exception ex)
+            {
+                await _helpers.CreateMessageDialog("Error", "Maaf, tidak dapat memuat daftar artikel. Coba lagi.");
+            }
+
+            CommandIsLoading = false;
         }
 
         private async void Search_Command(object obj)
@@ -95,12 +121,11 @@ namespace KFlearning.IDE.ViewModels
                 CommandIsLoading = true;
 
                 List<ArticleItem> articles;
-                if (OnlineIsChecked)
+                if (OfflineIsChecked)
                 {
                     articles = _database.Articles
                         .Find(x => SelectedSeries.Title == x.Series && x.Title.Contains(SearchText))
                         .Select(x => new ArticleItem(x)).ToList();
-
                 }
                 else
                 {
@@ -108,13 +133,13 @@ namespace KFlearning.IDE.ViewModels
                     articles = result.Select(x => new ArticleItem(x)).ToList();
                 }
 
-                Articles = new ObservableCollection<ArticleItem>(articles);                
+                Articles = new ObservableCollection<ArticleItem>(articles);
             }
             catch (Exception)
             {
                 await _helpers.CreateMessageDialog("Error", "Maaf, tidak dapat memuat daftar artikel. Coba lagi.");
             }
-            
+
             CommandIsLoading = false;
         }
 
@@ -124,42 +149,31 @@ namespace KFlearning.IDE.ViewModels
 
         private async Task LoadData()
         {
-            try
+            List<SeriesItem> series;
+            List<ArticleItem> articles = null;
+            if (OfflineIsChecked)
             {
-                CommandIsLoading = true;
-
-                List<SeriesItem> series;
-                List<ArticleItem> articles = null;
-                if (OnlineIsChecked)
+                series = _database.Series.FindAll().Select(x => new SeriesItem(x.Title)).ToList();
+                if (series.Any())
                 {
-                    series = _database.Series.FindAll().Select(x => new SeriesItem(x.Title)).ToList();
-                    if (series.Any())
-                    {
-                        articles = _database.Articles.Find(x => x.Series == series.First().Title)
-                            .Select(x => new ArticleItem(x)).ToList();
-                    }
+                    articles = _database.Articles.Find(x => x.Series == series.First().Title)
+                        .Select(x => new ArticleItem(x)).ToList();
                 }
-                else
-                {
-                    var seriesResult = await _kodesiana.GetSeriesAsync();
-                    series = seriesResult.Select(x => new SeriesItem(x)).ToList();
-                    if (series.Any())
-                    {
-                        var articlesResult = await _kodesiana.GetPostsAsync(series.First().Title);
-                        articles = articlesResult.Select(x => new ArticleItem(x)).ToList();
-                    }
-                }
-
-                Series = new ObservableCollection<SeriesItem>(series);
-                SelectedSeries = series.Any() ? null : Series[0];
-                Articles = articles == null ? null : new ObservableCollection<ArticleItem>(articles);
             }
-            catch (Exception)
+            else
             {
-                await _helpers.CreateMessageDialog("Error", "Maaf, tidak dapat memuat daftar artikel. Coba lagi.");
+                var seriesResult = await _kodesiana.GetSeriesAsync();
+                series = seriesResult.Select(x => new SeriesItem(x)).ToList();
+                if (series.Any())
+                {
+                    var articlesResult = await _kodesiana.GetPostsAsync(series.First().Title);
+                    articles = articlesResult.Select(x => new ArticleItem(x)).ToList();
+                }
             }
 
-            CommandIsLoading = false;
+            Series = new ObservableCollection<SeriesItem>(series);
+            SelectedSeries = series.Any() ? Series[0] : null;
+            Articles = articles != null ? new ObservableCollection<ArticleItem>(articles) : null;
         }
 
         #endregion

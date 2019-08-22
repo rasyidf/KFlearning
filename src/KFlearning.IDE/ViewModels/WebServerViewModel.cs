@@ -2,9 +2,13 @@
 //  PROJECT  :   KFlearning
 //  FILENAME :   WebServerViewModel.cs
 //  AUTHOR   :   Fahmi Noor Fiqri
-//  NPM      :   065118116
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
 // 
 //  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
+
+#region
 
 using System;
 using System.Collections.ObjectModel;
@@ -12,16 +16,19 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using KFlearning.Core.IO;
 using KFlearning.Core.Services;
+using KFlearning.Core.Services.Installer;
 using KFlearning.IDE.ApplicationServices;
 using KFlearning.IDE.Models;
 using KFlearning.IDE.Resources;
+
+#endregion
 
 namespace KFlearning.IDE.ViewModels
 {
     public class WebServerViewModel : PropertyChangedBase
     {
         #region Fields
-        
+
         private readonly IWebServer _webServer;
         private readonly IPathManager _pathManager;
 
@@ -46,7 +53,7 @@ namespace KFlearning.IDE.ViewModels
         #endregion
 
         #region Constructor
-        
+
         public WebServerViewModel(IWebServer webServer, IPathManager pathManager)
         {
             _pathManager = pathManager;
@@ -97,14 +104,14 @@ namespace KFlearning.IDE.ViewModels
         #endregion
 
         #region Private Methods
-        
+
         private void LoadData()
         {
             Logs = new ObservableCollection<ServerLogItem>
             {
-                new ServerLogItem(DateTime.Now, Texts.WebServerStatusReady),
+                new ServerLogItem(DateTime.Now, Texts.WebServerStatusReady)
             };
-        } 
+        }
 
         private void WebServer_StatusUpdate(object sender, StatusChangedEventArgs e)
         {

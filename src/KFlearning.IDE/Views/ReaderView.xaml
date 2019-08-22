@@ -14,7 +14,7 @@
                  d:DataContext="{d:DesignInstance viewModels:ReaderViewModel, IsDesignTimeCreatable=False}"
                  d:DesignHeight="450" d:DesignWidth="800"
                  applicationServices:ViewModelLocator.IsAutomaticLocator="False"
-                 x:Name="RootWindow" WindowStartupLocation="CenterScreen" 
+                 x:Name="RootWindow" WindowStartupLocation="CenterScreen"
                  Icon="../Resources/kflearning-logo.ico"
                  GlowBrush="{DynamicResource AccentColorBrush}" Title="{Binding Title}">
     <mah:MetroWindow.Resources>
@@ -43,26 +43,30 @@
                                 <Setter Property="Margin" Value="{StaticResource ButtonMargin}" />
                                 <Setter Property="Kind" Value="ContentSave" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Path=IsChecked, ElementName=SaveButton}" Value="True">
+                                    <DataTrigger Binding="{Binding Path=IsChecked, ElementName=SaveButton}"
+                                                 Value="True">
                                         <Setter Property="Kind" Value="Check" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
                         </iconPacks:PackIconMaterial.Style>
                     </iconPacks:PackIconMaterial>
-                    <TextBlock Text="{x:Static resources:Texts.ActionSaveOffline}" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionSaveOffline}"
+                               Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </ToggleButton>
             <Button Margin="{StaticResource ButtonFarMargin}" Command="{Binding OpenWebCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="Web" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="{x:Static resources:Texts.ActionOpenInBrowser}" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionOpenInBrowser}"
+                               Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding OpenSourceCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="OpenInApp" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="{x:Static resources:Texts.ActionOpenSource}" Margin="{StaticResource ButtonMargin}" />
+                    <TextBlock Text="{x:Static resources:Texts.ActionOpenSource}"
+                               Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
         </StackPanel>
