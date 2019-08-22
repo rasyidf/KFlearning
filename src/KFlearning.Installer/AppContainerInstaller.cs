@@ -32,19 +32,10 @@ namespace KFlearning.Installer
             // Register Views and ViewModels
             container.Register(
                 // common core
-                Classes.FromAssemblyNamed("KFlearning.Core").InSameNamespaceAs<IKodesianaService>()
-                    .WithServiceDefaultInterfaces().LifestyleSingleton(),
-                Classes.FromAssemblyNamed("KFlearning.Core").InSameNamespaceAs<IDatabaseContext>()
-                    .WithServiceDefaultInterfaces().LifestyleSingleton(),
-                Classes.FromAssemblyNamed("KFlearning.Core").InSameNamespaceAs<ITaskGraph>()
-                    .WithServiceDefaultInterfaces().LifestyleSingleton(),
-                Classes.FromAssemblyNamed("KFlearning.Core").InSameNamespaceAs<IProjectManager>()
-                    .WithServiceDefaultInterfaces().LifestyleSingleton(),
-                Classes.FromAssemblyNamed("KFlearning.Core").InSameNamespaceAs<IPathManager>()
-                    .WithServiceDefaultInterfaces().LifestyleSingleton(),
+                Classes.FromAssemblyNamed("KFlearning.Core").Pick().WithServiceAllInterfaces().LifestyleSingleton(),
 
                 // application specific
-                Component.For<IProgressBroker>().ImplementedBy<ProgressBroker>().LifestyleSingleton(),
+                Classes.FromThisAssembly().InSameNamespaceAs<IProgressBroker>().WithServiceAllInterfaces().LifestyleSingleton(),
                 Classes.FromThisAssembly().InSameNamespaceAs<MainForm>().LifestyleTransient()
             );
         }
