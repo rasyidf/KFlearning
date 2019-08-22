@@ -421,6 +421,15 @@ namespace KFlearning.IDE.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Menyiapkan proyek C++....
+        /// </summary>
+        public static string InitCppMessage {
+            get {
+                return ResourceManager.GetString("InitCppMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to KFlearning merupakan aplikasi sumber terbuka, dilisensikan di bawah lisensi permisif MIT..
         /// </summary>
         public static string LicenseText {
@@ -561,6 +570,15 @@ namespace KFlearning.IDE.Resources {
         public static string TitleImport {
             get {
                 return ResourceManager.GetString("TitleImport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project C++.
+        /// </summary>
+        public static string TitleInitCpp {
+            get {
+                return ResourceManager.GetString("TitleInitCpp", resourceCulture);
             }
         }
         

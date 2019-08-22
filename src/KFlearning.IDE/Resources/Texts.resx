@@ -300,4 +300,10 @@
   <data name="AliasRemovingMessage" xml:space="preserve">
     <value>Menghapus virtual host dan alias...</value>
   </data>
+  <data name="TitleInitCpp" xml:space="preserve">
+    <value>Project C++</value>
+  </data>
+  <data name="InitCppMessage" xml:space="preserve">
+    <value>Menyiapkan proyek C++...</value>
+  </data>
 </root>

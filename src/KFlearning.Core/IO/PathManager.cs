@@ -196,9 +196,6 @@ namespace KFlearning.Core.IO
 
                 // project templates
                 var templateRoot = Path.Combine(basePath, @"etc\templates");
-                _cachedPaths.Add(PathKind.TemplateWeb, Path.Combine(templateRoot, "web.zip"));
-                _cachedPaths.Add(PathKind.TemplateCpp, Path.Combine(templateRoot, "cpp.zip"));
-                _cachedPaths.Add(PathKind.TemplatePython, Path.Combine(templateRoot, "python.zip"));
                 _cachedPaths.Add(PathKind.TemplateHosts,
                     Path.Combine(systemRoot, @"Windows\System32\drivers\etc\hosts"));
             }

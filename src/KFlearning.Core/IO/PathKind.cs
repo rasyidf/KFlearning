@@ -26,9 +26,6 @@ namespace KFlearning.Core.IO
         PathKflearningRoot,
 
         TemplateHosts,
-        TemplateWeb,
-        TemplateCpp,
-        TemplatePython,
 
         ExeHttpd,
         ExeMariadb,

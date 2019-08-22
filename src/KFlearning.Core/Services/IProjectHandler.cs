@@ -22,6 +22,6 @@ namespace KFlearning.Core.Services
         void CreateAlias(Project project);
         void RemoveAlias(Project project);
         void SaveMetadata(Project project);
-        void ExtractTemplate(Project project, ProjectTemplate template);
+        void InitializeCpp(Project project);
     }
 }

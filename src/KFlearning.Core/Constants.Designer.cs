@@ -303,6 +303,16 @@ namespace KFlearning.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] template_cpp {
+            get {
+                object obj = ResourceManager.GetObject("template_cpp", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;VirtualHost *:80&gt; 
         ///    DocumentRoot &quot;{REPO_PATH}&quot;
         ///    ServerName {REPO_DOMAIN}

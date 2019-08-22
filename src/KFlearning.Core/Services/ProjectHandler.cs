@@ -12,6 +12,8 @@
 
 using System;
 using System.IO;
+using System.Reflection;
+using ICSharpCode.SharpZipLib.Zip;
 using KFlearning.Core.DAL;
 using KFlearning.Core.IO;
 using Newtonsoft.Json;
@@ -62,9 +64,27 @@ namespace KFlearning.Core.Services
             }
         }
 
-        public void ExtractTemplate(Project project, ProjectTemplate template)
+        public void InitializeCpp(Project project)
         {
-            throw new NotImplementedException();
+            var zipPath = Path.Combine(project.Path, "templateCppKFL.zip");
+            ExtractEmbeddedFile("KFlearning.Core.template_cpp", zipPath);
+            using (var zip = new ZipFile(zipPath))
+            {
+                zip.ExtractAll(project.Path);
+            }
+        }
+
+        private void ExtractEmbeddedFile(string resName, string fileName)
+        {
+            if (File.Exists(fileName)) File.Delete(fileName);
+
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            using (var input = assembly.GetManifestResourceStream(resName))
+            using (var output = File.Open(fileName, FileMode.Create, FileAccess.Write))
+            {
+                if (input == null) throw new FileNotFoundException(resName + ": Embedded resoure file not found");
+                input.CopyTo(output);
+            }
         }
     }
 }

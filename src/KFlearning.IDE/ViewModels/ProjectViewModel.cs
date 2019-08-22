@@ -49,6 +49,8 @@ namespace KFlearning.IDE.ViewModels
 
         public ICommand PurgeCommand { get; set; }
 
+        public ICommand InitializeCppCommand { get; set; }
+
         public ICommand CreateAliasCommand { get; set; }
 
         public ICommand DeleteAliasCommand { get; set; }
@@ -89,6 +91,7 @@ namespace KFlearning.IDE.ViewModels
             ImportCommand = new RelayCommand(Import_Command);
             ExportCommand = new RelayCommand(Export_Command);
             PurgeCommand = new RelayCommand(Purge_Command);
+            InitializeCppCommand = new RelayCommand(InitializeCpp_Command);
             CreateAliasCommand = new RelayCommand(CreateAlias_Command);
             DeleteAliasCommand = new RelayCommand(DeleteAlias_Command);
             ProjectDoubleClickCommand = new RelayCommand(Project_DoubleClick);
@@ -158,6 +161,13 @@ namespace KFlearning.IDE.ViewModels
             await Task.Run(() => _projectManager.Purge())
                 .ContinueWith(x => controller.CloseAsync())
                 .ContinueWith(x => LoadData());
+        }
+
+        private async void InitializeCpp_Command(object obj)
+        {
+            var controller = await _helpers.CreateProgressDialog(Texts.TitleInitCpp, Texts.InitCppMessage);
+            await Task.Run(() => _projectHandler.InitializeCpp(SelectedProject.Item))
+                .ContinueWith(x => controller.CloseAsync());
         }
 
         private async void CreateAlias_Command(object obj)

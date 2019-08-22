@@ -73,6 +73,13 @@
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator />
+                    <MenuItem Header="Siapkan project C++" Command="{Binding InitializeCppCommand}">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconMaterial Kind="LanguageCpp"
+                                                        Style="{StaticResource ContextMenuPackIconStyle}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
                     <MenuItem Header="Buat Alias" Command="{Binding CreateAliasCommand}">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="AutoFix"
