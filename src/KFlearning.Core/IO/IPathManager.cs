@@ -15,8 +15,6 @@ namespace KFlearning.Core.IO
         string Combine(PathKind path, params string[] parts);
         string Combine(params string[] parts);
         string GetPath(PathKind path);
-        string GetPathForVirtualHost(string domainName);
-        string GetPathForAlias(string domainName);
         string GetPathForTemp(string filename = "");
         string GetFileName(string path);
         string StripInvalidFileName(string path);

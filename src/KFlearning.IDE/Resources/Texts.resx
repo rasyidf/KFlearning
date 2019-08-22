@@ -312,4 +312,10 @@
   <data name="NoProjectMessage" xml:space="preserve">
     <value>Project belum dipilih/tidak valid.</value>
   </data>
+  <data name="NotElevatedTitle" xml:space="preserve">
+    <value>Symbolic Link</value>
+  </data>
+  <data name="NotElevatedMessage" xml:space="preserve">
+    <value>Tidak dapat membuat symbolic link. Jalankan program sebagai Administrator.</value>
+  </data>
 </root>

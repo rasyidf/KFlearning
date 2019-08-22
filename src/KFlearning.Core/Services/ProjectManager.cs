@@ -61,13 +61,14 @@ namespace KFlearning.Core.Services
 
             Directory.CreateDirectory(path);
             _database.Projects.Insert(project);
+            _projectHandler.SaveMetadata(project);
         }
 
         public void Delete(Project project)
         {
-            if (project.VirtualHostEnabled)
+            if (_projectHandler.LinkExists(project))
             {
-                _projectHandler.RemoveAlias(project);
+                _projectHandler.RemoveLink(project);
             }
 
             _fileSystem.DeleteDirectory(project.Path, CancellationToken.None);
@@ -97,13 +98,8 @@ namespace KFlearning.Core.Services
                 // save new project path
                 project.Path = extractPath;
 
-                // initialize project
-                if (project.VirtualHostEnabled)
-                {
-                    _projectHandler.CreateAlias(project);
-                }
-
                 _database.Projects.Insert(project);
+                _projectHandler.SaveMetadata(project);
             }
         }
 

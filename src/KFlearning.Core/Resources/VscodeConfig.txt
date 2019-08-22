@@ -8,8 +8,4 @@
     "[json]": {
         "editor.defaultFormatter": "HookyQR.beautify"
     },	
-
-    "php.validate.executablePath": "{PHP_PATH}",
-    "php.executablePath": "{PHP_PATH}",
-    "php.suggest.basic": false,   
 }

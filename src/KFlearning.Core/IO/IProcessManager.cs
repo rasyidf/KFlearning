@@ -13,6 +13,8 @@ namespace KFlearning.Core.IO
     public interface IProcessManager
     {
         bool IsRunning(string name);
+        bool IsProcessElevated();
+        bool IsUacEnabled();
 
         void Run(string filename, string args, bool show = false);
         void RunWait(string filename, string args, bool show = false);

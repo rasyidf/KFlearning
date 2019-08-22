@@ -11,10 +11,12 @@
 #region
 
 using System;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using IWshRuntimeLibrary;
+using KFlearning.Core.Native;
 using File = System.IO.File;
 
 #endregion
@@ -167,6 +169,28 @@ namespace KFlearning.Core.IO
         public void WriteFile(string path, string content)
         {
             File.WriteAllText(path, content);
+        }
+
+        public void DeleteFile(string source)
+        {
+            File.Delete(source);
+        }
+
+        public void CreateDirectoryLink(string link, string target)
+        {
+            var result = NativeMethods.CreateSymbolicLink(link, target, NativeConstants.SYMBOLIC_LINK_FLAG_DIRECTORY);
+            if (!result) throw new Win32Exception();
+        }
+
+        public void RemoveDirectoryLink(string link)
+        {
+            var result = NativeMethods.DeleteFile(link);
+            if (!result) throw new Win32Exception();
+        }
+
+        public bool DirectoryLinkExists(string dir)
+        {
+            return File.Exists(dir);
         }
 
         public void CreateShortcutOnDesktop(string linkName, string description, string path)

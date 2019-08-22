@@ -51,9 +51,9 @@ namespace KFlearning.IDE.ViewModels
 
         public ICommand InitializeCppCommand { get; set; }
 
-        public ICommand CreateAliasCommand { get; set; }
+        public ICommand CreateLinkCommand { get; set; }
 
-        public ICommand DeleteAliasCommand { get; set; }
+        public ICommand DeleteLinkCommand { get; set; }
 
         public ICommand ProjectDoubleClickCommand { get; set; }
 
@@ -92,8 +92,8 @@ namespace KFlearning.IDE.ViewModels
             ExportCommand = new RelayCommand(Export_Command);
             PurgeCommand = new RelayCommand(Purge_Command);
             InitializeCppCommand = new RelayCommand(InitializeCpp_Command);
-            CreateAliasCommand = new RelayCommand(CreateAlias_Command);
-            DeleteAliasCommand = new RelayCommand(DeleteAlias_Command);
+            CreateLinkCommand = new RelayCommand(CreateLink_Command);
+            DeleteLinkCommand = new RelayCommand(DeleteLink_Command);
             ProjectDoubleClickCommand = new RelayCommand(Project_DoubleClick);
 
             Task.Run(LoadData);
@@ -188,39 +188,39 @@ namespace KFlearning.IDE.ViewModels
                 .ContinueWith(x => controller.CloseAsync());
         }
 
-        private async void CreateAlias_Command(object obj)
+        private async void CreateLink_Command(object obj)
         {
             if (SelectedProject == null)
             {
                 await _helpers.CreateMessageDialog(Texts.TitleNoProject, Texts.NoProjectMessage);
                 return;
             }
-            if (SelectedProject.Item.VirtualHostEnabled)
+            if (!_projectHandler.CanModifyLink())
             {
-                await _helpers.CreateMessageDialog(Texts.TitleAlias, Texts.AliasAlreadyExists);
+                await _helpers.CreateMessageDialog(Texts.NotElevatedTitle, Texts.NotElevatedMessage);
                 return;
             }
 
             var controller = await _helpers.CreateProgressDialog(Texts.TitleAlias, Texts.AliasCreatingMessage);
-            await Task.Run(() => _projectHandler.CreateAlias(SelectedProject.Item))
+            await Task.Run(() => _projectHandler.CreateLink(SelectedProject.Item))
                 .ContinueWith(x => controller.CloseAsync());
         }
 
-        private async void DeleteAlias_Command(object obj)
+        private async void DeleteLink_Command(object obj)
         {
             if (SelectedProject == null)
             {
                 await _helpers.CreateMessageDialog(Texts.TitleNoProject, Texts.NoProjectMessage);
                 return;
             }
-            if (!SelectedProject.Item.VirtualHostEnabled)
+            if (!_projectHandler.CanModifyLink())
             {
-                await _helpers.CreateMessageDialog(Texts.TitleAlias, Texts.AliasNotExists);
+                await _helpers.CreateMessageDialog(Texts.NotElevatedTitle, Texts.NotElevatedMessage);
                 return;
             }
 
             var controller = await _helpers.CreateProgressDialog(Texts.TitleAlias, Texts.AliasRemovingMessage);
-            await Task.Run(() => _projectHandler.RemoveAlias(SelectedProject.Item))
+            await Task.Run(() => _projectHandler.RemoveLink(SelectedProject.Item))
                 .ContinueWith(x => controller.CloseAsync());
         }
 

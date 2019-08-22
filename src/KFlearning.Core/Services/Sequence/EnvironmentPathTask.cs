@@ -37,11 +37,7 @@ namespace KFlearning.Core.Services.Sequence
             var paths = new[]
             {
                 path.Combine(PathKind.PathMingwRoot, "bin"),
-                path.GetPath(PathKind.PathMariaDbRoot),
-                path.GetPath(PathKind.PathApacheRoot),
                 path.GetPath(PathKind.PathVscodeRoot),
-                path.GetPath(PathKind.PathPhpRoot),
-                path.GetPath(PathKind.PathComposerRoot)
             };
 
             progress.ReportMessage("Processing environment variables...");

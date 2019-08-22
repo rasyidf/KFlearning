@@ -14,21 +14,14 @@ namespace KFlearning.Core.IO
     {
         PathBase,
         PathReposRoot,
-        PathSitesAliasRoot,
-        PathVirtualHostRoot,
 
         PathVscodeRoot,
         PathMingwRoot,
-        PathApacheRoot,
-        PathMariaDbRoot,
-        PathPhpRoot,
-        PathComposerRoot,
         PathKflearningRoot,
+        PathLaragonWww,
 
         TemplateHosts,
 
-        ExeHttpd,
-        ExeMariadb,
         ExeVscode,
         CmdVscode
     }

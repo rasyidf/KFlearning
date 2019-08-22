@@ -56,16 +56,6 @@ namespace KFlearning.Core.IO
             return _cachedPaths[path];
         }
 
-        public string GetPathForVirtualHost(string domainName)
-        {
-            return Path.Combine(GetPath(PathKind.PathVirtualHostRoot), domainName + ".conf");
-        }
-
-        public string GetPathForAlias(string domainName)
-        {
-            return Path.Combine(GetPath(PathKind.PathSitesAliasRoot), domainName + ".conf");
-        }
-
         public string GetPathForTemp(string filename = "")
         {
             return Path.Combine(Path.GetTempPath(), "kflearning", filename);
@@ -174,27 +164,17 @@ namespace KFlearning.Core.IO
                     // common paths
                     {PathKind.PathBase, basePath},
                     {PathKind.PathReposRoot, Path.Combine(basePath, "repos")},
-                    {PathKind.PathSitesAliasRoot, Path.Combine(basePath, @"etc\apache\alias")},
-                    {PathKind.PathVirtualHostRoot, Path.Combine(basePath, @"etc\apache\sites-enabled")},
 
                     // app-specific installation dir
                     {PathKind.PathVscodeRoot, Path.Combine(basePath, @"bin\vscode")},
                     {PathKind.PathMingwRoot, Path.Combine(basePath, @"bin\mingw")},
-                    {PathKind.PathApacheRoot, Path.Combine(basePath, @"bin\httpd")},
-                    {PathKind.PathMariaDbRoot, Path.Combine(basePath, @"bin\mariadb")},
-                    {PathKind.PathPhpRoot, Path.Combine(basePath, @"bin\php")},
-                    {PathKind.PathComposerRoot, Path.Combine(basePath, @"bin\composer")},
-                    {PathKind.PathKflearningRoot, Path.Combine(basePath, "ide")}
+                    {PathKind.PathKflearningRoot, Path.Combine(basePath, "ide")},
+                    {PathKind.PathLaragonWww,  Path.Combine(systemRoot, @"laragon\www")}
                 };
 
                 // app-specific executable paths
-                _cachedPaths.Add(PathKind.ExeHttpd, Path.Combine(_cachedPaths[PathKind.PathApacheRoot], "httpd.exe"));
-                _cachedPaths.Add(PathKind.ExeMariadb, Path.Combine(_cachedPaths[PathKind.PathMariaDbRoot], "mysqld.exe"));
                 _cachedPaths.Add(PathKind.ExeVscode, Path.Combine(_cachedPaths[PathKind.PathVscodeRoot], "Code.exe"));
                 _cachedPaths.Add(PathKind.CmdVscode, Path.Combine(_cachedPaths[PathKind.PathVscodeRoot], @"bin\code.cmd"));
-
-                // project templates
-                _cachedPaths.Add(PathKind.TemplateHosts, Path.Combine(systemRoot, @"Windows\System32\drivers\etc\hosts"));
             }
         }
 

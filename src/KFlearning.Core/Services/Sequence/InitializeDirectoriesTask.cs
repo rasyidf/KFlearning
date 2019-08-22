@@ -41,20 +41,8 @@ namespace KFlearning.Core.Services.Sequence
             {
                 fileSystem.CreateDirectory(baseDir);
                 fileSystem.CreateDirectory(path.Combine(baseDir, "bin"));
-                fileSystem.CreateDirectory(path.Combine(baseDir, @"bin\httpd"));
-                fileSystem.CreateDirectory(path.Combine(baseDir, @"bin\mariadb"));
                 fileSystem.CreateDirectory(path.Combine(baseDir, @"bin\mingw"));
-                fileSystem.CreateDirectory(path.Combine(baseDir, @"bin\php"));
-                fileSystem.CreateDirectory(path.Combine(baseDir, @"bin\composer"));
                 fileSystem.CreateDirectory(path.Combine(baseDir, @"bin\vscode"));
-
-                fileSystem.CreateDirectory(path.Combine(baseDir, "etc"));
-                fileSystem.CreateDirectory(path.Combine(baseDir, @"etc\apache"));
-                fileSystem.CreateDirectory(path.Combine(baseDir, @"etc\apache\alias"));
-                fileSystem.CreateDirectory(path.Combine(baseDir, @"etc\apache\sites-enabled"));
-                fileSystem.CreateDirectory(path.Combine(baseDir, @"etc\kflearning"));
-                fileSystem.CreateDirectory(path.Combine(baseDir, @"etc\phpMyAdmin"));
-                fileSystem.CreateDirectory(path.Combine(baseDir, @"etc\templates"));
 
                 fileSystem.CreateDirectory(path.Combine(baseDir, "ide"));
                 fileSystem.CreateDirectory(path.Combine(baseDir, "repos"));

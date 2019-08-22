@@ -484,6 +484,24 @@ namespace KFlearning.IDE.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tidak dapat membuat symbolic link. Jalankan program sebagai Administrator..
+        /// </summary>
+        public static string NotElevatedMessage {
+            get {
+                return ResourceManager.GetString("NotElevatedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Symbolic Link.
+        /// </summary>
+        public static string NotElevatedTitle {
+            get {
+                return ResourceManager.GetString("NotElevatedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to C/C++ Project.
         /// </summary>
         public static string ProjectCppName {

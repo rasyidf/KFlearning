@@ -55,37 +55,30 @@
     <Compile Include="IO\IOHelpers.cs" />
     <Compile Include="IO\ZipExtractEventArgs.cs" />
     <Compile Include="IO\ZipExtractor.cs" />
+    <Compile Include="Native\NativeConstants.cs" />
+    <Compile Include="Native\NativeMethods.cs" />
+    <Compile Include="Native\TokenSafeHandle.cs" />
+    <Compile Include="Native\TOKEN_ELEVATION_TYPE.cs" />
+    <Compile Include="Native\TOKEN_INFORMATION_CLASS.cs" />
     <Compile Include="Services\Installer\ISequenceFactory.cs" />
     <Compile Include="Services\IProjectHandler.cs" />
     <Compile Include="Services\MathHelper.cs" />
     <Compile Include="Services\ProjectHandler.cs" />
-    <Compile Include="Services\Sequence\ComposerTask.cs" />
     <Compile Include="Services\Sequence\EnvironmentPathTask.cs" />
     <Compile Include="Services\Sequence\GlutTask.cs" />
-    <Compile Include="Services\Sequence\HttpdTask.cs" />
     <Compile Include="Services\Sequence\InitializeDirectoriesTask.cs" />
     <Compile Include="Services\Sequence\KflearningShortcutTask.cs" />
     <Compile Include="Services\Sequence\KflearningTask.cs" />
-    <Compile Include="Services\Sequence\PhpMyAdminTask.cs" />
-    <Compile Include="Services\Sequence\PhpTask.cs" />
     <Compile Include="Services\Sequence\VscodeTask.cs" />
     <Compile Include="Services\Installer\IProgressBroker.cs" />
     <Compile Include="Services\Installer\ITaskGraph.cs" />
-    <Compile Include="Services\Hosts\ApacheHttpd.cs" />
-    <Compile Include="Services\Hosts\HostEntry.cs" />
-    <Compile Include="Services\Hosts\HostsFile.cs" />
-    <Compile Include="Services\Hosts\IApacheHttpd.cs" />
-    <Compile Include="Services\Hosts\IHostsFile.cs" />
-    <Compile Include="Services\Hosts\IMariaDb.cs" />
-    <Compile Include="Services\Hosts\IVscode.cs" />
-    <Compile Include="Services\Hosts\MariaDb.cs" />
-    <Compile Include="Services\Hosts\Vscode.cs" />
+    <Compile Include="Services\IVscode.cs" />
+    <Compile Include="Services\Vscode.cs" />
     <Compile Include="Constants.Designer.cs">
       <DependentUpon>Constants.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Services\Sequence\MariaDbTask.cs" />
     <Compile Include="Services\Sequence\MingwTask.cs" />
     <Compile Include="Services\Installer\SequenceFactory.cs" />
     <Compile Include="Services\Installer\ITaskNode.cs" />
@@ -99,10 +92,8 @@
     <Compile Include="IO\TransformingConfigFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IProjectManager.cs" />
-    <Compile Include="Services\IWebServer.cs" />
     <Compile Include="Services\ProjectManager.cs" />
     <Compile Include="Services\Installer\StatusChangedEventArgs.cs" />
-    <Compile Include="Services\WebServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Constants.resx">

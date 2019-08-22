@@ -10,9 +10,7 @@
 
 #region
 
-using System;
 using System.IO;
-using System.Reflection;
 using ICSharpCode.SharpZipLib.Zip;
 using KFlearning.Core.DAL;
 using KFlearning.Core.IO;
@@ -24,13 +22,17 @@ namespace KFlearning.Core.Services
 {
     public class ProjectHandler : IProjectHandler
     {
-        private readonly IWebServer _webServer;
         private readonly IVscode _vscode;
+        private readonly IPathManager _pathManager;
+        private readonly IProcessManager _processManager;
+        private readonly IFileSystemManager _fileSystem;
 
-        public ProjectHandler(IWebServer webServer, IVscode vscode)
+        public ProjectHandler(IVscode vscode, IFileSystemManager fileSystem, IPathManager pathManager, IProcessManager processManager)
         {
-            _webServer = webServer;
             _vscode = vscode;
+            _fileSystem = fileSystem;
+            _pathManager = pathManager;
+            _processManager = processManager;
         }
 
         public void Launch(Project project)
@@ -38,14 +40,27 @@ namespace KFlearning.Core.Services
             _vscode.OpenFolder(project.Path);
         }
 
-        public void CreateAlias(Project project)
+        public void CreateLink(Project project)
         {
-            _webServer.CreateAlias(project.VirtualHostDomain, project.Path);
+            var linkPath = _pathManager.Combine(PathKind.PathLaragonWww, project.Title);
+            _fileSystem.CreateDirectoryLink(linkPath, project.Path);
         }
 
-        public void RemoveAlias(Project project)
+        public void RemoveLink(Project project)
         {
-            _webServer.RemoveAlias(project.VirtualHostDomain);
+            var linkPath = _pathManager.Combine(PathKind.PathLaragonWww, project.Title);
+            _fileSystem.RemoveDirectoryLink(linkPath);
+        }
+
+        public bool LinkExists(Project project)
+        {
+            var linkPath = _pathManager.Combine(PathKind.PathLaragonWww, project.Title);
+            return _fileSystem.DirectoryLinkExists(linkPath);
+        }
+
+        public bool CanModifyLink()
+        {
+            return _processManager.IsProcessElevated();
         }
 
         public void SaveMetadata(Project project)

@@ -25,11 +25,6 @@ namespace KFlearning.Core.Services.Installer
             dependencies.Enqueue(new InitializeDirectoriesTask(true));
             dependencies.Enqueue(new MingwTask());
             dependencies.Enqueue(new GlutTask());
-            dependencies.Enqueue(new PhpTask());
-            dependencies.Enqueue(new ComposerTask());
-            dependencies.Enqueue(new HttpdTask());
-            dependencies.Enqueue(new PhpMyAdminTask());
-            dependencies.Enqueue(new MariaDbTask());
             dependencies.Enqueue(new VscodeTask());
             dependencies.Enqueue(new KflearningTask());
             dependencies.Enqueue(new KflearningShortcutTask(true));

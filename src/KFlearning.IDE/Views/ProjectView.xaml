@@ -80,13 +80,13 @@
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator />
-                    <MenuItem Header="Buat Alias" Command="{Binding CreateAliasCommand}">
+                    <MenuItem Header="Link ke Laragon" Command="{Binding CreateLinkCommand}">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="AutoFix"
                                                         Style="{StaticResource ContextMenuPackIconStyle}" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Hapus Alias" Command="{Binding DeleteAliasCommand}">
+                    <MenuItem Header="Hapus Link Laragon" Command="{Binding DeleteLinkCommand}">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="DeleteEmpty"
                                                         Style="{StaticResource ContextMenuPackIconStyle}" />

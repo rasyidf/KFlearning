@@ -19,8 +19,10 @@ namespace KFlearning.Core.Services
     public interface IProjectHandler
     {
         void Launch(Project project);
-        void CreateAlias(Project project);
-        void RemoveAlias(Project project);
+        void CreateLink(Project project);
+        void RemoveLink(Project project);
+        bool LinkExists(Project project);
+        bool CanModifyLink();
         void SaveMetadata(Project project);
         void InitializeCpp(Project project);
     }

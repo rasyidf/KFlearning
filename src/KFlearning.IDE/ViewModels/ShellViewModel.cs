@@ -62,12 +62,6 @@ namespace KFlearning.IDE.ViewModels
                     Icon = new PackIconMaterial {Kind = PackIconMaterialKind.Newspaper},
                     Label = Texts.NavbarArticles,
                     Tag = App.Container.Resolve<ArticleView>()
-                },
-                new HamburgerMenuIconItem
-                {
-                    Icon = new PackIconMaterial {Kind = PackIconMaterialKind.Approval},
-                    Label = Texts.NavbarApps,
-                    Tag = App.Container.Resolve<WebServerView>()
                 }
             };
             SidebarOptionsItems = new HamburgerMenuItemCollection

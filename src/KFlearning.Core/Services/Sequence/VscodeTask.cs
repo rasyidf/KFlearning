@@ -55,11 +55,7 @@ namespace KFlearning.Core.Services.Sequence
             // save settings
             progress.ReportMessage("Configuring Visual Studio Code...");
             var vscodeSettingsFile = path.Combine(root, @"data\user-data\settings.json");
-            using (var config = new TransformingConfigFile(vscodeSettingsFile, Constants.VscodeConfig))
-            {
-                var phpExePath = path.Combine(PathKind.PathPhpRoot, "php.exe");
-                config.Transform("{PHP_PATH}", path.EnsureForwardSlash(phpExePath));
-            }
+            fileSystem.WriteFile(vscodeSettingsFile, Constants.VscodeConfig);
         }
     }
 }

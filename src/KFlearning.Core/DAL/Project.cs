@@ -20,22 +20,8 @@ namespace KFlearning.Core.DAL
     {
         [BsonId] public int ProjectId { get; set; }
 
-        // --- Common
-
         public string Title { get; set; }
 
         public string Path { get; set; }
-
-        // --- Web Specific
-
-        public bool VirtualHostEnabled { get; set; }
-
-        public string VirtualHostDomain { get; set; }
-
-        public string VirtualHostPath { get; set; }
-
-        public string VirtualHostAlias { get; set; }
-
-        public string VirtualHostAliasPath { get; set; }
     }
 }

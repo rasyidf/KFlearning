@@ -29,7 +29,11 @@ namespace KFlearning.Core.IO
         void MoveFile(string source, string destination);
         void CopyFile(string source, string destination);
         void WriteFile(string path, string content);
+        void DeleteFile(string source);
 
+        void CreateDirectoryLink(string link, string target);
+        void RemoveDirectoryLink(string link);
+        bool DirectoryLinkExists(string dir);
         void CreateShortcutOnDesktop(string linkName, string description, string path);
     }
 }
