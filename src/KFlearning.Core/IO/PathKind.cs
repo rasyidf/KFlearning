@@ -29,6 +29,7 @@ namespace KFlearning.Core.IO
 
         ExeHttpd,
         ExeMariadb,
-        ExeVscode
+        ExeVscode,
+        CmdVscode
     }
 }

@@ -24,7 +24,7 @@ namespace KFlearning.Core.IO
     {
         #region Fields
 
-        private const string EnvironmentVariablePath = "path";
+        private const string PathEnv = "path";
 
         private static readonly char[] InvalidFileNameChars = Path.GetInvalidFileNameChars();
         private static readonly object SyncLock = new object();
@@ -141,8 +141,7 @@ namespace KFlearning.Core.IO
 
         private static List<string> GetEnvironmentPath()
         {
-            var originalPaths =
-                Environment.GetEnvironmentVariable(EnvironmentVariablePath, EnvironmentVariableTarget.User);
+            var originalPaths = Environment.GetEnvironmentVariable(PathEnv, EnvironmentVariableTarget.User);
             if (originalPaths == null) return null;
             return new List<string>(originalPaths.Split(new[] {";"}, StringSplitOptions.RemoveEmptyEntries));
         }
@@ -150,7 +149,7 @@ namespace KFlearning.Core.IO
         private static void SetEnvironmentPath(IEnumerable<string> paths)
         {
             var revisedPath = string.Join(";", paths);
-            Environment.SetEnvironmentVariable(EnvironmentVariablePath, revisedPath, EnvironmentVariableTarget.User);
+            Environment.SetEnvironmentVariable(PathEnv, revisedPath, EnvironmentVariableTarget.User);
         }
 
         private static string GetBasePath()
@@ -190,14 +189,12 @@ namespace KFlearning.Core.IO
 
                 // app-specific executable paths
                 _cachedPaths.Add(PathKind.ExeHttpd, Path.Combine(_cachedPaths[PathKind.PathApacheRoot], "httpd.exe"));
-                _cachedPaths.Add(PathKind.ExeMariadb,
-                    Path.Combine(_cachedPaths[PathKind.PathMariaDbRoot], "mysqld.exe"));
+                _cachedPaths.Add(PathKind.ExeMariadb, Path.Combine(_cachedPaths[PathKind.PathMariaDbRoot], "mysqld.exe"));
                 _cachedPaths.Add(PathKind.ExeVscode, Path.Combine(_cachedPaths[PathKind.PathVscodeRoot], "Code.exe"));
+                _cachedPaths.Add(PathKind.CmdVscode, Path.Combine(_cachedPaths[PathKind.PathVscodeRoot], @"bin\code.cmd"));
 
                 // project templates
-                var templateRoot = Path.Combine(basePath, @"etc\templates");
-                _cachedPaths.Add(PathKind.TemplateHosts,
-                    Path.Combine(systemRoot, @"Windows\System32\drivers\etc\hosts"));
+                _cachedPaths.Add(PathKind.TemplateHosts, Path.Combine(systemRoot, @"Windows\System32\drivers\etc\hosts"));
             }
         }
 

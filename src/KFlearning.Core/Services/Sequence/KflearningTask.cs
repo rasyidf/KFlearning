@@ -63,12 +63,6 @@ namespace KFlearning.Core.Services.Sequence
             {
                 config.Transform("{KFLEARNING_DIR_ROOT}", indexPath);
             }
-
-            // create shortcut
-            progress.ReportNodeProgress(-1);
-            progress.ReportMessage("Creating desktop shortcut...");
-            var exePath = path.Combine(PathKind.PathKflearningRoot, "KFlearning.IDE.exe");
-            fileSystem.CreateShortcutOnDesktop("KFlearning", "KFlearning", exePath);
         }
     }
 }

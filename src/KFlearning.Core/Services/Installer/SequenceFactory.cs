@@ -32,6 +32,7 @@ namespace KFlearning.Core.Services.Installer
             dependencies.Enqueue(new MariaDbTask());
             dependencies.Enqueue(new VscodeTask());
             dependencies.Enqueue(new KflearningTask());
+            dependencies.Enqueue(new KflearningShortcutTask(true));
             dependencies.Enqueue(new EnvironmentPathTask(true));
 
             return dependencies;
@@ -41,6 +42,7 @@ namespace KFlearning.Core.Services.Installer
         {
             var dependencies = new Queue<ITaskNode>();
             dependencies.Enqueue(new InitializeDirectoriesTask(false));
+            dependencies.Enqueue(new KflearningShortcutTask(false));
             dependencies.Enqueue(new EnvironmentPathTask(false));
 
             return dependencies;

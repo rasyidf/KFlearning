@@ -47,7 +47,8 @@ namespace KFlearning.Core.Services.Sequence
             var extensions = definition.VscodeExtensions;
             for (var i = 0; i < extensions.Count; i++)
             {
-                process.RunWait(path.GetPath(PathKind.ExeVscode), $"--install-extension {extensions[i]}");
+                var args = $"--install-extension \"{extensions[i]}\"";
+                process.RunWait(path.GetPath(PathKind.CmdVscode), args);
                 progress.ReportNodeProgress(MathHelper.CalculatePercentage(i + 1, extensions.Count));
             }
 

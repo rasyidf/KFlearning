@@ -25,13 +25,11 @@ namespace KFlearning.Core.Services
     public class ProjectHandler : IProjectHandler
     {
         private readonly IWebServer _webServer;
-        private readonly IFileSystemManager _fileSystem;
         private readonly IVscode _vscode;
 
-        public ProjectHandler(IWebServer webServer, IFileSystemManager fileSystem, IVscode vscode)
+        public ProjectHandler(IWebServer webServer, IVscode vscode)
         {
             _webServer = webServer;
-            _fileSystem = fileSystem;
             _vscode = vscode;
         }
 
@@ -67,24 +65,12 @@ namespace KFlearning.Core.Services
         public void InitializeCpp(Project project)
         {
             var zipPath = Path.Combine(project.Path, "templateCppKFL.zip");
-            ExtractEmbeddedFile("KFlearning.Core.template_cpp", zipPath);
+            File.WriteAllBytes(zipPath, Constants.template_cpp);
             using (var zip = new ZipFile(zipPath))
             {
                 zip.ExtractAll(project.Path);
             }
-        }
-
-        private void ExtractEmbeddedFile(string resName, string fileName)
-        {
-            if (File.Exists(fileName)) File.Delete(fileName);
-
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            using (var input = assembly.GetManifestResourceStream(resName))
-            using (var output = File.Open(fileName, FileMode.Create, FileAccess.Write))
-            {
-                if (input == null) throw new FileNotFoundException(resName + ": Embedded resoure file not found");
-                input.CopyTo(output);
-            }
+            File.Delete(zipPath);
         }
     }
 }

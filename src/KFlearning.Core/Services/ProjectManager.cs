@@ -59,7 +59,7 @@ namespace KFlearning.Core.Services
                 Path = path
             };
 
-
+            Directory.CreateDirectory(path);
             _database.Projects.Insert(project);
         }
 

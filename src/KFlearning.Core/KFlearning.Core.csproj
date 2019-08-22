@@ -64,6 +64,7 @@
     <Compile Include="Services\Sequence\GlutTask.cs" />
     <Compile Include="Services\Sequence\HttpdTask.cs" />
     <Compile Include="Services\Sequence\InitializeDirectoriesTask.cs" />
+    <Compile Include="Services\Sequence\KflearningShortcutTask.cs" />
     <Compile Include="Services\Sequence\KflearningTask.cs" />
     <Compile Include="Services\Sequence\PhpMyAdminTask.cs" />
     <Compile Include="Services\Sequence\PhpTask.cs" />
