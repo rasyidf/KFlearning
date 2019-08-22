@@ -18,18 +18,18 @@ namespace KFlearning.Core.DAL
 
         public string Title { get; set; }
 
-        public ProjectType Type { get; set; }
-
         public string Path { get; set; }
 
         // --- Web Specific
 
-        public string Alias { get; set; }
+        public bool VirtualHostEnabled { get; set; }
 
-        public string DomainName { get; set; }
+        public string VirtualHostDomain { get; set; }
 
         public string VirtualHostPath { get; set; }
 
-        public string AliasPath { get; set; }
+        public string VirtualHostAlias { get; set; }
+        
+        public string VirtualHostAliasPath { get; set; }
     }
 }

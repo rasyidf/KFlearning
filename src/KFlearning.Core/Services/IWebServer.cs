@@ -7,6 +7,7 @@
 //  This file is part of KFlearning, licensed under MIT license.
 
 using System;
+using KFlearning.Core.Services.Installer;
 
 namespace KFlearning.Core.Services
 {

@@ -49,20 +49,17 @@
     <Compile Include="DAL\DatabaseContext.cs" />
     <Compile Include="DAL\IDatabaseContext.cs" />
     <Compile Include="DAL\Project.cs" />
-    <Compile Include="DAL\ProjectType.cs" />
     <Compile Include="DAL\Series.cs" />
     <Compile Include="IO\FileSystemManager.cs" />
     <Compile Include="IO\IFileSystemManager.cs" />
     <Compile Include="IO\IOHelpers.cs" />
     <Compile Include="IO\ZipExtractEventArgs.cs" />
     <Compile Include="IO\ZipExtractor.cs" />
-    <Compile Include="Services\Handlers\CppProjectHandler.cs" />
-    <Compile Include="Services\Handlers\PythonProjectHandler.cs" />
-    <Compile Include="Services\Handlers\WebProjectHandler.cs" />
+    <Compile Include="Services\Installer\ISequenceFactory.cs" />
     <Compile Include="Services\IProjectHandler.cs" />
-    <Compile Include="Services\ISequenceFactory.cs" />
     <Compile Include="Services\MathHelper.cs" />
-    <Compile Include="Services\ProjectHandlerBase.cs" />
+    <Compile Include="Services\ProjectHandler.cs" />
+    <Compile Include="DAL\ProjectTemplate.cs" />
     <Compile Include="Services\Sequence\ComposerTask.cs" />
     <Compile Include="Services\Sequence\EnvironmentPathTask.cs" />
     <Compile Include="Services\Sequence\GlutTask.cs" />
@@ -72,8 +69,8 @@
     <Compile Include="Services\Sequence\PhpMyAdminTask.cs" />
     <Compile Include="Services\Sequence\PhpTask.cs" />
     <Compile Include="Services\Sequence\VscodeTask.cs" />
-    <Compile Include="Services\IProgressBroker.cs" />
-    <Compile Include="Services\ITaskGraph.cs" />
+    <Compile Include="Services\Installer\IProgressBroker.cs" />
+    <Compile Include="Services\Installer\ITaskGraph.cs" />
     <Compile Include="Services\Hosts\ApacheHttpd.cs" />
     <Compile Include="Services\Hosts\HostEntry.cs" />
     <Compile Include="Services\Hosts\HostsFile.cs" />
@@ -90,10 +87,10 @@
     </Compile>
     <Compile Include="Services\Sequence\MariaDbTask.cs" />
     <Compile Include="Services\Sequence\MingwTask.cs" />
-    <Compile Include="Services\SequenceFactory.cs" />
-    <Compile Include="Services\ITaskNode.cs" />
-    <Compile Include="Services\TaskGraph.cs" />
-    <Compile Include="Services\InstallDefinition.cs" />
+    <Compile Include="Services\Installer\SequenceFactory.cs" />
+    <Compile Include="Services\Installer\ITaskNode.cs" />
+    <Compile Include="Services\Installer\TaskGraph.cs" />
+    <Compile Include="Services\Installer\InstallDefinition.cs" />
     <Compile Include="IO\IPathManager.cs" />
     <Compile Include="IO\IProcessManager.cs" />
     <Compile Include="IO\PathKind.cs" />
@@ -104,7 +101,7 @@
     <Compile Include="Services\IProjectManager.cs" />
     <Compile Include="Services\IWebServer.cs" />
     <Compile Include="Services\ProjectManager.cs" />
-    <Compile Include="Services\StatusChangedEventArgs.cs" />
+    <Compile Include="Services\Installer\StatusChangedEventArgs.cs" />
     <Compile Include="Services\WebServer.cs" />
   </ItemGroup>
   <ItemGroup>

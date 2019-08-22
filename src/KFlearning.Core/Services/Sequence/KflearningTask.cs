@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using KFlearning.Core.IO;
+using KFlearning.Core.Services.Installer;
 
 namespace KFlearning.Core.Services.Sequence
 {

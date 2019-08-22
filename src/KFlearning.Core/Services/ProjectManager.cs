@@ -6,12 +6,14 @@
 // 
 //  This file is part of KFlearning, licensed under MIT license.
 
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Threading;
 using ICSharpCode.SharpZipLib.Zip;
 using KFlearning.Core.DAL;
 using KFlearning.Core.IO;
-using KFlearning.Core.Services.Handlers;
 using LiteDB;
 using Newtonsoft.Json;
 
@@ -20,23 +22,16 @@ namespace KFlearning.Core.Services
     public class ProjectManager : IProjectManager
     {
         private readonly IDatabaseContext _database;
+        private readonly IProjectHandler _projectHandler;
+        private readonly IFileSystemManager _fileSystem;
         private readonly IPathManager _pathManager;
-        private readonly IVscode _vscode;
-        private readonly Dictionary<ProjectType, IProjectHandler> _projectHandlers;
-
-        public ProjectManager(IPathManager pathManager, IDatabaseContext database, IVscode vscode,
-            CppProjectHandler cppHandler, WebProjectHandler webHandler, PythonProjectHandler pythonHandler)
+        
+        public ProjectManager(IPathManager pathManager, IDatabaseContext database, IProjectHandler projectHandler, IFileSystemManager fileSystem)
         {
             _pathManager = pathManager;
             _database = database;
-            _vscode = vscode;
-
-            _projectHandlers = new Dictionary<ProjectType, IProjectHandler>
-            {
-                {ProjectType.Cpp, cppHandler},
-                {ProjectType.Web, webHandler},
-                {ProjectType.Python, pythonHandler}
-            };
+            _fileSystem = fileSystem;
+            _projectHandler = projectHandler;
         }
 
         public IEnumerable<Project> GetProjects()
@@ -50,24 +45,27 @@ namespace KFlearning.Core.Services
             return Directory.Exists(path);
         }
 
-        public void Create(ProjectType type, string title)
+        public void Create(string title)
         {
             var path = GetPathForProject(title);
-            var handler = _projectHandlers[type];
-            var project = handler.Create(title, path);
+            var project = new Project
+            {
+                Title = title,
+                Path = path
+            };
 
+            
             _database.Projects.Insert(project);
-        }
-
-        public void Launch(Project project)
-        {
-            _vscode.OpenFolder(project.Path);
         }
 
         public void Delete(Project project)
         {
-            var handler = _projectHandlers[project.Type];
-            handler.Destroy(project);
+            if (project.VirtualHostEnabled)
+            {
+                _projectHandler.RemoveAlias(project);
+            }
+
+            _fileSystem.DeleteDirectory(project.Path, CancellationToken.None);
             _database.Projects.Delete(project.ProjectId);
         }
 
@@ -95,8 +93,10 @@ namespace KFlearning.Core.Services
                 project.Path = extractPath;
 
                 // initialize project
-                var handler = _projectHandlers[project.Type];
-                handler.Import(project);
+                if (project.VirtualHostEnabled)
+                {
+                    _projectHandler.CreateAlias(project);
+                }
 
                 _database.Projects.Insert(project);
             }

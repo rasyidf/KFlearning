@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using KFlearning.Core.IO;
+using KFlearning.Core.Services.Installer;
 
 namespace KFlearning.Core.Services
 {

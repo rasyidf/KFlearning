@@ -8,7 +8,7 @@
 
 using System.Collections.Generic;
 
-namespace KFlearning.Core.Services
+namespace KFlearning.Core.Services.Installer
 {
     public interface ISequenceFactory
     {

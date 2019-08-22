@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace KFlearning.Core.Services
+namespace KFlearning.Core.Services.Installer
 {
     public class InstallDefinition
     {

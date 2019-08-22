@@ -15,14 +15,13 @@ namespace KFlearning.Core.Services
     {
         IEnumerable<Project> GetProjects();
         bool Exists(string title);
-        void Create(ProjectType type, string title);
-        void Launch(Project project);
+        void Create(string title);
         void Delete(Project project);
-        bool CheckImportZip(string zipFile);
-        void Import(string zipFile);
         void Export(Project project, string savePath);
-
+        void Import(string zipFile);
         void Purge();
+
+        bool CheckImportZip(string zipFile);
         string GetPathForProject(string title);
     }
 }

@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading;
 using KFlearning.Core.IO;
 
-namespace KFlearning.Core.Services
+namespace KFlearning.Core.Services.Installer
 {
     public class TaskGraph : ITaskGraph
     {
