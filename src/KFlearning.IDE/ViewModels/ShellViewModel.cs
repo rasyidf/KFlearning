@@ -27,7 +27,7 @@ namespace KFlearning.IDE.ViewModels
 
         public ShellViewModel(IApplicationHelpers helpers)
         {
-            WebCommand = new RelayCommand(x => helpers.OpenUrl(Strings.WebUrl));
+            WebCommand = new RelayCommand(x => helpers.OpenUrl(Strings.WebNavUrl));
             GitHubCommand = new RelayCommand(x => helpers.OpenUrl(Strings.GitHubUrl));
             ItemClickCommand = new RelayCommand(ItemClick_Command);
 
