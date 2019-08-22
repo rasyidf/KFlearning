@@ -100,7 +100,7 @@ namespace KFlearning.Installer.Views
                 default:
                 {
                     var path = PathManager.Combine(PathKind.PathBase, @"installer\data");
-                    var extensions = File.ReadAllLines(PathManager.Combine(path, "vscode-extensions.txt"));
+                    var extensions = Directory.GetFiles(PathManager.Combine(PathKind.PathBase, @"installer\data\vscode-exts"), "*.vsix");
                     var definition = new InstallDefinition(path, extensions, x => Program.Container.Resolve(x));
                     var sequence = _viewState == ViewState.Install
                         ? SequenceFactory.GetInstallSequence()
@@ -155,9 +155,7 @@ namespace KFlearning.Installer.Views
             }
             else
             {
-                Log.AppendLog($"[{DateTime.Now}] {Environment.NewLine}");
-                Log.AppendLog(obj);
-                Log.AppendLog(Environment.NewLine + Environment.NewLine);
+                Log.AppendLog($"{DateTime.Now}:  {obj}{Environment.NewLine}");
             }
         }
 
@@ -183,6 +181,9 @@ namespace KFlearning.Installer.Views
                         break;
                     case ViewState.WaitExit:
                         cmdInstall.Text = "Keluar";
+                        break;
+                    case ViewState.WaitOpen:
+                        cmdInstall.Text = "Buka";
                         break;
                     default:
                         throw new ArgumentOutOfRangeException(nameof(_viewState), _viewState, null);

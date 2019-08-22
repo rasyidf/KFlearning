@@ -27,7 +27,7 @@ namespace KFlearning.IDE.ViewModels
 {
     public class ProjectViewModel : PropertyChangedBase
     {
-        #region 1] Fields
+        #region Fields
 
         private readonly IProjectManager _projectManager;
         private readonly IProjectHandler _projectHandler;
@@ -37,7 +37,7 @@ namespace KFlearning.IDE.ViewModels
 
         #endregion
 
-        #region 2] Properties
+        #region Properties
 
         public ICommand CreateCommand { get; set; }
 
@@ -63,7 +63,7 @@ namespace KFlearning.IDE.ViewModels
 
         #endregion
 
-        #region 3] Constructor
+        #region Constructor
 
         public ProjectViewModel(IProjectManager projectManager, IApplicationHelpers helpers,
             IProjectHandler projectHandler)
@@ -101,7 +101,7 @@ namespace KFlearning.IDE.ViewModels
 
         #endregion
 
-        #region 4] Commands
+        #region Commands
 
         private async void Create_Command(object obj)
         {
@@ -121,6 +121,12 @@ namespace KFlearning.IDE.ViewModels
 
         private async void Delete_Command(object obj)
         {
+            if (SelectedProject == null)
+            {
+                await _helpers.CreateMessageDialog(Texts.TitleNoProject, Texts.NoProjectMessage);
+                return;
+            }
+
             var controller = await _helpers.CreateProgressDialog(Texts.TitleDelete, Texts.DeleteMessage);
             await Task.Run(() => _projectManager.Delete(SelectedProject.Item))
                 .ContinueWith(x => controller.CloseAsync())
@@ -144,7 +150,13 @@ namespace KFlearning.IDE.ViewModels
 
         private async void Export_Command(object obj)
         {
+            if (SelectedProject == null)
+            {
+                await _helpers.CreateMessageDialog(Texts.TitleNoProject, Texts.NoProjectMessage);
+                return;
+            }
             if (_ofd.ShowDialog() == false) return;
+
             var controller = await _helpers.CreateProgressDialog(Texts.TitleExport, Texts.ExportMessage);
             await Task.Run(() => _projectManager.Export(SelectedProject.Item, _ofd.FileName))
                 .ContinueWith(x => controller.CloseAsync())
@@ -165,6 +177,12 @@ namespace KFlearning.IDE.ViewModels
 
         private async void InitializeCpp_Command(object obj)
         {
+            if (SelectedProject == null)
+            {
+                await _helpers.CreateMessageDialog(Texts.TitleNoProject, Texts.NoProjectMessage);
+                return;
+            }
+
             var controller = await _helpers.CreateProgressDialog(Texts.TitleInitCpp, Texts.InitCppMessage);
             await Task.Run(() => _projectHandler.InitializeCpp(SelectedProject.Item))
                 .ContinueWith(x => controller.CloseAsync());
@@ -172,6 +190,11 @@ namespace KFlearning.IDE.ViewModels
 
         private async void CreateAlias_Command(object obj)
         {
+            if (SelectedProject == null)
+            {
+                await _helpers.CreateMessageDialog(Texts.TitleNoProject, Texts.NoProjectMessage);
+                return;
+            }
             if (SelectedProject.Item.VirtualHostEnabled)
             {
                 await _helpers.CreateMessageDialog(Texts.TitleAlias, Texts.AliasAlreadyExists);
@@ -185,6 +208,11 @@ namespace KFlearning.IDE.ViewModels
 
         private async void DeleteAlias_Command(object obj)
         {
+            if (SelectedProject == null)
+            {
+                await _helpers.CreateMessageDialog(Texts.TitleNoProject, Texts.NoProjectMessage);
+                return;
+            }
             if (!SelectedProject.Item.VirtualHostEnabled)
             {
                 await _helpers.CreateMessageDialog(Texts.TitleAlias, Texts.AliasNotExists);
@@ -196,14 +224,20 @@ namespace KFlearning.IDE.ViewModels
                 .ContinueWith(x => controller.CloseAsync());
         }
 
-        private void Project_DoubleClick(object obj)
+        private async void Project_DoubleClick(object obj)
         {
+            if (SelectedProject == null)
+            {
+                await _helpers.CreateMessageDialog(Texts.TitleNoProject, Texts.NoProjectMessage);
+                return;
+            }
+
             _projectHandler.Launch(SelectedProject.Item);
         }
 
         #endregion
 
-        #region 5] Private Methods
+        #region Private Methods
 
         private void LoadData()
         {

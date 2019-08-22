@@ -475,6 +475,15 @@ namespace KFlearning.IDE.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Project belum dipilih/tidak valid..
+        /// </summary>
+        public static string NoProjectMessage {
+            get {
+                return ResourceManager.GetString("NoProjectMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to C/C++ Project.
         /// </summary>
         public static string ProjectCppName {
@@ -579,6 +588,15 @@ namespace KFlearning.IDE.Resources {
         public static string TitleInitCpp {
             get {
                 return ResourceManager.GetString("TitleInitCpp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pilih project.
+        /// </summary>
+        public static string TitleNoProject {
+            get {
+                return ResourceManager.GetString("TitleNoProject", resourceCulture);
             }
         }
         

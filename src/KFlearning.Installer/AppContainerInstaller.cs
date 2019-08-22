@@ -13,10 +13,6 @@
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using KFlearning.Core.API;
-using KFlearning.Core.DAL;
-using KFlearning.Core.IO;
-using KFlearning.Core.Services;
 using KFlearning.Core.Services.Installer;
 using KFlearning.Installer.ApplicationServices;
 using KFlearning.Installer.Views;
@@ -35,8 +31,8 @@ namespace KFlearning.Installer
                 Classes.FromAssemblyNamed("KFlearning.Core").Pick().WithServiceAllInterfaces().LifestyleSingleton(),
 
                 // application specific
-                Classes.FromThisAssembly().InSameNamespaceAs<IProgressBroker>().WithServiceAllInterfaces().LifestyleSingleton(),
-                Classes.FromThisAssembly().InSameNamespaceAs<MainForm>().LifestyleTransient()
+                Classes.FromThisAssembly().InSameNamespaceAs<MainForm>().LifestyleTransient(),
+                Component.For<IProgressBroker>().ImplementedBy<ProgressBroker>().LifestyleSingleton()
             );
         }
     }

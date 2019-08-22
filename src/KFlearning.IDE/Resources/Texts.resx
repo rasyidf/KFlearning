@@ -306,4 +306,10 @@
   <data name="InitCppMessage" xml:space="preserve">
     <value>Menyiapkan proyek C++...</value>
   </data>
+  <data name="TitleNoProject" xml:space="preserve">
+    <value>Pilih project</value>
+  </data>
+  <data name="NoProjectMessage" xml:space="preserve">
+    <value>Project belum dipilih/tidak valid.</value>
+  </data>
 </root>
