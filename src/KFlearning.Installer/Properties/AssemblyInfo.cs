@@ -1,5 +1,19 @@
-﻿using System.Reflection;
+﻿// 
+//  PROJECT  :   KFlearning
+//  FILENAME :   AssemblyInfo.cs
+//  AUTHOR   :   Fahmi Noor Fiqri
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
+// 
+//  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
+
+#region
+
+using System.Reflection;
 using System.Runtime.InteropServices;
+
+#endregion
 
 [assembly: AssemblyTitle("KFlearning.Installer")]
 [assembly: AssemblyDescription("E-learning terpadu by Kodesiana.com")]

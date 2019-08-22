@@ -2,9 +2,13 @@
 //  PROJECT  :   KFlearning
 //  FILENAME :   AppContainerInstaller.cs
 //  AUTHOR   :   Fahmi Noor Fiqri
-//  NPM      :   065118116
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
 // 
 //  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
+
+#region
 
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
@@ -13,8 +17,11 @@ using KFlearning.Core.API;
 using KFlearning.Core.DAL;
 using KFlearning.Core.IO;
 using KFlearning.Core.Services;
+using KFlearning.Core.Services.Installer;
 using KFlearning.Installer.ApplicationServices;
 using KFlearning.Installer.Views;
+
+#endregion
 
 namespace KFlearning.Installer
 {

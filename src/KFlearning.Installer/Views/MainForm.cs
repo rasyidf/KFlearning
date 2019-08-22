@@ -1,16 +1,30 @@
-﻿using System;
+﻿// 
+//  PROJECT  :   KFlearning
+//  FILENAME :   MainForm.cs
+//  AUTHOR   :   Fahmi Noor Fiqri
+//  WEBSITE  : https://kodesiana.com
+//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
+// 
+//  This file is part of KFlearning, licensed under MIT license.
+//  See this code in repository URL above!
+
+#region
+
+using System;
 using System.IO;
 using System.Windows.Forms;
 using KFlearning.Core.IO;
-using KFlearning.Core.Services;
+using KFlearning.Core.Services.Installer;
 using KFlearning.Installer.ApplicationServices;
+
+#endregion
 
 namespace KFlearning.Installer.Views
 {
     public partial class MainForm : Form
     {
         #region Fields
-        
+
         private enum ViewState
         {
             Install,
@@ -21,17 +35,17 @@ namespace KFlearning.Installer.Views
         }
 
         private ViewState _viewState;
-        private bool _isInstall; 
+        private bool _isInstall;
 
         #endregion
 
         #region Properties
-        
+
         public IProgressBroker ProgressBroker { get; set; }
         public IPathManager PathManager { get; set; }
         public ITaskGraph TaskGraph { get; set; }
         public ISequenceFactory SequenceFactory { get; set; }
-        public LogForm Log { get; set; } 
+        public LogForm Log { get; set; }
 
         #endregion
 
@@ -40,7 +54,7 @@ namespace KFlearning.Installer.Views
         public MainForm()
         {
             InitializeComponent();
-        } 
+        }
 
         #endregion
 
@@ -48,7 +62,7 @@ namespace KFlearning.Installer.Views
 
         protected override void OnLoad(EventArgs e)
         {
-            var broker = (ProgressBroker)ProgressBroker;
+            var broker = (ProgressBroker) ProgressBroker;
             broker.MessageAction = MessageAction;
             broker.ProgressOverallAction = x => ProgressAction(x, true);
             broker.ProgressCurrentAction = x => ProgressAction(x, false);
@@ -57,7 +71,7 @@ namespace KFlearning.Installer.Views
             UpdateViewState();
 
             base.OnLoad(e);
-        } 
+        }
 
         #endregion
 
@@ -145,7 +159,7 @@ namespace KFlearning.Installer.Views
                 Log.AppendLog(obj);
                 Log.AppendLog(Environment.NewLine + Environment.NewLine);
             }
-        } 
+        }
 
         private void UpdateViewState()
         {
