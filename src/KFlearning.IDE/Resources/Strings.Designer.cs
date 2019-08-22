@@ -142,11 +142,20 @@ namespace KFlearning.IDE.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://kodesiana.com/.
+        ///   Looks up a localized string similar to https://kodesiana.com/?utm_source=kflearning&amp;utm_medium=about&amp;utm_campaign=button.
         /// </summary>
-        public static string WebUrl {
+        public static string WebAboutUrl {
             get {
-                return ResourceManager.GetString("WebUrl", resourceCulture);
+                return ResourceManager.GetString("WebAboutUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://kodesiana.com/?utm_source=kflearning&amp;utm_medium=title_bar&amp;utm_campaign=menu.
+        /// </summary>
+        public static string WebNavUrl {
+            get {
+                return ResourceManager.GetString("WebNavUrl", resourceCulture);
             }
         }
     }

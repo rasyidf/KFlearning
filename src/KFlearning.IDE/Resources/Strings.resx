@@ -126,8 +126,8 @@
   <data name="TwitterUrl" xml:space="preserve">
     <value>https://twitter.com/fahminoorfiqri</value>
   </data>
-  <data name="WebUrl" xml:space="preserve">
-    <value>https://kodesiana.com/</value>
+  <data name="WebNavUrl" xml:space="preserve">
+    <value>https://kodesiana.com/?utm_source=kflearning&amp;utm_medium=title_bar&amp;utm_campaign=menu</value>
   </data>
   <data name="AnalyticsCampaignQuery" xml:space="preserve">
     <value>?utm_source=kflearning_desktop&amp;utm_medium=</value>
@@ -146,5 +146,8 @@
   </data>
   <data name="ImportIncompatibleMessage" xml:space="preserve">
     <value>Berkas ZIP yang Anda pilih tidak sesuai dengan format impor!</value>
+  </data>
+  <data name="WebAboutUrl" xml:space="preserve">
+    <value>https://kodesiana.com/?utm_source=kflearning&amp;utm_medium=about&amp;utm_campaign=button</value>
   </data>
 </root>
