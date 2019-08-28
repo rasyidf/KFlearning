@@ -123,11 +123,8 @@
   <data name="InstagramUrl" xml:space="preserve">
     <value>https://www.instagram.com/fahminoorfiqri</value>
   </data>
-  <data name="TwitterUrl" xml:space="preserve">
-    <value>https://twitter.com/fahminoorfiqri</value>
-  </data>
-  <data name="WebNavUrl" xml:space="preserve">
-    <value>https://kodesiana.com/?utm_source=app&amp;utm_medium=kflearning&amp;utm_campaign=navbar</value>
+  <data name="CampaignNav" xml:space="preserve">
+    <value>navbar</value>
   </data>
   <data name="AnalyticsCampaignQuery" xml:space="preserve">
     <value>?utm_source=kflearning_desktop&amp;utm_medium=</value>
@@ -147,7 +144,7 @@
   <data name="ImportIncompatibleMessage" xml:space="preserve">
     <value>Berkas ZIP yang Anda pilih tidak sesuai dengan format impor!</value>
   </data>
-  <data name="WebAboutUrl" xml:space="preserve">
-    <value>https://kodesiana.com/?utm_source=app&amp;utm_medium=kflearning&amp;utm_campaign=about</value>
+  <data name="WebUrl" xml:space="preserve">
+    <value>https://kodesiana.com</value>
   </data>
 </root>

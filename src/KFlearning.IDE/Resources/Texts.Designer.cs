@@ -295,6 +295,24 @@ namespace KFlearning.IDE.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maaf, tidak dapat memuat daftar artikel. Coba lagi..
+        /// </summary>
+        public static string CantLoadArticleMessage {
+            get {
+                return ResourceManager.GetString("CantLoadArticleMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string CantLoadArticleTitle {
+            get {
+                return ResourceManager.GetString("CantLoadArticleTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hak Cipta (C) Fahmi Noor Fiqri, Kodesiana.com 2019.
         /// </summary>
         public static string CopyrightText {
@@ -471,6 +489,24 @@ namespace KFlearning.IDE.Resources {
         public static string NavbarProject {
             get {
                 return ResourceManager.GetString("NavbarProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nama project.
+        /// </summary>
+        public static string NewProjectName {
+            get {
+                return ResourceManager.GetString("NewProjectName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Buat Project baru.
+        /// </summary>
+        public static string NewProjectTitle {
+            get {
+                return ResourceManager.GetString("NewProjectTitle", resourceCulture);
             }
         }
         

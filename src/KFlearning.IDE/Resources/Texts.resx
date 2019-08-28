@@ -318,4 +318,16 @@
   <data name="NotElevatedMessage" xml:space="preserve">
     <value>Tidak dapat membuat symbolic link. Jalankan program sebagai Administrator.</value>
   </data>
+  <data name="NewProjectTitle" xml:space="preserve">
+    <value>Buat Project baru</value>
+  </data>
+  <data name="NewProjectName" xml:space="preserve">
+    <value>Nama project</value>
+  </data>
+  <data name="CantLoadArticleTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="CantLoadArticleMessage" xml:space="preserve">
+    <value>Maaf, tidak dapat memuat daftar artikel. Coba lagi.</value>
+  </data>
 </root>
