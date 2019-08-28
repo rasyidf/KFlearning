@@ -64,10 +64,32 @@
         </ListView>
         <mah:ProgressRing Grid.Row="2" IsActive="{Binding CommandIsLoading}" VerticalAlignment="Center"
                           HorizontalAlignment="Center" />
-        <mah:ToggleSwitch Grid.Row="3" Margin="0,10,0,0" HorizontalAlignment="Left"
-                          IsChecked="{Binding OfflineIsChecked}" CheckChangedCommand="{Binding OnlineChangedCommand}"
-                          IsEnabled="{Binding CommandIsLoading, Converter={StaticResource InvertBoolConverter}}"
-                          OnLabel="{x:Static resources:Texts.CueOnlineMode}"
-                          OffLabel="{x:Static resources:Texts.CueOnlineMode}" />
+        <Grid Grid.Row="3" Margin="0,10,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <mah:ToggleSwitch Grid.Column="0" HorizontalAlignment="Left"
+                              IsChecked="{Binding OfflineIsChecked}" CheckChangedCommand="{Binding OnlineChangedCommand}"
+                              IsEnabled="{Binding CommandIsLoading, Converter={StaticResource InvertBoolConverter}}"
+                              OnLabel="{x:Static resources:Texts.CueOnlineMode}"
+                              OffLabel="{x:Static resources:Texts.CueOnlineMode}" />
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Button Margin="{StaticResource ButtonMargin}" Command="{Binding PageFirstCommand}">
+                    <iconPacks:PackIconMaterial Kind="PageFirst" Margin="{StaticResource ButtonMargin}" />
+                </Button>
+                <Button Margin="{StaticResource ButtonMargin}" Command="{Binding PagePreviousCommand}">
+                    <iconPacks:PackIconMaterial Kind="ChevronLeft" Margin="{StaticResource ButtonMargin}" />
+                </Button>
+                <TextBlock Margin="{StaticResource ButtonMargin}" VerticalAlignment="Center" Text="{Binding CurrentPage}" />
+                <Button Margin="{StaticResource ButtonMargin}" Command="{Binding PageNextCommand}">
+                    <iconPacks:PackIconMaterial Kind="ChevronRight" Margin="{StaticResource ButtonMargin}" />
+                </Button>
+                <Button Margin="{StaticResource ButtonMargin}" Command="{Binding PageLastCommand}">
+                    <iconPacks:PackIconMaterial Kind="PageLast" Margin="{StaticResource ButtonMargin}" />
+                </Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>
