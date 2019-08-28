@@ -20,8 +20,11 @@ namespace KFlearning.Core.API
     public interface IKodesianaService
     {
         Task<bool> IsOnline();
-        Task<IEnumerable<Post>> GetPostsAsync(string series = null);
-        Task<IEnumerable<Post>> FindPostAsync(string title, string series = null);
+        Task<string> GetPostAsync(int postId);
         Task<IEnumerable<string>> GetSeriesAsync();
+        Task<PostResponse> GetPostsAsync(int offset, int count);
+        Task<PostResponse> GetPostsAsync(int offset, int count, string series);
+        Task<PostResponse> FindPostAsync(int offset, int count, string title);
+        Task<PostResponse> FindPostAsync(int offset, int count, string title, string series);
     }
 }

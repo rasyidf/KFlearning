@@ -45,6 +45,7 @@
     <Compile Include="API\IKodesianaService.cs" />
     <Compile Include="API\KodesianaService.cs" />
     <Compile Include="API\Post.cs" />
+    <Compile Include="API\PostResponse.cs" />
     <Compile Include="DAL\Article.cs" />
     <Compile Include="DAL\DatabaseContext.cs" />
     <Compile Include="DAL\IDatabaseContext.cs" />

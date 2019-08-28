@@ -25,10 +25,11 @@ namespace KFlearning.Core.API
 {
     public class KodesianaService : IKodesianaService
     {
-        //private const string EndpointBase = "https://api.kodesiana.com/kflearning";
-        private const string EndpointBase = "http://kodesiana-rest.test/kflearning";
+        public const string EndpointBase = "https://api.kodesiana.com/kflearning";
 
         public static HttpClient Client = new HttpClient();
+
+        #region Public Methods
 
         public async Task<bool> IsOnline()
         {
@@ -45,40 +46,65 @@ namespace KFlearning.Core.API
             }
         }
 
-        public async Task<IEnumerable<Post>> GetPostsAsync(string series = null)
+        public async Task<string> GetPostAsync(int postId)
         {
-            var uri = CreateUri(string.IsNullOrEmpty(series) ? "/posts" : "/posts?series=" + series);
-            var response = await Client.GetStreamAsync(uri);
+            var uri = CreateUri($"/posts/{postId}");
+            var response = await Client.GetAsync(uri);
+            response.EnsureSuccessStatusCode();
 
-            return DeserializeStream<List<Post>>(response);
+            return await response.Content.ReadAsStringAsync();
         }
 
-        public async Task<IEnumerable<Post>> FindPostAsync(string title, string series = null)
+        public Task<PostResponse> GetPostsAsync(int offset, int count)
         {
-            var uri = CreateUri(string.IsNullOrEmpty(series)
-                ? "/posts/find?q=" + title
-                : $"/posts/find?q={title}&series={series}");
-            var response = await Client.GetStreamAsync(uri);
+            return GetPostsAsync(offset, count, string.Empty);
+        }
 
-            return DeserializeStream<List<Post>>(response);
+        public async Task<PostResponse> GetPostsAsync(int offset, int count, string series)
+        {
+            var uri = CreateUri($"/posts?series={series}&offset={offset}&count={count}");
+            var response = await Client.GetAsync(uri);
+            response.EnsureSuccessStatusCode();
+
+            return await DeserializeStream<PostResponse>(response.Content);
+        }
+
+        public Task<PostResponse> FindPostAsync(int offset, int count, string title)
+        {
+            return FindPostAsync(offset, count, title, string.Empty);
+        }
+
+        public async Task<PostResponse> FindPostAsync(int offset, int count, string title, string series)
+        {
+            var uri = CreateUri($"/posts/find?title={title}&series={series}&offset={offset}&count={count}");
+            var response = await Client.GetAsync(uri);
+            response.EnsureSuccessStatusCode();
+
+            return await DeserializeStream<PostResponse>(response.Content);
         }
 
         public async Task<IEnumerable<string>> GetSeriesAsync()
         {
-            var uri = CreateUri("/series");
-            var response = await Client.GetStreamAsync(uri);
+            var uri = CreateUri("/posts/series");
+            var response = await Client.GetAsync(uri);
+            response.EnsureSuccessStatusCode();
 
-            return DeserializeStream<List<string>>(response);
-        }
+            return await DeserializeStream<List<string>>(response.Content);
+        } 
+
+        #endregion
+
+        #region Private Methods
 
         private string CreateUri(string path)
         {
             return EndpointBase + path;
         }
 
-        private static T DeserializeStream<T>(Stream stream)
+        private static async Task<T> DeserializeStream<T>(HttpContent content)
         {
-            if (stream == null) return default;
+            if (content == null) return default;
+            using (var stream = await content.ReadAsStreamAsync())
             using (var reader = new StreamReader(stream))
             using (var jsonReader = new JsonTextReader(reader))
             {
@@ -94,6 +120,8 @@ namespace KFlearning.Core.API
 
                 return serializer.Deserialize<T>(jsonReader);
             }
-        }
+        } 
+
+        #endregion
     }
 }
