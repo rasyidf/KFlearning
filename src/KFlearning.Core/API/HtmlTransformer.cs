@@ -15,6 +15,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Net;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -36,8 +37,14 @@ namespace KFlearning.Core.API
         public void TransformHtmlForStyle(string filePath)
         {
             var input = File.ReadAllText(filePath);
-            var content = Constants.HtmlBodyStart + input + Constants.HtmlBodyEnd;
-            File.WriteAllText(filePath, content);
+            var content = new StringBuilder();
+            content.AppendLine(Constants.HtmlBodyStart);
+            content.AppendLine(input);
+            content.Replace("[csharp]", "<pre>");
+            content.Replace("[/csharp]", "</pre>");
+            content.AppendLine(Constants.HtmlBodyEnd);
+            
+            File.WriteAllText(filePath, content.ToString());
         }
 
         private string Evaluator(Match match)
