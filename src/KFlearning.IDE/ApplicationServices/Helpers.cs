@@ -1,15 +1,4 @@
-﻿// 
-//  PROJECT  :   KFlearning
-//  FILENAME :   ApplicationHelpers.cs
-//  AUTHOR   :   Fahmi Noor Fiqri
-//  WEBSITE  : https://kodesiana.com
-//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
-// 
-//  This file is part of KFlearning, licensed under MIT license.
-//  See this code in repository URL above!
-
-#region
-
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -22,29 +11,25 @@ using KFlearning.IDE.Views;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 
-#endregion
-
 namespace KFlearning.IDE.ApplicationServices
 {
-    public class ApplicationHelpers : IApplicationHelpers
+    public static class Helpers
     {
-        public void OpenUrl(string url)
+        // -- URLs
+
+        public static void OpenUrl(string url)
         {
             Process.Start(url);
         }
 
-        public void OpenUrl(string url, string campaign)
+        public static void OpenUrl(string url, string campaign)
         {
             OpenUrl(url + Strings.AnalyticsCampaignQuery + campaign);
         }
 
-        public async Task<string> CreateNewProjectDialog()
-        {
-            var window = (MetroWindow) Application.Current.MainWindow;
-            return await window.ShowInputAsync("Buat Project baru", "Nama project");
-        }
+        // -- Dialogs
 
-        public void ShowReaderWindow(ArticleItem item)
+        public static void ShowReaderWindow(ArticleItem item)
         {
             var args = new Dictionary<string, object>
             {
@@ -56,7 +41,13 @@ namespace KFlearning.IDE.ApplicationServices
             view.Show();
         }
 
-        public async Task<ProgressDialogController> CreateProgressDialog(string title, string message)
+        public static async Task<string> CreateNewProjectDialog()
+        {
+            var window = (MetroWindow) Application.Current.MainWindow;
+            return await window.ShowInputAsync(Texts.NewProjectTitle, Texts.NewProjectName);
+        }
+
+        public static async Task<ProgressDialogController> CreateProgressDialog(string title, string message)
         {
             var window = (MetroWindow) Application.Current.MainWindow;
             var controller = await window.ShowProgressAsync(title, message);
@@ -64,11 +55,24 @@ namespace KFlearning.IDE.ApplicationServices
             return controller;
         }
 
-        public async Task<MessageDialogResult> CreateMessageDialog(string title, string message,
+        public static async Task<MessageDialogResult> CreateMessageDialog(string title, string message,
             MessageDialogStyle style = MessageDialogStyle.Affirmative)
         {
             var window = (MetroWindow) Application.Current.MainWindow;
             return await window.ShowMessageAsync(title, message, style);
+        }
+
+        // -- Pagination 
+
+        public static int CalculateTotalPage(int total, int size)
+        {
+            return (int) Math.Ceiling(decimal.Divide(total, size));
+        }
+
+        public static int CalculatePage(int offset, int size)
+        {
+            var page = offset / size;
+            return page < 1 ? 1 : page;
         }
     }
 }
