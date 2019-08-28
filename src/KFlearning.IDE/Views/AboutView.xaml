@@ -37,13 +37,6 @@
                                Margin="{StaticResource ButtonMargin}" />
                 </StackPanel>
             </Button>
-            <Button Margin="{StaticResource ButtonMargin}" Command="{Binding TwitterCommand}">
-                <StackPanel Orientation="Horizontal">
-                    <iconPacks:PackIconMaterial Kind="Twitter" Margin="{StaticResource ButtonMargin}" />
-                    <TextBlock Text="{x:Static resources:Texts.ActionOpenTwitter}"
-                               Margin="{StaticResource ButtonMargin}" />
-                </StackPanel>
-            </Button>
             <Button Margin="{StaticResource ButtonMargin}" Command="{Binding InstagramCommand}">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="Instagram" Margin="{StaticResource ButtonMargin}" />
