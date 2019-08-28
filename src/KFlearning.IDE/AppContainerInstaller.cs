@@ -31,10 +31,7 @@ namespace KFlearning.IDE
                 Classes.FromAssemblyNamed("KFlearning.Core").Pick().WithServiceAllInterfaces().LifestyleSingleton(),
 
                 // application specific
-                Classes.FromThisAssembly().InSameNamespaceAs<IApplicationHelpers>().WithServiceDefaultInterfaces()
-                    .ConfigureFor<NotifyPropertChangedInterceptor>(x => x.LifestyleTransient())
-                    .ConfigureFor<PropertyChangedBase>(x => x.LifestyleTransient())
-                    .Configure(x => x.LifestyleSingleton()),
+                Component.For<NotifyPropertChangedInterceptor>().LifestyleTransient(),
                 Classes.FromThisAssembly().InSameNamespaceAs<ShellView>().LifestyleTransient(),
                 Classes.FromThisAssembly().InSameNamespaceAs<ShellViewModel>()
                     .Configure(x => x.Interceptors<NotifyPropertChangedInterceptor>().LifestyleTransient())

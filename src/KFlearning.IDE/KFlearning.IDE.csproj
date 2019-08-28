@@ -135,8 +135,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AppContainerInstaller.cs" />
-    <Compile Include="ApplicationServices\ApplicationHelpers.cs" />
-    <Compile Include="ApplicationServices\IApplicationHelpers.cs" />
+    <Compile Include="ApplicationServices\Helpers.cs" />
     <Compile Include="ApplicationServices\MVVM\IAutoNotifyPropertyChanged.cs" />
     <Compile Include="ApplicationServices\MVVM\NotifyPropertChangedInterceptor.cs" />
     <Compile Include="ApplicationServices\MVVM\NotifyChangedAttribute.cs" />
