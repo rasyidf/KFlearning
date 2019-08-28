@@ -25,10 +25,10 @@ namespace KFlearning.IDE.ViewModels
     {
         #region Constructor
 
-        public ShellViewModel(IApplicationHelpers helpers)
+        public ShellViewModel()
         {
-            WebCommand = new RelayCommand(x => helpers.OpenUrl(Strings.WebNavUrl));
-            GitHubCommand = new RelayCommand(x => helpers.OpenUrl(Strings.GitHubUrl));
+            WebCommand = new RelayCommand(x => Helpers.OpenUrl(Strings.WebUrl, Strings.CampaignNav));
+            GitHubCommand = new RelayCommand(x => Helpers.OpenUrl(Strings.GitHubUrl));
             ItemClickCommand = new RelayCommand(ItemClick_Command);
 
             PopulateView();

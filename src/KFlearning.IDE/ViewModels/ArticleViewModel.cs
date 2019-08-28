@@ -20,6 +20,7 @@ using KFlearning.Core.API;
 using KFlearning.Core.DAL;
 using KFlearning.IDE.ApplicationServices;
 using KFlearning.IDE.Models;
+using KFlearning.IDE.Resources;
 
 #endregion
 
@@ -29,17 +30,21 @@ namespace KFlearning.IDE.ViewModels
     {
         #region Fields
 
-        private readonly IApplicationHelpers _helpers;
+        public const int PageSize = 20;
+
         private readonly IDatabaseContext _database;
         private readonly IKodesianaService _kodesiana;
+
+        private bool _isSearchMode;
+        private int _currentPage = 1;
+        private int _totalPage = 1;
 
         #endregion
 
         #region Constructor
 
-        public ArticleViewModel(IApplicationHelpers helpers, IDatabaseContext database, IKodesianaService kodesiana)
+        public ArticleViewModel(IDatabaseContext database, IKodesianaService kodesiana)
         {
-            _helpers = helpers;
             _database = database;
             _kodesiana = kodesiana;
 
@@ -47,6 +52,10 @@ namespace KFlearning.IDE.ViewModels
             SearchCommand = new RelayCommand(Search_Command);
             OnlineChangedCommand = new RelayCommand(Online_Command);
             ArticleDoubleClickCommand = new RelayCommand(ArticleDoubleClick_Command);
+            PageFirstCommand = new RelayCommand(PageFirst_Command);
+            PagePreviousCommand = new RelayCommand(PagePrevious_Command);
+            PageNextCommand = new RelayCommand(PageNext_Command);
+            PageLastCommand = new RelayCommand(PageLast_Command);
 
             Task.Run(LoadData);
         }
@@ -63,17 +72,34 @@ namespace KFlearning.IDE.ViewModels
 
         public ICommand ArticleDoubleClickCommand { get; set; }
 
-        [NotifyChanged] public virtual bool CommandIsLoading { get; set; }
+        public ICommand PageFirstCommand { get; set; }
 
-        [NotifyChanged] public virtual ObservableCollection<ArticleItem> Articles { get; set; }
+        public ICommand PagePreviousCommand { get; set; }
 
-        [NotifyChanged] public virtual ObservableCollection<SeriesItem> Series { get; set; }
+        public ICommand PageNextCommand { get; set; }
 
-        [NotifyChanged] public virtual SeriesItem SelectedSeries { get; set; }
+        public ICommand PageLastCommand { get; set; }
 
-        [NotifyChanged] public virtual bool OfflineIsChecked { get; set; }
+        [NotifyChanged] 
+        public virtual bool CommandIsLoading { get; set; }
 
-        [NotifyChanged] public virtual string SearchText { get; set; }
+        [NotifyChanged]
+        public virtual ObservableCollection<ArticleItem> Articles { get; set; }
+
+        [NotifyChanged] 
+        public virtual ObservableCollection<SeriesItem> Series { get; set; }
+
+        [NotifyChanged] 
+        public virtual SeriesItem SelectedSeries { get; set; }
+
+        [NotifyChanged] 
+        public virtual bool OfflineIsChecked { get; set; } = true;
+
+        [NotifyChanged] 
+        public virtual string SearchText { get; set; }
+
+        [NotifyChanged]
+        public virtual string CurrentPage { get; set; }
 
         #endregion
 
@@ -81,7 +107,7 @@ namespace KFlearning.IDE.ViewModels
 
         private void ArticleDoubleClick_Command(object obj)
         {
-            _helpers.ShowReaderWindow((ArticleItem) obj);
+            Helpers.ShowReaderWindow((ArticleItem) obj);
         }
 
         private async void Online_Command(object obj)
@@ -89,11 +115,12 @@ namespace KFlearning.IDE.ViewModels
             try
             {
                 CommandIsLoading = true;
+                _isSearchMode = false;
                 await LoadData();
             }
-            catch (Exception)
+            catch
             {
-                await _helpers.CreateMessageDialog("Error", "Maaf, tidak dapat memuat daftar artikel. Coba lagi.");
+                await Helpers.CreateMessageDialog(Texts.CantLoadArticleTitle, Texts.CantLoadArticleMessage);
             }
 
             CommandIsLoading = false;
@@ -104,11 +131,12 @@ namespace KFlearning.IDE.ViewModels
             try
             {
                 CommandIsLoading = true;
+                _isSearchMode = false;
                 await LoadData();
             }
-            catch (Exception ex)
+            catch
             {
-                await _helpers.CreateMessageDialog("Error", "Maaf, tidak dapat memuat daftar artikel. Coba lagi.");
+                await Helpers.CreateMessageDialog(Texts.CantLoadArticleTitle, Texts.CantLoadArticleMessage);
             }
 
             CommandIsLoading = false;
@@ -119,25 +147,82 @@ namespace KFlearning.IDE.ViewModels
             try
             {
                 CommandIsLoading = true;
-
-                List<ArticleItem> articles;
-                if (OfflineIsChecked)
-                {
-                    articles = _database.Articles
-                        .Find(x => SelectedSeries.Title == x.Series && x.Title.Contains(SearchText))
-                        .Select(x => new ArticleItem(x)).ToList();
-                }
-                else
-                {
-                    var result = await _kodesiana.FindPostAsync(SearchText, SelectedSeries.Title);
-                    articles = result.Select(x => new ArticleItem(x)).ToList();
-                }
-
-                Articles = new ObservableCollection<ArticleItem>(articles);
+                _isSearchMode = true;
+                await SearchData();
             }
-            catch (Exception)
+            catch
             {
-                await _helpers.CreateMessageDialog("Error", "Maaf, tidak dapat memuat daftar artikel. Coba lagi.");
+                await Helpers.CreateMessageDialog(Texts.CantLoadArticleTitle, Texts.CantLoadArticleMessage);
+            }
+
+            CommandIsLoading = false;
+        }
+
+        private async void PageLast_Command(object obj)
+        {
+            if (_currentPage == _totalPage) return;
+
+            try
+            {
+                CommandIsLoading = true;
+                _currentPage = _totalPage;
+                await ProcessData();
+            }
+            catch
+            {
+                await Helpers.CreateMessageDialog(Texts.CantLoadArticleTitle, Texts.CantLoadArticleMessage);
+            }
+
+            CommandIsLoading = false;
+        }
+
+        private async void PageNext_Command(object obj)
+        {
+            if (_currentPage < _totalPage) return;
+
+            try
+            {
+                CommandIsLoading = true;
+                _currentPage++;
+                await ProcessData();
+            }
+            catch
+            {
+                await Helpers.CreateMessageDialog(Texts.CantLoadArticleTitle, Texts.CantLoadArticleMessage);
+            }
+
+            CommandIsLoading = false;
+        }
+
+        private async void PagePrevious_Command(object obj)
+        {
+            if (_currentPage < _totalPage) return;
+
+            try
+            {
+                CommandIsLoading = true;
+                _currentPage--;
+                await ProcessData();
+            }
+            catch
+            {
+                await Helpers.CreateMessageDialog(Texts.CantLoadArticleTitle, Texts.CantLoadArticleMessage);
+            }
+        }
+
+        private async void PageFirst_Command(object obj)
+        {
+            if (_currentPage == 1) return;
+
+            try
+            {
+                CommandIsLoading = true;
+                _currentPage = 1;
+                await ProcessData();
+            }
+            catch
+            {
+                await Helpers.CreateMessageDialog(Texts.CantLoadArticleTitle, Texts.CantLoadArticleMessage);
             }
 
             CommandIsLoading = false;
@@ -147,10 +232,54 @@ namespace KFlearning.IDE.ViewModels
 
         #region Private Methods
 
+        private async Task ProcessData()
+        {
+            if (_isSearchMode)
+            {
+                await SearchData();
+            }
+            else
+            {
+                await LoadData();
+            }
+        }
+
+        private async Task SearchData()
+        {
+            List<ArticleItem> articles;
+            var offset = _currentPage * PageSize;
+
+            if (OfflineIsChecked)
+            {
+                articles = _database.Articles
+                    .Find(x => SelectedSeries.Title == x.Series && x.Title.Contains(SearchText))
+                    .Select(x => new ArticleItem(x)).ToList();
+
+                _currentPage = Helpers.CalculatePage(offset, PageSize);
+                _totalPage = Helpers.CalculateTotalPage(articles.Count, PageSize);
+
+                var skip = _currentPage * PageSize;
+                articles = articles.Skip(skip).Take(PageSize).ToList();
+            }
+            else
+            {
+                var result = await _kodesiana.FindPostAsync(offset, PageSize, SearchText, SelectedSeries.Title);
+                articles = result.Posts.Select(x => new ArticleItem(x)).ToList();
+
+                _currentPage = Helpers.CalculatePage(result.Offset, PageSize);
+                _totalPage = Helpers.CalculateTotalPage(result.Total, PageSize);
+            }
+
+            Articles = new ObservableCollection<ArticleItem>(articles);
+            CurrentPage = _currentPage.ToString();
+        }
+
         private async Task LoadData()
         {
             List<SeriesItem> series;
             List<ArticleItem> articles = null;
+            var offset = _currentPage * PageSize;
+
             if (OfflineIsChecked)
             {
                 series = _database.Series.FindAll().Select(x => new SeriesItem(x.Title)).ToList();
@@ -158,6 +287,17 @@ namespace KFlearning.IDE.ViewModels
                 {
                     articles = _database.Articles.Find(x => x.Series == series.First().Title)
                         .Select(x => new ArticleItem(x)).ToList();
+
+                    _currentPage = Helpers.CalculatePage(offset, PageSize);
+                    _totalPage = Helpers.CalculateTotalPage(articles.Count, PageSize);
+
+                    var skip = (_currentPage - 1) * PageSize;
+                    articles = articles.Skip(skip).Take(PageSize).ToList();
+                }
+                else
+                {
+                    _currentPage = 1;
+                    _totalPage = 1;
                 }
             }
             else
@@ -166,14 +306,23 @@ namespace KFlearning.IDE.ViewModels
                 series = seriesResult.Select(x => new SeriesItem(x)).ToList();
                 if (series.Any())
                 {
-                    var articlesResult = await _kodesiana.GetPostsAsync(series.First().Title);
-                    articles = articlesResult.Select(x => new ArticleItem(x)).ToList();
+                    var articlesResult = await _kodesiana.GetPostsAsync(offset, PageSize, series.First().Title);
+                    articles = articlesResult.Posts.Select(x => new ArticleItem(x)).ToList();
+
+                    _currentPage = Helpers.CalculatePage(articlesResult.Offset, PageSize);
+                    _totalPage = Helpers.CalculateTotalPage(articlesResult.Total, PageSize);
+                }
+                else
+                {
+                    _currentPage = 1;
+                    _totalPage = 1;
                 }
             }
 
             Series = new ObservableCollection<SeriesItem>(series);
             SelectedSeries = series.Any() ? Series[0] : null;
             Articles = articles != null ? new ObservableCollection<ArticleItem>(articles) : null;
+            CurrentPage = _currentPage.ToString();
         }
 
         #endregion

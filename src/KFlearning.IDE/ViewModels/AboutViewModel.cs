@@ -26,20 +26,17 @@ namespace KFlearning.IDE.ViewModels
 
         public ICommand GitHubCommand { get; set; }
 
-        public ICommand TwitterCommand { get; set; }
-
         public ICommand InstagramCommand { get; set; }
 
         #endregion
 
         #region Constructor
 
-        public AboutViewModel(IApplicationHelpers helpers)
+        public AboutViewModel()
         {
-            WebCommand = new RelayCommand(x => helpers.OpenUrl(Strings.WebAboutUrl, Strings.CampaignAbout));
-            GitHubCommand = new RelayCommand(x => helpers.OpenUrl(Strings.GitHubUrl));
-            TwitterCommand = new RelayCommand(x => helpers.OpenUrl(Strings.TwitterUrl));
-            InstagramCommand = new RelayCommand(x => helpers.OpenUrl(Strings.InstagramUrl));
+            WebCommand = new RelayCommand(x => Helpers.OpenUrl(Strings.WebUrl, Strings.CampaignAbout));
+            GitHubCommand = new RelayCommand(x => Helpers.OpenUrl(Strings.GitHubUrl));
+            InstagramCommand = new RelayCommand(x => Helpers.OpenUrl(Strings.InstagramUrl));
         }
 
         #endregion

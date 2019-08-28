@@ -31,7 +31,6 @@ namespace KFlearning.IDE.ViewModels
 
         private readonly IProjectManager _projectManager;
         private readonly IProjectHandler _projectHandler;
-        private readonly IApplicationHelpers _helpers;
         private readonly OpenFileDialog _ofd;
         private readonly SaveFileDialog _sfd;
 
@@ -65,11 +64,9 @@ namespace KFlearning.IDE.ViewModels
 
         #region Constructor
 
-        public ProjectViewModel(IProjectManager projectManager, IApplicationHelpers helpers,
-            IProjectHandler projectHandler)
+        public ProjectViewModel(IProjectManager projectManager, IProjectHandler projectHandler)
         {
             _projectManager = projectManager;
-            _helpers = helpers;
             _projectHandler = projectHandler;
 
             _ofd = new OpenFileDialog
@@ -105,15 +102,15 @@ namespace KFlearning.IDE.ViewModels
 
         private async void Create_Command(object obj)
         {
-            var projectName = await _helpers.CreateNewProjectDialog();
+            var projectName = await Helpers.CreateNewProjectDialog();
             if (string.IsNullOrWhiteSpace(projectName)) return;
             if (_projectManager.Exists(projectName))
             {
-                await _helpers.CreateMessageDialog(Texts.TitleCreateProject, Texts.CreateProjectDuplicateMessage);
+                await Helpers.CreateMessageDialog(Texts.TitleCreateProject, Texts.CreateProjectDuplicateMessage);
                 return;
             }
 
-            var controller = await _helpers.CreateProgressDialog(Texts.TitleCreateProject, Texts.CreateProjectMessage);
+            var controller = await Helpers.CreateProgressDialog(Texts.TitleCreateProject, Texts.CreateProjectMessage);
             await Task.Run(() => _projectManager.Create(projectName))
                 .ContinueWith(x => controller.CloseAsync())
                 .ContinueWith(x => LoadData());
@@ -123,11 +120,11 @@ namespace KFlearning.IDE.ViewModels
         {
             if (SelectedProject == null)
             {
-                await _helpers.CreateMessageDialog(Texts.TitleNoProject, Texts.NoProjectMessage);
+                await Helpers.CreateMessageDialog(Texts.TitleNoProject, Texts.NoProjectMessage);
                 return;
             }
 
-            var controller = await _helpers.CreateProgressDialog(Texts.TitleDelete, Texts.DeleteMessage);
+            var controller = await Helpers.CreateProgressDialog(Texts.TitleDelete, Texts.DeleteMessage);
             await Task.Run(() => _projectManager.Delete(SelectedProject.Item))
                 .ContinueWith(x => controller.CloseAsync())
                 .ContinueWith(x => LoadData());
@@ -138,11 +135,11 @@ namespace KFlearning.IDE.ViewModels
             if (_sfd.ShowDialog() == false) return;
             if (!_projectManager.CheckImportZip(_sfd.FileName))
             {
-                await _helpers.CreateMessageDialog(Texts.TitleImport, Strings.ImportIncompatibleMessage);
+                await Helpers.CreateMessageDialog(Texts.TitleImport, Strings.ImportIncompatibleMessage);
                 return;
             }
 
-            var controller = await _helpers.CreateProgressDialog(Texts.TitleImport, Texts.ImportMessage);
+            var controller = await Helpers.CreateProgressDialog(Texts.TitleImport, Texts.ImportMessage);
             await Task.Run(() => _projectManager.Import(_sfd.FileName))
                 .ContinueWith(x => controller.CloseAsync())
                 .ContinueWith(x => LoadData());
@@ -152,12 +149,12 @@ namespace KFlearning.IDE.ViewModels
         {
             if (SelectedProject == null)
             {
-                await _helpers.CreateMessageDialog(Texts.TitleNoProject, Texts.NoProjectMessage);
+                await Helpers.CreateMessageDialog(Texts.TitleNoProject, Texts.NoProjectMessage);
                 return;
             }
             if (_ofd.ShowDialog() == false) return;
 
-            var controller = await _helpers.CreateProgressDialog(Texts.TitleExport, Texts.ExportMessage);
+            var controller = await Helpers.CreateProgressDialog(Texts.TitleExport, Texts.ExportMessage);
             await Task.Run(() => _projectManager.Export(SelectedProject.Item, _ofd.FileName))
                 .ContinueWith(x => controller.CloseAsync())
                 .ContinueWith(x => LoadData());
@@ -165,11 +162,11 @@ namespace KFlearning.IDE.ViewModels
 
         private async void Purge_Command(object obj)
         {
-            var result = await _helpers.CreateMessageDialog(Texts.TitlePurge, Texts.PurgeConfirmMessage,
+            var result = await Helpers.CreateMessageDialog(Texts.TitlePurge, Texts.PurgeConfirmMessage,
                 MessageDialogStyle.AffirmativeAndNegative);
 
             if (result != MessageDialogResult.Affirmative) return;
-            var controller = await _helpers.CreateProgressDialog(Texts.TitlePurge, Texts.PurgeProcessMessage);
+            var controller = await Helpers.CreateProgressDialog(Texts.TitlePurge, Texts.PurgeProcessMessage);
             await Task.Run(() => _projectManager.Purge())
                 .ContinueWith(x => controller.CloseAsync())
                 .ContinueWith(x => LoadData());
@@ -179,11 +176,11 @@ namespace KFlearning.IDE.ViewModels
         {
             if (SelectedProject == null)
             {
-                await _helpers.CreateMessageDialog(Texts.TitleNoProject, Texts.NoProjectMessage);
+                await Helpers.CreateMessageDialog(Texts.TitleNoProject, Texts.NoProjectMessage);
                 return;
             }
 
-            var controller = await _helpers.CreateProgressDialog(Texts.TitleInitCpp, Texts.InitCppMessage);
+            var controller = await Helpers.CreateProgressDialog(Texts.TitleInitCpp, Texts.InitCppMessage);
             await Task.Run(() => _projectHandler.InitializeCpp(SelectedProject.Item))
                 .ContinueWith(x => controller.CloseAsync());
         }
@@ -192,16 +189,16 @@ namespace KFlearning.IDE.ViewModels
         {
             if (SelectedProject == null)
             {
-                await _helpers.CreateMessageDialog(Texts.TitleNoProject, Texts.NoProjectMessage);
+                await Helpers.CreateMessageDialog(Texts.TitleNoProject, Texts.NoProjectMessage);
                 return;
             }
             if (!_projectHandler.CanModifyLink())
             {
-                await _helpers.CreateMessageDialog(Texts.NotElevatedTitle, Texts.NotElevatedMessage);
+                await Helpers.CreateMessageDialog(Texts.NotElevatedTitle, Texts.NotElevatedMessage);
                 return;
             }
 
-            var controller = await _helpers.CreateProgressDialog(Texts.TitleAlias, Texts.AliasCreatingMessage);
+            var controller = await Helpers.CreateProgressDialog(Texts.TitleAlias, Texts.AliasCreatingMessage);
             await Task.Run(() => _projectHandler.CreateLink(SelectedProject.Item))
                 .ContinueWith(x => controller.CloseAsync());
         }
@@ -210,16 +207,16 @@ namespace KFlearning.IDE.ViewModels
         {
             if (SelectedProject == null)
             {
-                await _helpers.CreateMessageDialog(Texts.TitleNoProject, Texts.NoProjectMessage);
+                await Helpers.CreateMessageDialog(Texts.TitleNoProject, Texts.NoProjectMessage);
                 return;
             }
             if (!_projectHandler.CanModifyLink())
             {
-                await _helpers.CreateMessageDialog(Texts.NotElevatedTitle, Texts.NotElevatedMessage);
+                await Helpers.CreateMessageDialog(Texts.NotElevatedTitle, Texts.NotElevatedMessage);
                 return;
             }
 
-            var controller = await _helpers.CreateProgressDialog(Texts.TitleAlias, Texts.AliasRemovingMessage);
+            var controller = await Helpers.CreateProgressDialog(Texts.TitleAlias, Texts.AliasRemovingMessage);
             await Task.Run(() => _projectHandler.RemoveLink(SelectedProject.Item))
                 .ContinueWith(x => controller.CloseAsync());
         }
@@ -228,7 +225,7 @@ namespace KFlearning.IDE.ViewModels
         {
             if (SelectedProject == null)
             {
-                await _helpers.CreateMessageDialog(Texts.TitleNoProject, Texts.NoProjectMessage);
+                await Helpers.CreateMessageDialog(Texts.TitleNoProject, Texts.NoProjectMessage);
                 return;
             }
 

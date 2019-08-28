@@ -26,31 +26,13 @@ namespace KFlearning.IDE.ViewModels
 {
     public class ReaderViewModel : PropertyChangedBase
     {
-        #region Constructor
-
-        public ReaderViewModel(ArticleItem item, IApplicationHelpers helpers, IHtmlTransformer htmlTransformer,
-            IDatabaseContext database)
-        {
-            _item = item;
-            _helpers = helpers;
-            _htmlTransformer = htmlTransformer;
-            _database = database;
-
-            WindowClosingCommand = new RelayCommand(WindowClosing_Command);
-            OpenWebCommand = new RelayCommand(OpenWeb_Command);
-            OpenSourceCommand = new RelayCommand(OpenSource_Command);
-
-            LoadPage();
-        }
-
-        #endregion
-
         #region Fields
 
         private readonly ArticleItem _item;
-        private readonly IApplicationHelpers _helpers;
         private readonly IHtmlTransformer _htmlTransformer;
         private readonly IDatabaseContext _database;
+        private readonly IKodesianaService _kodesiana;
+
         private string _tempFile;
 
         #endregion
@@ -71,6 +53,25 @@ namespace KFlearning.IDE.ViewModels
 
         #endregion
 
+        #region Constructor
+
+        public ReaderViewModel(ArticleItem item, IHtmlTransformer htmlTransformer, IDatabaseContext database,
+            IKodesianaService kodesiana)
+        {
+            _item = item;
+            _htmlTransformer = htmlTransformer;
+            _database = database;
+            _kodesiana = kodesiana;
+
+            WindowClosingCommand = new RelayCommand(WindowClosing_Command);
+            OpenWebCommand = new RelayCommand(OpenWeb_Command);
+            OpenSourceCommand = new RelayCommand(OpenSource_Command);
+
+            Task.Run(LoadPage);
+        }
+
+        #endregion
+
         #region Commands
 
         private void WindowClosing_Command(object obj)
@@ -80,19 +81,19 @@ namespace KFlearning.IDE.ViewModels
 
         private void OpenWeb_Command(object obj)
         {
-            _helpers.OpenUrl(_item.Url, Strings.CampaignReader);
+            Helpers.OpenUrl(_item.Url, Strings.CampaignReader);
         }
 
         private void OpenSource_Command(object obj)
         {
-            throw new NotImplementedException();
+            Helpers.OpenUrl(_item.SourceUrl);
         }
 
         #endregion
 
         #region Private Methods
 
-        private void LoadPage()
+        private async Task LoadPage()
         {
             _tempFile = Path.GetTempFileName();
             switch (_item.Item)
@@ -113,7 +114,8 @@ namespace KFlearning.IDE.ViewModels
 
                 case Post post:
                 {
-                    File.WriteAllText(_tempFile, post.Content);
+                    var postContent = await _kodesiana.GetPostAsync(post.Id);
+                    File.WriteAllText(_tempFile, postContent);
                     _htmlTransformer.TransformHtmlForStyle(_tempFile);
 
                     PageSource = _tempFile;
@@ -130,6 +132,7 @@ namespace KFlearning.IDE.ViewModels
             if (SavedIsChecked)
             {
                 if (!(_item.Item is Post post)) return;
+                if (_database.Articles.Exists(x => x.Title == post.Title)) return;
 
                 // add series, if not already added
                 if (!_database.Series.Exists(x => x.Title == post.Series))
