@@ -28,6 +28,7 @@ namespace KFlearning.IDE.Models
             Level = article.Level;
             Series = article.Series;
             Url = article.Url;
+            SourceUrl = article.SourceUrl;
         }
 
         public ArticleItem(Post post)
@@ -38,6 +39,7 @@ namespace KFlearning.IDE.Models
             Level = post.Level;
             Series = post.Series;
             Url = post.Url;
+            SourceUrl = post.SourceUrl;
         }
 
         public DateTime Date { get; }
@@ -49,6 +51,8 @@ namespace KFlearning.IDE.Models
         public string Series { get; }
 
         public string Url { get; }
+
+        public string SourceUrl { get; }
 
         public object Item { get; }
     }
