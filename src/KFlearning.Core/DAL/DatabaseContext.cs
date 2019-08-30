@@ -10,6 +10,7 @@
 
 #region
 
+using KFlearning.Core.IO;
 using LiteDB;
 
 #endregion
@@ -18,9 +19,13 @@ namespace KFlearning.Core.DAL
 {
     public class DatabaseContext : IDatabaseContext
     {
-        public DatabaseContext()
+        private readonly IPathManager _path;
+
+        public DatabaseContext(IPathManager path)
         {
-            Database = new LiteDatabase(Constants.DatabaseConnectionString);
+            _path = path;
+            var databasePath = _path.Combine(PathKind.PathKflearningRoot, Constants.DatabaseConnectionString);
+            Database = new LiteDatabase(databasePath);
         }
 
         public LiteDatabase Database { get; }
