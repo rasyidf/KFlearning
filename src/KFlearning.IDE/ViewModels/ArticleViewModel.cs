@@ -21,6 +21,7 @@ using KFlearning.Core.DAL;
 using KFlearning.IDE.ApplicationServices;
 using KFlearning.IDE.Models;
 using KFlearning.IDE.Resources;
+using LiteDB;
 
 #endregion
 
@@ -278,7 +279,6 @@ namespace KFlearning.IDE.ViewModels
         {
             List<SeriesItem> series;
             List<ArticleItem> articles = null;
-            var offset = _currentPage * PageSize;
 
             if (OfflineIsChecked)
             {
@@ -288,7 +288,7 @@ namespace KFlearning.IDE.ViewModels
                     articles = _database.Articles.Find(x => x.Series == series.First().Title)
                         .Select(x => new ArticleItem(x)).ToList();
 
-                    _currentPage = Helpers.CalculatePage(offset, PageSize);
+                    _currentPage = Helpers.CalculatePage(_currentPage * PageSize, PageSize);
                     _totalPage = Helpers.CalculateTotalPage(articles.Count, PageSize);
 
                     var skip = (_currentPage - 1) * PageSize;
@@ -306,6 +306,7 @@ namespace KFlearning.IDE.ViewModels
                 series = seriesResult.Select(x => new SeriesItem(x)).ToList();
                 if (series.Any())
                 {
+                    var offset = (_currentPage - 1) * PageSize;
                     var articlesResult = await _kodesiana.GetPostsAsync(offset, PageSize, series.First().Title);
                     articles = articlesResult.Posts.Select(x => new ArticleItem(x)).ToList();
 
