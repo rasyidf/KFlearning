@@ -10,6 +10,7 @@
 
 #region
 
+using System;
 using System.Threading;
 using KFlearning.Core.IO;
 using KFlearning.Core.Services.Installer;
@@ -32,7 +33,8 @@ namespace KFlearning.Core.Services.Sequence
 
             // find zip and extract
             progress.ReportMessage("Extracting Visual Studio Code...");
-            var vscodeZip = fileSystem.FindFile(definition.DataPath, "vscode-*");
+            var vscodeName = Environment.Is64BitOperatingSystem ? "VSCode-win32-x64*" : "VSCode-win32-ia32*";
+            var vscodeZip = fileSystem.FindFile(definition.DataPath, vscodeName);
             using (var extractor = new ZipExtractor((s, e) => progress.ReportNodeProgress(e.ProgressPercentage)))
             {
                 extractor.ExtractAll(vscodeZip, root);
