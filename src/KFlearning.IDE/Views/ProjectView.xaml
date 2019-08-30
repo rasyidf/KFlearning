@@ -62,9 +62,9 @@
                   ItemsSource="{Binding Projects}" SelectedItem="{Binding SelectedProject}">
             <ListView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Hapus" Command="{Binding DeleteCommand}">
+                    <MenuItem Header="Buka Folder" Command="{Binding OpenFolderCommand}">
                         <MenuItem.Icon>
-                            <iconPacks:PackIconMaterial Kind="Delete" Style="{StaticResource ContextMenuPackIconStyle}" />
+                            <iconPacks:PackIconMaterial Kind="Folder" Style="{StaticResource ContextMenuPackIconStyle}" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="Ekspor" Command="{Binding ExportCommand}">

@@ -14,6 +14,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using KFlearning.Core.IO;
 using KFlearning.Core.Services;
 using KFlearning.IDE.ApplicationServices;
 using KFlearning.IDE.Models;
@@ -29,6 +30,7 @@ namespace KFlearning.IDE.ViewModels
     {
         #region Fields
 
+        private readonly IPathManager _path;
         private readonly IProjectManager _projectManager;
         private readonly IProjectHandler _projectHandler;
         private readonly OpenFileDialog _ofd;
@@ -48,6 +50,8 @@ namespace KFlearning.IDE.ViewModels
 
         public ICommand PurgeCommand { get; set; }
 
+        public ICommand OpenFolderCommand { get; set; }
+
         public ICommand InitializeCppCommand { get; set; }
 
         public ICommand CreateLinkCommand { get; set; }
@@ -64,10 +68,11 @@ namespace KFlearning.IDE.ViewModels
 
         #region Constructor
 
-        public ProjectViewModel(IProjectManager projectManager, IProjectHandler projectHandler)
+        public ProjectViewModel(IProjectManager projectManager, IProjectHandler projectHandler, IPathManager path)
         {
             _projectManager = projectManager;
             _projectHandler = projectHandler;
+            _path = path;
 
             _ofd = new OpenFileDialog
             {
@@ -88,6 +93,7 @@ namespace KFlearning.IDE.ViewModels
             ImportCommand = new RelayCommand(Import_Command);
             ExportCommand = new RelayCommand(Export_Command);
             PurgeCommand = new RelayCommand(Purge_Command);
+            OpenFolderCommand = new RelayCommand(OpenFolder_Command);
             InitializeCppCommand = new RelayCommand(InitializeCpp_Command);
             CreateLinkCommand = new RelayCommand(CreateLink_Command);
             DeleteLinkCommand = new RelayCommand(DeleteLink_Command);
@@ -132,15 +138,15 @@ namespace KFlearning.IDE.ViewModels
 
         private async void Import_Command(object obj)
         {
-            if (_sfd.ShowDialog() == false) return;
-            if (!_projectManager.CheckImportZip(_sfd.FileName))
+            if (_ofd.ShowDialog() == false) return;
+            if (!_projectManager.CheckImportZip(_ofd.FileName))
             {
                 await Helpers.CreateMessageDialog(Texts.TitleImport, Strings.ImportIncompatibleMessage);
                 return;
             }
 
             var controller = await Helpers.CreateProgressDialog(Texts.TitleImport, Texts.ImportMessage);
-            await Task.Run(() => _projectManager.Import(_sfd.FileName))
+            await Task.Run(() => _projectManager.Import(_ofd.FileName))
                 .ContinueWith(x => controller.CloseAsync())
                 .ContinueWith(x => LoadData());
         }
@@ -152,10 +158,10 @@ namespace KFlearning.IDE.ViewModels
                 await Helpers.CreateMessageDialog(Texts.TitleNoProject, Texts.NoProjectMessage);
                 return;
             }
-            if (_ofd.ShowDialog() == false) return;
+            if (_sfd.ShowDialog() == false) return;
 
             var controller = await Helpers.CreateProgressDialog(Texts.TitleExport, Texts.ExportMessage);
-            await Task.Run(() => _projectManager.Export(SelectedProject.Item, _ofd.FileName))
+            await Task.Run(() => _projectManager.Export(SelectedProject.Item, _sfd.FileName))
                 .ContinueWith(x => controller.CloseAsync())
                 .ContinueWith(x => LoadData());
         }
@@ -170,6 +176,17 @@ namespace KFlearning.IDE.ViewModels
             await Task.Run(() => _projectManager.Purge())
                 .ContinueWith(x => controller.CloseAsync())
                 .ContinueWith(x => LoadData());
+        }
+
+        private async void OpenFolder_Command(object obj)
+        {
+            if (SelectedProject == null)
+            {
+                await Helpers.CreateMessageDialog(Texts.TitleNoProject, Texts.NoProjectMessage);
+                return;
+            }
+
+            _path.LaunchExplorer(SelectedProject.Path);
         }
 
         private async void InitializeCpp_Command(object obj)

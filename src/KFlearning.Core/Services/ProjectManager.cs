@@ -12,6 +12,7 @@
 
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using ICSharpCode.SharpZipLib.Zip;
 using KFlearning.Core.DAL;
@@ -79,7 +80,7 @@ namespace KFlearning.Core.Services
         {
             using (var zip = new ZipFile(zipFile))
             {
-                return zip.FindEntry(Constants.MetadataFileName, true) != -1;
+                return zip.Cast<ZipEntry>().Any(x => x.Name.Contains(Constants.MetadataFileName));
             }
         }
 
@@ -105,9 +106,12 @@ namespace KFlearning.Core.Services
 
         public void Export(Project project, string savePath)
         {
-            using (var zip = new ZipFile(savePath))
+            using (var zip = ZipFile.Create(savePath))
             {
                 var files = Directory.EnumerateFiles(project.Path, "*", SearchOption.AllDirectories);
+                zip.NameTransform = new ZipNameTransform(project.Path);
+
+                zip.BeginUpdate();
                 foreach (string dire in files)
                 {
                     zip.Add(dire, CompressionMethod.Deflated);
