@@ -25,10 +25,6 @@ namespace KFlearning.Core.IO
 
         public event EventHandler<ZipExtractEventArgs> StatusChanged;
 
-        public ZipExtractor()
-        {
-        }
-
         public ZipExtractor(EventHandler<ZipExtractEventArgs> statusChangedHandler)
         {
             _statusChangedHandler = statusChangedHandler;
