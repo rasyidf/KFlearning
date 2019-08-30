@@ -35,34 +35,6 @@ namespace KFlearning.Core.Services.Sequence
             {
                 extractor.ExtractAll(apacheZip, path.GetPath(PathKind.PathKflearningRoot));
             }
-
-            // save content
-            progress.ReportMessage("Creating default hosts...");
-            var contentPath = path.Combine(PathKind.PathBase, @"etc\kflearning\index.html");
-            fileSystem.WriteFile(contentPath, Constants.IndexPageHtml);
-
-            contentPath = path.Combine(PathKind.PathBase, @"etc\kflearning\phpinfo.php");
-            fileSystem.WriteFile(contentPath, Constants.PhpInfoPage);
-
-
-            // add default site alias
-            progress.ReportMessage("Creating HTTPD alias...");
-            var indexPath = path.EnsureBackslashEnding(path.EnsureForwardSlash(
-                path.Combine(PathKind.PathBase, @"etc\kflearning")));
-            var defaultAliasPath = path.Combine(PathKind.PathBase, @"etc\apache\alias\0-default.conf");
-            using (var alias = new TransformingConfigFile(defaultAliasPath, Constants.AliasTemplate))
-            {
-                alias.Transform("{ALIAS_NAME}", "kflearning");
-                alias.Transform("{ALIAS_PATH}", indexPath);
-            }
-
-            // add default site virtual host
-            progress.ReportMessage("Creating HTTPD virtual host...");
-            var defaultHostPath = path.Combine(PathKind.PathBase, @"etc\apache\sites-enabled\0-default.conf");
-            using (var config = new TransformingConfigFile(defaultHostPath, Constants.DefaultVirtualHost))
-            {
-                config.Transform("{KFLEARNING_DIR_ROOT}", indexPath);
-            }
         }
     }
 }

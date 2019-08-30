@@ -139,38 +139,11 @@
   <data name="MetadataFileName" xml:space="preserve">
     <value>kf-project.json</value>
   </data>
-  <data name="VirtualHostTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\VirtualHostTemplate.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="MariaDbConfig" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\MariaDbConfig.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
   <data name="VscodeConfig" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\VscodeConfig.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="PhpConfig" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\PhpConfig.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="ComposerBatch" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\ComposerBatch.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="AliasTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\AliasTemplate.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
   <data name="DatabaseConnectionString" xml:space="preserve">
     <value>database.db</value>
-  </data>
-  <data name="HttpdConfig" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\HttpdConfig.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="DefaultVirtualHost" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\DefaultVirtualHost.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="IndexPageHtml" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\IndexPageHtml.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="PhpInfoPage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\PhpInfoPage.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="template_cpp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\template-cpp.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

@@ -115,13 +115,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\template-cpp.zip" />
-    <None Include="Resources\VirtualHostTemplate.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\HtmlBodyStart.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\MariaDbConfig.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\VscodeConfig.txt" />
@@ -136,27 +132,6 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\PhpConfig.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ComposerBatch.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\AliasTemplate.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\HttpdConfig.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\DefaultVirtualHost.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\IndexPageHtml.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\PhpInfoPage.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

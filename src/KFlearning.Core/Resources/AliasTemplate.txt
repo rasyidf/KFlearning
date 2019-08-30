@@ -1,6 +1,0 @@
-Alias /{ALIAS_NAME} "{ALIAS_PATH}"
-<Directory "{ALIAS_PATH}">
-	Options Indexes FollowSymLinks MultiViews
-	AllowOverride all  
-	Require local
-</Directory>

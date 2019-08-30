@@ -61,49 +61,11 @@ namespace KFlearning.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Alias /{ALIAS_NAME} &quot;{ALIAS_PATH}&quot;
-        ///&lt;Directory &quot;{ALIAS_PATH}&quot;&gt;
-        ///	Options Indexes FollowSymLinks MultiViews
-        ///	AllowOverride all  
-        ///	Require local
-        ///&lt;/Directory&gt;.
-        /// </summary>
-        public static string AliasTemplate {
-            get {
-                return ResourceManager.GetString("AliasTemplate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to @php &quot;%~dp0composer.phar&quot; %*.
-        /// </summary>
-        public static string ComposerBatch {
-            get {
-                return ResourceManager.GetString("ComposerBatch", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to database.db.
         /// </summary>
         public static string DatabaseConnectionString {
             get {
                 return ResourceManager.GetString("DatabaseConnectionString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;VirtualHost _default_:80&gt;
-        ///    &lt;Directory &quot;{KFLEARNING_DIR_ROOT}&quot;&gt;
-        ///        AllowOverride All
-        ///        Require all granted
-        ///    &lt;/Directory&gt;
-        ///&lt;/VirtualHost&gt;
-        ///.
-        /// </summary>
-        public static string DefaultVirtualHost {
-            get {
-                return ResourceManager.GetString("DefaultVirtualHost", resourceCulture);
             }
         }
         
@@ -137,52 +99,30 @@ namespace KFlearning.Core {
         /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html lang=&quot;en&quot;&gt;
+        ///
         ///&lt;head&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
         ///    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
         ///    &lt;style&gt;
-        ///    body {
-        ///        background: #252525;
-        ///        color: #ffffff
-        ///    }
-        ///    &lt;/style&gt;
-        ///&lt;/head&gt;
-        ///&lt;body&gt;.
+        ///        body {
+        ///            background: #252525;
+        ///            color: #ffffff;
+        ///            font-family: &quot;Segoe UI&quot;, serif;
+        ///        }
+        ///        
+        ///        table {
+        ///            border-collapse: collapse;
+        ///            width: 100%;
+        ///        }
+        ///        
+        ///        table,
+        ///        tr {
+        ///             [rest of string was truncated]&quot;;.
         /// </summary>
         public static string HtmlBodyStart {
             get {
                 return ResourceManager.GetString("HtmlBodyStart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Define SRVROOT &quot;{HTTPD_ROOT}&quot;
-        ///ServerRoot &quot;${SRVROOT}&quot;
-        ///Define ENABLE_TLS13 &quot;Yes&quot;
-        ///Listen 80
-        ///
-        ///DocumentRoot &quot;{DOCUMENT_ROOT}&quot;
-        ///
-        ///ServerAdmin admin@example.com
-        ///ServerName KFLearning
-        ///
-        ///ErrorLog &quot;logs/error.log&quot;
-        ///LogLevel error
-        ///
-        ///EnableMMAP off
-        ///EnableSendfile on
-        ///AcceptFilter http none
-        ///AcceptFilter https none
-        ///
-        ///LoadModule access_compat_module modules/mod_access_compat.so
-        ///LoadModule actions_module modules/mod_actions.so
-        ///LoadModule alias_module modules/mod_alias.so
-        ///LoadModule allowmethods_module module [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string HttpdConfig {
-            get {
-                return ResourceManager.GetString("HttpdConfig", resourceCulture);
             }
         }
         
@@ -192,55 +132,6 @@ namespace KFlearning.Core {
         public static string HttpdProcessName {
             get {
                 return ResourceManager.GetString("HttpdProcessName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
-        ///&lt;html lang=&quot;en&quot;&gt;
-        ///
-        ///&lt;head&gt;
-        ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
-        ///    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-        ///    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
-        ///    &lt;!--&lt;meta http-equiv=&quot;refresh&quot; content=&quot;10; url=https://kodesiana.com&quot;&gt;--&gt;
-        ///    &lt;title&gt;KFlearning&lt;/title&gt;
-        ///
-        ///    &lt;style&gt;
-        ///        body,
-        ///        html {
-        ///            height: 90%;
-        ///            display: grid;
-        ///            font-family: &apos;Lucida Sans&apos;, &apos;Lucida Sans Regular&apos;, &apos;Lucida Grande&apos;, &apos;Lucida Sans  [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string IndexPageHtml {
-            get {
-                return ResourceManager.GetString("IndexPageHtml", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [client-server]
-        ///# Uncomment these if you want to use a nonstandard connection to MariaDB
-        ///#socket=/tmp/mysql.sock
-        ///#port=3306
-        ///
-        ///# This will be passed to all MariaDB clients
-        ///[client]
-        ///#password=my_password
-        ///
-        ///# The MariaDB server
-        ///[mysqld]
-        ///# Directory where you want to put your data
-        ///data={MARIADB_INSTALL_ROOT}data
-        ///# Directory for the errmsg.sys file in the language you want to use
-        ///language={MARIADB_INSTALL_ROOT}share/english
-        ///
-        ///# This is the prefix name to be used for all log, error and replication fi [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string MariaDbConfig {
-            get {
-                return ResourceManager.GetString("MariaDbConfig", resourceCulture);
             }
         }
         
@@ -263,69 +154,12 @@ namespace KFlearning.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [PHP]
-        ///engine = On
-        ///short_open_tag = Off
-        ///precision = 14
-        ///output_buffering = 4096
-        ///zlib.output_compression = Off
-        ///implicit_flush = Off
-        ///unserialize_callback_func =
-        ///serialize_precision = -1
-        ///disable_functions =
-        ///disable_classes =
-        ///zend.enable_gc = On
-        ///expose_php = On
-        ///max_execution_time = 36000
-        ///max_input_time = 60
-        ///memory_limit = 512M
-        ///error_reporting = E_ALL
-        ///display_errors = On
-        ///display_startup_errors = On
-        ///log_errors = On
-        ///log_errors_max_len = 1024
-        ///ignore_repeated_errors = Off
-        ///ignore_repeated_source = [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string PhpConfig {
-            get {
-                return ResourceManager.GetString("PhpConfig", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;?php phpinfo(); ?&gt;.
-        /// </summary>
-        public static string PhpInfoPage {
-            get {
-                return ResourceManager.GetString("PhpInfoPage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         public static byte[] template_cpp {
             get {
                 object obj = ResourceManager.GetObject("template_cpp", resourceCulture);
                 return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;VirtualHost *:80&gt; 
-        ///    DocumentRoot &quot;{REPO_PATH}&quot;
-        ///    ServerName {REPO_DOMAIN}
-        ///    ServerAlias *.{REPO_DOMAIN}
-        ///    &lt;Directory &quot;{REPO_PATH}&quot;&gt;
-        ///        AllowOverride All
-        ///        Require all granted
-        ///    &lt;/Directory&gt;
-        ///&lt;/VirtualHost&gt;.
-        /// </summary>
-        public static string VirtualHostTemplate {
-            get {
-                return ResourceManager.GetString("VirtualHostTemplate", resourceCulture);
             }
         }
         
@@ -340,10 +174,6 @@ namespace KFlearning.Core {
         ///    &quot;[json]&quot;: {
         ///        &quot;editor.defaultFormatter&quot;: &quot;HookyQR.beautify&quot;
         ///    },	
-        ///
-        ///    &quot;php.validate.executablePath&quot;: &quot;{PHP_PATH}&quot;,
-        ///    &quot;php.executablePath&quot;: &quot;{PHP_PATH}&quot;,
-        ///    &quot;php.suggest.basic&quot;: false,   
         ///}.
         /// </summary>
         public static string VscodeConfig {
