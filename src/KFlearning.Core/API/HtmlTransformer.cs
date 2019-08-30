@@ -49,8 +49,15 @@ namespace KFlearning.Core.API
 
         private string Evaluator(Match match)
         {
-            var imageData = DownloadImageAsBase64(match.Groups["url"].Value).Result;
-            return "data:image/jpeg;base64," + imageData;
+            try
+            {
+                var imageData = DownloadImageAsBase64(match.Groups["url"].Value).Result;
+                return "data:image/jpeg;base64," + imageData;
+            }
+            catch (Exception)
+            {
+                return "";
+            }
         }
 
         private async Task<string> DownloadImageAsBase64(string url)
@@ -61,7 +68,6 @@ namespace KFlearning.Core.API
             using (var ms = new MemoryStream())
             {
                 image.Save(ms, ImageFormat.Jpeg);
-
                 return Convert.ToBase64String(ms.ToArray());
             }
         }
