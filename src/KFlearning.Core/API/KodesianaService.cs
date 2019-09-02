@@ -25,8 +25,8 @@ namespace KFlearning.Core.API
 {
     public class KodesianaService : IKodesianaService
     {
-        //public const string EndpointBase = "https://api.kodesiana.com/kflearning";
-        public const string EndpointBase = "http://kodesiana-rest.test/kflearning";
+        public const string EndpointBase = "https://api.kodesiana.com/kflearning";
+        //public const string EndpointBase = "http://kodesiana-rest.test/kflearning";
 
         public static HttpClient Client = new HttpClient();
 
