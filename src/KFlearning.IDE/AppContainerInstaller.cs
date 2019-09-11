@@ -28,7 +28,8 @@ namespace KFlearning.IDE
             // Register Views and ViewModels
             container.Register(
                 // common core
-                Classes.FromAssemblyNamed("KFlearning.Core").Pick().WithServiceAllInterfaces().LifestyleSingleton(),
+                Classes.FromAssemblyNamed("KFlearning.Core").Pick().WithServiceAllInterfaces().LifestyleTransient(),
+                Classes.FromAssemblyNamed("KFlearning.Core.IDE").Pick().WithServiceAllInterfaces().LifestyleTransient(),
 
                 // application specific
                 Component.For<NotifyPropertChangedInterceptor>().LifestyleTransient(),

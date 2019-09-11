@@ -13,8 +13,8 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
+using KFlearning.Core.Installer;
 using KFlearning.Core.IO;
-using KFlearning.Core.Services.Installer;
 using KFlearning.Installer.ApplicationServices;
 
 #endregion
@@ -43,6 +43,7 @@ namespace KFlearning.Installer.Views
 
         public IProgressBroker ProgressBroker { get; set; }
         public IPathManager PathManager { get; set; }
+        public IModuleService ModuleService { get; set; }
         public ITaskGraph TaskGraph { get; set; }
         public ISequenceFactory SequenceFactory { get; set; }
         public LogForm Log { get; set; }
@@ -92,19 +93,17 @@ namespace KFlearning.Installer.Views
 
                 case ViewState.WaitOpen:
                 {
-                    var path = PathManager.Combine(PathKind.PathKflearningRoot, "kflearning.ide.exe");
+                    var path = Path.Combine(PathManager.GetModuleInstallPath(ModuleKind.Ide), "kflearning.ide.exe");
                     PathManager.LaunchUri(path);
                     break;
                 }
 
                 default:
                 {
-                    var path = PathManager.Combine(PathKind.PathBase, @"installer\data");
-                    var extensions = Directory.GetFiles(PathManager.Combine(PathKind.PathBase, @"installer\data\vscode-exts"), "*.vsix");
-                    var definition = new InstallDefinition(path, extensions, x => Program.Container.Resolve(x));
+                    var definition = new InstallDefinition {IsInstall = _viewState == ViewState.Install};
                     var sequence = _viewState == ViewState.Install
-                        ? SequenceFactory.GetInstallSequence()
-                        : SequenceFactory.GetUninstallSequence();
+                        ? SequenceFactory.GetInstallSequence(x => Program.Container.Resolve(x))
+                        : SequenceFactory.GetUninstallSequence(x => Program.Container.Resolve(x));
 
                     _isInstall = _viewState == ViewState.Install;
                     TaskGraph.RunSequence(definition, sequence);

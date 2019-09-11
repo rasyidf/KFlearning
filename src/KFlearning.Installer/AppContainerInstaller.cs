@@ -13,7 +13,9 @@
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using KFlearning.Core.Services.Installer;
+using KFlearning.Core.Installer;
+using KFlearning.Core.IO;
+using KFlearning.Core.Services;
 using KFlearning.Installer.ApplicationServices;
 using KFlearning.Installer.Views;
 
@@ -28,7 +30,8 @@ namespace KFlearning.Installer
             // Register Views and ViewModels
             container.Register(
                 // common core
-                Classes.FromAssemblyNamed("KFlearning.Core").Pick().WithServiceAllInterfaces().LifestyleSingleton(),
+                Classes.FromAssemblyNamed("KFlearning.Core").Pick().WithServiceAllInterfaces().LifestyleTransient(),
+                Classes.FromAssemblyNamed("KFlearning.Core.Installer").Pick().WithServiceAllInterfaces().LifestyleTransient(),
 
                 // application specific
                 Classes.FromThisAssembly().InSameNamespaceAs<MainForm>().LifestyleTransient(),

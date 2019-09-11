@@ -111,12 +111,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KFlearning.Core\KFlearning.Core.csproj">
-      <Project>{ed0f38b7-33fe-4e24-bdad-58790ca85bcc}</Project>
-      <Name>KFlearning.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Castle.Core">
       <Version>4.4.0</Version>
     </PackageReference>
@@ -129,6 +123,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="kflearning-logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\KFlearning.Core.Installer\KFlearning.Core.Installer.csproj">
+      <Project>{2a2d9b0e-4897-40b3-b233-c06e6cedadab}</Project>
+      <Name>KFlearning.Core.Installer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KFlearning.Core\KFlearning.Core.csproj">
+      <Project>{ED0F38B7-33FE-4E24-BDAD-58790CA85BCC}</Project>
+      <Name>KFlearning.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -12,19 +12,19 @@ namespace KFlearning.Core.IO
 {
     public interface IPathManager
     {
-        string Combine(PathKind path, params string[] parts);
-        string Combine(params string[] parts);
-        string GetPath(PathKind path);
-        string GetPathForTemp(string filename = "");
-        string GetFileName(string path);
+        string InstallRoot { get; }
+
+        string GetPathForTemp();
+        string GetModuleInstallPath(ModuleKind module);
+
         string StripInvalidFileName(string path);
         string EnsureForwardSlash(string path);
         string EnsureBackslashEnding(string path);
-
+        
         void LaunchUri(string uri);
         void LaunchExplorer(string path);
 
-        void AddPathEnvironmentVar(string path);
-        void RemovePathEnvironmentVar(string path);
+        void AddVariable(string path);
+        void RemoveVariable(string path);
     }
 }

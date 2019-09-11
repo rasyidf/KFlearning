@@ -12,6 +12,7 @@ namespace KFlearning.Core.Services
 {
     public interface IVscode
     {
+        void InstallExtension(string path);
         void OpenFolder(string path);
     }
 }

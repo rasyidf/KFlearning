@@ -25,45 +25,39 @@ namespace KFlearning.Core.IO
         #region Fields
 
         private const string PathEnv = "path";
-
         private static readonly char[] InvalidFileNameChars = Path.GetInvalidFileNameChars();
-        private static readonly object SyncLock = new object();
+        
+        public string InstallRoot { get; }
 
-        private Dictionary<PathKind, string> _cachedPaths;
+        #endregion
+
+        #region Constructor
+
+        public PathManager()
+        {
+            var rootDrive = Path.GetPathRoot(Environment.SystemDirectory);
+            InstallRoot = Path.Combine(rootDrive, "kflearning");
+        }
 
         #endregion
 
         #region Public Methods
 
-        #region Path Manipulations
-
-        public string Combine(PathKind path, params string[] parts)
+        public string GetModuleInstallPath(ModuleKind module)
         {
-            var aggregate = new List<string>();
-            aggregate.Add(GetPath(path));
-            aggregate.AddRange(parts);
-            return Combine(aggregate.ToArray());
-        }
-
-        public string Combine(params string[] parts)
-        {
-            return Path.Combine(parts);
-        }
-
-        public string GetPath(PathKind path)
-        {
-            if (_cachedPaths == null) InitializePaths();
-            return _cachedPaths[path];
-        }
-
-        public string GetPathForTemp(string filename = "")
-        {
-            return Path.Combine(Path.GetTempPath(), "kflearning", filename);
-        }
-
-        public string GetFileName(string path)
-        {
-            return Path.GetFileName(path);
+            switch (module)
+            {
+                case ModuleKind.Ide:
+                    return Path.Combine(InstallRoot, "ide");
+                case ModuleKind.Mingw:
+                    return Path.Combine(InstallRoot, @"bin\mingw");
+                case ModuleKind.Vscode:
+                    return Path.Combine(InstallRoot, @"bin\vscode");
+                case ModuleKind.ReposDirectory:
+                    return Path.Combine(InstallRoot, "repos");
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(module), module, null);
+            }
         }
 
         public string StripInvalidFileName(string path)
@@ -85,9 +79,14 @@ namespace KFlearning.Core.IO
             return useForwardSlash ? EnsureForwardSlash(path) + "/" : path + @"\";
         }
 
-        #endregion
+        public string GetPathForTemp()
+        {
+            var name = Path.GetFileNameWithoutExtension(Path.GetRandomFileName());
+            var path = Path.Combine(Path.GetTempPath(), name);
+            Directory.CreateDirectory(path);
 
-        #region Shell Operations
+            return path;
+        }
 
         public void LaunchUri(string uri)
         {
@@ -98,12 +97,8 @@ namespace KFlearning.Core.IO
         {
             Process.Start("explorer.exe", path);
         }
-
-        #endregion
-
-        #region Environment Paths
-
-        public void AddPathEnvironmentVar(string path)
+        
+        public void AddVariable(string path)
         {
             var parts = GetEnvironmentPath();
             if (parts == null) return;
@@ -113,7 +108,7 @@ namespace KFlearning.Core.IO
             SetEnvironmentPath(parts);
         }
 
-        public void RemovePathEnvironmentVar(string path)
+        public void RemoveVariable(string path)
         {
             var parts = GetEnvironmentPath();
             if (parts == null) return;
@@ -122,8 +117,6 @@ namespace KFlearning.Core.IO
             parts.RemoveAll(x => x.Contains(path));
             SetEnvironmentPath(parts);
         }
-
-        #endregion
 
         #endregion
 
@@ -140,42 +133,6 @@ namespace KFlearning.Core.IO
         {
             var revisedPath = string.Join(";", paths);
             Environment.SetEnvironmentVariable(PathEnv, revisedPath, EnvironmentVariableTarget.User);
-        }
-
-        private static string GetBasePath()
-        {
-            var basePath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);
-            Debug.Assert(basePath != null);
-            int lastIndex = basePath.LastIndexOf(@"\", StringComparison.InvariantCultureIgnoreCase);
-            return basePath.Substring(0, lastIndex);
-        }
-
-        private void InitializePaths()
-        {
-            lock (SyncLock)
-            {
-                // find base path, relative one level up from this executable
-                string basePath = GetBasePath();
-                string systemRoot = Path.GetPathRoot(Environment.SystemDirectory);
-
-                // cache paths
-                _cachedPaths = new Dictionary<PathKind, string>
-                {
-                    // common paths
-                    {PathKind.PathBase, basePath},
-                    {PathKind.PathReposRoot, Path.Combine(basePath, "repos")},
-
-                    // app-specific installation dir
-                    {PathKind.PathVscodeRoot, Path.Combine(basePath, @"bin\vscode")},
-                    {PathKind.PathMingwRoot, Path.Combine(basePath, @"bin\mingw")},
-                    {PathKind.PathKflearningRoot, Path.Combine(basePath, "ide")},
-                    {PathKind.PathLaragonWww,  Path.Combine(systemRoot, @"laragon\www")}
-                };
-
-                // app-specific executable paths
-                _cachedPaths.Add(PathKind.ExeVscode, Path.Combine(_cachedPaths[PathKind.PathVscodeRoot], "Code.exe"));
-                _cachedPaths.Add(PathKind.CmdVscode, Path.Combine(_cachedPaths[PathKind.PathVscodeRoot], @"bin\code.cmd"));
-            }
         }
 
         #endregion

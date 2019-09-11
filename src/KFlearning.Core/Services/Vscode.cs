@@ -10,6 +10,8 @@
 
 #region
 
+using System.IO;
+using KFlearning.Core.Diagnostics;
 using KFlearning.Core.IO;
 
 #endregion
@@ -18,18 +20,25 @@ namespace KFlearning.Core.Services
 {
     public class Vscode : IVscode
     {
-        private readonly IPathManager _pathManager;
         private readonly IProcessManager _processManager;
-
-        public Vscode(IProcessManager processManager, IPathManager pathManager)
+        private readonly IPathManager _path;
+        
+        public Vscode(IProcessManager processManager, IPathManager path)
         {
             _processManager = processManager;
-            _pathManager = pathManager;
+            _path = path;
+        }
+
+        public void InstallExtension(string path)
+        {
+            var filePath = Path.Combine(_path.GetModuleInstallPath(ModuleKind.Vscode), @"bin\code.cmd");
+            _processManager.RunWait(filePath, $"--install-extension \"{path}\"");
         }
 
         public void OpenFolder(string path)
         {
-            _processManager.Run(_pathManager.GetPath(PathKind.ExeVscode), path);
+            var filePath = Path.Combine(_path.GetModuleInstallPath(ModuleKind.Vscode), @"code.exe");
+            _processManager.Run(filePath, path);
         }
     }
 }

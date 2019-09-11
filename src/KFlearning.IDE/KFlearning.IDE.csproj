@@ -223,13 +223,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KFlearning.Core\KFlearning.Core.csproj">
-      <Project>{ed0f38b7-33fe-4e24-bdad-58790ca85bcc}</Project>
-      <Name>KFlearning.Core</Name>
-    </ProjectReference>
+    <Resource Include="Resources\kflearning-logo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\kflearning-logo.ico" />
+    <ProjectReference Include="..\..\KFlearning.Core.IDE\KFlearning.Core.IDE.csproj">
+      <Project>{1f05c4d7-36c6-46f5-9d49-5fd9036c2c07}</Project>
+      <Name>KFlearning.Core.IDE</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KFlearning.Core\KFlearning.Core.csproj">
+      <Project>{ED0F38B7-33FE-4E24-BDAD-58790CA85BCC}</Project>
+      <Name>KFlearning.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

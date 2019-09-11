@@ -10,7 +10,7 @@
 
 #region
 
-using KFlearning.Core.DAL;
+using KFlearning.Core.IDE.Data;
 
 #endregion
 

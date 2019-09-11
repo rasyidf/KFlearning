@@ -11,7 +11,7 @@
 #region
 
 using System;
-using KFlearning.Core.Services.Installer;
+using KFlearning.Core.Installer;
 
 #endregion
 

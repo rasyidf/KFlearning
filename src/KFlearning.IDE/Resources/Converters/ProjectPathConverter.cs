@@ -13,7 +13,7 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
-using KFlearning.Core.Services;
+using KFlearning.Core.IDE;
 
 #endregion
 
