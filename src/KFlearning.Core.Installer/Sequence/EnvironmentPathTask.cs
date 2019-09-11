@@ -20,15 +20,13 @@ namespace KFlearning.Core.Installer.Sequence
 {
     public class EnvironmentPathTask : ITaskNode
     {
-        private readonly bool _install;
         private readonly IPathManager _path;
         private readonly IProgressBroker _progress;
 
         public string TaskName => "Setup Environment Variable";
 
-        public EnvironmentPathTask(bool install, IPathManager path, IProgressBroker progress)
+        public EnvironmentPathTask(IPathManager path, IProgressBroker progress)
         {
-            _install = install;
             _path = path;
             _progress = progress;
         }
@@ -43,7 +41,7 @@ namespace KFlearning.Core.Installer.Sequence
             _progress.ReportMessage("Processing environment variables...");
             for (int i = 0; i < paths.Length; i++)
             {
-                if (_install)
+                if (definition.IsInstall)
                 {
                     _path.AddVariable(paths[i]);
                 }

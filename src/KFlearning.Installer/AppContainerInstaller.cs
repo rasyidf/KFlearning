@@ -30,8 +30,9 @@ namespace KFlearning.Installer
             // Register Views and ViewModels
             container.Register(
                 // common core
-                Classes.FromAssemblyNamed("KFlearning.Core").Pick().WithServiceAllInterfaces().LifestyleTransient(),
-                Classes.FromAssemblyNamed("KFlearning.Core.Installer").Pick().WithServiceAllInterfaces().LifestyleTransient(),
+                Classes.FromAssemblyNamed("KFlearning.Core").Pick().WithServiceDefaultInterfaces().LifestyleTransient(),
+                Classes.FromAssemblyNamed("KFlearning.Core.Installer").Pick().WithServiceDefaultInterfaces().LifestyleTransient(),
+                Classes.FromAssemblyNamed("KFlearning.Core.Installer").Pick().WithServiceSelf().LifestyleTransient(),
 
                 // application specific
                 Classes.FromThisAssembly().InSameNamespaceAs<MainForm>().LifestyleTransient(),
