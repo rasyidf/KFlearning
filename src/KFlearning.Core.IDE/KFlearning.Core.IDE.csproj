@@ -63,7 +63,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\KFlearning.Core\KFlearning.Core.csproj">
+    <ProjectReference Include="..\KFlearning.Core\KFlearning.Core.csproj">
       <Project>{ed0f38b7-33fe-4e24-bdad-58790ca85bcc}</Project>
       <Name>KFlearning.Core</Name>
     </ProjectReference>
