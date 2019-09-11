@@ -105,7 +105,7 @@
     <Content Include="kflearning-logo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\KFlearning.Core.Installer\KFlearning.Core.Installer.csproj">
+    <ProjectReference Include="..\KFlearning.Core.Installer\KFlearning.Core.Installer.csproj">
       <Project>{2a2d9b0e-4897-40b3-b233-c06e6cedadab}</Project>
       <Name>KFlearning.Core.Installer</Name>
     </ProjectReference>

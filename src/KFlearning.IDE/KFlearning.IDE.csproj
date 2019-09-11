@@ -206,7 +206,7 @@
     <Resource Include="Resources\kflearning-logo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\KFlearning.Core.IDE\KFlearning.Core.IDE.csproj">
+    <ProjectReference Include="..\KFlearning.Core.IDE\KFlearning.Core.IDE.csproj">
       <Project>{1f05c4d7-36c6-46f5-9d49-5fd9036c2c07}</Project>
       <Name>KFlearning.Core.IDE</Name>
     </ProjectReference>
