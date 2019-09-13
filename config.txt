@@ -1,0 +1,5 @@
+;!@Install@!UTF-8!
+Title="KFlearning IDE"
+BeginPrompt="Do you want to install KFlearning?"
+RunProgram="KFlearning.Installer.exe"
+;!@InstallEnd@!
