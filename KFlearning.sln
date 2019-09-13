@@ -22,6 +22,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "files", "files", "{2D0ED7CC-537C-4B3F-9E0B-6BB826F17E05}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		7zSD.sfx = 7zSD.sfx
+		build.cake = build.cake
+		build.ps1 = build.ps1
+		config.txt = config.txt
 		kflearning-logo.ico = kflearning-logo.ico
 		LICENSE.txt = LICENSE.txt
 		README.md = README.md
