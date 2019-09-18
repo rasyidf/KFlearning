@@ -38,7 +38,6 @@ namespace KFlearning.Core.Installer.Sequence
             _progress.ReportNodeProgress(-1);
             if (definition.IsInstall)
             {
-                
                 Directory.CreateDirectory(_path.InstallRoot);
                 Directory.CreateDirectory(_path.GetModuleInstallPath(ModuleKind.Ide));
                 Directory.CreateDirectory(_path.GetModuleInstallPath(ModuleKind.Mingw));
