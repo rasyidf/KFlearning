@@ -26,7 +26,7 @@ namespace KFlearning.Core.IDE
         public PathService()
         {
             var rootDrive = Path.GetPathRoot(Environment.SystemDirectory);
-            _templateRoot = Path.Combine(rootDrive, @"kflearning\ProjectTemplates");
+            _templateRoot = Path.Combine(rootDrive, @"kflearning\ide\ProjectTemplates");
             LaragonWebRoot = Path.Combine(rootDrive, @"laragon\www");
         }
 
