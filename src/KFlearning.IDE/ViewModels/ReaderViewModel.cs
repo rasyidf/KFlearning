@@ -95,7 +95,7 @@ namespace KFlearning.IDE.ViewModels
 
         private async Task LoadPage()
         {
-            _tempFile = Path.GetTempFileName();
+            _tempFile = Path.ChangeExtension(Path.GetTempFileName(), "html");
             switch (_item.Item)
             {
                 case Article article:
