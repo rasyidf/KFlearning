@@ -35,7 +35,7 @@ namespace KFlearning.Core.Installer.Sequence
         {
             var paths = new[]
             {
-                Path.Combine(_path.GetModuleInstallPath(ModuleKind.Mingw), @"bin\mingw\bin"),
+                Path.Combine(_path.GetModuleInstallPath(ModuleKind.Mingw), @"bin"),
             };
 
             _progress.ReportMessage("Processing environment variables...");
