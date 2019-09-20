@@ -87,7 +87,6 @@ namespace KFlearning.Core.IDE
             {
                 zip.ExtractAll(project.Path);
             }
-            File.Delete(zipPath);
         }
     }
 }
