@@ -72,7 +72,7 @@ Task("BuildArchives")
 	Information("7z exit code: {0}", exitCode);
 
 	Information("Integrating dependencies to Installer...");
-	CopyFiles(GetFiles("./KFlearning-bin/*"), "./build/installer/data");
+	CopyDirectory("./KFlearning-bin", "./build/installer/data");
 
 	Information("Building KFlearning Installer archive...");
 	exitCode = StartProcess(sevenZipPath, @"a .\build\staging\KFlearning-Installer-latest.7z .\build\installer\*");
