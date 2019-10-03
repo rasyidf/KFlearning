@@ -20,6 +20,29 @@ using System.Linq;
 
 namespace KFlearning.Core.IO
 {
+    public enum PathKind
+    {
+        InstallRoot,
+        ExtensionRoot,
+        LaragonWww,
+        Temp,
+
+        ProjectTemplatesJson,
+        
+        VscodeZip,
+        MinGwZip,
+        FreeglutZip
+    }
+
+    public interface IPathManager
+    {
+        string GetPath(PathKind kind);
+        string StripInvalidFileName(string path);
+
+        void AddVariable(string path);
+        void RemoveVariable(string path);
+    }
+
     public class PathManager : IPathManager
     {
         #region Fields
@@ -27,36 +50,48 @@ namespace KFlearning.Core.IO
         private const string PathEnv = "path";
         private static readonly char[] InvalidFileNameChars = Path.GetInvalidFileNameChars();
         
-        public string InstallRoot { get; }
-
         #endregion
 
-        #region Constructor
-
-        public PathManager()
-        {
-            var rootDrive = Path.GetPathRoot(Environment.SystemDirectory);
-            InstallRoot = Path.Combine(rootDrive, "kflearning");
-        }
-
-        #endregion
 
         #region Public Methods
 
-        public string GetModuleInstallPath(ModuleKind module)
+        public string GetPath(PathKind kind)
         {
-            switch (module)
+            var rootDrive = Path.GetPathRoot(Environment.SystemDirectory);
+            var dataPath = Path.Combine(rootDrive, @"kflearning\data");
+            switch (kind)
             {
-                case ModuleKind.Ide:
-                    return Path.Combine(InstallRoot, "ide");
-                case ModuleKind.Mingw:
-                    return Path.Combine(InstallRoot, @"bin\mingw");
-                case ModuleKind.Vscode:
-                    return Path.Combine(InstallRoot, @"bin\vscode");
-                case ModuleKind.ReposDirectory:
-                    return Path.Combine(InstallRoot, "repos");
+                case PathKind.InstallRoot:
+                    return Path.Combine(rootDrive, @"kflearning");
+                case PathKind.LaragonWww:
+                    return Path.Combine(rootDrive, @"laragon\www");
+                case PathKind.ProjectTemplatesJson:
+                    return Path.Combine(rootDrive, @"kflearning\json\project-templates.json");
+                case PathKind.VscodeZip:
+                {
+                    string c = Environment.Is64BitOperatingSystem ? "VSCode-win32-x64-*" : "VSCode-win32-ia32-*";
+                    return Path.Combine(rootDrive, FindFile(dataPath, c));
+                }
+                case PathKind.MinGwZip:
+                    return Path.Combine(rootDrive, FindFile(dataPath, "mingw*"));
+                case PathKind.FreeglutZip:
+                    return Path.Combine(rootDrive, FindFile(dataPath, "freeglut*"));
+                case PathKind.Temp:
+                {
+                    string name = Path.GetFileNameWithoutExtension(Path.GetRandomFileName());
+                    string path = Path.Combine(Path.GetTempPath(), name);
+                    Directory.CreateDirectory(path);
+                    return path;
+                }
+                case PathKind.ExtensionRoot:
+                    return Path.Combine(rootDrive, Path.Combine(dataPath, @"vscode-exts"));
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(module), module, null);
+                    throw new ArgumentOutOfRangeException(nameof(kind), kind, null);
+            }
+
+            string FindFile(string searchPath, string pattern)
+            {
+                return Directory.EnumerateFiles(searchPath, pattern).First();
             }
         }
 
@@ -64,48 +99,21 @@ namespace KFlearning.Core.IO
         {
             return InvalidFileNameChars.Aggregate(path, (current, x) => current.Replace(x.ToString(), string.Empty));
         }
-
-        public string EnsureForwardSlash(string path)
-        {
-            return path.Replace(@"\", "/");
-        }
-
-        public string EnsureBackslashEnding(string path)
-        {
-            bool useForwardSlash = path.Contains("/");
-            bool shouldAddSlash = useForwardSlash ? path.EndsWith("/") : path.EndsWith(@"\");
-
-            if (!shouldAddSlash) return path;
-            return useForwardSlash ? EnsureForwardSlash(path) + "/" : path + @"\";
-        }
-
-        public string GetPathForTemp()
-        {
-            var name = Path.GetFileNameWithoutExtension(Path.GetRandomFileName());
-            var path = Path.Combine(Path.GetTempPath(), name);
-            Directory.CreateDirectory(path);
-
-            return path;
-        }
-
-        public void LaunchUri(string uri)
-        {
-            Process.Start(uri);
-        }
-
-        public void LaunchExplorer(string path)
-        {
-            Process.Start("explorer.exe", path);
-        }
         
         public void AddVariable(string path)
         {
             var parts = GetEnvironmentPath();
-            if (parts == null) return;
-            if (parts.Contains(path)) return;
+            if (parts == null)
+            {
+                SetEnvironmentPath(new[] {path});
+            }
+            else
+            {
+                if (parts.Contains(path)) return;
 
-            parts.Add(path);
-            SetEnvironmentPath(parts);
+                parts.Add(path);
+                SetEnvironmentPath(parts);
+            }
         }
 
         public void RemoveVariable(string path)

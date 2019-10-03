@@ -1,20 +1,6 @@
-﻿// 
-//  PROJECT  :   KFlearning
-//  FILENAME :   Post.cs
-//  AUTHOR   :   Fahmi Noor Fiqri
-//  WEBSITE  : https://kodesiana.com
-//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
-// 
-//  This file is part of KFlearning, licensed under MIT license.
-//  See this code in repository URL above!
-
-#region
-
-using System;
+﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-
-#endregion
 
 namespace KFlearning.Core.API
 {

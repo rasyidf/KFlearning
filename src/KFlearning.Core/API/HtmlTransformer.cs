@@ -1,16 +1,4 @@
-﻿// 
-//  PROJECT  :   KFlearning
-//  FILENAME :   HtmlTransformer.cs
-//  AUTHOR   :   Fahmi Noor Fiqri
-//  WEBSITE  : https://kodesiana.com
-//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
-// 
-//  This file is part of KFlearning, licensed under MIT license.
-//  See this code in repository URL above!
-
-#region
-
-using System;
+﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -18,12 +6,15 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using KFlearning.Core.Resources;
-
-#endregion
 
 namespace KFlearning.Core.API
 {
+    public interface IHtmlTransformer
+    {
+        void TransformHtmlForSave(string filePath);
+        void TransformHtmlForStyle(string filePath);
+    }
+
     public class HtmlTransformer : IHtmlTransformer
     {
         private static readonly Regex Pattern = new Regex(@"<img\s[^>]*?src\s*=\s*[\""](?<url>.*?)[\""][^>]*?>");
@@ -39,11 +30,11 @@ namespace KFlearning.Core.API
         {
             var input = File.ReadAllText(filePath);
             var content = new StringBuilder();
-            content.AppendLine(Constants.HtmlBodyStart);
+            content.AppendLine(CoreResources.HtmlBodyStart);
             content.AppendLine(input);
             content.Replace("[csharp]", "<pre>");
             content.Replace("[/csharp]", "</pre>");
-            content.AppendLine(Constants.HtmlBodyEnd);
+            content.AppendLine(CoreResources.HtmlBodyEnd);
             
             File.WriteAllText(filePath, content.ToString());
         }

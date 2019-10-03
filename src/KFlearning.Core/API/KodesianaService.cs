@@ -1,16 +1,4 @@
-﻿// 
-//  PROJECT  :   KFlearning
-//  FILENAME :   KodesianaService.cs
-//  AUTHOR   :   Fahmi Noor Fiqri
-//  WEBSITE  : https://kodesiana.com
-//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
-// 
-//  This file is part of KFlearning, licensed under MIT license.
-//  See this code in repository URL above!
-
-#region
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -19,10 +7,19 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-#endregion
-
 namespace KFlearning.Core.API
 {
+    public interface IKodesianaService
+    {
+        Task<bool> IsOnline();
+        Task<string> GetPostAsync(int postId);
+        Task<IEnumerable<string>> GetSeriesAsync();
+        Task<PostResponse> GetPostsAsync(int offset, int count);
+        Task<PostResponse> GetPostsAsync(int offset, int count, string series);
+        Task<PostResponse> FindPostAsync(int offset, int count, string title);
+        Task<PostResponse> FindPostAsync(int offset, int count, string title, string series);
+    }
+
     public class KodesianaService : IKodesianaService
     {
         public const string EndpointBase = "https://api.kodesiana.com/kflearning";

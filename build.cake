@@ -26,7 +26,6 @@ Task("Prepare")
 	CleanDirectories("./build");
 	CreateDirectory("./build");
 	CreateDirectory("./build/ide");
-	CreateDirectory("./build/installer");
 	CreateDirectory("./build/staging");
 });
 
@@ -55,27 +54,28 @@ Task("CopyBuild")
 {
 	Information("Copying build output...");
 
-	CopyDirectory($"./src/KFlearning.IDE/bin/{platform}/{configuration}", "./build/ide");
-	CopyDirectory($"./src/KFlearning.Installer/bin/{platform}/{configuration}", "./build/installer");
+	CopyDirectory($"./src/KFlearning/bin/{platform}/{configuration}", "./build/ide");
+});
+
+// Copy dependecies
+Task("CopyDependecies")
+.IsDependentOn("CopyBuild")
+.Does(() =>
+{
+	Information("Copying dependencies to Installer...");
+	CopyDirectory("./assets", "./build/ide/data");
 });
 
 // Build package archives
 Task("BuildArchives")
-.IsDependentOn("CopyBuild")
+.IsDependentOn("CopyDependecies")
 .Does(() =>
 {
 	FilePath sevenZipPath = Context.Tools.Resolve("7za.exe");
 	Debug(sevenZipPath);
 
     Information("Building KFlearning IDE archive...");
-	var exitCode = StartProcess(sevenZipPath, @"a .\build\installer\data\KFlearning-IDE-latest.zip .\build\ide\*");
-	Information("7z exit code: {0}", exitCode);
-
-	Information("Integrating dependencies to Installer...");
-	CopyDirectory("./KFlearning-bin", "./build/installer/data");
-
-	Information("Building KFlearning Installer archive...");
-	exitCode = StartProcess(sevenZipPath, @"a .\build\staging\KFlearning-Installer-latest.7z .\build\installer\*");
+	var exitCode = StartProcess(sevenZipPath, @"a -t7z -m0=lzma -mf=off .\build\staging\KFlearning-latest.7z .\build\ide\*");
 	Information("7z exit code: {0}", exitCode);
 });
 
@@ -88,12 +88,12 @@ Task("BuildSfx")
 	CopyFile("./config.txt", "./build/staging/config.txt");
 
 	Information("Copying SFX binary...");
-	CopyFile("./7zSD.sfx", "./build/staging/7zSD.sfx");
+	CopyFile("./7zSD.sfx", "./build/staging/7zsd.sfx");
 
 	Information("Builidng SFX archive...");
 	var settings = new ProcessSettings
 	{ 
-		Arguments = "/c copy /b 7zSD.sfx + config.txt + KFlearning-Installer-latest.7z KFlearning-installer.exe",
+		Arguments = "/c copy /b 7zSD.sfx + config.txt + KFlearning-latest.7z KFlearning-installer.exe",
 		WorkingDirectory = Directory("./build/staging")
 	};
 	var exitCode = StartProcess("cmd.exe", settings);

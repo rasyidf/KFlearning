@@ -1,16 +1,4 @@
-﻿// 
-//  PROJECT  :   KFlearning
-//  FILENAME :   ProcessManager.cs
-//  AUTHOR   :   Fahmi Noor Fiqri
-//  WEBSITE  : https://kodesiana.com
-//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
-// 
-//  This file is part of KFlearning, licensed under MIT license.
-//  See this code in repository URL above!
-
-#region
-
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -19,11 +7,21 @@ using System.Security.Principal;
 using KFlearning.Core.Native;
 using Microsoft.Win32;
 
-#endregion
-
 namespace KFlearning.Core.Diagnostics
 {
-    public class ProcessManager : IProcessManager
+    public interface IProcessManager
+    {
+        bool IsRunning(string name);
+        bool IsProcessElevated();
+        bool IsUacEnabled();
+
+        void Run(string filename, string args, bool show = false);
+        void RunWait(string filename, string args, bool show = false);
+        void RunJob(string filename, string args, bool show = false);
+        void TerminateJob(string processName);
+    }
+
+   public class ProcessManager : IProcessManager
     {
         public bool IsRunning(string name)
         {

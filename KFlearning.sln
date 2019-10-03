@@ -1,35 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.29020.237
+VisualStudioVersion = 16.0.29318.209
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFlearning.Core", "src\KFlearning.Core\KFlearning.Core.csproj", "{ED0F38B7-33FE-4E24-BDAD-58790CA85BCC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFlearning.IDE", "src\KFlearning.IDE\KFlearning.IDE.csproj", "{636CEE45-1A7C-4DA3-8D88-9F121CE0FF05}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFlearning.Installer", "src\KFlearning.Installer\KFlearning.Installer.csproj", "{F94D622B-9ABB-42D0-9503-CEC67A73ECFE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFlearning.Core.IDE", "src\KFlearning.Core.IDE\KFlearning.Core.IDE.csproj", "{1F05C4D7-36C6-46F5-9D49-5FD9036C2C07}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFlearning.Core.Installer", "src\KFlearning.Core.Installer\KFlearning.Core.Installer.csproj", "{2A2D9B0E-4897-40B3-B233-C06E6CEDADAB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{13ADF3A0-0EF0-4FD7-ACDD-F9AEA08750FC}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{66E9385E-AAA0-4508-8253-EE10707DF135}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{6630FBDE-FB0C-49C7-B50C-D9281BDA9B51}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "files", "files", "{2D0ED7CC-537C-4B3F-9E0B-6BB826F17E05}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "files", "files", "{D3C20BB6-416B-468F-BF08-0E7AE913D75B}"
 	ProjectSection(SolutionItems) = preProject
-		.gitignore = .gitignore
-		7zSD.sfx = 7zSD.sfx
 		build.cake = build.cake
-		build.ps1 = build.ps1
 		config.txt = config.txt
-		kflearning-logo.ico = kflearning-logo.ico
-		LICENSE.txt = LICENSE.txt
+		LICENSE.md = LICENSE.md
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E100C164-35F5-4EF9-B739-F446CD2CD149}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFlearning", "src\KFlearning\KFlearning.csproj", "{0CFFDEDA-8108-4F8A-9C5D-2BDDC98EEF1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFlearning.Core", "src\KFlearning.Core\KFlearning.Core.csproj", "{443A1CE9-0C67-41ED-B392-5E41F7325A82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,57 +25,31 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ED0F38B7-33FE-4E24-BDAD-58790CA85BCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED0F38B7-33FE-4E24-BDAD-58790CA85BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED0F38B7-33FE-4E24-BDAD-58790CA85BCC}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{ED0F38B7-33FE-4E24-BDAD-58790CA85BCC}.Debug|x86.Build.0 = Debug|Any CPU
-		{ED0F38B7-33FE-4E24-BDAD-58790CA85BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED0F38B7-33FE-4E24-BDAD-58790CA85BCC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ED0F38B7-33FE-4E24-BDAD-58790CA85BCC}.Release|x86.ActiveCfg = Release|Any CPU
-		{ED0F38B7-33FE-4E24-BDAD-58790CA85BCC}.Release|x86.Build.0 = Release|Any CPU
-		{636CEE45-1A7C-4DA3-8D88-9F121CE0FF05}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{636CEE45-1A7C-4DA3-8D88-9F121CE0FF05}.Debug|x86.ActiveCfg = Debug|x86
-		{636CEE45-1A7C-4DA3-8D88-9F121CE0FF05}.Debug|x86.Build.0 = Debug|x86
-		{636CEE45-1A7C-4DA3-8D88-9F121CE0FF05}.Release|Any CPU.ActiveCfg = Release|x86
-		{636CEE45-1A7C-4DA3-8D88-9F121CE0FF05}.Release|x86.ActiveCfg = Release|x86
-		{636CEE45-1A7C-4DA3-8D88-9F121CE0FF05}.Release|x86.Build.0 = Release|x86
-		{F94D622B-9ABB-42D0-9503-CEC67A73ECFE}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{F94D622B-9ABB-42D0-9503-CEC67A73ECFE}.Debug|Any CPU.Build.0 = Debug|x86
-		{F94D622B-9ABB-42D0-9503-CEC67A73ECFE}.Debug|x86.ActiveCfg = Debug|x86
-		{F94D622B-9ABB-42D0-9503-CEC67A73ECFE}.Debug|x86.Build.0 = Debug|x86
-		{F94D622B-9ABB-42D0-9503-CEC67A73ECFE}.Release|Any CPU.ActiveCfg = Release|x86
-		{F94D622B-9ABB-42D0-9503-CEC67A73ECFE}.Release|x86.ActiveCfg = Release|x86
-		{F94D622B-9ABB-42D0-9503-CEC67A73ECFE}.Release|x86.Build.0 = Release|x86
-		{1F05C4D7-36C6-46F5-9D49-5FD9036C2C07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1F05C4D7-36C6-46F5-9D49-5FD9036C2C07}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1F05C4D7-36C6-46F5-9D49-5FD9036C2C07}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{1F05C4D7-36C6-46F5-9D49-5FD9036C2C07}.Debug|x86.Build.0 = Debug|Any CPU
-		{1F05C4D7-36C6-46F5-9D49-5FD9036C2C07}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1F05C4D7-36C6-46F5-9D49-5FD9036C2C07}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1F05C4D7-36C6-46F5-9D49-5FD9036C2C07}.Release|x86.ActiveCfg = Release|Any CPU
-		{1F05C4D7-36C6-46F5-9D49-5FD9036C2C07}.Release|x86.Build.0 = Release|Any CPU
-		{2A2D9B0E-4897-40B3-B233-C06E6CEDADAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2A2D9B0E-4897-40B3-B233-C06E6CEDADAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2A2D9B0E-4897-40B3-B233-C06E6CEDADAB}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{2A2D9B0E-4897-40B3-B233-C06E6CEDADAB}.Debug|x86.Build.0 = Debug|Any CPU
-		{2A2D9B0E-4897-40B3-B233-C06E6CEDADAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2A2D9B0E-4897-40B3-B233-C06E6CEDADAB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2A2D9B0E-4897-40B3-B233-C06E6CEDADAB}.Release|x86.ActiveCfg = Release|Any CPU
-		{2A2D9B0E-4897-40B3-B233-C06E6CEDADAB}.Release|x86.Build.0 = Release|Any CPU
+		{0CFFDEDA-8108-4F8A-9C5D-2BDDC98EEF1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CFFDEDA-8108-4F8A-9C5D-2BDDC98EEF1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CFFDEDA-8108-4F8A-9C5D-2BDDC98EEF1B}.Debug|x86.ActiveCfg = Debug|x86
+		{0CFFDEDA-8108-4F8A-9C5D-2BDDC98EEF1B}.Debug|x86.Build.0 = Debug|x86
+		{0CFFDEDA-8108-4F8A-9C5D-2BDDC98EEF1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CFFDEDA-8108-4F8A-9C5D-2BDDC98EEF1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CFFDEDA-8108-4F8A-9C5D-2BDDC98EEF1B}.Release|x86.ActiveCfg = Release|x86
+		{0CFFDEDA-8108-4F8A-9C5D-2BDDC98EEF1B}.Release|x86.Build.0 = Release|x86
+		{443A1CE9-0C67-41ED-B392-5E41F7325A82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{443A1CE9-0C67-41ED-B392-5E41F7325A82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{443A1CE9-0C67-41ED-B392-5E41F7325A82}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{443A1CE9-0C67-41ED-B392-5E41F7325A82}.Debug|x86.Build.0 = Debug|Any CPU
+		{443A1CE9-0C67-41ED-B392-5E41F7325A82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{443A1CE9-0C67-41ED-B392-5E41F7325A82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{443A1CE9-0C67-41ED-B392-5E41F7325A82}.Release|x86.ActiveCfg = Release|Any CPU
+		{443A1CE9-0C67-41ED-B392-5E41F7325A82}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{ED0F38B7-33FE-4E24-BDAD-58790CA85BCC} = {6630FBDE-FB0C-49C7-B50C-D9281BDA9B51}
-		{636CEE45-1A7C-4DA3-8D88-9F121CE0FF05} = {66E9385E-AAA0-4508-8253-EE10707DF135}
-		{F94D622B-9ABB-42D0-9503-CEC67A73ECFE} = {66E9385E-AAA0-4508-8253-EE10707DF135}
-		{1F05C4D7-36C6-46F5-9D49-5FD9036C2C07} = {6630FBDE-FB0C-49C7-B50C-D9281BDA9B51}
-		{2A2D9B0E-4897-40B3-B233-C06E6CEDADAB} = {6630FBDE-FB0C-49C7-B50C-D9281BDA9B51}
-		{66E9385E-AAA0-4508-8253-EE10707DF135} = {13ADF3A0-0EF0-4FD7-ACDD-F9AEA08750FC}
-		{6630FBDE-FB0C-49C7-B50C-D9281BDA9B51} = {13ADF3A0-0EF0-4FD7-ACDD-F9AEA08750FC}
+		{0CFFDEDA-8108-4F8A-9C5D-2BDDC98EEF1B} = {E100C164-35F5-4EF9-B739-F446CD2CD149}
+		{443A1CE9-0C67-41ED-B392-5E41F7325A82} = {E100C164-35F5-4EF9-B739-F446CD2CD149}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {5DB68C2E-D823-43C7-B4FE-BD258A53F739}
+		SolutionGuid = {01014452-34E3-46C7-99D8-DE8763ABD8E3}
 	EndGlobalSection
 EndGlobal

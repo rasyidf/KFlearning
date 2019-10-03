@@ -23,22 +23,27 @@ using File = System.IO.File;
 
 namespace KFlearning.Core.IO
 {
+    public interface IFileSystemManager
+    {
+        string FindFile(string searchPath, string filename);
+
+        void DeleteDirectory(string path, CancellationToken token);
+        void CopyDirectory(string source, string destination, CancellationToken token);
+
+        void WriteFile(string path, string content);
+        void DeleteFile(string source);
+
+        void CreateDirectoryLink(string link, string target);
+        void RemoveDirectoryLink(string link);
+        bool DirectoryLinkExists(string dir);
+        void CreateShortcutOnDesktop(string linkName, string description, string path);
+    }
+
     public class FileSystemManager : IFileSystemManager
     {
         public string FindFile(string searchPath, string filename)
         {
             return Directory.EnumerateFiles(searchPath, filename, SearchOption.TopDirectoryOnly).FirstOrDefault();
-        }
-
-        public string FindDirectory(string searchPath, string directoryName)
-        {
-            return Directory.EnumerateDirectories(searchPath, directoryName, SearchOption.TopDirectoryOnly)
-                .FirstOrDefault();
-        }
-
-        public void CreateDirectory(string path)
-        {
-            Directory.CreateDirectory(path);
         }
 
         public void DeleteDirectory(string path, CancellationToken token)
@@ -59,44 +64,6 @@ namespace KFlearning.Core.IO
                 }
 
                 Directory.Delete(path);
-            }
-            catch (OperationCanceledException)
-            {
-                // ignored
-            }
-            catch
-            {
-                // ignored
-            }
-        }
-
-        public void MoveDirectory(string source, string destination, CancellationToken token)
-        {
-            try
-            {
-                Directory.CreateDirectory(destination);
-                foreach (string libFile in Directory.EnumerateFiles(source))
-                {
-                    var destPath = Path.Combine(destination, Path.GetFileName(libFile) ?? "");
-                    if (File.Exists(destPath))
-                    {
-                        File.SetAttributes(destPath, FileAttributes.Normal);
-                        File.Delete(destPath);
-                    }
-
-                    File.Move(libFile, destPath);
-                }
-
-                foreach (string name in Directory.EnumerateDirectories(source).Select(Path.GetFileName))
-                {
-                    var sourceToProcess = Path.Combine(source, name);
-                    var destToProcess = Path.Combine(destination, name);
-
-                    Directory.CreateDirectory(destToProcess);
-                    MoveDirectory(sourceToProcess, destToProcess, token);
-                }
-
-                Directory.Delete(source);
             }
             catch (OperationCanceledException)
             {
@@ -142,28 +109,6 @@ namespace KFlearning.Core.IO
             {
                 // ignored
             }
-        }
-
-        public void MoveFile(string source, string destination)
-        {
-            if (File.Exists(destination))
-            {
-                File.SetAttributes(destination, FileAttributes.Normal);
-                File.Delete(destination);
-            }
-
-            File.Move(source, destination);
-        }
-
-        public void CopyFile(string source, string destination)
-        {
-            if (File.Exists(destination))
-            {
-                File.SetAttributes(destination, FileAttributes.Normal);
-                File.Delete(destination);
-            }
-
-            File.Copy(source, destination);
         }
 
         public void WriteFile(string path, string content)

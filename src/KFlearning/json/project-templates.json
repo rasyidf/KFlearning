@@ -1,0 +1,18 @@
+﻿[
+  {
+    "name": "Konsol (C++)",
+    "file": "template/cpp-console.zip"
+  },
+  {
+    "name": "GUI Freeglut (C++)",
+    "file": "template/cpp-freeglut.zip"
+  },
+  {
+    "name": "Web (PHP/HTML/CSS/JS)",
+    "file": "template/web-php.zip"
+  },
+  {
+    "name": "Anaconda Base Environment (Python 3.7)",
+    "file": "template/python-anaconda-base.zip"
+  }
+]

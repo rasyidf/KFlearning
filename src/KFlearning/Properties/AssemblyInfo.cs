@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("KFlearning.Core")]
+[assembly: AssemblyTitle("KFlearning")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("KFlearning.Core")]
+[assembly: AssemblyProduct("KFlearning")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("443a1ce9-0c67-41ed-b392-5e41f7325a82")]
+[assembly: Guid("0cffdeda-8108-4f8a-9c5d-2bddc98eef1b")]
 
 // Version information for an assembly consists of the following four values:
 //
