@@ -127,33 +127,19 @@
   <data name="AppName" xml:space="preserve">
     <value>KFlearning</value>
   </data>
-  <data name="LinkNameEmptyMessage" xml:space="preserve">
-    <value>Nama link tidak boleh kosong atau spasi.</value>
-  </data>
-  <data name="LinkNotPermittedMessage" xml:space="preserve">
-    <value>KFlearning harus dijalankan sebagai Administrator untuk membuat link.</value>
-  </data>
-  <data name="LaragonNotInstalledMessage" xml:space="preserve">
-    <value>Laragon harus diinstal pada {0} untuk membuat link.</value>
-  </data>
   <data name="InvalidProjectMessage" xml:space="preserve">
     <value>Folder ini bukan proyek KFlearning.</value>
   </data>
   <data name="UnderMaintenanceMessage" xml:space="preserve">
     <value>Sedang dalam perbaikan...</value>
   </data>
-  <data name="InstallSuccessMessage" xml:space="preserve">
-    <value>Proses instalasi sukses.</value>
-  </data>
-  <data name="InstallCanceledMessage" xml:space="preserve">
-    <value>Proses instalasi/uninstall dibatalkan.</value>
-  </data>
-  <data name="InstallFailedMessage" xml:space="preserve">
-    <value>Proses instalasi gagal.
-
-{0}</value>
-  </data>
   <data name="ProjectExistsMessage" xml:space="preserve">
     <value>Proyek pada lokasi tersebut sudah ada. Pilih lokasi lain.</value>
+  </data>
+  <data name="InvalidAccessCode" xml:space="preserve">
+    <value>Kode akses salah!</value>
+  </data>
+  <data name="NotElevatedMessage" xml:space="preserve">
+    <value>KFlearning harus dijalankan sebagai Administrator untuk mengubah pengaturan sistem.</value>
   </data>
 </root>

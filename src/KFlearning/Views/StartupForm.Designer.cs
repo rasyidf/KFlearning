@@ -42,10 +42,10 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.lstHistory = new System.Windows.Forms.ListBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.cmdBrowse = new System.Windows.Forms.LinkLabel();
+            this.cmdClear = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -207,24 +207,19 @@
             this.label7.TabIndex = 18;
             this.label7.Text = "i";
             // 
-            // listBox1
+            // lstHistory
             // 
-            this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(53)))), ((int)(((byte)(55)))));
-            this.listBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.listBox1.ForeColor = System.Drawing.Color.White;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 20;
-            this.listBox1.Items.AddRange(new object[] {
-            "fhgjhydtgjt",
-            "tyujtyj",
-            "tyjt",
-            "y",
-            "hjtyhtyh"});
-            this.listBox1.Location = new System.Drawing.Point(121, 76);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(295, 204);
-            this.listBox1.TabIndex = 19;
-            this.listBox1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox1_DrawItem);
+            this.lstHistory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(53)))), ((int)(((byte)(55)))));
+            this.lstHistory.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.lstHistory.ForeColor = System.Drawing.Color.White;
+            this.lstHistory.FormattingEnabled = true;
+            this.lstHistory.ItemHeight = 20;
+            this.lstHistory.Location = new System.Drawing.Point(121, 76);
+            this.lstHistory.Name = "lstHistory";
+            this.lstHistory.Size = new System.Drawing.Size(295, 204);
+            this.lstHistory.TabIndex = 19;
+            this.lstHistory.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lstHistory_DrawItem);
+            this.lstHistory.DoubleClick += new System.EventHandler(this.lstHistory_DoubleClick);
             // 
             // label8
             // 
@@ -244,16 +239,17 @@
             this.label9.TabIndex = 21;
             this.label9.Text = "Buka proyek sebelumnya:";
             // 
-            // cmdBrowse
+            // cmdClear
             // 
-            this.cmdBrowse.AutoSize = true;
-            this.cmdBrowse.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(160)))), ((int)(((byte)(230)))));
-            this.cmdBrowse.Location = new System.Drawing.Point(358, 58);
-            this.cmdBrowse.Name = "cmdBrowse";
-            this.cmdBrowse.Size = new System.Drawing.Size(58, 15);
-            this.cmdBrowse.TabIndex = 22;
-            this.cmdBrowse.TabStop = true;
-            this.cmdBrowse.Text = "Bersihkan";
+            this.cmdClear.AutoSize = true;
+            this.cmdClear.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(160)))), ((int)(((byte)(230)))));
+            this.cmdClear.Location = new System.Drawing.Point(358, 58);
+            this.cmdClear.Name = "cmdClear";
+            this.cmdClear.Size = new System.Drawing.Size(58, 15);
+            this.cmdClear.TabIndex = 22;
+            this.cmdClear.TabStop = true;
+            this.cmdClear.Text = "Bersihkan";
+            this.cmdClear.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.cmdClear_LinkClicked);
             // 
             // StartupForm
             // 
@@ -261,10 +257,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(70)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(627, 293);
-            this.Controls.Add(this.cmdBrowse);
+            this.Controls.Add(this.cmdClear);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.lstHistory);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -306,10 +302,10 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox lstHistory;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.LinkLabel cmdBrowse;
+        private System.Windows.Forms.LinkLabel cmdClear;
     }
 }
 

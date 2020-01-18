@@ -70,31 +70,11 @@ namespace KFlearning.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Proses instalasi/uninstall dibatalkan..
+        ///   Looks up a localized string similar to Kode akses salah!.
         /// </summary>
-        internal static string InstallCanceledMessage {
+        internal static string InvalidAccessCode {
             get {
-                return ResourceManager.GetString("InstallCanceledMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Proses instalasi gagal.
-        ///
-        ///{0}.
-        /// </summary>
-        internal static string InstallFailedMessage {
-            get {
-                return ResourceManager.GetString("InstallFailedMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Proses instalasi sukses..
-        /// </summary>
-        internal static string InstallSuccessMessage {
-            get {
-                return ResourceManager.GetString("InstallSuccessMessage", resourceCulture);
+                return ResourceManager.GetString("InvalidAccessCode", resourceCulture);
             }
         }
         
@@ -118,29 +98,11 @@ namespace KFlearning.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Laragon harus diinstal pada {0} untuk membuat link..
+        ///   Looks up a localized string similar to KFlearning harus dijalankan sebagai Administrator untuk mengubah pengaturan sistem..
         /// </summary>
-        internal static string LaragonNotInstalledMessage {
+        internal static string NotElevatedMessage {
             get {
-                return ResourceManager.GetString("LaragonNotInstalledMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Nama link tidak boleh kosong atau spasi..
-        /// </summary>
-        internal static string LinkNameEmptyMessage {
-            get {
-                return ResourceManager.GetString("LinkNameEmptyMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to KFlearning harus dijalankan sebagai Administrator untuk membuat link..
-        /// </summary>
-        internal static string LinkNotPermittedMessage {
-            get {
-                return ResourceManager.GetString("LinkNotPermittedMessage", resourceCulture);
+                return ResourceManager.GetString("NotElevatedMessage", resourceCulture);
             }
         }
         

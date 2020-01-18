@@ -178,7 +178,6 @@
             this.Name = "CreateProjectForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Buat Proyek Baru";
-            this.Load += new System.EventHandler(this.CreateProjectForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

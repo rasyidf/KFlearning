@@ -31,34 +31,22 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label3 = new System.Windows.Forms.Label();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.chkWriteProtect = new System.Windows.Forms.CheckBox();
+            this.chkRegistry = new System.Windows.Forms.CheckBox();
+            this.chkTaskManager = new System.Windows.Forms.CheckBox();
+            this.chkControlPanel = new System.Windows.Forms.CheckBox();
+            this.chkDesktop = new System.Windows.Forms.CheckBox();
+            this.chkWallpaper = new System.Windows.Forms.CheckBox();
+            this.rdWDefault = new System.Windows.Forms.RadioButton();
+            this.rdWCustom = new System.Windows.Forms.RadioButton();
+            this.cmdBrowseWallpaper = new System.Windows.Forms.LinkLabel();
+            this.lblFileName = new System.Windows.Forms.Label();
+            this.cmdSave = new System.Windows.Forms.Button();
+            this.cmdCredential = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.panel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -69,7 +57,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(579, 49);
+            this.panel1.Size = new System.Drawing.Size(431, 49);
             this.panel1.TabIndex = 14;
             // 
             // label2
@@ -92,301 +80,186 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Administrator";
             // 
-            // checkBox1
+            // chkWriteProtect
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(15, 146);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(110, 19);
-            this.checkBox1.TabIndex = 16;
-            this.checkBox1.Text = "Kunci wallpaper";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkWriteProtect.AutoSize = true;
+            this.chkWriteProtect.Location = new System.Drawing.Point(18, 65);
+            this.chkWriteProtect.Name = "chkWriteProtect";
+            this.chkWriteProtect.Size = new System.Drawing.Size(124, 19);
+            this.chkWriteProtect.TabIndex = 16;
+            this.chkWriteProtect.Text = "Kunci copy ke USB";
+            this.chkWriteProtect.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // chkRegistry
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(15, 121);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(101, 19);
-            this.checkBox2.TabIndex = 17;
-            this.checkBox2.Text = "Kunci desktop";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.chkRegistry.AutoSize = true;
+            this.chkRegistry.Location = new System.Drawing.Point(18, 90);
+            this.chkRegistry.Name = "chkRegistry";
+            this.chkRegistry.Size = new System.Drawing.Size(135, 19);
+            this.chkRegistry.TabIndex = 17;
+            this.chkRegistry.Text = "Kunci Registry Editor";
+            this.chkRegistry.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // chkTaskManager
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(15, 47);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(124, 19);
-            this.checkBox3.TabIndex = 18;
-            this.checkBox3.Text = "Kunci copy ke USB";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.chkTaskManager.AutoSize = true;
+            this.chkTaskManager.Location = new System.Drawing.Point(18, 115);
+            this.chkTaskManager.Name = "chkTaskManager";
+            this.chkTaskManager.Size = new System.Drawing.Size(131, 19);
+            this.chkTaskManager.TabIndex = 18;
+            this.chkTaskManager.Text = "Kunci Task Manager";
+            this.chkTaskManager.UseVisualStyleBackColor = true;
             // 
-            // checkBox4
+            // chkControlPanel
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(15, 71);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(135, 19);
-            this.checkBox4.TabIndex = 19;
-            this.checkBox4.Text = "Kunci Registry Editor";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.chkControlPanel.AutoSize = true;
+            this.chkControlPanel.Location = new System.Drawing.Point(18, 139);
+            this.chkControlPanel.Name = "chkControlPanel";
+            this.chkControlPanel.Size = new System.Drawing.Size(131, 19);
+            this.chkControlPanel.TabIndex = 19;
+            this.chkControlPanel.Text = "Kunci Control Panel";
+            this.chkControlPanel.UseVisualStyleBackColor = true;
             // 
-            // checkBox5
+            // chkDesktop
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(15, 96);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(131, 19);
-            this.checkBox5.TabIndex = 20;
-            this.checkBox5.Text = "Kunci Task Manager";
-            this.checkBox5.UseVisualStyleBackColor = true;
+            this.chkDesktop.AutoSize = true;
+            this.chkDesktop.Location = new System.Drawing.Point(212, 69);
+            this.chkDesktop.Name = "chkDesktop";
+            this.chkDesktop.Size = new System.Drawing.Size(101, 19);
+            this.chkDesktop.TabIndex = 20;
+            this.chkDesktop.Text = "Kunci desktop";
+            this.chkDesktop.UseVisualStyleBackColor = true;
             // 
-            // checkBox6
+            // chkWallpaper
             // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(15, 22);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(131, 19);
-            this.checkBox6.TabIndex = 21;
-            this.checkBox6.Text = "Kunci Control Panel";
-            this.checkBox6.UseVisualStyleBackColor = true;
+            this.chkWallpaper.AutoSize = true;
+            this.chkWallpaper.Location = new System.Drawing.Point(212, 94);
+            this.chkWallpaper.Name = "chkWallpaper";
+            this.chkWallpaper.Size = new System.Drawing.Size(110, 19);
+            this.chkWallpaper.TabIndex = 21;
+            this.chkWallpaper.Text = "Kunci wallpaper";
+            this.chkWallpaper.UseVisualStyleBackColor = true;
+            this.chkWallpaper.CheckedChanged += new System.EventHandler(this.chkWallpaper_CheckedChanged);
             // 
-            // radioButton1
+            // rdWDefault
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(33, 171);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(166, 19);
-            this.radioButton1.TabIndex = 23;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Gunakan wallpaper default";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rdWDefault.AutoSize = true;
+            this.rdWDefault.Checked = true;
+            this.rdWDefault.Location = new System.Drawing.Point(0, 0);
+            this.rdWDefault.Name = "rdWDefault";
+            this.rdWDefault.Size = new System.Drawing.Size(166, 19);
+            this.rdWDefault.TabIndex = 23;
+            this.rdWDefault.TabStop = true;
+            this.rdWDefault.Text = "Gunakan wallpaper default";
+            this.rdWDefault.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // rdWCustom
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(33, 196);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(145, 19);
-            this.radioButton2.TabIndex = 24;
-            this.radioButton2.Text = "Gunakan wallpaper ini:";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rdWCustom.AutoSize = true;
+            this.rdWCustom.Location = new System.Drawing.Point(0, 25);
+            this.rdWCustom.Name = "rdWCustom";
+            this.rdWCustom.Size = new System.Drawing.Size(145, 19);
+            this.rdWCustom.TabIndex = 24;
+            this.rdWCustom.Text = "Gunakan wallpaper ini:";
+            this.rdWCustom.UseVisualStyleBackColor = true;
             // 
-            // linkLabel1
+            // cmdBrowseWallpaper
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(160)))), ((int)(((byte)(230)))));
-            this.linkLabel1.Location = new System.Drawing.Point(178, 198);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(30, 15);
-            this.linkLabel1.TabIndex = 26;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Pilih";
+            this.cmdBrowseWallpaper.AutoSize = true;
+            this.cmdBrowseWallpaper.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(160)))), ((int)(((byte)(230)))));
+            this.cmdBrowseWallpaper.Location = new System.Drawing.Point(147, 27);
+            this.cmdBrowseWallpaper.Name = "cmdBrowseWallpaper";
+            this.cmdBrowseWallpaper.Size = new System.Drawing.Size(30, 15);
+            this.cmdBrowseWallpaper.TabIndex = 26;
+            this.cmdBrowseWallpaper.TabStop = true;
+            this.cmdBrowseWallpaper.Text = "Pilih";
+            this.cmdBrowseWallpaper.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.cmdBrowseWallpaper_LinkClicked);
             // 
-            // label4
+            // lblFileName
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(50, 216);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(16, 15);
-            this.label4.TabIndex = 27;
-            this.label4.Text = "...";
+            this.lblFileName.AutoSize = true;
+            this.lblFileName.Location = new System.Drawing.Point(17, 45);
+            this.lblFileName.Name = "lblFileName";
+            this.lblFileName.Size = new System.Drawing.Size(16, 15);
+            this.lblFileName.TabIndex = 27;
+            this.lblFileName.Text = "...";
             // 
-            // button1
+            // cmdSave
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.button1.Location = new System.Drawing.Point(17, 27);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(74, 25);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Shutdown";
-            this.button1.UseVisualStyleBackColor = false;
+            this.cmdSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(168)))), ((int)(((byte)(109)))));
+            this.cmdSave.FlatAppearance.BorderSize = 0;
+            this.cmdSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmdSave.Location = new System.Drawing.Point(321, 214);
+            this.cmdSave.Name = "cmdSave";
+            this.cmdSave.Size = new System.Drawing.Size(98, 29);
+            this.cmdSave.TabIndex = 1;
+            this.cmdSave.Text = "Simpan";
+            this.cmdSave.UseVisualStyleBackColor = false;
+            this.cmdSave.Click += new System.EventHandler(this.cmdSave_Click);
             // 
-            // button2
+            // cmdCredential
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.button2.Location = new System.Drawing.Point(97, 27);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(74, 25);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Restart";
-            this.button2.UseVisualStyleBackColor = false;
+            this.cmdCredential.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdCredential.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.cmdCredential.FlatAppearance.BorderSize = 0;
+            this.cmdCredential.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmdCredential.Location = new System.Drawing.Point(217, 214);
+            this.cmdCredential.Name = "cmdCredential";
+            this.cmdCredential.Size = new System.Drawing.Size(98, 29);
+            this.cmdCredential.TabIndex = 29;
+            this.cmdCredential.Text = "Kredensial";
+            this.cmdCredential.UseVisualStyleBackColor = false;
+            this.cmdCredential.Click += new System.EventHandler(this.cmdCredential_Click);
             // 
-            // button4
+            // panel2
             // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(168)))), ((int)(((byte)(109)))));
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(469, 316);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(98, 29);
-            this.button4.TabIndex = 1;
-            this.button4.Text = "Simpan";
-            this.button4.UseVisualStyleBackColor = false;
+            this.panel2.Controls.Add(this.rdWDefault);
+            this.panel2.Controls.Add(this.lblFileName);
+            this.panel2.Controls.Add(this.rdWCustom);
+            this.panel2.Controls.Add(this.cmdBrowseWallpaper);
+            this.panel2.Enabled = false;
+            this.panel2.Location = new System.Drawing.Point(231, 118);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(188, 70);
+            this.panel2.TabIndex = 30;
             // 
-            // groupBox1
+            // ofd
             // 
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.checkBox6);
-            this.groupBox1.Controls.Add(this.linkLabel1);
-            this.groupBox1.Controls.Add(this.checkBox5);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Controls.Add(this.checkBox2);
-            this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Controls.Add(this.checkBox3);
-            this.groupBox1.Controls.Add(this.checkBox4);
-            this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(12, 58);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(220, 243);
-            this.groupBox1.TabIndex = 25;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Pengaturan Sistem";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.progressBar1);
-            this.groupBox2.Controls.Add(this.button5);
-            this.groupBox2.Controls.Add(this.linkLabel2);
-            this.groupBox2.Controls.Add(this.listView1);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(238, 58);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(329, 243);
-            this.groupBox2.TabIndex = 26;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Kontrol Jaringan";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(288, 219);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(23, 15);
-            this.label8.TabIndex = 8;
-            this.label8.Text = "0%";
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(6, 221);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(278, 12);
-            this.progressBar1.TabIndex = 7;
-            // 
-            // linkLabel2
-            // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(160)))), ((int)(((byte)(230)))));
-            this.linkLabel2.Location = new System.Drawing.Point(272, 64);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(51, 15);
-            this.linkLabel2.TabIndex = 6;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "Perbarui";
-            // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3});
-            this.listView1.FullRowSelect = true;
-            this.listView1.GridLines = true;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(6, 82);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(317, 131);
-            this.listView1.TabIndex = 5;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Hostname";
-            this.columnHeader1.Width = 100;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "IP";
-            this.columnHeader2.Width = 100;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "MAC";
-            this.columnHeader3.Width = 100;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 64);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(148, 15);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "KFlearning dalam jaringan:";
-            // 
-            // button5
-            // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(236, 27);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(87, 25);
-            this.button5.TabIndex = 2;
-            this.button5.Text = "Broadcast";
-            this.button5.UseVisualStyleBackColor = false;
-            // 
-            // button3
-            // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(365, 316);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(98, 29);
-            this.button3.TabIndex = 29;
-            this.button3.Text = "Kredensial";
-            this.button3.UseVisualStyleBackColor = false;
+            this.ofd.DefaultExt = "jpg";
+            this.ofd.Filter = "Gambar JPG|*.jpg";
+            this.ofd.Title = "Pilih file sebagai wallpaper.";
             // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(70)))), ((int)(((byte)(73)))));
-            this.ClientSize = new System.Drawing.Size(579, 359);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(431, 257);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.cmdCredential);
+            this.Controls.Add(this.chkWallpaper);
+            this.Controls.Add(this.cmdSave);
+            this.Controls.Add(this.chkDesktop);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.chkWriteProtect);
+            this.Controls.Add(this.chkControlPanel);
+            this.Controls.Add(this.chkRegistry);
+            this.Controls.Add(this.chkTaskManager);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AdminForm";
-            this.Text = "Administrasi KFlearning";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Administrasi";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -395,30 +268,19 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.CheckBox checkBox6;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.CheckBox chkWriteProtect;
+        private System.Windows.Forms.CheckBox chkRegistry;
+        private System.Windows.Forms.CheckBox chkTaskManager;
+        private System.Windows.Forms.CheckBox chkControlPanel;
+        private System.Windows.Forms.CheckBox chkDesktop;
+        private System.Windows.Forms.CheckBox chkWallpaper;
+        private System.Windows.Forms.LinkLabel cmdBrowseWallpaper;
+        private System.Windows.Forms.RadioButton rdWCustom;
+        private System.Windows.Forms.RadioButton rdWDefault;
+        private System.Windows.Forms.Label lblFileName;
+        private System.Windows.Forms.Button cmdSave;
+        private System.Windows.Forms.Button cmdCredential;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.OpenFileDialog ofd;
     }
 }

@@ -32,10 +32,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtAccessCode = new System.Windows.Forms.TextBox();
             this.cmdLogin = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtNetworkCode = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,14 +79,15 @@
             this.label3.TabIndex = 14;
             this.label3.Text = "Kode akses:";
             // 
-            // textBox1
+            // txtAccessCode
             // 
-            this.textBox1.Font = new System.Drawing.Font("Lucida Console", 12F);
-            this.textBox1.Location = new System.Drawing.Point(118, 76);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(152, 23);
-            this.textBox1.TabIndex = 16;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtAccessCode.Font = new System.Drawing.Font("Lucida Console", 12F);
+            this.txtAccessCode.Location = new System.Drawing.Point(118, 76);
+            this.txtAccessCode.Name = "txtAccessCode";
+            this.txtAccessCode.Size = new System.Drawing.Size(152, 23);
+            this.txtAccessCode.TabIndex = 16;
+            this.txtAccessCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtAccessCode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyUp);
             // 
             // cmdLogin
             // 
@@ -110,14 +111,15 @@
             this.label4.TabIndex = 20;
             this.label4.Text = "Kode jaringan:";
             // 
-            // textBox2
+            // txtNetworkCode
             // 
-            this.textBox2.Font = new System.Drawing.Font("Lucida Console", 12F);
-            this.textBox2.Location = new System.Drawing.Point(118, 106);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(152, 23);
-            this.textBox2.TabIndex = 21;
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtNetworkCode.Font = new System.Drawing.Font("Lucida Console", 12F);
+            this.txtNetworkCode.Location = new System.Drawing.Point(118, 106);
+            this.txtNetworkCode.Name = "txtNetworkCode";
+            this.txtNetworkCode.Size = new System.Drawing.Size(152, 23);
+            this.txtNetworkCode.TabIndex = 21;
+            this.txtNetworkCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtNetworkCode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyUp);
             // 
             // AuthenticationForm
             // 
@@ -125,10 +127,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(70)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(310, 204);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtNetworkCode);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cmdLogin);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtAccessCode);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -152,9 +154,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtAccessCode;
         private System.Windows.Forms.Button cmdLogin;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtNetworkCode;
     }
 }

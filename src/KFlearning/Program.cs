@@ -17,9 +17,15 @@ namespace KFlearning
         {
             Container.Install(new AppModulesInstaller());
 
+            Application.ApplicationExit += Application_ApplicationExit;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(Container.Resolve<StartupForm>());
+        }
+
+        private static void Application_ApplicationExit(object sender, EventArgs e)
+        {
+            Container.Dispose();
         }
     }
 }
