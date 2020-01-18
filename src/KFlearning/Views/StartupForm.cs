@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Web.Hosting;
 using System.Windows.Forms;
 using KFlearning.Core.Diagnostics;
 using KFlearning.Core.Services;
