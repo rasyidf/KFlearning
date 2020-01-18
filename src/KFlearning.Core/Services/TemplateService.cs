@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
 
@@ -11,13 +8,35 @@ namespace KFlearning.Core.Services
 {
     public interface ITemplateService
     {
-        void Extract(string name, string outputPath);
+        IEnumerable<Template> GetTemplates();
+        void Extract(Template template, string outputPath);
     }
 
     public class TemplateService : ITemplateService
     {
-        public void Extract(string name, string outputPath)
+        private static readonly List<Template> Templates = new List<Template>
         {
+            new Template("Konsol (C++)", "cpp_console"),
+            new Template("GUI Freeglut (C++)", "cpp_freeglut"),
+            new Template("Web (PHP/HTML/CSS/JS)", "web_php"),
+            new Template("Python/Jupyter Notebook", "python_anaconda_base"),
+            new Template("Kosong", null)
+        };
+
+        public IEnumerable<Template> GetTemplates()
+        {
+            return Templates;
+        }
+
+        public void Extract(Template template, string outputPath)
+        {
+            Extract(template.ResourceName, outputPath);
+        }
+
+        private void Extract(string name, string outputPath)
+        {
+            if (name == null) return;
+
             var content = (byte[]) TemplateResources.ResourceManager.GetObject(name) ??
                           throw new InvalidOperationException();
             using (var ms = new MemoryStream(content))

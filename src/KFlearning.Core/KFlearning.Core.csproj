@@ -43,20 +43,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Diagnostics\ProcessManager.cs" />
-    <Compile Include="Diagnostics\RegistryHelper.cs" />
     <Compile Include="Diagnostics\SystemTweaker.cs" />
-    <Compile Include="IO\FileSystemManager.cs" />
+    <Compile Include="Helpers.cs" />
+    <Compile Include="IO\PathKind.cs" />
     <Compile Include="IO\PathManager.cs" />
+    <Compile Include="KFlearningException.cs" />
     <Compile Include="Native\NativeConstants.cs" />
     <Compile Include="Native\NativeMethods.cs" />
     <Compile Include="Native\TokenSafeHandle.cs" />
     <Compile Include="Native\TOKEN_ELEVATION_TYPE.cs" />
     <Compile Include="Native\TOKEN_INFORMATION_CLASS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ProjectTemplate.cs" />
-    <Compile Include="Services\ProjectManager.cs" />
+    <Compile Include="Services\CredentialService.cs" />
+    <Compile Include="Services\HistoryService.cs" />
+    <Compile Include="Services\ICredentialStorage.cs" />
+    <Compile Include="Services\Project.cs" />
+    <Compile Include="Services\Template.cs" />
+    <Compile Include="Services\ProjectService.cs" />
     <Compile Include="Services\TemplateService.cs" />
-    <Compile Include="Services\Vscode.cs" />
+    <Compile Include="Services\VisualStudioCodeService.cs" />
     <Compile Include="TemplateResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -93,9 +98,6 @@
     <None Include="Resources\cpp-freeglut.zip" />
     <None Include="Resources\python-anaconda-base.zip" />
     <None Include="Resources\web-php.zip" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ProjectTemplates.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

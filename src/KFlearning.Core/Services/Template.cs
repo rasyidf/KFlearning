@@ -15,10 +15,21 @@
 
 namespace KFlearning.Core.Services
 {
-    public class ProjectTemplate
+    public class Template
     {
-        public string Name { get; set; }
+        public string Title { get; set; }
 
-        public string Template { get; set; }
+        public string ResourceName { get; set; }
+
+        public Template(string title, string resourceName)
+        {
+            Title = title;
+            ResourceName = resourceName;
+        }
+
+        public override string ToString()
+        {
+            return Title;
+        }
     }
 }

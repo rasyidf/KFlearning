@@ -81,32 +81,6 @@ namespace KFlearning.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [
-        ///  {
-        ///    &quot;name&quot;: &quot;Konsol (C++)&quot;,
-        ///    &quot;file&quot;: &quot;template/cpp-console.zip&quot;
-        ///  },
-        ///  {
-        ///    &quot;name&quot;: &quot;GUI Freeglut (C++)&quot;,
-        ///    &quot;file&quot;: &quot;template/cpp-freeglut.zip&quot;
-        ///  },
-        ///  {
-        ///    &quot;name&quot;: &quot;Web (PHP/HTML/CSS/JS)&quot;,
-        ///    &quot;file&quot;: &quot;template/web-php.zip&quot;
-        ///  },
-        ///  {
-        ///    &quot;name&quot;: &quot;Anaconda Base Environment (Python 3.7)&quot;,
-        ///    &quot;file&quot;: &quot;template/python-anaconda-base.zip&quot;
-        ///  }
-        ///].
-        /// </summary>
-        internal static string ProjectTemplates {
-            get {
-                return ResourceManager.GetString("ProjectTemplates", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] python_anaconda_base {
