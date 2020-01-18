@@ -46,8 +46,8 @@ namespace KFlearning.Views
             var templateName = cboTemplate.Text;
             Task.Run(() =>
             {
-                var project = ProjectManager.Create(txtProjectName.Text, templateName, txtLocation.Text);
-                ProjectManager.Launch(project);
+                //var project = ProjectManager.Create(txtProjectName.Text, templateName, txtLocation.Text);
+                //ProjectManager.Launch(project);
             }).ContinueWith(x =>
             {
                 Cursor = Cursors.Default;

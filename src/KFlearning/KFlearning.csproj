@@ -89,6 +89,7 @@
     <Compile Include="Views\AuthenticationForm.Designer.cs">
       <DependentUpon>AuthenticationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Controls\FlatListBox.cs" />
     <Compile Include="Views\CreateProjectForm.cs">
       <SubType>Form</SubType>
     </Compile>

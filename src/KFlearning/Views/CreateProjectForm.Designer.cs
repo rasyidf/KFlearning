@@ -65,7 +65,7 @@
             // 
             this.txtProjectName.Location = new System.Drawing.Point(119, 76);
             this.txtProjectName.Name = "txtProjectName";
-            this.txtProjectName.Size = new System.Drawing.Size(189, 23);
+            this.txtProjectName.Size = new System.Drawing.Size(146, 23);
             this.txtProjectName.TabIndex = 4;
             this.txtProjectName.TextChanged += new System.EventHandler(this.txtProjectName_TextChanged);
             // 
@@ -75,7 +75,7 @@
             this.cboTemplate.FormattingEnabled = true;
             this.cboTemplate.Location = new System.Drawing.Point(119, 105);
             this.cboTemplate.Name = "cboTemplate";
-            this.cboTemplate.Size = new System.Drawing.Size(137, 23);
+            this.cboTemplate.Size = new System.Drawing.Size(220, 23);
             this.cboTemplate.TabIndex = 5;
             // 
             // cmdCreate
@@ -83,7 +83,7 @@
             this.cmdCreate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.cmdCreate.FlatAppearance.BorderSize = 0;
             this.cmdCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmdCreate.Location = new System.Drawing.Point(197, 191);
+            this.cmdCreate.Location = new System.Drawing.Point(264, 189);
             this.cmdCreate.Name = "cmdCreate";
             this.cmdCreate.Size = new System.Drawing.Size(111, 32);
             this.cmdCreate.TabIndex = 7;
@@ -105,7 +105,7 @@
             this.txtLocation.Location = new System.Drawing.Point(119, 134);
             this.txtLocation.Name = "txtLocation";
             this.txtLocation.ReadOnly = true;
-            this.txtLocation.Size = new System.Drawing.Size(167, 23);
+            this.txtLocation.Size = new System.Drawing.Size(220, 23);
             this.txtLocation.TabIndex = 9;
             // 
             // fbd
@@ -116,12 +116,12 @@
             // 
             this.cmdBrowse.AutoSize = true;
             this.cmdBrowse.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(160)))), ((int)(((byte)(230)))));
-            this.cmdBrowse.Location = new System.Drawing.Point(292, 137);
+            this.cmdBrowse.Location = new System.Drawing.Point(345, 137);
             this.cmdBrowse.Name = "cmdBrowse";
-            this.cmdBrowse.Size = new System.Drawing.Size(16, 15);
+            this.cmdBrowse.Size = new System.Drawing.Size(30, 15);
             this.cmdBrowse.TabIndex = 10;
             this.cmdBrowse.TabStop = true;
-            this.cmdBrowse.Text = "...";
+            this.cmdBrowse.Text = "Pilih";
             this.cmdBrowse.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.cmdBrowse_LinkClicked);
             // 
             // panel1
@@ -132,7 +132,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(345, 49);
+            this.panel1.Size = new System.Drawing.Size(403, 49);
             this.panel1.TabIndex = 14;
             // 
             // label3
@@ -160,7 +160,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(70)))), ((int)(((byte)(73)))));
-            this.ClientSize = new System.Drawing.Size(345, 243);
+            this.ClientSize = new System.Drawing.Size(403, 243);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.cmdBrowse);
             this.Controls.Add(this.txtLocation);

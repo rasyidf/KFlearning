@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using KFlearning.Core.Services;
 using KFlearning.Properties;
+using KFlearning.Views.Controls;
 
 namespace KFlearning.Views
 {
@@ -28,8 +29,8 @@ namespace KFlearning.Views
                 return;
             }
 
-            var project = ProjectManager.Load(fbd.SelectedPath);
-            ProjectManager.Launch(project);
+            //var project = ProjectManager.Load(fbd.SelectedPath);
+            //ProjectManager.Launch(project);
         }
 
         private void cmdAdmin_Click(object sender, System.EventArgs e)
@@ -44,6 +45,11 @@ namespace KFlearning.Views
         private void cmdAbout_Click(object sender, System.EventArgs e)
         {
             using (var frm = Program.Container.Resolve<AboutForm>()) frm.ShowDialog(this);
+        }
+
+        private void listBox1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            FlatListBox.DrawItemHandler(sender, e);
         }
     }
 }
