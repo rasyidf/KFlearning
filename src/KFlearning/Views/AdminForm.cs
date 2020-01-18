@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace KFlearning.Views
 {
-    public partial class ArticleReaderForm : Form
+    public partial class AdminForm : Form
     {
-        public ArticleReaderForm()
+        public AdminForm()
         {
             InitializeComponent();
         }

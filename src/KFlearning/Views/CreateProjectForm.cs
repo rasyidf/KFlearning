@@ -24,12 +24,7 @@ namespace KFlearning.Views
         {
             cboTemplate.DataSource = ProjectManager.Templates;
         }
-
-        private void chkLink_CheckedChanged(object sender, EventArgs e)
-        {
-            txtLinkName.ReadOnly = !chkLink.Checked;
-        }
-
+        
         private void cmdCreate_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtProjectName.Text))
@@ -44,24 +39,6 @@ namespace KFlearning.Views
                     MessageBoxIcon.Exclamation);
                 return;
             }
-            if (chkLink.Checked && string.IsNullOrWhiteSpace(txtLinkName.Text))
-            {
-                MessageBox.Show(Resources.LinkNameEmptyMessage, Resources.AppName, MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
-                return;
-            }
-            if (chkLink.Checked && !ProjectManager.IsSymbolicLinkPermitted())
-            {
-                MessageBox.Show(Resources.LinkNotPermittedMessage, Resources.AppName, MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
-                return;
-            }
-            if (chkLink.Checked && !ProjectManager.IsLaragonInstalled())
-            {
-                MessageBox.Show(string.Format(Resources.LaragonNotInstalledMessage, PathManager.GetPath(PathKind.LaragonWww)), Resources.AppName, MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
-                return;
-            }
 
             var scheduler = TaskScheduler.FromCurrentSynchronizationContext();
             Cursor = Cursors.WaitCursor;
@@ -70,7 +47,6 @@ namespace KFlearning.Views
             Task.Run(() =>
             {
                 var project = ProjectManager.Create(txtProjectName.Text, templateName, txtLocation.Text);
-                if (chkLink.Checked) ProjectManager.CreateLink(project);
                 ProjectManager.Launch(project);
             }).ContinueWith(x =>
             {

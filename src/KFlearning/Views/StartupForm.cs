@@ -13,16 +13,6 @@ namespace KFlearning.Views
             InitializeComponent();
         }
         
-        private void StartupForm_Load(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void cmdAbout_Click(object sender, System.EventArgs e)
-        {
-            using (var frm = Program.Container.Resolve<AboutForm>()) frm.ShowDialog(this);
-        }
-
         private void cmdNewProject_Click(object sender, System.EventArgs e)
         {
             using (var frm = Program.Container.Resolve<CreateProjectForm>()) frm.ShowDialog(this);
@@ -42,16 +32,18 @@ namespace KFlearning.Views
             ProjectManager.Launch(project);
         }
 
-        private void cmdArticles_Click(object sender, System.EventArgs e)
+        private void cmdAdmin_Click(object sender, System.EventArgs e)
         {
-            MessageBox.Show(Resources.UnderMaintenanceMessage, Resources.AppName, MessageBoxButtons.OK,
-                MessageBoxIcon.Exclamation);
+            using (var frm = Program.Container.Resolve<AuthenticationForm>())
+            {
+                if (frm.ShowDialog(this) != DialogResult.OK) return;
+
+            }
         }
 
-        private void cmdLaragonLink_Click(object sender, System.EventArgs e)
+        private void cmdAbout_Click(object sender, System.EventArgs e)
         {
-            MessageBox.Show(Resources.UnderMaintenanceMessage, Resources.AppName, MessageBoxButtons.OK,
-                MessageBoxIcon.Exclamation);
+            using (var frm = Program.Container.Resolve<AboutForm>()) frm.ShowDialog(this);
         }
     }
 }

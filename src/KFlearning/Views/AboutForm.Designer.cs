@@ -87,7 +87,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(200, 30);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Hak Cipta (C) Fahmi Noor Fiqri 2910.\r\nDilisensikan di bawah lisensi MIT.";
+            this.label3.Text = "Hak Cipta (C) Fahmi Noor Fiqri 2019.\r\nDilisensikan di bawah lisensi MIT.";
             // 
             // cmdKodesiana
             // 
@@ -132,7 +132,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(89, 15);
             this.label4.TabIndex = 8;
-            this.label4.Text = "Versi 1.0 rev 221";
+            this.label4.Text = "Versi 1.1 rev 247";
             // 
             // AboutForm
             // 
@@ -150,7 +150,7 @@
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.ForeColor = System.Drawing.Color.White;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AboutForm";
