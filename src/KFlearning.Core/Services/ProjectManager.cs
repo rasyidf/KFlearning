@@ -30,16 +30,12 @@ namespace KFlearning.Core.Services
         string GetPathForProject(string basePath, string title);
 
         bool IsValidProject(string path);
-        bool IsLaragonInstalled();
-        bool IsSymbolicLinkPermitted();
 
         Project Load(string path);
+
         Project Create(string title, string template, string path);
         void Launch(Project project);
 
-        void CreateLink(Project project);
-        void RemoveLink(Project project);
-        bool LinkExists(Project project);
         
         void SaveMetadata(Project project);
     }
@@ -111,41 +107,6 @@ namespace KFlearning.Core.Services
         public void Launch(Project project)
         {
             _vscode.OpenFolder(project.Path);
-        }
-
-        public void CreateLink(Project project)
-        {
-            var linkPath = Path.Combine(_path.GetPath(PathKind.LaragonWww), project.Title);
-            _fileSystem.CreateDirectoryLink(linkPath, project.Path);
-
-            project.LinkPath = linkPath;
-            SaveMetadata(project);
-        }
-
-        public void RemoveLink(Project project)
-        {
-            var linkPath = Path.Combine(_path.GetPath(PathKind.LaragonWww), project.Title);
-            _fileSystem.RemoveDirectoryLink(linkPath);
-
-            project.LinkPath = null;
-            SaveMetadata(project);
-        }
-
-        public bool LinkExists(Project project)
-        {
-            var linkPath = Path.Combine(_path.GetPath(PathKind.LaragonWww), project.Title);
-            return _fileSystem.DirectoryLinkExists(linkPath);
-        }
-
-        public bool IsSymbolicLinkPermitted()
-        {
-            return _process.IsProcessElevated();
-        }
-
-        public bool IsLaragonInstalled()
-        {
-            var root = Path.GetPathRoot(Environment.SystemDirectory);
-            return Directory.Exists(Path.Combine(root, @"laragon\www"));
         }
 
         public void SaveMetadata(Project project)

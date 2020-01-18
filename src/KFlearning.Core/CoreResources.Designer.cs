@@ -61,55 +61,11 @@ namespace KFlearning.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string HtmlBodyEnd {
-            get {
-                return ResourceManager.GetString("HtmlBodyEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string HtmlBodyStart {
-            get {
-                return ResourceManager.GetString("HtmlBodyStart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to kf-project.json.
         /// </summary>
         internal static string MetadataFileName {
             get {
                 return ResourceManager.GetString("MetadataFileName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {
-        ///    &quot;window.zoomLevel&quot;: 0,
-        ///    &quot;vsicons.dontShowNewVersionMessage&quot;: true,
-        ///
-        ///    &quot;terminal.integrated.shell.windows&quot;: &quot;C:\\WINDOWS\\System32\\cmd.exe&quot;,
-        ///    &quot;terminal.integrated.rendererType&quot;: &quot;canvas&quot;,
-        ///
-        ///    &quot;[json]&quot;: {
-        ///        &quot;editor.defaultFormatter&quot;: &quot;HookyQR.beautify&quot;
-        ///    },
-        ///    &quot;[html]&quot;: {
-        ///        &quot;editor.defaultFormatter&quot;: &quot;HookyQR.beautify&quot;
-        ///    },
-        ///
-        ///    &quot;editor.renderWhitespace&quot;: &quot;all&quot;,
-        ///    &quot;editor.renderControlCharacters&quot;: true,
-        ///    &quot;editor.detectIndentation&quot;: false,
-        ///    &quot;editor.tabS [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string VscodeConfig {
-            get {
-                return ResourceManager.GetString("VscodeConfig", resourceCulture);
             }
         }
     }

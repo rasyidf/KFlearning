@@ -32,11 +32,6 @@ namespace KFlearning.Core.IO
 
         void WriteFile(string path, string content);
         void DeleteFile(string source);
-
-        void CreateDirectoryLink(string link, string target);
-        void RemoveDirectoryLink(string link);
-        bool DirectoryLinkExists(string dir);
-        void CreateShortcutOnDesktop(string linkName, string description, string path);
     }
 
     public class FileSystemManager : IFileSystemManager
@@ -120,24 +115,7 @@ namespace KFlearning.Core.IO
         {
             File.Delete(source);
         }
-
-        public void CreateDirectoryLink(string link, string target)
-        {
-            var result = NativeMethods.CreateSymbolicLink(link, target, NativeConstants.SYMBOLIC_LINK_FLAG_DIRECTORY);
-            if (!result) throw new Win32Exception();
-        }
-
-        public void RemoveDirectoryLink(string link)
-        {
-            var result = NativeMethods.DeleteFile(link);
-            if (!result) throw new Win32Exception();
-        }
-
-        public bool DirectoryLinkExists(string dir)
-        {
-            return File.Exists(dir);
-        }
-
+        
         public void CreateShortcutOnDesktop(string linkName, string description, string path)
         {
             object shDesktop = "Desktop";

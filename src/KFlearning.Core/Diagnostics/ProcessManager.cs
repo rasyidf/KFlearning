@@ -14,6 +14,7 @@ namespace KFlearning.Core.Diagnostics
         bool IsRunning(string name);
         bool IsProcessElevated();
         bool IsUacEnabled();
+        bool IsWindows7();
 
         void Run(string filename, string args, bool show = false);
         void RunWait(string filename, string args, bool show = false);
@@ -81,6 +82,11 @@ namespace KFlearning.Core.Diagnostics
             {
                 return uacKey != null && uacKey.GetValue(NativeConstants.UacRegistryValue).Equals(1);
             }
+        }
+
+        public bool IsWindows7()
+        {
+            throw new NotImplementedException();
         }
 
         public void Run(string filename, string args, bool show = false)

@@ -42,16 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\HtmlTransformer.cs" />
-    <Compile Include="API\KodesianaService.cs" />
-    <Compile Include="API\Post.cs" />
-    <Compile Include="API\PostResponse.cs" />
     <Compile Include="CoreResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CoreResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Diagnostics\ProcessManager.cs" />
+    <Compile Include="Diagnostics\RegistryHelper.cs" />
+    <Compile Include="Diagnostics\SystemTweaker.cs" />
     <Compile Include="IO\FileSystemManager.cs" />
     <Compile Include="IO\PathManager.cs" />
     <Compile Include="Native\NativeConstants.cs" />
@@ -60,14 +58,10 @@
     <Compile Include="Native\TOKEN_ELEVATION_TYPE.cs" />
     <Compile Include="Native\TOKEN_INFORMATION_CLASS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IInstallable.cs" />
-    <Compile Include="Services\KflearningShortcut.cs" />
-    <Compile Include="Services\MinGW.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Services\Project.cs" />
     <Compile Include="Services\ProjectManager.cs" />
     <Compile Include="Services\Vscode.cs" />
-    <Compile Include="Services\VscodeExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CoreResources.resx">
