@@ -30,18 +30,16 @@ namespace KFlearning.Core.Services
         string GetPathForProject(string basePath, string title);
 
         bool IsValidProject(string path);
-
-        Project Load(string path);
-
-        Project Create(string title, string template, string path);
-        void Launch(Project project);
-
         
-        void SaveMetadata(Project project);
+        void Create(string title, string template, string path);
+
+        void Launch(string project);
     }
 
     public class ProjectManager : IProjectManager
-    {      
+    {
+        private const string MetadataFileName = "kf-learning.json";
+
         private readonly IVscode _vscode;
         private readonly IProcessManager _process;
         private readonly IPathManager _path;
@@ -66,37 +64,17 @@ namespace KFlearning.Core.Services
 
         public bool IsValidProject(string path)
         {
-            return File.Exists(Path.Combine(path, CoreResources.MetadataFileName));
+            return File.Exists(Path.Combine(path, MetadataFileName));
         }
-
-        public Project Load(string path)
+        
+        public void Create(string title, string template, string path)
         {
-            var content = File.ReadAllText(Path.Combine(path, CoreResources.MetadataFileName));
-            var project = JsonConvert.DeserializeObject<Project>(content);
-            project.Path = path;
-
-            return project;
-        }
-
-        public Project Create(string title, string template, string path)
-        {
-            var project = new Project
-            {
-                Title = title,
-                Template = template,
-                Path = path,
-            };
-
             Directory.CreateDirectory(path);
-            SaveMetadata(project);
-
-            if (!_projectTemplates.TryGetValue(project.Template, out string zipPath)) return project;
-            using (var zip = new ZipFile(zipPath))
-            {
-                zip.ExtractAll(project.Path);
-            }
-
-            return project;
+            //if (!_projectTemplates.TryGetValue(project.Template, out string zipPath)) return project;
+            //using (var zip = new ZipFile(zipPath))
+            //{
+            //    zip.ExtractAll(project.Path);
+            //}
         }
 
         public string GetPathForProject(string basePath, string title)
@@ -104,24 +82,12 @@ namespace KFlearning.Core.Services
             return Path.Combine(basePath ?? _defaultProjectPath, _path.StripInvalidFileName(title).ToLowerInvariant());
         }
 
-        public void Launch(Project project)
+        public void Launch(string project)
         {
-            _vscode.OpenFolder(project.Path);
+            _vscode.OpenFolder(project);
         }
 
-        public void SaveMetadata(Project project)
-        {
-            var path = Path.Combine(project.Path, CoreResources.MetadataFileName);
-            using (var streamWriter = new StreamWriter(path))
-            {
-                var serializer = new JsonSerializer
-                {
-                    Formatting = Formatting.Indented
-                };
-
-                serializer.Serialize(streamWriter, project);
-            }
-        }
+       
 
         private Dictionary<string, string> LoadTemplates()
         {

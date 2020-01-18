@@ -42,11 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CoreResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CoreResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Diagnostics\ProcessManager.cs" />
     <Compile Include="Diagnostics\RegistryHelper.cs" />
     <Compile Include="Diagnostics\SystemTweaker.cs" />
@@ -58,15 +53,20 @@
     <Compile Include="Native\TOKEN_ELEVATION_TYPE.cs" />
     <Compile Include="Native\TOKEN_INFORMATION_CLASS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Helpers.cs" />
-    <Compile Include="Services\Project.cs" />
+    <Compile Include="Services\ProjectTemplate.cs" />
     <Compile Include="Services\ProjectManager.cs" />
+    <Compile Include="Services\TemplateService.cs" />
     <Compile Include="Services\Vscode.cs" />
+    <Compile Include="TemplateResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TemplateResources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CoreResources.resx">
+    <EmbeddedResource Include="TemplateResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>CoreResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>TemplateResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -89,9 +89,13 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Services\ProjectTemplates.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="Resources\cpp-console.zip" />
+    <None Include="Resources\cpp-freeglut.zip" />
+    <None Include="Resources\python-anaconda-base.zip" />
+    <None Include="Resources\web-php.zip" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ProjectTemplates.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

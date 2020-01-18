@@ -15,14 +15,10 @@
 
 namespace KFlearning.Core.Services
 {
-    public class Project
+    public class ProjectTemplate
     {
-        public string Title { get; set; }
-
-        public string Path { get; set; }
+        public string Name { get; set; }
 
         public string Template { get; set; }
-
-        public string LinkPath { get; set; }
     }
 }

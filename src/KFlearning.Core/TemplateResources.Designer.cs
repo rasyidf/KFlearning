@@ -22,14 +22,14 @@ namespace KFlearning.Core {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class CoreResources {
+    internal class TemplateResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CoreResources() {
+        internal TemplateResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace KFlearning.Core {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KFlearning.Core.CoreResources", typeof(CoreResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KFlearning.Core.TemplateResources", typeof(TemplateResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,68 @@ namespace KFlearning.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to kf-project.json.
+        ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static string MetadataFileName {
+        internal static byte[] cpp_console {
             get {
-                return ResourceManager.GetString("MetadataFileName", resourceCulture);
+                object obj = ResourceManager.GetObject("cpp_console", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] cpp_freeglut {
+            get {
+                object obj = ResourceManager.GetObject("cpp_freeglut", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [
+        ///  {
+        ///    &quot;name&quot;: &quot;Konsol (C++)&quot;,
+        ///    &quot;file&quot;: &quot;template/cpp-console.zip&quot;
+        ///  },
+        ///  {
+        ///    &quot;name&quot;: &quot;GUI Freeglut (C++)&quot;,
+        ///    &quot;file&quot;: &quot;template/cpp-freeglut.zip&quot;
+        ///  },
+        ///  {
+        ///    &quot;name&quot;: &quot;Web (PHP/HTML/CSS/JS)&quot;,
+        ///    &quot;file&quot;: &quot;template/web-php.zip&quot;
+        ///  },
+        ///  {
+        ///    &quot;name&quot;: &quot;Anaconda Base Environment (Python 3.7)&quot;,
+        ///    &quot;file&quot;: &quot;template/python-anaconda-base.zip&quot;
+        ///  }
+        ///].
+        /// </summary>
+        internal static string ProjectTemplates {
+            get {
+                return ResourceManager.GetString("ProjectTemplates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] python_anaconda_base {
+            get {
+                object obj = ResourceManager.GetObject("python_anaconda_base", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] web_php {
+            get {
+                object obj = ResourceManager.GetObject("web_php", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }
