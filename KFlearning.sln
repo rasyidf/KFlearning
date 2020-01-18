@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFlearning", "src\KFlearnin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFlearning.Core", "src\KFlearning.Core\KFlearning.Core.csproj", "{443A1CE9-0C67-41ED-B392-5E41F7325A82}"
 EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "KFlearning.Setup", "src\KFlearning.Setup\KFlearning.Setup.wixproj", "{51B934A5-0042-49C0-9560-0E6A4C38D41E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,12 @@ Global
 		{443A1CE9-0C67-41ED-B392-5E41F7325A82}.Release|Any CPU.Build.0 = Release|Any CPU
 		{443A1CE9-0C67-41ED-B392-5E41F7325A82}.Release|x86.ActiveCfg = Release|Any CPU
 		{443A1CE9-0C67-41ED-B392-5E41F7325A82}.Release|x86.Build.0 = Release|Any CPU
+		{51B934A5-0042-49C0-9560-0E6A4C38D41E}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{51B934A5-0042-49C0-9560-0E6A4C38D41E}.Debug|x86.ActiveCfg = Debug|x86
+		{51B934A5-0042-49C0-9560-0E6A4C38D41E}.Debug|x86.Build.0 = Debug|x86
+		{51B934A5-0042-49C0-9560-0E6A4C38D41E}.Release|Any CPU.ActiveCfg = Release|x86
+		{51B934A5-0042-49C0-9560-0E6A4C38D41E}.Release|x86.ActiveCfg = Release|x86
+		{51B934A5-0042-49C0-9560-0E6A4C38D41E}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +56,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{0CFFDEDA-8108-4F8A-9C5D-2BDDC98EEF1B} = {E100C164-35F5-4EF9-B739-F446CD2CD149}
 		{443A1CE9-0C67-41ED-B392-5E41F7325A82} = {E100C164-35F5-4EF9-B739-F446CD2CD149}
+		{51B934A5-0042-49C0-9560-0E6A4C38D41E} = {E100C164-35F5-4EF9-B739-F446CD2CD149}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {01014452-34E3-46C7-99D8-DE8763ABD8E3}
