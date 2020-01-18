@@ -11,25 +11,15 @@ namespace KFlearning.Core.Diagnostics
 {
     public interface IProcessManager
     {
-        bool IsRunning(string name);
         bool IsProcessElevated();
         bool IsUacEnabled();
         bool IsWindows7();
 
         void Run(string filename, string args, bool show = false);
-        void RunWait(string filename, string args, bool show = false);
-        void RunJob(string filename, string args, bool show = false);
-        void TerminateJob(string processName);
     }
 
    public class ProcessManager : IProcessManager
     {
-        public bool IsRunning(string name)
-        {
-            var processes = Process.GetProcessesByName("httpd");
-            return processes.Length > 0;
-        }
-
         public bool IsProcessElevated()
         {
             if (!IsUacEnabled())
@@ -86,39 +76,13 @@ namespace KFlearning.Core.Diagnostics
 
         public bool IsWindows7()
         {
-            throw new NotImplementedException();
+            var version = Environment.OSVersion;
+            return version.Version.Major == 6 && version.Version.Minor == 1;
         }
 
         public void Run(string filename, string args, bool show = false)
         {
             Process.Start(filename, args);
-        }
-
-        public void RunWait(string filename, string args, bool show = false)
-        {
-            var procInfo = new ProcessStartInfo
-            {
-                FileName = filename,
-                Arguments = args,
-                CreateNoWindow = true,
-                WindowStyle = ProcessWindowStyle.Hidden
-            };
-            Process.Start(procInfo)?.WaitForExit();
-        }
-
-        public void RunJob(string filename, string args, bool show = false)
-        {
-            Process.Start(filename, args);
-        }
-
-        public void TerminateJob(string processName)
-        {
-            var processes = Process.GetProcessesByName(processName);
-            if (!processes.Any()) return;
-            foreach (Process process in processes)
-            {
-                process.Kill();
-            }
         }
     }
 }
