@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+  <?define SourceDir = "D:\Workspace\Kodesiana\apps\KFlearning\build" ?>
+  <?define AssetsDir = "D:\Workspace\Kodesiana\apps\KFlearning\assets" ?>
+</Include>

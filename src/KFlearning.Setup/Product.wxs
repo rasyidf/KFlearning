@@ -1,30 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="KFlearning.Setup" Language="1033" Version="1.0.0.0" Manufacturer="" UpgradeCode="7146d4b3-194d-4c57-95ee-ee08f37808db">
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+  <?include Variables.wxi ?>
 
-		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-		<MediaTemplate />
+  <Product Id="*" Name="KFlearning Setup" Language="1033" Version="1.0.0.0" Manufacturer="Kodesiana" UpgradeCode="7146d4b3-194d-4c57-95ee-ee08f37808db">
+    <!-- Package -->
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    <MediaTemplate EmbedCab="yes" />
 
-		<Feature Id="ProductFeature" Title="KFlearning.Setup" Level="1">
-			<ComponentGroupRef Id="ProductComponents" />
-		</Feature>
-	</Product>
+    <!-- Install Conditions -->
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 
-	<Fragment>
-		<Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLFOLDER" Name="KFlearning.Setup" />
-			</Directory>
-		</Directory>
-	</Fragment>
+    <!-- Features to install -->
+    <Feature Id="ProductFeature" Title="KFlearning" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentGroupRef Id="MingwComponents" />
+      <ComponentGroupRef Id="MingwEnvironments" />
+      <ComponentGroupRef Id="AppShortcuts" />
+    </Feature>
 
-	<Fragment>
-		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
-			<!-- <Component Id="ProductComponent"> -->
-				<!-- TODO: Insert files, registry keys, and other resources here. -->
-			<!-- </Component> -->
-		</ComponentGroup>
-	</Fragment>
+    <!-- Properties -->
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.AssetsDir)\license.rtf" />
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <Property Id="WixShellExecTarget" Value="[#KFlearning.exe]" />
+    <Property Id="ARPPRODUCTICON" Value="D:\Workspace\Kodesiana\apps\KFlearning\assets\kflearning-logo.ico" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Buka KFlearning" />
+
+    <!-- UI -->
+    <UI>
+      <UIRef Id="WixUI_InstallDir" />
+      <ProgressText Action="ExtractMingw">Memasang MinGW-w64...</ProgressText>
+      <ProgressText Action="RemoveMingw">Menghapus MinGW-w64...</ProgressText>
+
+      <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchApplication">
+        WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 AND NOT Installed
+      </Publish>
+    </UI>
+
+    <!-- Custom Actions -->
+    <SetProperty Id="QtExecCmdLine" Action="extract" Value="&quot;[#sevenza.exe]&quot; x &quot;[#mingw_w64.7z]&quot; -o[WindowsVolume] -y" Sequence="execute" Before="ExtractMingw" />
+    <CustomAction Id="ExtractMingw" BinaryKey="WixCA" DllEntry="CAQuietExec" Execute="immediate" Return="check" />
+
+    <SetProperty Id="QtExecCmdLine" Action="remove" Value="&quot;[SystemFolder]cmd.exe&quot; /c rmdir [WindowsVolume]mingw32 /s /q" Sequence="execute" Before="RemoveMingw" />
+    <CustomAction Id="RemoveMingw" BinaryKey="WixCA" DllEntry="CAQuietExec" Execute="immediate" Return="check" />
+
+    <CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
+
+    <!-- Custom install sequence -->
+    <InstallExecuteSequence>
+      <Custom Action="ExtractMingw" After="InstallFiles">NOT Installed</Custom>
+      <Custom Action="RemoveMingw" After="RemoveFiles">Installed</Custom>
+    </InstallExecuteSequence>
+  </Product>
 </Wix>

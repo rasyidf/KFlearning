@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include Variables.wxi ?>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="Castle.Core.dll" Guid="*">
+        <File Id="Castle.Core.dll" KeyPath="yes" Source="$(var.SourceDir)\Castle.Core.dll" />
+      </Component>
+      <Component Id="Castle.Windsor.dll" Guid="*">
+        <File Id="Castle.Windsor.dll" KeyPath="yes" Source="$(var.SourceDir)\Castle.Windsor.dll" />
+      </Component>
+      <Component Id="ICSharpCode.SharpZipLib.dll" Guid="*">
+        <File Id="ICSharpCode.SharpZipLib.dll" KeyPath="yes" Source="$(var.SourceDir)\ICSharpCode.SharpZipLib.dll" />
+      </Component>
+      <Component Id="KFlearning.Core.dll" Guid="*">
+        <File Id="KFlearning.Core.dll" KeyPath="yes" Source="$(var.SourceDir)\KFlearning.Core.dll" />
+      </Component>
+      <Component Id="KFlearning.exe" Guid="*">
+        <File Id="KFlearning.exe" KeyPath="yes" Source="$(var.SourceDir)\KFlearning.exe" />
+      </Component>
+      <Component Id="KFlearning.exe.config" Guid="*">
+        <File Id="KFlearning.exe.config" KeyPath="yes" Source="$(var.SourceDir)\KFlearning.exe.config" />
+      </Component>
+      <Component Id="Newtonsoft.Json.dll" Guid="*">
+        <File Id="Newtonsoft.Json.dll" KeyPath="yes" Source="$(var.SourceDir)\Newtonsoft.Json.dll" />
+      </Component>
+
+      <Component Id="kodesiana_icon.ico" Guid="*">
+        <File Id="kodesiana_icon.ico" KeyPath="yes" Source="$(var.AssetsDir)\kodesiana_icon.ico" />
+      </Component>
+    </ComponentGroup>
+
+    <ComponentGroup Id="MingwComponents" Directory="TempFolder">
+      <Component Id="mingw_w64.7z" Guid="*">
+        <File Id="mingw_w64.7z" KeyPath="yes" Source="$(var.AssetsDir)\i686-8.1.0-release-posix-dwarf-rt_v6-rev0.7z" />
+      </Component>
+      <Component Id="sevenza.exe" Guid="*">
+        <File Id="sevenza.exe" KeyPath="yes" Source="$(var.AssetsDir)\7za.exe" />
+      </Component>
+    </ComponentGroup>
+
+    <ComponentGroup Id="MingwEnvironments">
+      <Component Id="Mingw32BinDir" Directory="TARGETDIR" Guid="{A3A5F7AF-FD24-4E93-B608-99539B319AEA}">
+        <CreateFolder />
+        <Environment Id="UpdatePath1" Name="PATH" Action="set" Part="last" Value="[WindowsVolume]mingw32\bin" />
+        <Environment Id="UpdatePath2" Name="PATH" Action="set" Part="last" Value="[WindowsVolume]mingw32\i686-w64-mingw32\bin" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>
