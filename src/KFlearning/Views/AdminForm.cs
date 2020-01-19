@@ -51,7 +51,7 @@ namespace KFlearning.Views
 
         private void chkWallpaper_CheckedChanged(object sender, EventArgs e)
         {
-            panel1.Enabled = chkWallpaper.Checked;
+            panel2.Enabled = chkWallpaper.Checked;
         }
 
         private void cmdCredential_Click(object sender, EventArgs e)
@@ -59,7 +59,7 @@ namespace KFlearning.Views
             using (var frm = Program.Container.Resolve<AuthenticationForm>())
             {
                 if (frm.ShowDialog(this) != DialogResult.OK) return;
-                if (string.IsNullOrEmpty(frm.AccessCode)) _credential.SaveAccessCode(frm.AccessCode);
+                if (!string.IsNullOrEmpty(frm.AccessCode)) _credential.SaveAccessCode(frm.AccessCode);
             }
         }
 
@@ -87,6 +87,7 @@ namespace KFlearning.Views
             _tweaker.Apply();
             Settings.Default.Raf = chkRaf.Checked;
             Settings.Default.Save();
+            Close();
         }
 
         private void cmdBrowseWallpaper_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
