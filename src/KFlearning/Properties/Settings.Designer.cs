@@ -37,13 +37,13 @@ namespace KFlearning.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string NetworkCode {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Raf {
             get {
-                return ((string)(this["NetworkCode"]));
+                return ((bool)(this["Raf"]));
             }
             set {
-                this["NetworkCode"] = value;
+                this["Raf"] = value;
             }
         }
     }

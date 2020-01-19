@@ -5,8 +5,8 @@
     <Setting Name="AccessCode" Type="System.String" Scope="User">
       <Value Profile="(Default)">8D0rHYDtvdMCvYjf6XdzNoQE7eg/mA8KpKGSYQCTpxY=</Value>
     </Setting>
-    <Setting Name="NetworkCode" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="Raf" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>
