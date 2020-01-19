@@ -142,4 +142,7 @@
   <data name="NotElevatedMessage" xml:space="preserve">
     <value>KFlearning harus dijalankan sebagai Administrator untuk mengubah pengaturan sistem.</value>
   </data>
+  <data name="VscodeNotInstalled" xml:space="preserve">
+    <value>Visual Studio Code tidak ditemukan. Harap install Visual Studio Code terlebih dahulu!</value>
+  </data>
 </root>

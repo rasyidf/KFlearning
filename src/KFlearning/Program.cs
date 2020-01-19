@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 using Castle.Windsor;
+using KFlearning.Core.IO;
+using KFlearning.Properties;
 using KFlearning.Views;
 
 namespace KFlearning
@@ -16,6 +18,14 @@ namespace KFlearning
         static void Main(string[] args)
         {
             Container.Install(new AppModulesInstaller());
+
+            var vscode = Container.Resolve<IPathManager>();
+            if (!vscode.DiscoverVisualStudioCode(out _))
+            {
+                MessageBox.Show(Resources.VscodeNotInstalled, Resources.AppName, MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+                return;
+            }
 
             Application.ApplicationExit += Application_ApplicationExit;
             Application.EnableVisualStyles();

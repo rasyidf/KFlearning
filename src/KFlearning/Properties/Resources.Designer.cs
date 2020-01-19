@@ -132,5 +132,14 @@ namespace KFlearning.Properties {
                 return ResourceManager.GetString("UnderMaintenanceMessage", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visual Studio Code tidak ditemukan. Harap install Visual Studio Code terlebih dahulu!.
+        /// </summary>
+        internal static string VscodeNotInstalled {
+            get {
+                return ResourceManager.GetString("VscodeNotInstalled", resourceCulture);
+            }
+        }
     }
 }
