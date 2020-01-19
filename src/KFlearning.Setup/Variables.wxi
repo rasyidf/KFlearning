@@ -2,4 +2,5 @@
 <Include>
   <?define SourceDir = "D:\Workspace\Kodesiana\apps\KFlearning\build\staging" ?>
   <?define AssetsDir = "D:\Workspace\Kodesiana\apps\KFlearning\assets" ?>
+  <?define IconFile = "D:\Workspace\Kodesiana\apps\KFlearning\assets\kflearning-logo.ico" ?>
 </Include>
