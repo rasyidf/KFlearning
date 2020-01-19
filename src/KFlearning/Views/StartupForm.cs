@@ -22,6 +22,8 @@ namespace KFlearning.Views
             _process = Program.Container.Resolve<IProcessManager>();
 
             InitializeComponent();
+
+            pnRaf.Visible = Settings.Default.Raf;
             ReloadHistory();
         }
 
@@ -75,8 +77,6 @@ namespace KFlearning.Views
 
             using (var frm = Program.Container.Resolve<AuthenticationForm>())
             {
-                frm.VerifyOnly = true;
-
                 if (frm.ShowDialog(this) != DialogResult.OK) return;
                 if (!_credential.Verify(frm.AccessCode))
                 {

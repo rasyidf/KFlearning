@@ -20,6 +20,7 @@ namespace KFlearning
         {
             Container.Install(new AppModulesInstaller());
 
+            // find vscode
             var vscode = Container.Resolve<IPathManager>();
             if (!vscode.DiscoverVisualStudioCode(out _))
             {
@@ -28,7 +29,13 @@ namespace KFlearning
                 return;
             }
 
+            // history
+            Container.Resolve<IHistoryService>().RecordHistory = !Settings.Default.Raf;
+
+            // app exit handler
             Application.ApplicationExit += Application_ApplicationExit;
+
+            // bootstrapper
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(Container.Resolve<StartupForm>());

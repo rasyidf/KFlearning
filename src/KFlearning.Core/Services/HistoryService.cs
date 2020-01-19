@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using KFlearning.Core.IO;
 using Newtonsoft.Json;
 
@@ -8,6 +9,8 @@ namespace KFlearning.Core.Services
 {
     public interface IHistoryService
     {
+        bool RecordHistory { get; set; }
+
         void Add(Project project);
         void Clear();
         IEnumerable<Project> GetAll();
@@ -22,6 +25,8 @@ namespace KFlearning.Core.Services
 
         private readonly IPathManager _path;
 
+        public bool RecordHistory { get; set; } = true;
+
         public HistoryService(IPathManager path)
         {
             _path = path;
@@ -30,6 +35,7 @@ namespace KFlearning.Core.Services
 
         public void Add(Project project)
         {
+            if (!RecordHistory) return;
             _projects.RemoveAll(x => x.Path == project.Path);
             _projects.Add(project);
             EnsureSize();
@@ -37,17 +43,19 @@ namespace KFlearning.Core.Services
 
         public void Clear()
         {
+            if (!RecordHistory) return;
             _projects.Clear();
             File.Delete(_path.GetPath(PathKind.HistoryFile));
         }
 
         public IEnumerable<Project> GetAll()
         {
-            return _projects;
+            return !RecordHistory ? Enumerable.Empty<Project>() : _projects;
         }
 
         public void Save()
         {
+            if (!RecordHistory) return;
             try
             {
                 var saveFile = _path.GetPath(PathKind.HistoryFile);
@@ -65,12 +73,14 @@ namespace KFlearning.Core.Services
 
         private void EnsureSize()
         {
+            if (!RecordHistory) return;
             if (_projects.Count <= HistorySize) return;
             _projects.RemoveRange(HistorySize - 1, _projects.Count - HistorySize);
         }
 
         private void Reload()
         {
+            if (!RecordHistory) return;
             try
             {
                 var saveFile = _path.GetPath(PathKind.HistoryFile);

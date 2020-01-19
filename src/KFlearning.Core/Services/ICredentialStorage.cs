@@ -3,6 +3,5 @@
     public interface ICredentialStorage
     {
         string AccessCode { get; set; }
-        string NetworkCode { get; set; }
     }
 }

@@ -47,8 +47,11 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.cmdClear = new System.Windows.Forms.LinkLabel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.pnRaf = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pnRaf.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmdNewProject
@@ -252,12 +255,33 @@
             this.cmdClear.Text = "Bersihkan";
             this.cmdClear.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.cmdClear_LinkClicked);
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.label10.Location = new System.Drawing.Point(4, -1);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(130, 21);
+            this.label10.TabIndex = 23;
+            this.label10.Text = "Run-and-Forget";
+            // 
+            // pnRaf
+            // 
+            this.pnRaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.pnRaf.Controls.Add(this.label10);
+            this.pnRaf.Location = new System.Drawing.Point(454, 16);
+            this.pnRaf.Name = "pnRaf";
+            this.pnRaf.Size = new System.Drawing.Size(140, 23);
+            this.pnRaf.TabIndex = 24;
+            this.pnRaf.Visible = false;
+            // 
             // StartupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(70)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(627, 293);
+            this.Controls.Add(this.pnRaf);
             this.Controls.Add(this.cmdClear);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -283,6 +307,8 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.pnRaf.ResumeLayout(false);
+            this.pnRaf.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -308,6 +334,8 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.LinkLabel cmdClear;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Panel pnRaf;
     }
 }
 
