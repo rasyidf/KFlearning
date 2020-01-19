@@ -23,7 +23,7 @@ namespace KFlearning.Views
             InitializeComponent();
 
             cboTemplate.DataSource = template.GetTemplates();
-            txtProjectName.Text = "Mode Run-and-Forget";
+            txtProjectName.Text = _isRaf ? "Mode Run-and-Forget" : "";
             txtProjectName.ReadOnly = _isRaf;
         }
 
