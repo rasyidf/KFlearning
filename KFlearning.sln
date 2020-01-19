@@ -6,7 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "files", "files", "{D3C20BB6-416B-468F-BF08-0E7AE913D75B}"
 	ProjectSection(SolutionItems) = preProject
 		build.cake = build.cake
-		config.txt = config.txt
 		LICENSE.md = LICENSE.md
 		README.md = README.md
 	EndProjectSection
