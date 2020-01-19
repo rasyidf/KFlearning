@@ -49,7 +49,7 @@ namespace KFlearning.Core.IO
         public bool DiscoverVisualStudioCode(out string installRoot)
         {
             var userDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            var userInstall = Path.Combine(userDir, @"Programs\Microsoft VS Code\bin\code.cmd");
+            var userInstall = Path.Combine(userDir, @"Programs\Microsoft VS Code\code.exe");
 
             installRoot = userInstall;
             return File.Exists(userInstall);
