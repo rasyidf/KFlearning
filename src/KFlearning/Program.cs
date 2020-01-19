@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Castle.Windsor;
 using KFlearning.Core.IO;
+using KFlearning.Core.Services;
 using KFlearning.Properties;
 using KFlearning.Views;
 
@@ -35,6 +36,7 @@ namespace KFlearning
 
         private static void Application_ApplicationExit(object sender, EventArgs e)
         {
+            Container.Resolve<IHistoryService>().Save();
             Container.Dispose();
         }
     }
