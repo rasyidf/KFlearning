@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartupForm));
             this.cmdNewProject = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cmdOpenProject = new System.Windows.Forms.Button();
@@ -274,6 +275,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "StartupForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -87,7 +87,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(200, 30);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Hak Cipta (C) Fahmi Noor Fiqri 2019.\r\nDilisensikan di bawah lisensi MIT.";
+            this.label3.Text = "Hak Cipta (C) Fahmi Noor Fiqri 2020.\r\nDilisensikan di bawah lisensi MIT.";
             // 
             // cmdKodesiana
             // 
