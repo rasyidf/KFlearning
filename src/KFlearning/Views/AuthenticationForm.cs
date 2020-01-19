@@ -11,21 +11,11 @@ namespace KFlearning.Views
             InitializeComponent();
         }
 
-        public bool VerifyOnly { get; set; }
         public string AccessCode { get;set; }
-        public string NetworkCode { get; set; }
-
-        protected override void OnShown(EventArgs e)
-        {
-            base.OnShown(e);
-            txtNetworkCode.Visible = !VerifyOnly;
-            label4.Visible = !VerifyOnly;
-        }
 
         protected override void OnClosing(CancelEventArgs e)
         {
             AccessCode = txtAccessCode.Text;
-            NetworkCode = txtNetworkCode.Text;
             base.OnClosing(e);
         }
 

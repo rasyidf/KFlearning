@@ -34,8 +34,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtAccessCode = new System.Windows.Forms.TextBox();
             this.cmdLogin = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtNetworkCode = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,7 +71,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(29, 80);
+            this.label3.Location = new System.Drawing.Point(119, 78);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(68, 15);
             this.label3.TabIndex = 14;
@@ -81,10 +79,10 @@
             // 
             // txtAccessCode
             // 
-            this.txtAccessCode.Font = new System.Drawing.Font("Lucida Console", 12F);
-            this.txtAccessCode.Location = new System.Drawing.Point(118, 76);
+            this.txtAccessCode.Font = new System.Drawing.Font("Lucida Console", 20F);
+            this.txtAccessCode.Location = new System.Drawing.Point(28, 96);
             this.txtAccessCode.Name = "txtAccessCode";
-            this.txtAccessCode.Size = new System.Drawing.Size(152, 23);
+            this.txtAccessCode.Size = new System.Drawing.Size(251, 34);
             this.txtAccessCode.TabIndex = 16;
             this.txtAccessCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtAccessCode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyUp);
@@ -94,7 +92,7 @@
             this.cmdLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(168)))), ((int)(((byte)(109)))));
             this.cmdLogin.FlatAppearance.BorderSize = 0;
             this.cmdLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmdLogin.Location = new System.Drawing.Point(162, 154);
+            this.cmdLogin.Location = new System.Drawing.Point(99, 153);
             this.cmdLogin.Name = "cmdLogin";
             this.cmdLogin.Size = new System.Drawing.Size(108, 29);
             this.cmdLogin.TabIndex = 19;
@@ -102,33 +100,12 @@
             this.cmdLogin.UseVisualStyleBackColor = false;
             this.cmdLogin.Click += new System.EventHandler(this.cmdLogin_Click);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(29, 110);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(83, 15);
-            this.label4.TabIndex = 20;
-            this.label4.Text = "Kode jaringan:";
-            // 
-            // txtNetworkCode
-            // 
-            this.txtNetworkCode.Font = new System.Drawing.Font("Lucida Console", 12F);
-            this.txtNetworkCode.Location = new System.Drawing.Point(118, 106);
-            this.txtNetworkCode.Name = "txtNetworkCode";
-            this.txtNetworkCode.Size = new System.Drawing.Size(152, 23);
-            this.txtNetworkCode.TabIndex = 21;
-            this.txtNetworkCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtNetworkCode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyUp);
-            // 
             // AuthenticationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(70)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(310, 204);
-            this.Controls.Add(this.txtNetworkCode);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.cmdLogin);
             this.Controls.Add(this.txtAccessCode);
             this.Controls.Add(this.label3);
@@ -156,7 +133,5 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtAccessCode;
         private System.Windows.Forms.Button cmdLogin;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtNetworkCode;
     }
 }

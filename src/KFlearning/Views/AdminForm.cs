@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using KFlearning.Core.Diagnostics;
 using KFlearning.Core.IO;
 using KFlearning.Core.Services;
+using KFlearning.Properties;
 
 namespace KFlearning.Views
 {
@@ -35,6 +36,7 @@ namespace KFlearning.Views
             chkControlPanel.Checked = _tweaker.LockControlPanel;
             chkWallpaper.Checked = _tweaker.LockWallpaper;
             chkDesktop.Checked = _tweaker.LockDesktop;
+            chkRaf.Checked = Settings.Default.Raf;
 
             if (string.IsNullOrEmpty(_tweaker.WallpaperPath))
             {
@@ -58,7 +60,6 @@ namespace KFlearning.Views
             {
                 if (frm.ShowDialog(this) != DialogResult.OK) return;
                 if (string.IsNullOrEmpty(frm.AccessCode)) _credential.SaveAccessCode(frm.AccessCode);
-                if (string.IsNullOrEmpty(frm.NetworkCode)) _credential.SaveAccessCode(frm.NetworkCode);
             }
         }
 
@@ -84,6 +85,8 @@ namespace KFlearning.Views
             }
 
             _tweaker.Apply();
+            Settings.Default.Raf = chkRaf.Checked;
+            Settings.Default.Save();
         }
 
         private void cmdBrowseWallpaper_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

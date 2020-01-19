@@ -45,6 +45,7 @@
             this.cmdCredential = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.ofd = new System.Windows.Forms.OpenFileDialog();
+            this.chkRaf = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -230,12 +231,23 @@
             this.ofd.Filter = "Gambar JPG|*.jpg";
             this.ofd.Title = "Pilih file sebagai wallpaper.";
             // 
+            // chkRaf
+            // 
+            this.chkRaf.AutoSize = true;
+            this.chkRaf.Location = new System.Drawing.Point(18, 164);
+            this.chkRaf.Name = "chkRaf";
+            this.chkRaf.Size = new System.Drawing.Size(145, 19);
+            this.chkRaf.TabIndex = 31;
+            this.chkRaf.Text = "Mode Run-and-Forget";
+            this.chkRaf.UseVisualStyleBackColor = true;
+            // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(70)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(431, 257);
+            this.Controls.Add(this.chkRaf);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.cmdCredential);
             this.Controls.Add(this.chkWallpaper);
@@ -282,5 +294,6 @@
         private System.Windows.Forms.Button cmdCredential;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.OpenFileDialog ofd;
+        private System.Windows.Forms.CheckBox chkRaf;
     }
 }

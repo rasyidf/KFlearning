@@ -10,11 +10,5 @@ namespace KFlearning.Services
             get => Settings.Default.AccessCode;
             set => Settings.Default.AccessCode = value;
         }
-
-        public string NetworkCode
-        {
-            get => Settings.Default.NetworkCode;
-            set => Settings.Default.NetworkCode = value;
-        }
     }
 }
