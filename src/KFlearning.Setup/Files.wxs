@@ -35,6 +35,9 @@
       <Component Id="mingw_w64.7z" Guid="*">
         <File Id="mingw_w64.7z" KeyPath="yes" Source="$(var.AssetsDir)\i686-8.1.0-release-posix-dwarf-rt_v6-rev0.7z" />
       </Component>
+      <Component Id="freeglut_glew.zip" Guid="*">
+        <File Id="freeglut_glew.zip" KeyPath="yes" Source="$(var.AssetsDir)\freeglut-glew-mingw-w64.zip" />
+      </Component>
       <Component Id="sevenza.exe" Guid="*">
         <File Id="sevenza.exe" KeyPath="yes" Source="$(var.AssetsDir)\7za.exe" />
       </Component>
