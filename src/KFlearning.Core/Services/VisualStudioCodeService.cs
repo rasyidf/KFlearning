@@ -35,7 +35,7 @@ namespace KFlearning.Core.Services
 
         public void OpenFolder(string path)
         {
-            _path.DiscoverVisualStudioCode(out string vscode);
+            var vscode = _path.GetPath(PathKind.VisualStudioCodeExecutable);
             _processManager.Run(vscode, $"\"{path}\"");
         }
     }

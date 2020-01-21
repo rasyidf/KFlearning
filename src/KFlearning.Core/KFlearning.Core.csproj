@@ -73,6 +73,11 @@
     <Compile Include="Native\TOKEN_ELEVATION_TYPE.cs" />
     <Compile Include="Native\TOKEN_INFORMATION_CLASS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\TR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TR.resx</DependentUpon>
+    </Compile>
     <Compile Include="Services\CredentialService.cs" />
     <Compile Include="Services\HistoryService.cs" />
     <Compile Include="Services\ICredentialStorage.cs" />
@@ -80,32 +85,22 @@
     <Compile Include="Services\Template.cs" />
     <Compile Include="Services\ProjectService.cs" />
     <Compile Include="Services\TemplateService.cs" />
+    <Compile Include="Services\Transformable.cs" />
     <Compile Include="Services\VisualStudioCodeService.cs" />
-    <Compile Include="TemplateResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TemplateResources.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="TemplateResources.resx">
+    <EmbeddedResource Include="Resources\TR.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>TemplateResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>TR.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.2</Version>
     </PackageReference>
-    <PackageReference Include="SharpZipLib">
-      <Version>1.2.0</Version>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\cpp-console.zip" />
-    <None Include="Resources\cpp-freeglut.zip" />
-    <None Include="Resources\python-anaconda-base.zip" />
-    <None Include="Resources\web-php.zip" />
+    <Folder Include="Templates\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

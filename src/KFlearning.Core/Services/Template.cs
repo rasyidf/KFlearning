@@ -13,18 +13,20 @@
 #endregion
 
 
+using System.Collections.Generic;
+
 namespace KFlearning.Core.Services
 {
     public class Template
     {
-        public string Title { get; set; }
+        public string Title { get; }
 
-        public string ResourceName { get; set; }
+        public List<Transformable> FileMapping { get; }
 
-        public Template(string title, string resourceName)
+        public Template(string title, List<Transformable> fileMapping)
         {
             Title = title;
-            ResourceName = resourceName;
+            FileMapping = fileMapping;
         }
 
         public override string ToString()

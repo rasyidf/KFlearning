@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using ICSharpCode.SharpZipLib.Core;
-using ICSharpCode.SharpZipLib.Zip;
+using KFlearning.Core.IO;
+using KFlearning.Core.Resources;
 
 namespace KFlearning.Core.Services
 {
@@ -14,54 +13,60 @@ namespace KFlearning.Core.Services
 
     public class TemplateService : ITemplateService
     {
-        private static readonly List<Template> Templates = new List<Template>
+        private readonly List<Template> _templates;
+
+        public TemplateService(IPathManager path)
         {
-            new Template("Konsol (C++)", "cpp_console"),
-            new Template("GUI Freeglut (C++)", "cpp_freeglut"),
-            new Template("Web (PHP/HTML/CSS/JS)", "web_php"),
-            new Template("Python/Jupyter Notebook", "python_anaconda_base"),
-            new Template("Kosong", null)
-        };
+            var path1 = path;
+            _templates = new List<Template>
+            {
+                new Template("Konsol (C++)", new List<Transformable>
+                {
+                    new Transformable("program.cpp", () => TR.CPP_program),
+                    new Transformable(".vscode/c_cpp_properties.json", () => TR.CPP_c_cpp_properties, 
+                        x => x.Replace("{GXX}", path1.GetPath(PathKind.MingwGXXExecutable, true))
+                            .Replace("{ENV1}", path1.GetPath(PathKind.MingwInclude1Directory, true))
+                            .Replace("{ENV2}", path1.GetPath(PathKind.MingwInclude2Directory, true))),
+                    new Transformable(".vscode/launch.json", () => TR.CPP_launch, 
+                        x => x.Replace("{GDB}", path1.GetPath(PathKind.MingwGDBExecutable, true))),
+                    new Transformable(".vscode/settings.json", () => TR.CPP_settings),
+                    new Transformable(".vscode/tasks.json", () => TR.CPP_Console_tasks)
+                }),
+                new Template("GUI Freeglut (C++)", new List<Transformable>
+                {
+                    new Transformable("program.cpp", () => TR.CPP_program),
+                    new Transformable(".vscode/c_cpp_properties.json", () => TR.CPP_c_cpp_properties, 
+                        x => x.Replace("{GXX}", path1.GetPath(PathKind.MingwGXXExecutable, true))
+                            .Replace("{ENV1}", path1.GetPath(PathKind.MingwInclude1Directory, true))
+                            .Replace("{ENV2}", path1.GetPath(PathKind.MingwInclude2Directory, true))),
+                    new Transformable(".vscode/launch.json", () => TR.CPP_launch, 
+                        x => x.Replace("{GDB}", path1.GetPath(PathKind.MingwGDBExecutable, true))),
+                    new Transformable(".vscode/settings.json", () => TR.CPP_settings),
+                    new Transformable(".vscode/tasks.json", () => TR.CPP_GUI_tasks)
+                }),
+                new Template("Web (PHP/HTML/CSS/JS)", new List<Transformable>
+                {
+                    new Transformable("index.html", () => TR.WEB_index)
+                }),
+                new Template("Python/Jupyter Notebook", new List<Transformable>
+                {
+                    new Transformable("program.py", () => TR.PY_program)
+                }),
+                new Template("Kosong", null)
+            };
+        }
 
         public IEnumerable<Template> GetTemplates()
         {
-            return Templates;
+            return _templates;
         }
 
         public void Extract(Template template, string outputPath)
         {
-            Extract(template.ResourceName, outputPath);
-        }
-
-        private void Extract(string name, string outputPath)
-        {
-            if (name == null) return;
-
-            var content = (byte[]) TemplateResources.ResourceManager.GetObject(name) ??
-                          throw new InvalidOperationException();
-            using (var ms = new MemoryStream(content))
-            using (var zip = new ZipFile(ms))
+            if (template.FileMapping == null) return;
+            foreach (var file in template.FileMapping)
             {
-                foreach (ZipEntry entry in zip)
-                {
-                    if (!entry.IsFile) continue;
-
-                    string entryFileName = entry.Name;
-                    byte[] buffer = new byte[4096];
-
-                    string fullZipToPath = Path.Combine(outputPath, entryFileName);
-                    string directoryName = Path.GetDirectoryName(fullZipToPath);
-                    if (directoryName?.Length > 0)
-                    {
-                        Directory.CreateDirectory(directoryName);
-                    }
-
-                    using (FileStream streamWriter = File.Create(fullZipToPath))
-                    {
-                        Stream zipStream = zip.GetInputStream(entry);
-                        StreamUtils.Copy(zipStream, streamWriter, buffer);
-                    }
-                }
+               file.Transform(outputPath);
             }
         }
     }

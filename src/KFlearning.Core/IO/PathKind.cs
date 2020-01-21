@@ -4,6 +4,11 @@
     {
         DefaultProjectRoot,
         HistoryFile,
-        WallpaperPath
+        WallpaperPath,
+        VisualStudioCodeExecutable,
+        MingwInclude1Directory,
+        MingwInclude2Directory,
+        MingwGXXExecutable,
+        MingwGDBExecutable,
     }
 }

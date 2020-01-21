@@ -117,17 +117,141 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="cpp_console" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\cpp-console.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="CPP_Console_tasks" xml:space="preserve">
+    <value>{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [{
+        "label": "Build",
+        "type": "shell",
+        "command": "g++",
+        "args": [
+          "-g", "program.cpp", "-o", "program.exe"
+        ],
+        "group": {
+            "kind": "build",
+            "isDefault": true
+        }
+    }]
+}</value>
   </data>
-  <data name="cpp_freeglut" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\cpp-freeglut.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="CPP_c_cpp_properties" xml:space="preserve">
+    <value>{
+    "configurations": [{
+        "name": "MinGW",
+        "intelliSenseMode": "gcc-x86",
+        "compilerPath": "{GXX}",
+        "includePath": [
+            "${workspaceFolder}/**",
+            "{ENV1}/**",
+            "{ENV1}/**"
+        ],
+        "defines": [
+            "_DEBUG",
+            "UNICODE"
+        ],
+        "cStandard": "c11",
+        "cppStandard": "c++17"
+    }],
+    "version": 4
+}</value>
   </data>
-  <data name="python_anaconda_base" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\python-anaconda-base.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="CPP_GUI_tasks" xml:space="preserve">
+    <value>{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [{
+        "label": "Build",
+        "type": "shell",
+        "command": "g++",
+        "args": [
+          "-g", "program.cpp", "-lopengl32", "-lglew32", "-lfreeglut", "-lglu32", "-o", "program.exe"
+        ],
+        "group": {
+            "kind": "build",
+            "isDefault": true
+        }
+    }]
+}</value>
   </data>
-  <data name="web_php" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\web-php.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="CPP_launch" xml:space="preserve">
+    <value>{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [{
+        "name": "Launch without Debugging",
+        "type": "cppvsdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/program.exe",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "externalConsole": true,
+        "preLaunchTask": "Build"
+    },
+    {
+        "name": "(gdb) Launch",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/program.exe",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "externalConsole": true,
+        "MIMode": "gdb",
+        "miDebuggerPath": "{GDB}",
+        "setupCommands": [{
+            "description": "Enable pretty-printing for gdb",
+            "text": "-enable-pretty-printing",
+            "ignoreFailures": true
+        }],
+        "preLaunchTask": "Build"
+    }]
+}</value>
+  </data>
+  <data name="CPP_program" xml:space="preserve">
+    <value>// Hello World</value>
+  </data>
+  <data name="CPP_settings" xml:space="preserve">
+    <value>{
+    "files.associations": {
+        "*.tcc": "cpp",
+        "cctype": "cpp",
+        "clocale": "cpp",
+        "cstdint": "cpp",
+        "cstdio": "cpp",
+        "cstdlib": "cpp",
+        "cwchar": "cpp",
+        "cwctype": "cpp",
+        "exception": "cpp",
+        "fstream": "cpp",
+        "initializer_list": "cpp",
+        "iosfwd": "cpp",
+        "iostream": "cpp",
+        "istream": "cpp",
+        "limits": "cpp",
+        "new": "cpp",
+        "ostream": "cpp",
+        "stdexcept": "cpp",
+        "streambuf": "cpp",
+        "system_error": "cpp",
+        "type_traits": "cpp",
+        "typeinfo": "cpp",
+        "cmath": "cpp",
+        "numeric": "cpp"
+    }
+}</value>
+  </data>
+  <data name="PY_program" xml:space="preserve">
+    <value>print("Hello World")</value>
+  </data>
+  <data name="WEB_index" xml:space="preserve">
+    <value>&lt;p&gt;Hello World&lt;/p&gt;</value>
   </data>
 </root>
