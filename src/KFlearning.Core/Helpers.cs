@@ -5,9 +5,9 @@ namespace KFlearning.Core
 {
     internal static class Helpers
     {
-        public static string TrimLongText(string path, int maxLength = 20)
+        public static string TrimLongText(string path, int maxLength = 40)
         {
-            return path.Length <= 20 ? path : path.Substring(0, maxLength) + "...";
+            return path.Length <= maxLength ? path : path.Substring(0, maxLength) + "...";
         }
 
         public static int GetIntValue(this RegistryKey key, string name, int defaultValue = 0)
