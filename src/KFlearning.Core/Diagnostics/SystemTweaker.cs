@@ -34,12 +34,14 @@ namespace KFlearning.Core.Diagnostics
         private const string StoragePoliciesKey = @"SYSTEM\Current Control Set\Control\StorageDevicePolicies";
         private const string DesktopKey = @"Control Panel\Desktop";
 
-        private readonly IProcessManager _process;
-
-        public SystemTweaker(IProcessManager process)
-        {
-            _process = process;
-        }
+        private const string NoChangingWallPaper = "NoChangingWallPaper";
+        private const string Wallpaper = "Wallpaper";
+        private const string WallpaperStyle = "WallpaperStyle";
+        private const string NoDispCPL = "NoDispCPL";
+        private const string DisableRegistryTools = "DisableRegistryTools";
+        private const string DisableTaskMgr = "DisableTaskMgr";
+        private const string WriteProtect = "WriteProtect";
+        private const string NoControlPanel = "NoControlPanel";
 
         public string WallpaperPath { get; set; }
         public bool LockWallpaper { get; set; }
@@ -57,15 +59,13 @@ namespace KFlearning.Core.Diagnostics
             using (var storageKey = Registry.LocalMachine.OpenSubKey(StoragePoliciesKey))
             using (var activeDesktopKey = Registry.CurrentUser.OpenSubKey(ActiveDesktopKey))
             {
-                WallpaperPath = _process.IsWindows7()
-                    ? systemKey.GetStringValue("Wallpaper")
-                    : desktopKey.GetStringValue("Wallpaper");
-                LockWallpaper = activeDesktopKey.GetIntValue("NoChangingWallPaper", 0) == 1;
-                LockDesktop = systemKey.GetIntValue("NoDispCPL", 0) == 1;
-                LockRegistryEditor = systemKey.GetIntValue("DisableRegistryTools", 0) == 1;
-                LockTaskManager = systemKey.GetIntValue("DisableTaskMgr", 0) == 1;
-                LockUsbCopying = storageKey.GetIntValue("WriteProtect", 0) == 1;
-                LockControlPanel = explorerKey.GetIntValue("NoControlPanel", 0) == 1;
+                LockWallpaper = activeDesktopKey.GetIntValue(NoChangingWallPaper, 0) == 1;
+                WallpaperPath = systemKey.GetStringValue(Wallpaper) ?? desktopKey.GetStringValue(Wallpaper);
+                LockDesktop = systemKey.GetIntValue(NoDispCPL, 0) == 1;
+                LockRegistryEditor = systemKey.GetIntValue(DisableRegistryTools, 0) == 1;
+                LockTaskManager = systemKey.GetIntValue(DisableTaskMgr, 0) == 1;
+                LockUsbCopying = storageKey.GetIntValue(WriteProtect, 0) == 1;
+                LockControlPanel = explorerKey.GetIntValue(NoControlPanel, 0) == 1;
             }
         }
 
@@ -77,11 +77,16 @@ namespace KFlearning.Core.Diagnostics
             using (var storageKey = Registry.LocalMachine.CreateSubKey(StoragePoliciesKey))
             using (var activeDesktopKey = Registry.CurrentUser.CreateSubKey(ActiveDesktopKey))
             {
+                activeDesktopKey?.SetValue(NoChangingWallPaper, LockWallpaper ? 1 : 0, RegistryValueKind.DWord);
+                desktopKey?.SetValue(Wallpaper, WallpaperPath, RegistryValueKind.String);
+                systemKey?.SetValue(Wallpaper, WallpaperPath, RegistryValueKind.String);
+                systemKey?.SetValue(WallpaperStyle, 0, RegistryValueKind.DWord);
+                systemKey?.SetValue(NoDispCPL, LockDesktop ? 1 : 0, RegistryValueKind.DWord);
+                systemKey?.SetValue(DisableRegistryTools, LockRegistryEditor ? 1 : 0, RegistryValueKind.DWord);
+                systemKey?.SetValue(DisableTaskMgr, LockTaskManager ? 1 : 0, RegistryValueKind.DWord);
+                storageKey?.SetValue(WriteProtect, LockUsbCopying ? 1 : 0, RegistryValueKind.DWord);
+                explorerKey?.SetValue(NoControlPanel, LockControlPanel ? 1 : 0, RegistryValueKind.DWord);
             }
         }
-
-        #region Private Methods
-
-        #endregion
     }
 }
