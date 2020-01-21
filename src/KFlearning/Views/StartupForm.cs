@@ -8,6 +8,7 @@
 // This file is part of KFlearning, see LICENSE.
 // See this code in repository URL above!
 
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using KFlearning.Core.Diagnostics;
@@ -45,6 +46,12 @@ namespace KFlearning.Views
 
         private void OpenProject(string path)
         {
+            if (Settings.Default.Raf)
+            {
+                MessageBox.Show(Resources.RafModeMessage, Resources.AppName, MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+                return;
+            }
             if (!_project.IsExists(path))
             {
                 MessageBox.Show(Resources.InvalidProjectMessage, Resources.AppName, MessageBoxButtons.OK,

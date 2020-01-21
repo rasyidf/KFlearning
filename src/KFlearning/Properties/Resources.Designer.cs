@@ -125,7 +125,7 @@ namespace KFlearning.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to KFlearning dalam mode Run-and-Forget. Tidak dapat mengubah lokasi proyek..
+        ///   Looks up a localized string similar to KFlearning dalam mode Run-and-Forget. Tidak dapat melakukan aksi tersebut..
         /// </summary>
         internal static string RafModeMessage {
             get {
