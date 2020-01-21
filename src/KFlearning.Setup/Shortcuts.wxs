@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
   <Fragment>
     <ComponentGroup Id="AppShortcuts">
@@ -18,7 +19,7 @@
                   Arguments="/x [ProductCode]" />
 
         <!-- Webpage -->
-        <util:InternetShortcut Id="KodesianaShortcut" Name="Kodesiana.com" Target="https://kodesiana.com/" 
+        <util:InternetShortcut Id="KodesianaShortcut" Name="Kodesiana.com" Target="https://kodesiana.com/"
                                IconFile="[#kodesiana_icon.ico]" />
 
         <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />

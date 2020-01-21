@@ -1,4 +1,14 @@
-﻿using System;
+﻿// SOLUTION : KFlearning
+// PROJECT  : KFlearning
+// FILENAME : Program.cs
+// AUTHOR   : Fahmi Noor Fiqri, Kodesiana.com
+// WEBSITE  : https://kodesiana.com
+// REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
+// 
+// This file is part of KFlearning, see LICENSE.
+// See this code in repository URL above!
+
+using System;
 using System.Windows.Forms;
 using Castle.Windsor;
 using KFlearning.Core.IO;
@@ -13,7 +23,7 @@ namespace KFlearning
         public static WindsorContainer Container = new WindsorContainer();
 
         /// <summary>
-        /// The main entry point for the application.
+        ///     The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main(string[] args)

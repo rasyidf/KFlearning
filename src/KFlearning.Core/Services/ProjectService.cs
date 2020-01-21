@@ -1,12 +1,12 @@
-﻿// 
-//  PROJECT  :   KFlearning
-//  FILENAME :   ProjectManager.cs
-//  AUTHOR   :   Fahmi Noor Fiqri
-//  WEBSITE  : https://kodesiana.com
-//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
+﻿// SOLUTION : KFlearning
+// PROJECT  : KFlearning.Core
+// FILENAME : ProjectService.cs
+// AUTHOR   : Fahmi Noor Fiqri, Kodesiana.com
+// WEBSITE  : https://kodesiana.com
+// REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
 // 
-//  This file is part of KFlearning, licensed under MIT license.
-//  See this code in repository URL above!
+// This file is part of KFlearning, see LICENSE.
+// See this code in repository URL above!
 
 #region
 
@@ -36,7 +36,8 @@ namespace KFlearning.Core.Services
         private readonly ITemplateService _template;
         private readonly IPathManager _path;
 
-        public ProjectService(IVisualStudioCodeService visualStudioCodeService, IPathManager path, ITemplateService template)
+        public ProjectService(IVisualStudioCodeService visualStudioCodeService, IPathManager path,
+            ITemplateService template)
         {
             _visualStudioCodeService = visualStudioCodeService;
             _path = path;

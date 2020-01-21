@@ -1,4 +1,14 @@
-﻿using System.Collections.Generic;
+﻿// SOLUTION : KFlearning
+// PROJECT  : KFlearning.Core
+// FILENAME : TemplateService.cs
+// AUTHOR   : Fahmi Noor Fiqri, Kodesiana.com
+// WEBSITE  : https://kodesiana.com
+// REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
+// 
+// This file is part of KFlearning, see LICENSE.
+// See this code in repository URL above!
+
+using System.Collections.Generic;
 using System.IO;
 using KFlearning.Core.IO;
 using KFlearning.Core.Resources;
@@ -23,11 +33,11 @@ namespace KFlearning.Core.Services
                 new Template("Konsol (C++)", new List<Transformable>
                 {
                     new Transformable("program.cpp", () => TR.CPP_program),
-                    new Transformable(".vscode/c_cpp_properties.json", () => TR.CPP_c_cpp_properties, 
+                    new Transformable(".vscode/c_cpp_properties.json", () => TR.CPP_c_cpp_properties,
                         x => x.Replace("{GXX}", path1.GetPath(PathKind.MingwGXXExecutable, true))
                             .Replace("{ENV1}", path1.GetPath(PathKind.MingwInclude1Directory, true))
                             .Replace("{ENV2}", path1.GetPath(PathKind.MingwInclude2Directory, true))),
-                    new Transformable(".vscode/launch.json", () => TR.CPP_launch, 
+                    new Transformable(".vscode/launch.json", () => TR.CPP_launch,
                         x => x.Replace("{GDB}", path1.GetPath(PathKind.MingwGDBExecutable, true))),
                     new Transformable(".vscode/settings.json", () => TR.CPP_settings),
                     new Transformable(".vscode/tasks.json", () => TR.CPP_Console_tasks)
@@ -35,11 +45,11 @@ namespace KFlearning.Core.Services
                 new Template("GUI Freeglut (C++)", new List<Transformable>
                 {
                     new Transformable("program.cpp", () => TR.CPP_program),
-                    new Transformable(".vscode/c_cpp_properties.json", () => TR.CPP_c_cpp_properties, 
+                    new Transformable(".vscode/c_cpp_properties.json", () => TR.CPP_c_cpp_properties,
                         x => x.Replace("{GXX}", path1.GetPath(PathKind.MingwGXXExecutable, true))
                             .Replace("{ENV1}", path1.GetPath(PathKind.MingwInclude1Directory, true))
                             .Replace("{ENV2}", path1.GetPath(PathKind.MingwInclude2Directory, true))),
-                    new Transformable(".vscode/launch.json", () => TR.CPP_launch, 
+                    new Transformable(".vscode/launch.json", () => TR.CPP_launch,
                         x => x.Replace("{GDB}", path1.GetPath(PathKind.MingwGDBExecutable, true))),
                     new Transformable(".vscode/settings.json", () => TR.CPP_settings),
                     new Transformable(".vscode/tasks.json", () => TR.CPP_GUI_tasks)
@@ -66,7 +76,7 @@ namespace KFlearning.Core.Services
             if (template.FileMapping == null) return;
             foreach (var file in template.FileMapping)
             {
-               file.Transform(outputPath);
+                file.Transform(outputPath);
             }
         }
     }

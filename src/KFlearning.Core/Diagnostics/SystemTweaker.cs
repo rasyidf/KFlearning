@@ -1,4 +1,14 @@
-﻿using Microsoft.Win32;
+﻿// SOLUTION : KFlearning
+// PROJECT  : KFlearning.Core
+// FILENAME : SystemTweaker.cs
+// AUTHOR   : Fahmi Noor Fiqri, Kodesiana.com
+// WEBSITE  : https://kodesiana.com
+// REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
+// 
+// This file is part of KFlearning, see LICENSE.
+// See this code in repository URL above!
+
+using Microsoft.Win32;
 
 namespace KFlearning.Core.Diagnostics
 {
@@ -67,12 +77,10 @@ namespace KFlearning.Core.Diagnostics
             using (var storageKey = Registry.LocalMachine.CreateSubKey(StoragePoliciesKey))
             using (var activeDesktopKey = Registry.CurrentUser.CreateSubKey(ActiveDesktopKey))
             {
-
             }
         }
 
         #region Private Methods
-
 
         #endregion
     }

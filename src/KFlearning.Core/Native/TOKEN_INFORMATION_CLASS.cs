@@ -1,12 +1,13 @@
-﻿// 
-//  PROJECT  :   KFlearning
-//  FILENAME :   TOKEN_INFORMATION_CLASS.cs
-//  AUTHOR   :   Fahmi Noor Fiqri
-//  WEBSITE  : https://kodesiana.com
-//  REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
+﻿// SOLUTION : KFlearning
+// PROJECT  : KFlearning.Core
+// FILENAME : TOKEN_INFORMATION_CLASS.cs
+// AUTHOR   : Fahmi Noor Fiqri, Kodesiana.com
+// WEBSITE  : https://kodesiana.com
+// REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
 // 
-//  This file is part of KFlearning, licensed under MIT license.
-//  See this code in repository URL above!
+// This file is part of KFlearning, see LICENSE.
+// See this code in repository URL above!
+
 namespace KFlearning.Core.Native
 {
     public enum TOKEN_INFORMATION_CLASS

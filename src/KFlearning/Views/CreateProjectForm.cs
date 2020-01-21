@@ -1,4 +1,14 @@
-﻿using System;
+﻿// SOLUTION : KFlearning
+// PROJECT  : KFlearning
+// FILENAME : CreateProjectForm.cs
+// AUTHOR   : Fahmi Noor Fiqri, Kodesiana.com
+// WEBSITE  : https://kodesiana.com
+// REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
+// 
+// This file is part of KFlearning, see LICENSE.
+// See this code in repository URL above!
+
+using System;
 using System.IO;
 using System.Windows.Forms;
 using KFlearning.Core.Services;
@@ -34,12 +44,14 @@ namespace KFlearning.Views
                 _basePath = Path.GetTempPath();
                 txtProjectName.Text = Path.GetFileNameWithoutExtension(Path.GetTempFileName());
             }
+
             if (string.IsNullOrWhiteSpace(txtProjectName.Text))
             {
                 MessageBox.Show(Resources.ProjectNameEmptyMessage, Resources.AppName, MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
                 return;
             }
+
             if (Directory.Exists(txtLocation.Text))
             {
                 MessageBox.Show(Resources.ProjectExistsMessage, Resources.AppName, MessageBoxButtons.OK,
@@ -50,7 +62,7 @@ namespace KFlearning.Views
             Project = new Project
             {
                 Name = txtProjectName.Text,
-                Path =_project.GetPathForProject(txtProjectName.Text, _basePath),
+                Path = _project.GetPathForProject(txtProjectName.Text, _basePath),
                 Template = (Template) cboTemplate.SelectedItem
             };
 

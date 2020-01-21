@@ -1,4 +1,14 @@
-﻿using System;
+﻿// SOLUTION : KFlearning
+// PROJECT  : KFlearning
+// FILENAME : AdminForm.cs
+// AUTHOR   : Fahmi Noor Fiqri, Kodesiana.com
+// WEBSITE  : https://kodesiana.com
+// REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
+// 
+// This file is part of KFlearning, see LICENSE.
+// See this code in repository URL above!
+
+using System;
 using System.IO;
 using System.Windows.Forms;
 using KFlearning.Core.Diagnostics;
@@ -79,7 +89,7 @@ namespace KFlearning.Views
             {
                 var savePath = _path.GetPath(PathKind.WallpaperPath);
                 if (File.Exists(savePath)) File.Delete(savePath);
-                
+
                 File.Copy(_selectedWallpaperPath, savePath);
                 _tweaker.WallpaperPath = savePath;
             }

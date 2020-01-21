@@ -1,4 +1,14 @@
-﻿using System.Linq;
+﻿// SOLUTION : KFlearning
+// PROJECT  : KFlearning
+// FILENAME : StartupForm.cs
+// AUTHOR   : Fahmi Noor Fiqri, Kodesiana.com
+// WEBSITE  : https://kodesiana.com
+// REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
+// 
+// This file is part of KFlearning, see LICENSE.
+// See this code in repository URL above!
+
+using System.Linq;
 using System.Windows.Forms;
 using KFlearning.Core.Diagnostics;
 using KFlearning.Core.Services;
@@ -92,7 +102,7 @@ namespace KFlearning.Views
 
         private void cmdAbout_Click(object sender, System.EventArgs e)
         {
-            using (var frm = Program.Container.Resolve<AboutForm>()) 
+            using (var frm = Program.Container.Resolve<AboutForm>())
                 frm.ShowDialog(this);
         }
 

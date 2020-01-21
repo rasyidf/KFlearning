@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <?include Variables.wxi ?>
 
   <Fragment>
     <DirectoryRef Id="INSTALLFOLDER">
-      <Merge Id="Mingw_w64" SourceFile="$(var.AssetsDir)\Mingw_w64.Msm.x86.msm" DiskId="1" Language="1033"/>
+      <Merge Id="Mingw_w64" SourceFile="$(var.AssetsDir)\Mingw_w64.Msm.x86.msm" DiskId="1" Language="1033" />
     </DirectoryRef>
   </Fragment>
 </Wix>
