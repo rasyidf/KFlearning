@@ -14,7 +14,7 @@ var buildSettings = new MSBuildSettings
 
 // ----- BUILD SEQUENCE
 
-// Prepare output folders
+// Build only
 Task("Build")
 .Does(()=>
 {
@@ -31,11 +31,17 @@ Task("Build")
 
 	Information("Copying build output...");
 	CopyDirectory($"./src/KFlearning/bin/{platform}/{configuration}", "./build/staging");
+});
 
-	Information("Builidng setup installer...");
+// Create MSI installer
+Task("Publish")
+.IsDependentOn("Build")
+.Does(()=>
+{
+    Information("Builidng setup installer...");
 	MSBuild("./src/KFlearning.Setup/KFlearning.Setup.wixproj", buildSettings);
 
-	Information("Copying setup installer...");
+	Information("Moving setup installer...");
 	MoveFile("./src/KFlearning.Setup/bin/Release/KFlearning.Setup.msi", "./build/KFlearning.Setup.msi");
 });
 
