@@ -21,8 +21,8 @@ namespace KFlearning
             Container.Install(new AppModulesInstaller());
 
             // find vscode
-            var vscode = Container.Resolve<IPathManager>();
-            if (!vscode.DiscoverVisualStudioCode(out _))
+            var path = Container.Resolve<IPathManager>();
+            if (path.GetPath(PathKind.VisualStudioCodeExecutable) == null)
             {
                 MessageBox.Show(Resources.VscodeNotInstalled, Resources.AppName, MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
