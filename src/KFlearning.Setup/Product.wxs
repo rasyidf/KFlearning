@@ -21,10 +21,8 @@
 
     <!-- Properties -->
     <WixVariable Id="WixUILicenseRtf" Value="$(var.AssetsDir)\license.rtf" />
-    <Property Id="WixShellExecTarget" Value="[#KFlearning.exe]" />
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
-    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Buka KFlearning" />
 
     <!-- UI -->
     <UI>
@@ -32,10 +30,6 @@
       <ProgressText Action="ExtractMingw">Installing MinGW-w64...</ProgressText>
       <ProgressText Action="ExtractFreeglutGlew">Installing Freeglut and GLEW...</ProgressText>
       <ProgressText Action="RemoveMingw">Removing MinGW-w64...</ProgressText>
-
-      <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchApplication">
-        WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 AND NOT Installed
-      </Publish>
     </UI>
 
     <!-- Custom Actions -->
@@ -45,7 +39,6 @@
                   ExeCommand="&quot;[#sevenza.exe]&quot; x &quot;[#freeglut_glew.zip]&quot; -o[WindowsVolume] -y" />
     <CustomAction Id="RemoveMingw" Directory="INSTALLFOLDER" Return="ignore"
                   ExeCommand="&quot;[SystemFolder]cmd.exe&quot; /c rmdir [WindowsVolume]mingw32 /s /q" />
-    <CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
 
     <!-- Custom install sequence -->
     <InstallExecuteSequence>
