@@ -29,22 +29,8 @@
       <Component Id="kodesiana_icon.ico" Guid="*">
         <File Id="kodesiana_icon.ico" KeyPath="yes" Source="$(var.AssetsDir)\kodesiana_icon.ico" />
       </Component>
-      <Component Id="mingw_w64.7z" Guid="*">
-        <File Id="mingw_w64.7z" KeyPath="yes" Source="$(var.AssetsDir)\i686-8.1.0-release-posix-dwarf-rt_v6-rev0.7z" />
-      </Component>
-      <Component Id="freeglut_glew.zip" Guid="*">
-        <File Id="freeglut_glew.zip" KeyPath="yes" Source="$(var.AssetsDir)\freeglut-glew-mingw-w64.zip" />
-      </Component>
-      <Component Id="sevenza.exe" Guid="*">
-        <File Id="sevenza.exe" KeyPath="yes" Source="$(var.AssetsDir)\7za.exe" />
-      </Component>
-    </ComponentGroup>
-
-    <ComponentGroup Id="MingwEnvironments">
-      <Component Id="Mingw32BinDir" Directory="TARGETDIR" Guid="{A3A5F7AF-FD24-4E93-B608-99539B319AEA}">
-        <CreateFolder />
-        <Environment Id="UpdatePath1" Name="PATH" Action="set" Part="last" Value="[WindowsVolume]mingw32\bin" />
-        <Environment Id="UpdatePath2" Name="PATH" Action="set" Part="last" Value="[WindowsVolume]mingw32\i686-w64-mingw32\bin" />
+      <Component Id="license.rtf" Guid="*">
+        <File Id="license.rtf" KeyPath="yes" Source="$(var.AssetsDir)\license.rtf" />
       </Component>
     </ComponentGroup>
   </Fragment>

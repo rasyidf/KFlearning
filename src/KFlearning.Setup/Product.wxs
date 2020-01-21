@@ -15,36 +15,33 @@
     <!-- Features to install -->
     <Feature Id="ProductFeature" Title="KFlearning" Level="1">
       <ComponentGroupRef Id="ProductComponents" />
-      <ComponentGroupRef Id="MingwEnvironments" />
       <ComponentGroupRef Id="AppShortcuts" />
+    </Feature>
+    <Feature Id="Mingw_w64" Title="MinGW-w64" AllowAdvertise="no" Display="hidden" Level="1">
+      <MergeRef Id="Mingw_w64"/>
     </Feature>
 
     <!-- Properties -->
     <WixVariable Id="WixUILicenseRtf" Value="$(var.AssetsDir)\license.rtf" />
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Buka KFlearning" />
 
     <!-- UI -->
     <UI>
       <UIRef Id="WixUI_InstallDir" />
+
       <ProgressText Action="ExtractMingw">Installing MinGW-w64...</ProgressText>
       <ProgressText Action="ExtractFreeglutGlew">Installing Freeglut and GLEW...</ProgressText>
       <ProgressText Action="RemoveMingw">Removing MinGW-w64...</ProgressText>
+
+      <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchApplication">
+        WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 AND NOT Installed
+      </Publish>
     </UI>
 
     <!-- Custom Actions -->
-    <CustomAction Id="ExtractMingw" Directory="INSTALLFOLDER" Return="check"
-                  ExeCommand="&quot;[#sevenza.exe]&quot; x &quot;[#mingw_w64.7z]&quot; -o[WindowsVolume] -y" />
-    <CustomAction Id="ExtractFreeglutGlew" Directory="INSTALLFOLDER" Return="check"
-                  ExeCommand="&quot;[#sevenza.exe]&quot; x &quot;[#freeglut_glew.zip]&quot; -o[WindowsVolume] -y" />
-    <CustomAction Id="RemoveMingw" Directory="INSTALLFOLDER" Return="ignore"
-                  ExeCommand="&quot;[SystemFolder]cmd.exe&quot; /c rmdir [WindowsVolume]mingw32 /s /q" />
-
-    <!-- Custom install sequence -->
-    <InstallExecuteSequence>
-      <Custom Action="ExtractMingw" After="InstallFinalize">NOT Installed</Custom>
-      <Custom Action="ExtractFreeglutGlew" After="ExtractMingw">NOT Installed</Custom>
-      <Custom Action="RemoveMingw" After="InstallFiles">Installed</Custom>
-    </InstallExecuteSequence>
+    <Property Id="WixShellExecTarget" Value="[#KFlearning.exe]" />
+    <CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
   </Product>
 </Wix>
