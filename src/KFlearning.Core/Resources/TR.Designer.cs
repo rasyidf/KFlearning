@@ -69,7 +69,7 @@ namespace KFlearning.Core.Resources {
         ///        &quot;includePath&quot;: [
         ///            &quot;${workspaceFolder}/**&quot;,
         ///            &quot;{ENV1}/**&quot;,
-        ///            &quot;{ENV1}/**&quot;
+        ///            &quot;{ENV2}/**&quot;
         ///        ],
         ///        &quot;defines&quot;: [
         ///            &quot;_DEBUG&quot;,

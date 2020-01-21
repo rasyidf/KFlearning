@@ -145,7 +145,7 @@
         "includePath": [
             "${workspaceFolder}/**",
             "{ENV1}/**",
-            "{ENV1}/**"
+            "{ENV2}/**"
         ],
         "defines": [
             "_DEBUG",

@@ -27,18 +27,17 @@ namespace KFlearning.Core.Services
 
         public TemplateService(IPathManager path)
         {
-            var path1 = path;
             _templates = new List<Template>
             {
                 new Template("Konsol (C++)", new List<Transformable>
                 {
                     new Transformable("program.cpp", () => TR.CPP_program),
                     new Transformable(".vscode/c_cpp_properties.json", () => TR.CPP_c_cpp_properties,
-                        x => x.Replace("{GXX}", path1.GetPath(PathKind.MingwGXXExecutable, true))
-                            .Replace("{ENV1}", path1.GetPath(PathKind.MingwInclude1Directory, true))
-                            .Replace("{ENV2}", path1.GetPath(PathKind.MingwInclude2Directory, true))),
+                        x => x.Replace("{GXX}", path.GetPath(PathKind.MingwGXXExecutable, true))
+                            .Replace("{ENV1}", path.GetPath(PathKind.MingwInclude1Directory, true))
+                            .Replace("{ENV2}", path.GetPath(PathKind.MingwInclude2Directory, true))),
                     new Transformable(".vscode/launch.json", () => TR.CPP_launch,
-                        x => x.Replace("{GDB}", path1.GetPath(PathKind.MingwGDBExecutable, true))),
+                        x => x.Replace("{GDB}", path.GetPath(PathKind.MingwGDBExecutable, true))),
                     new Transformable(".vscode/settings.json", () => TR.CPP_settings),
                     new Transformable(".vscode/tasks.json", () => TR.CPP_Console_tasks)
                 }),
@@ -46,11 +45,11 @@ namespace KFlearning.Core.Services
                 {
                     new Transformable("program.cpp", () => TR.CPP_program),
                     new Transformable(".vscode/c_cpp_properties.json", () => TR.CPP_c_cpp_properties,
-                        x => x.Replace("{GXX}", path1.GetPath(PathKind.MingwGXXExecutable, true))
-                            .Replace("{ENV1}", path1.GetPath(PathKind.MingwInclude1Directory, true))
-                            .Replace("{ENV2}", path1.GetPath(PathKind.MingwInclude2Directory, true))),
+                        x => x.Replace("{GXX}", path.GetPath(PathKind.MingwGXXExecutable, true))
+                            .Replace("{ENV1}", path.GetPath(PathKind.MingwInclude1Directory, true))
+                            .Replace("{ENV2}", path.GetPath(PathKind.MingwInclude2Directory, true))),
                     new Transformable(".vscode/launch.json", () => TR.CPP_launch,
-                        x => x.Replace("{GDB}", path1.GetPath(PathKind.MingwGDBExecutable, true))),
+                        x => x.Replace("{GDB}", path.GetPath(PathKind.MingwGDBExecutable, true))),
                     new Transformable(".vscode/settings.json", () => TR.CPP_settings),
                     new Transformable(".vscode/tasks.json", () => TR.CPP_GUI_tasks)
                 }),
