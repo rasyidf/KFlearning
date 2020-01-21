@@ -11,9 +11,6 @@
       <Component Id="Castle.Windsor.dll" Guid="*">
         <File Id="Castle.Windsor.dll" KeyPath="yes" Source="$(var.SourceDir)\Castle.Windsor.dll" />
       </Component>
-      <Component Id="ICSharpCode.SharpZipLib.dll" Guid="*">
-        <File Id="ICSharpCode.SharpZipLib.dll" KeyPath="yes" Source="$(var.SourceDir)\ICSharpCode.SharpZipLib.dll" />
-      </Component>
       <Component Id="KFlearning.Core.dll" Guid="*">
         <File Id="KFlearning.Core.dll" KeyPath="yes" Source="$(var.SourceDir)\KFlearning.Core.dll" />
       </Component>
