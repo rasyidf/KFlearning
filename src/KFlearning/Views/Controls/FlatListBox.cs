@@ -34,16 +34,13 @@ namespace KFlearning.Views.Controls
             e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
             e.Graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
-            if (e.State.HasFlag(DrawItemState.Selected))
-            {
-                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(35, 168, 109)),
-                    new Rectangle(e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height));
-            }
-            else
-            {
-                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(51, 53, 55)),
-                    new Rectangle(e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height));
-            }
+            Rectangle bgRect = new Rectangle(e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height);
+
+            SolidBrush stateBrush = e.State.HasFlag(DrawItemState.Selected)
+                                    ? new SolidBrush(Color.FromArgb(35, 168, 109))
+                                    : new SolidBrush(Color.FromArgb(51, 53, 55));
+
+            e.Graphics.FillRectangle(stateBrush, bgRect);
 
             e.Graphics.DrawString(" " + listBox.Items[e.Index], new Font("Segoe UI", 8), Brushes.White, e.Bounds.X,
                 e.Bounds.Y + 2);
