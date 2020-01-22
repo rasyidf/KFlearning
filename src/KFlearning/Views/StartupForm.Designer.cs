@@ -269,7 +269,7 @@
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.label4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label4.Font = new System.Drawing.Font("Segoe MDL2 Assets", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(7, 2);
+            this.label4.Location = new System.Drawing.Point(7, 4);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(39, 27);
             this.label4.TabIndex = 16;
@@ -292,7 +292,7 @@
             this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label5.Font = new System.Drawing.Font("Segoe MDL2 Assets", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(6, 3);
+            this.label5.Location = new System.Drawing.Point(8, 4);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(39, 27);
             this.label5.TabIndex = 17;
@@ -314,10 +314,10 @@
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.label6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label6.Font = new System.Drawing.Font("Segoe MDL2 Assets", 19F);
-            this.label6.Location = new System.Drawing.Point(6, 4);
+            this.label6.Font = new System.Drawing.Font("Segoe MDL2 Assets", 18F);
+            this.label6.Location = new System.Drawing.Point(8, 6);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(38, 26);
+            this.label6.Size = new System.Drawing.Size(34, 24);
             this.label6.TabIndex = 18;
             this.label6.Text = "";
             // 
