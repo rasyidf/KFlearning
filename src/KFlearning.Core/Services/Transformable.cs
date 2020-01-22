@@ -30,6 +30,11 @@ namespace KFlearning.Core.Services
 
         public void Transform(string outputPath)
         {
+            if (string.IsNullOrEmpty(outputPath))
+            {
+                return; 
+            }
+
             var path = Path.Combine(outputPath, RelativePath);
             Directory.CreateDirectory(Path.GetDirectoryName(path));
 
