@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtAccessCode = new System.Windows.Forms.TextBox();
@@ -40,7 +39,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(47)))), ((int)(((byte)(49)))));
-            this.panel1.Controls.Add(this.label2);
+            this.panel1.BackgroundImage = global::KFlearning.Properties.Resources.bang_bang;
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -48,21 +47,12 @@
             this.panel1.Size = new System.Drawing.Size(310, 49);
             this.panel1.TabIndex = 13;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Webdings", 25F);
-            this.label2.Location = new System.Drawing.Point(12, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 34);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "N";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(67, 9);
+            this.label1.Location = new System.Drawing.Point(198, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(109, 28);
             this.label1.TabIndex = 1;
@@ -129,7 +119,6 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtAccessCode;
         private System.Windows.Forms.Button cmdLogin;

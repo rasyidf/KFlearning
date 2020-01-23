@@ -70,6 +70,45 @@ namespace KFlearning.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bang_bang {
+            get {
+                object obj = ResourceManager.GetObject("bang_bang", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap dangerous_zombie {
+            get {
+                object obj = ResourceManager.GetObject("dangerous_zombie", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hyper_muteki {
+            get {
+                object obj = ResourceManager.GetObject("hyper_muteki", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream intro {
+            get {
+                return ResourceManager.GetStream("intro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kode akses salah!.
         /// </summary>
         internal static string InvalidAccessCode {
@@ -93,6 +132,16 @@ namespace KFlearning.Properties {
         internal static System.Drawing.Bitmap KFlearning_logo48 {
             get {
                 object obj = ResourceManager.GetObject("KFlearning_logo48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap maximum_mighty_x {
+            get {
+                object obj = ResourceManager.GetObject("maximum_mighty_x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -130,6 +179,26 @@ namespace KFlearning.Properties {
         internal static string RafModeMessage {
             get {
                 return ResourceManager.GetString("RafModeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap splash {
+            get {
+                object obj = ResourceManager.GetObject("splash", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap toki_meki_crisis {
+            get {
+                object obj = ResourceManager.GetObject("toki_meki_crisis", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

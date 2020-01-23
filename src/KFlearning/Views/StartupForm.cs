@@ -8,6 +8,7 @@
 // This file is part of KFlearning, see LICENSE.
 // See this code in repository URL above!
 
+using System;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -24,6 +25,13 @@ namespace KFlearning.Views
         private readonly IHistoryService _history;
         private readonly ICredentialService _credential;
         private readonly IProcessManager _process;
+
+        protected override void OnLoad(EventArgs e)
+        {
+            using (var frm = Program.Container.Resolve<SplashForm>())
+                frm.ShowDialog();
+            base.OnLoad(e);
+        }
 
         public StartupForm()
         {
@@ -85,12 +93,12 @@ namespace KFlearning.Views
 
         private void cmdAdmin_Click(object sender, System.EventArgs e)
         {
-            if (!_process.IsProcessElevated())
-            {
-                MessageBox.Show(Resources.NotElevatedMessage, Resources.AppName, MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
-                return;
-            }
+            //if (!_process.IsProcessElevated())
+            //{
+            //    MessageBox.Show(Resources.NotElevatedMessage, Resources.AppName, MessageBoxButtons.OK,
+            //        MessageBoxIcon.Exclamation);
+            //    return;
+            //}
 
             using (var frm = Program.Container.Resolve<AuthenticationForm>())
             {

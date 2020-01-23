@@ -38,7 +38,6 @@
             this.fbd = new System.Windows.Forms.FolderBrowserDialog();
             this.cmdBrowse = new System.Windows.Forms.LinkLabel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -127,7 +126,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(47)))), ((int)(((byte)(49)))));
-            this.panel1.Controls.Add(this.label3);
+            this.panel1.BackgroundImage = global::KFlearning.Properties.Resources.hyper_muteki;
             this.panel1.Controls.Add(this.label5);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -135,21 +134,12 @@
             this.panel1.Size = new System.Drawing.Size(403, 49);
             this.panel1.TabIndex = 14;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Webdings", 25F);
-            this.label3.Location = new System.Drawing.Point(12, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 34);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "ñ";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
-            this.label5.Location = new System.Drawing.Point(67, 9);
+            this.label5.Location = new System.Drawing.Point(12, 9);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(177, 28);
             this.label5.TabIndex = 1;
@@ -197,7 +187,6 @@
         private System.Windows.Forms.FolderBrowserDialog fbd;
         private System.Windows.Forms.LinkLabel cmdBrowse;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
     }
 }

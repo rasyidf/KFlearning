@@ -37,8 +37,11 @@
             this.cmdInstagram = new System.Windows.Forms.LinkLabel();
             this.cmdGitHub = new System.Windows.Forms.LinkLabel();
             this.label4 = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -83,7 +86,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(106, 219);
+            this.label3.Location = new System.Drawing.Point(107, 134);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(200, 30);
             this.label3.TabIndex = 4;
@@ -93,7 +96,7 @@
             // 
             this.cmdKodesiana.AutoSize = true;
             this.cmdKodesiana.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(160)))), ((int)(((byte)(230)))));
-            this.cmdKodesiana.Location = new System.Drawing.Point(106, 186);
+            this.cmdKodesiana.Location = new System.Drawing.Point(107, 208);
             this.cmdKodesiana.Name = "cmdKodesiana";
             this.cmdKodesiana.Size = new System.Drawing.Size(88, 15);
             this.cmdKodesiana.TabIndex = 5;
@@ -105,7 +108,7 @@
             // 
             this.cmdInstagram.AutoSize = true;
             this.cmdInstagram.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(160)))), ((int)(((byte)(230)))));
-            this.cmdInstagram.Location = new System.Drawing.Point(200, 186);
+            this.cmdInstagram.Location = new System.Drawing.Point(107, 223);
             this.cmdInstagram.Name = "cmdInstagram";
             this.cmdInstagram.Size = new System.Drawing.Size(60, 15);
             this.cmdInstagram.TabIndex = 6;
@@ -117,7 +120,7 @@
             // 
             this.cmdGitHub.AutoSize = true;
             this.cmdGitHub.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(160)))), ((int)(((byte)(230)))));
-            this.cmdGitHub.Location = new System.Drawing.Point(266, 186);
+            this.cmdGitHub.Location = new System.Drawing.Point(107, 238);
             this.cmdGitHub.Name = "cmdGitHub";
             this.cmdGitHub.Size = new System.Drawing.Size(45, 15);
             this.cmdGitHub.TabIndex = 7;
@@ -134,12 +137,34 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "Versi 1.1 rev 247";
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::KFlearning.Properties.Resources.dangerous_zombie;
+            this.pictureBox2.Location = new System.Drawing.Point(258, 168);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox2.TabIndex = 9;
+            this.pictureBox2.TabStop = false;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.label5.ForeColor = System.Drawing.Color.Magenta;
+            this.label5.Location = new System.Drawing.Point(201, 92);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(89, 15);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "EX-AID edition";
+            // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(70)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(353, 269);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cmdGitHub);
             this.Controls.Add(this.cmdInstagram);
@@ -148,6 +173,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.pictureBox2);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -160,6 +186,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -176,5 +203,7 @@
         private System.Windows.Forms.LinkLabel cmdInstagram;
         private System.Windows.Forms.LinkLabel cmdGitHub;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label5;
     }
 }
