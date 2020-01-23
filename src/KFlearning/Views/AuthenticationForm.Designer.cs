@@ -51,27 +51,27 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Webdings", 25F);
-            this.label2.Location = new System.Drawing.Point(12, 9);
+            this.label2.Font = new System.Drawing.Font("Segoe MDL2 Assets", 20F);
+            this.label2.Location = new System.Drawing.Point(12, 12);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 34);
+            this.label2.Size = new System.Drawing.Size(39, 27);
             this.label2.TabIndex = 2;
-            this.label2.Text = "N";
+            this.label2.Text = "";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(67, 9);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 15F);
+            this.label1.Location = new System.Drawing.Point(56, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 28);
+            this.label1.Size = new System.Drawing.Size(100, 28);
             this.label1.TabIndex = 1;
             this.label1.Text = "Otentikasi";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(119, 78);
+            this.label3.Location = new System.Drawing.Point(119, 71);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(68, 15);
             this.label3.TabIndex = 14;
@@ -80,9 +80,9 @@
             // txtAccessCode
             // 
             this.txtAccessCode.Font = new System.Drawing.Font("Lucida Console", 20F);
-            this.txtAccessCode.Location = new System.Drawing.Point(28, 96);
+            this.txtAccessCode.Location = new System.Drawing.Point(28, 102);
             this.txtAccessCode.Name = "txtAccessCode";
-            this.txtAccessCode.Size = new System.Drawing.Size(251, 34);
+            this.txtAccessCode.Size = new System.Drawing.Size(255, 34);
             this.txtAccessCode.TabIndex = 16;
             this.txtAccessCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtAccessCode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyUp);
@@ -92,7 +92,7 @@
             this.cmdLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(168)))), ((int)(((byte)(109)))));
             this.cmdLogin.FlatAppearance.BorderSize = 0;
             this.cmdLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmdLogin.Location = new System.Drawing.Point(99, 153);
+            this.cmdLogin.Location = new System.Drawing.Point(99, 155);
             this.cmdLogin.Name = "cmdLogin";
             this.cmdLogin.Size = new System.Drawing.Size(108, 29);
             this.cmdLogin.TabIndex = 19;
@@ -102,8 +102,8 @@
             // 
             // AuthenticationForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(70)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(310, 204);
             this.Controls.Add(this.cmdLogin);

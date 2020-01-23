@@ -64,6 +64,7 @@
             // txtProjectName
             // 
             this.txtProjectName.Location = new System.Drawing.Point(119, 76);
+            this.txtProjectName.MaxLength = 100;
             this.txtProjectName.Name = "txtProjectName";
             this.txtProjectName.Size = new System.Drawing.Size(146, 23);
             this.txtProjectName.TabIndex = 4;
@@ -71,6 +72,7 @@
             // 
             // cboTemplate
             // 
+            this.cboTemplate.BackColor = System.Drawing.SystemColors.Window;
             this.cboTemplate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTemplate.FormattingEnabled = true;
             this.cboTemplate.Location = new System.Drawing.Point(119, 105);
@@ -83,7 +85,7 @@
             this.cmdCreate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.cmdCreate.FlatAppearance.BorderSize = 0;
             this.cmdCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmdCreate.Location = new System.Drawing.Point(264, 189);
+            this.cmdCreate.Location = new System.Drawing.Point(269, 186);
             this.cmdCreate.Name = "cmdCreate";
             this.cmdCreate.Size = new System.Drawing.Size(111, 32);
             this.cmdCreate.TabIndex = 7;
@@ -103,6 +105,7 @@
             // txtLocation
             // 
             this.txtLocation.Location = new System.Drawing.Point(119, 134);
+            this.txtLocation.MaxLength = 1024;
             this.txtLocation.Name = "txtLocation";
             this.txtLocation.ReadOnly = true;
             this.txtLocation.Size = new System.Drawing.Size(220, 23);
@@ -115,7 +118,7 @@
             // cmdBrowse
             // 
             this.cmdBrowse.AutoSize = true;
-            this.cmdBrowse.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(160)))), ((int)(((byte)(230)))));
+            this.cmdBrowse.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(207)))), ((int)(((byte)(216)))));
             this.cmdBrowse.Location = new System.Drawing.Point(345, 137);
             this.cmdBrowse.Name = "cmdBrowse";
             this.cmdBrowse.Size = new System.Drawing.Size(30, 15);
@@ -132,40 +135,40 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(403, 49);
+            this.panel1.Size = new System.Drawing.Size(404, 48);
             this.panel1.TabIndex = 14;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Webdings", 25F);
-            this.label3.Location = new System.Drawing.Point(12, 9);
+            this.label3.Font = new System.Drawing.Font("Segoe MDL2 Assets", 18F);
+            this.label3.Location = new System.Drawing.Point(17, 12);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 34);
+            this.label3.Size = new System.Drawing.Size(34, 24);
             this.label3.TabIndex = 2;
-            this.label3.Text = "ñ";
+            this.label3.Text = "";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
-            this.label5.Location = new System.Drawing.Point(67, 9);
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 15F);
+            this.label5.Location = new System.Drawing.Point(59, 9);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(177, 28);
+            this.label5.Size = new System.Drawing.Size(160, 28);
             this.label5.TabIndex = 1;
             this.label5.Text = "Buat Proyek Baru";
             // 
             // CreateProjectForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(70)))), ((int)(((byte)(73)))));
-            this.ClientSize = new System.Drawing.Size(403, 243);
+            this.ClientSize = new System.Drawing.Size(404, 241);
+            this.Controls.Add(this.cmdCreate);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.cmdBrowse);
             this.Controls.Add(this.txtLocation);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.cmdCreate);
             this.Controls.Add(this.cboTemplate);
             this.Controls.Add(this.txtProjectName);
             this.Controls.Add(this.label2);
