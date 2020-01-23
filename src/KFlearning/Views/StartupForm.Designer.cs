@@ -119,6 +119,10 @@
             this.cmdAbout.UseVisualStyleBackColor = false;
             this.cmdAbout.Click += new System.EventHandler(this.cmdAbout_Click);
             // 
+            // fbd
+            // 
+            this.fbd.Description = "Pilih folder untuk dibuka.";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;

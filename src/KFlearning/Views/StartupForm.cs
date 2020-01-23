@@ -93,12 +93,12 @@ namespace KFlearning.Views
 
         private void cmdAdmin_Click(object sender, System.EventArgs e)
         {
-            //if (!_process.IsProcessElevated())
-            //{
-            //    MessageBox.Show(Resources.NotElevatedMessage, Resources.AppName, MessageBoxButtons.OK,
-            //        MessageBoxIcon.Exclamation);
-            //    return;
-            //}
+            if (!_process.IsProcessElevated())
+            {
+                MessageBox.Show(Resources.NotElevatedMessage, Resources.AppName, MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+                return;
+            }
 
             using (var frm = Program.Container.Resolve<AuthenticationForm>())
             {
