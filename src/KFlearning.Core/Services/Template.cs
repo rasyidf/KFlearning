@@ -14,6 +14,7 @@
 
 
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace KFlearning.Core.Services
 {
@@ -21,7 +22,12 @@ namespace KFlearning.Core.Services
     {
         public string Title { get; }
 
-        public List<Transformable> FileMapping { get; }
+        [JsonIgnore]
+        public List<Transformable> FileMapping { get; set; }
+
+        public Template()
+        {
+        }
 
         public Template(string title, List<Transformable> fileMapping)
         {
