@@ -14,6 +14,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 #endregion
 
@@ -29,6 +30,8 @@ namespace KFlearning.Core.IO
     {
         private static readonly string InstallRoot = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         private static readonly char[] InvalidFileNameChars = Path.GetInvalidFileNameChars();
+        private static readonly Regex VscodePathPattern = new Regex(@";(?<t>.*(Microsoft VS Code\\bin));", RegexOptions.None);
+        private string _cachedVscodePath;
 
         public string GetPath(PathKind kind, bool forwardSlash = false)
         {
@@ -47,13 +50,9 @@ namespace KFlearning.Core.IO
                     path = Path.Combine(Path.GetPathRoot(Environment.SystemDirectory), "wallpaper.jpg");
                     break;
                 case PathKind.VisualStudioCodeExecutable:
-                {
-                    var userDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                    var userInstall = Path.Combine(userDir, @"Programs\Microsoft VS Code\code.exe");
-
-                    path = File.Exists(userInstall) ? userInstall : null;
+                    path = _cachedVscodePath ?? FindVscode();
+                    _cachedVscodePath = path;
                     break;
-                }
                 case PathKind.MingwInclude1Directory:
                     path = Path.Combine(InstallRoot, @"mingw32\include");
                     break;
@@ -76,6 +75,22 @@ namespace KFlearning.Core.IO
         public string StripInvalidPathName(string path)
         {
             return InvalidFileNameChars.Aggregate(path, (current, x) => current.Replace(x, '_'));
+        }
+
+        private string FindVscode()
+        {
+            
+            // find in env path
+            var userEnv = Environment.GetEnvironmentVariable("path");
+            var match = VscodePathPattern.Match(userEnv);
+            if (match.Success) return match.Groups["t"].Value;
+
+            // find in user dir
+            var userDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var userInstall = Path.Combine(userDir, @"Programs\Microsoft VS Code\code.exe");
+            if (File.Exists(userInstall)) return userInstall;
+
+            return null;
         }
     }
 }
