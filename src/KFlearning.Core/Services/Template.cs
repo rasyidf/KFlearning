@@ -22,8 +22,7 @@ namespace KFlearning.Core.Services
     {
         public string Title { get; }
 
-        [JsonIgnore]
-        public List<Transformable> FileMapping { get; }
+        [JsonIgnore] public List<Transformable> FileMapping { get; }
 
         public Template()
         {

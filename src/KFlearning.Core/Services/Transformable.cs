@@ -32,7 +32,7 @@ namespace KFlearning.Core.Services
         {
             if (string.IsNullOrEmpty(outputPath))
             {
-                return; 
+                return;
             }
 
             var path = Path.Combine(outputPath, RelativePath);

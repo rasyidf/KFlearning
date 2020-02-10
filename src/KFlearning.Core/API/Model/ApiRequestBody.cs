@@ -1,6 +1,6 @@
 ﻿// SOLUTION : KFlearning
 // PROJECT  : KFlearning.Core
-// FILENAME : PathKind.cs
+// FILENAME : ApiRequestBody.cs
 // AUTHOR   : Fahmi Noor Fiqri, Kodesiana.com
 // WEBSITE  : https://kodesiana.com
 // REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
@@ -8,17 +8,14 @@
 // This file is part of KFlearning, see LICENSE.
 // See this code in repository URL above!
 
-namespace KFlearning.Core.IO
+using Newtonsoft.Json;
+
+namespace KFlearning.Core.API.Model
 {
-    public enum PathKind
+    public class ApiRequestBody
     {
-        DefaultProjectRoot,
-        PersistanceDirectory,
-        WallpaperPath,
-        VisualStudioCodeExecutable,
-        MingwInclude1Directory,
-        MingwInclude2Directory,
-        MingwGXXExecutable,
-        MingwGDBExecutable,
+        [JsonProperty("action")] public string Action { get; set; }
+
+        [JsonProperty("user")] public UserProfile User { get; set; }
     }
 }

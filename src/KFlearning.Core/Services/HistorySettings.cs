@@ -1,6 +1,6 @@
 ﻿// SOLUTION : KFlearning
 // PROJECT  : KFlearning.Core
-// FILENAME : PathKind.cs
+// FILENAME : HistorySettings.cs
 // AUTHOR   : Fahmi Noor Fiqri, Kodesiana.com
 // WEBSITE  : https://kodesiana.com
 // REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
@@ -8,17 +8,13 @@
 // This file is part of KFlearning, see LICENSE.
 // See this code in repository URL above!
 
-namespace KFlearning.Core.IO
+using System.Collections.Generic;
+
+namespace KFlearning.Core.Services
 {
-    public enum PathKind
+    public class HistorySettings
     {
-        DefaultProjectRoot,
-        PersistanceDirectory,
-        WallpaperPath,
-        VisualStudioCodeExecutable,
-        MingwInclude1Directory,
-        MingwInclude2Directory,
-        MingwGXXExecutable,
-        MingwGDBExecutable,
+        public List<Project> Projects { get; set; }
+        public bool Recording { get; set; }
     }
 }

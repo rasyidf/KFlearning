@@ -8,10 +8,10 @@
 // This file is part of KFlearning, see LICENSE.
 // See this code in repository URL above!
 
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using KFlearning.Core.Diagnostics;
+using KFlearning.Core.Security;
 using KFlearning.Core.Services;
 using KFlearning.Properties;
 using KFlearning.Views.Controls;
@@ -52,6 +52,7 @@ namespace KFlearning.Views
                     MessageBoxIcon.Exclamation);
                 return;
             }
+
             if (!_project.IsExists(path))
             {
                 MessageBox.Show(Resources.InvalidProjectMessage, Resources.AppName, MessageBoxButtons.OK,
@@ -85,26 +86,33 @@ namespace KFlearning.Views
 
         private void cmdAdmin_Click(object sender, System.EventArgs e)
         {
-            if (!_process.IsProcessElevated())
+            if (ModifierKeys.HasFlag(Keys.Shift))
             {
-                MessageBox.Show(Resources.NotElevatedMessage, Resources.AppName, MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
-                return;
-            }
-
-            using (var frm = Program.Container.Resolve<AuthenticationForm>())
-            {
-                if (frm.ShowDialog(this) != DialogResult.OK) return;
-                if (!_credential.Verify(frm.AccessCode))
+                if (!_process.IsProcessElevated())
                 {
-                    MessageBox.Show(Resources.InvalidAccessCode, Resources.AppName, MessageBoxButtons.OK,
-                        MessageBoxIcon.Stop);
+                    MessageBox.Show(Resources.NotElevatedMessage, Resources.AppName, MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation);
                     return;
+                }
+
+                using (var frm = Program.Container.Resolve<AuthenticationForm>())
+                {
+                    if (frm.ShowDialog(this) != DialogResult.OK) return;
+                    if (!_credential.Verify(frm.AccessCode))
+                    {
+                        MessageBox.Show(Resources.InvalidAccessCode, Resources.AppName, MessageBoxButtons.OK,
+                            MessageBoxIcon.Stop);
+                        return;
+                    }
                 }
 
                 using (var frm2 = Program.Container.Resolve<AdminForm>())
                     frm2.ShowDialog();
+                return;
             }
+
+            var questForm = Program.Container.Resolve<QuestForm>();
+            questForm.Show(this);
         }
 
         private void cmdAbout_Click(object sender, System.EventArgs e)

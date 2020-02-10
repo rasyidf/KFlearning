@@ -56,12 +56,19 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Model\ApiRequestBody.cs" />
+    <Compile Include="API\ApiServiceBase.cs" />
+    <Compile Include="API\LeaderboardService.cs" />
+    <Compile Include="API\Model\ApiResponseBody.cs" />
+    <Compile Include="API\Model\UserProfile.cs" />
     <Compile Include="Diagnostics\ProcessManager.cs" />
+    <Compile Include="Diagnostics\ProcessWatcher.cs" />
     <Compile Include="Diagnostics\SystemTweaker.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="IO\PathKind.cs" />
@@ -73,22 +80,40 @@
     <Compile Include="Native\TOKEN_ELEVATION_TYPE.cs" />
     <Compile Include="Native\TOKEN_INFORMATION_CLASS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\TR.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TR.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\CredentialService.cs" />
+    <Compile Include="IO\PersistanceStorage.cs" />
+    <Compile Include="Security\CredentialSettings.cs" />
+    <Compile Include="Security\AuthorizationService.cs" />
+    <Compile Include="IO\IUsesPersistance.cs" />
+    <Compile Include="Services\HistorySettings.cs" />
+    <Compile Include="Services\QuestService.cs" />
+    <Compile Include="Security\CredentialService.cs" />
     <Compile Include="Services\HistoryService.cs" />
-    <Compile Include="Services\ICredentialStorage.cs" />
     <Compile Include="Services\Project.cs" />
+    <Compile Include="Services\QuestSettings.cs" />
+    <Compile Include="Services\QuestStatistics.cs" />
     <Compile Include="Services\Template.cs" />
     <Compile Include="Services\ProjectService.cs" />
     <Compile Include="Services\TemplateService.cs" />
     <Compile Include="Services\Transformable.cs" />
+    <Compile Include="Services\UserService.cs" />
+    <Compile Include="Services\UserSettings.cs" />
     <Compile Include="Services\VisualStudioCodeService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\TR.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>TR.Designer.cs</LastGenOutput>

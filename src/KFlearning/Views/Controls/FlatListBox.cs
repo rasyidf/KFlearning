@@ -37,8 +37,8 @@ namespace KFlearning.Views.Controls
             Rectangle bgRect = new Rectangle(e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height);
 
             SolidBrush stateBrush = e.State.HasFlag(DrawItemState.Selected)
-                                    ? new SolidBrush(Color.FromArgb(35, 168, 109))
-                                    : new SolidBrush(Color.FromArgb(51, 53, 55));
+                ? new SolidBrush(Color.FromArgb(35, 168, 109))
+                : new SolidBrush(Color.FromArgb(51, 53, 55));
 
             e.Graphics.FillRectangle(stateBrush, bgRect);
 

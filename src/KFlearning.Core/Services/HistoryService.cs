@@ -8,39 +8,35 @@
 // This file is part of KFlearning, see LICENSE.
 // See this code in repository URL above!
 
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using KFlearning.Core.IO;
-using Newtonsoft.Json;
 
 namespace KFlearning.Core.Services
 {
-    public interface IHistoryService
+    public interface IHistoryService : IUsesPersistance
     {
         bool RecordHistory { get; set; }
 
         void Add(Project project);
         void Clear();
         IEnumerable<Project> GetAll();
-        void Save();
     }
 
     public class HistoryService : IHistoryService
     {
-        public const int HistorySize = 10;
+        private const int HistorySize = 10;
+        private const string HistorySettingsName = "History.Settings";
+
         private readonly List<Project> _projects = new List<Project>();
-        private readonly JsonSerializer _serializer = new JsonSerializer();
+        private readonly IPersistanceStorage _storage;
 
-        private readonly IPathManager _path;
+        public bool RecordHistory { get; set; }
 
-        public bool RecordHistory { get; set; } = true;
-
-        public HistoryService(IPathManager path)
+        public HistoryService(IPersistanceStorage storage)
         {
-            _path = path;
-            Reload();
+            _storage = storage;
+            Load();
         }
 
         public void Add(Project project)
@@ -55,7 +51,6 @@ namespace KFlearning.Core.Services
         {
             if (!RecordHistory) return;
             _projects.Clear();
-            File.Delete(_path.GetPath(PathKind.HistoryFile));
         }
 
         public IEnumerable<Project> GetAll()
@@ -63,52 +58,41 @@ namespace KFlearning.Core.Services
             return !RecordHistory ? Enumerable.Empty<Project>() : _projects;
         }
 
-        public void Save()
-        {
-            if (!RecordHistory) return;
-            try
-            {
-                var saveFile = _path.GetPath(PathKind.HistoryFile);
-                using (var writer = new StreamWriter(saveFile))
-                using (var jsonWriter = new JsonTextWriter(writer))
-                {
-                    _serializer.Serialize(jsonWriter, _projects);
-                }
-            }
-            catch (Exception)
-            {
-                // ignore
-            }
-        }
-
         private void EnsureSize()
         {
             if (!RecordHistory) return;
             if (_projects.Count <= HistorySize) return;
+
             _projects.RemoveRange(HistorySize - 1, _projects.Count - HistorySize);
         }
 
-        private void Reload()
+        private HistorySettings CreateDefaultSettings()
         {
-            if (!RecordHistory) return;
-            try
-            {
-                var saveFile = _path.GetPath(PathKind.HistoryFile);
-                if (!File.Exists(saveFile)) return;
-
-                _projects.Clear();
-
-                using (var reader = new StreamReader(saveFile))
-                using (var jsonReader = new JsonTextReader(reader))
-                {
-                    var list = _serializer.Deserialize<List<Project>>(jsonReader);
-                    _projects.AddRange(list);
-                }
-            }
-            catch (Exception)
-            {
-                // ignore
-            }
+            return new HistorySettings {Recording = true, Projects = new List<Project>()};
         }
+
+        #region IUsesPersistance Implementation
+
+        public void Load()
+        {
+            var settings = _storage.Retrieve<HistorySettings>(HistorySettingsName) ?? CreateDefaultSettings();
+            if (!settings.Recording) return;
+
+            _projects.Clear();
+            _projects.AddRange(settings.Projects);
+            RecordHistory = true;
+        }
+
+        public void Save()
+        {
+            var settings = new HistorySettings
+            {
+                Recording = RecordHistory,
+                Projects = _projects.ToList()
+            };
+            _storage.Store(HistorySettingsName, settings);
+        }
+
+        #endregion
     }
 }

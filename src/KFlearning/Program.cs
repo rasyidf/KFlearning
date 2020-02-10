@@ -39,9 +39,6 @@ namespace KFlearning
                 return;
             }
 
-            // history
-            Container.Resolve<IHistoryService>().RecordHistory = !Settings.Default.Raf;
-
             // app exit handler
             Application.ApplicationExit += Application_ApplicationExit;
 
@@ -53,7 +50,20 @@ namespace KFlearning
 
         private static void Application_ApplicationExit(object sender, EventArgs e)
         {
-            Container.Resolve<IHistoryService>().Save();
+            try
+            {
+                foreach (var usesPersistance in Container.ResolveAll<IUsesPersistance>())
+                {
+                    usesPersistance.Save();
+                }
+
+                Container.Resolve<IUserService>().Sync().Wait();
+            }
+            catch
+            {
+                // ignore
+            }
+
             Container.Dispose();
         }
     }

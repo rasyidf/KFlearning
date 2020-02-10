@@ -130,9 +130,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(106, 92);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(89, 15);
+            this.label4.Size = new System.Drawing.Size(49, 15);
             this.label4.TabIndex = 8;
-            this.label4.Text = "Versi 1.1 rev 247";
+            this.label4.Text = "Versi 1.2";
             // 
             // AboutForm
             // 

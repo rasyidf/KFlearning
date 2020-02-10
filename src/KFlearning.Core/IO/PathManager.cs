@@ -30,7 +30,6 @@ namespace KFlearning.Core.IO
     {
         private static readonly string InstallRoot = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         private static readonly char[] InvalidFileNameChars = Path.GetInvalidFileNameChars();
-        private static readonly Regex VscodePathPattern = new Regex(@";(?<t>.*(Microsoft VS Code\\bin));", RegexOptions.None);
         private string _cachedVscodePath;
 
         public string GetPath(PathKind kind, bool forwardSlash = false)
@@ -42,9 +41,9 @@ namespace KFlearning.Core.IO
                     path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                         "KFlearning");
                     break;
-                case PathKind.HistoryFile:
+                case PathKind.PersistanceDirectory:
                     path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                        @"KFlearning\history.json");
+                        @"KFlearning\settings");
                     break;
                 case PathKind.WallpaperPath:
                     path = Path.Combine(Path.GetPathRoot(Environment.SystemDirectory), "wallpaper.jpg");
@@ -79,11 +78,10 @@ namespace KFlearning.Core.IO
 
         private string FindVscode()
         {
-            
             // find in env path
             var userEnv = Environment.GetEnvironmentVariable("path");
-            var match = VscodePathPattern.Match(userEnv);
-            if (match.Success) return match.Groups["t"].Value;
+            var path = userEnv?.Split(Path.PathSeparator).FirstOrDefault(x => x.Contains("Microsoft VS Code"));
+            if (path != null) return Path.Combine(path.Substring(0, path.Length - 4), "code.exe");
 
             // find in user dir
             var userDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);

@@ -98,6 +98,15 @@ namespace KFlearning.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kesalahan jaringan. Tidak dapat terhubung ke server..
+        /// </summary>
+        internal static string NetworkErrorMessage {
+            get {
+                return ResourceManager.GetString("NetworkErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to KFlearning harus dijalankan sebagai Administrator untuk mengubah pengaturan sistem..
         /// </summary>
         internal static string NotElevatedMessage {

@@ -13,6 +13,7 @@ using System.IO;
 using System.Windows.Forms;
 using KFlearning.Core.Diagnostics;
 using KFlearning.Core.IO;
+using KFlearning.Core.Security;
 using KFlearning.Core.Services;
 using KFlearning.Properties;
 
@@ -69,7 +70,7 @@ namespace KFlearning.Views
             using (var frm = Program.Container.Resolve<AuthenticationForm>())
             {
                 if (frm.ShowDialog(this) != DialogResult.OK) return;
-                if (!string.IsNullOrEmpty(frm.AccessCode)) _credential.SaveAccessCode(frm.AccessCode);
+                if (!string.IsNullOrEmpty(frm.AccessCode)) _credential.Save(frm.AccessCode);
             }
         }
 
