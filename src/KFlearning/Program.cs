@@ -9,6 +9,7 @@
 // See this code in repository URL above!
 
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Castle.Windsor;
 using KFlearning.Core.IO;
@@ -57,7 +58,7 @@ namespace KFlearning
                     usesPersistance.Save();
                 }
 
-                Container.Resolve<IUserService>().Sync().Wait();
+                Task.WaitAll(Container.Resolve<IUserService>().Sync());
             }
             catch
             {
