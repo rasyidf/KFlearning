@@ -19,8 +19,12 @@ namespace KFlearning.Core.API
 {
     public abstract class ApiServiceBase
     {
+#if DEBUG
         private const string BaseUri = "http://kflearning-board.test/api";
-
+#else
+        private const string BaseUri = "http://kflearning.kodesiana.com/api";
+#endif
+        
         private static readonly HttpClient Client = new HttpClient();
         private readonly IAuthorizationService _authorizationService;
 

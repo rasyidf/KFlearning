@@ -59,13 +59,13 @@ namespace KFlearning.Core.Diagnostics
             using (var storageKey = Registry.LocalMachine.OpenSubKey(StoragePoliciesKey))
             using (var activeDesktopKey = Registry.CurrentUser.OpenSubKey(ActiveDesktopKey))
             {
-                LockWallpaper = activeDesktopKey.GetIntValue(NoChangingWallPaper, 0) == 1;
+                LockWallpaper = activeDesktopKey.GetIntValue(NoChangingWallPaper) == 1;
                 WallpaperPath = systemKey.GetStringValue(Wallpaper) ?? desktopKey.GetStringValue(Wallpaper);
-                LockDesktop = systemKey.GetIntValue(NoDispCPL, 0) == 1;
-                LockRegistryEditor = systemKey.GetIntValue(DisableRegistryTools, 0) == 1;
-                LockTaskManager = systemKey.GetIntValue(DisableTaskMgr, 0) == 1;
-                LockUsbCopying = storageKey.GetIntValue(WriteProtect, 0) == 1;
-                LockControlPanel = explorerKey.GetIntValue(NoControlPanel, 0) == 1;
+                LockDesktop = systemKey.GetIntValue(NoDispCPL) == 1;
+                LockRegistryEditor = systemKey.GetIntValue(DisableRegistryTools) == 1;
+                LockTaskManager = systemKey.GetIntValue(DisableTaskMgr) == 1;
+                LockUsbCopying = storageKey.GetIntValue(WriteProtect) == 1;
+                LockControlPanel = explorerKey.GetIntValue(NoControlPanel) == 1;
             }
         }
 

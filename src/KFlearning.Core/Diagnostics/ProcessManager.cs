@@ -11,7 +11,6 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 using KFlearning.Core.Native;
@@ -23,7 +22,6 @@ namespace KFlearning.Core.Diagnostics
     {
         bool IsProcessElevated();
         bool IsUacEnabled();
-        bool IsWindows7();
 
         void Run(string filename, string args, bool show = false);
     }
@@ -82,12 +80,6 @@ namespace KFlearning.Core.Diagnostics
             {
                 return uacKey != null && uacKey.GetValue(NativeConstants.UacRegistryValue).Equals(1);
             }
-        }
-
-        public bool IsWindows7()
-        {
-            var version = Environment.OSVersion;
-            return version.Version.Major == 6 && version.Version.Minor == 1;
         }
 
         public void Run(string filename, string args, bool show = false)

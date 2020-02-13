@@ -31,6 +31,9 @@ namespace KFlearning
         {
             Container.Install(new AppModulesInstaller());
 
+            // check RAF mode
+            Container.Resolve<IHistoryService>().RecordHistory = !Settings.Default.Raf;
+
             // find vscode
             var path = Container.Resolve<IPathManager>();
             if (path.GetPath(PathKind.VisualStudioCodeExecutable) == null)
