@@ -20,7 +20,7 @@ namespace KFlearning.Core.Services
     {
         QuestStatistics GetStatistics();
         void ChangeScores(long codeCount, TimeSpan codeTime, int projectCount);
-        void UpdateScores();
+        void UpdateScores(bool restart = true);
     }
 
     public class QuestService : IQuestService
@@ -53,7 +53,7 @@ namespace KFlearning.Core.Services
             _storage.Store(QuestSettingsKey, _settings);
         }
 
-        public void UpdateScores()
+        public void UpdateScores(bool restart = true)
         {
             _watcher.Stop();
 
@@ -62,6 +62,8 @@ namespace KFlearning.Core.Services
             _settings.CodeCount = files.AsParallel().Select(Helpers.CountLines).Sum();
             _settings.CodingTime = _settings.CodingTime.Add(TimeSpan.FromSeconds(_watcher.TotalSeconds));
             _settings.ProjectCount = Directory.EnumerateDirectories(projectPath).AsParallel().Count() - 1;
+
+            if (restart) _watcher.Start();
         }
 
         public void Load()
@@ -73,7 +75,7 @@ namespace KFlearning.Core.Services
 
         public void Save()
         {
-            UpdateScores();
+            UpdateScores(false);
             _storage.Store(QuestSettingsKey, _settings);
         }
 
