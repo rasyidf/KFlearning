@@ -159,5 +159,14 @@ namespace KFlearning.Properties {
                 return ResourceManager.GetString("VscodeNotInstalled", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tidak dapat menyalin wallpaper. .
+        /// </summary>
+        internal static string WallpaperCopyError {
+            get {
+                return ResourceManager.GetString("WallpaperCopyError", resourceCulture);
+            }
+        }
     }
 }

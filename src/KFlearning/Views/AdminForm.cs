@@ -14,7 +14,6 @@ using System.Windows.Forms;
 using KFlearning.Core.Diagnostics;
 using KFlearning.Core.IO;
 using KFlearning.Core.Security;
-using KFlearning.Core.Services;
 using KFlearning.Properties;
 
 namespace KFlearning.Views
@@ -88,11 +87,19 @@ namespace KFlearning.Views
             }
             else
             {
-                var savePath = _path.GetPath(PathKind.WallpaperPath);
-                if (File.Exists(savePath)) File.Delete(savePath);
+                try
+                {
+                    var savePath = _path.GetPath(PathKind.WallpaperPath);
+                    if (File.Exists(savePath)) File.Delete(savePath);
 
-                File.Copy(_selectedWallpaperPath, savePath);
-                _tweaker.WallpaperPath = savePath;
+                    File.Copy(_selectedWallpaperPath, savePath);
+                    _tweaker.WallpaperPath = savePath;
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(string.Format("{0}\r\n{1}", Resources.WallpaperCopyError, exception.Message), Resources.AppName,
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
 
             _tweaker.Apply();

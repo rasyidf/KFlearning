@@ -151,4 +151,7 @@
   <data name="NetworkErrorMessage" xml:space="preserve">
     <value>Kesalahan jaringan. Tidak dapat terhubung ke server.</value>
   </data>
+  <data name="WallpaperCopyError" xml:space="preserve">
+    <value>Tidak dapat menyalin wallpaper. </value>
+  </data>
 </root>
