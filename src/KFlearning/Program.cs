@@ -15,6 +15,7 @@ using Castle.Windsor;
 using KFlearning.Core.IO;
 using KFlearning.Core.Services;
 using KFlearning.Properties;
+using KFlearning.Services;
 using KFlearning.Views;
 
 namespace KFlearning

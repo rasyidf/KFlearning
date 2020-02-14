@@ -13,7 +13,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using KFlearning.Views;
 
-namespace KFlearning
+namespace KFlearning.Services
 {
     public class AppModulesInstaller : IWindsorInstaller
     {
