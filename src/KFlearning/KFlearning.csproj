@@ -50,7 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppModulesInstaller.cs" />
+    <Compile Include="Services\AppModulesInstaller.cs" />
+    <Compile Include="Services\Helpers.cs" />
     <Compile Include="Views\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>

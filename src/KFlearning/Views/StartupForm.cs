@@ -14,6 +14,7 @@ using KFlearning.Core.Diagnostics;
 using KFlearning.Core.Security;
 using KFlearning.Core.Services;
 using KFlearning.Properties;
+using KFlearning.Services;
 using KFlearning.Views.Controls;
 
 namespace KFlearning.Views
@@ -34,6 +35,7 @@ namespace KFlearning.Views
 
             InitializeComponent();
 
+            lblVersion.Text = Helpers.GetVersionString();
             pnRaf.Visible = Settings.Default.Raf;
             ReloadHistory();
         }
