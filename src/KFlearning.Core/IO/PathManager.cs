@@ -27,6 +27,7 @@ namespace KFlearning.Core.IO
 
     public class PathManager : IPathManager
     {
+        private static readonly string SystemRoot = Path.GetPathRoot(Environment.SystemDirectory);
         private static readonly string InstallRoot = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         private static readonly char[] InvalidFileNameChars = Path.GetInvalidFileNameChars();
         private string _cachedVscodePath;
@@ -39,6 +40,9 @@ namespace KFlearning.Core.IO
                 case PathKind.DefaultProjectRoot:
                     path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                         "KFlearning");
+                    break;
+                case PathKind.XamppProjectRoot:
+                    path = Path.Combine(SystemRoot, @"xampp\htdocs");
                     break;
                 case PathKind.PersistanceDirectory:
                     path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),

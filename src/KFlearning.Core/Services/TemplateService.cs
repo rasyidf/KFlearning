@@ -9,7 +9,6 @@
 // See this code in repository URL above!
 
 using System.Collections.Generic;
-using System.IO;
 using KFlearning.Core.IO;
 using KFlearning.Core.Resources;
 
@@ -56,7 +55,7 @@ namespace KFlearning.Core.Services
                 new Template("Web (PHP/HTML/CSS/JS)", new List<Transformable>
                 {
                     new Transformable("index.html", () => TR.WEB_index)
-                }),
+                }, true),
                 new Template("Python/Jupyter Notebook", new List<Transformable>
                 {
                     new Transformable("program.py", () => TR.PY_program)

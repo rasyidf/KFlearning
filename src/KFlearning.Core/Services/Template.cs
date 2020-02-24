@@ -22,16 +22,19 @@ namespace KFlearning.Core.Services
     {
         public string Title { get; }
 
+        public bool UseXamppPath { get; }
+
         [JsonIgnore] public List<Transformable> FileMapping { get; }
 
         public Template()
         {
         }
 
-        public Template(string title, List<Transformable> fileMapping)
+        public Template(string title, List<Transformable> fileMapping, bool useXampp = false)
         {
             Title = title;
             FileMapping = fileMapping;
+            UseXamppPath = useXampp;
         }
 
         public override string ToString()

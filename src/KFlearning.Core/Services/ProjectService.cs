@@ -25,7 +25,7 @@ namespace KFlearning.Core.Services
         void Launch(Project project);
         bool IsExists(Project project);
         bool IsExists(string path);
-        string GetPathForProject(string title, string basePath = null);
+        string GetPathForProject(string title, Template template, string basePath = null);
     }
 
     public class ProjectService : IProjectService
@@ -83,10 +83,10 @@ namespace KFlearning.Core.Services
             return File.Exists(Path.Combine(path, MetadataFileName));
         }
 
-        public string GetPathForProject(string title, string basePath = null)
+        public string GetPathForProject(string title, Template template, string basePath = null)
         {
-            return Path.Combine(basePath ?? _path.GetPath(PathKind.DefaultProjectRoot),
-                _path.StripInvalidPathName(title));
+            var pathKind = template.UseXamppPath ? PathKind.XamppProjectRoot : PathKind.DefaultProjectRoot;
+            return Path.Combine(basePath ?? _path.GetPath(pathKind), _path.StripInvalidPathName(title));
         }
 
         private void Save(Project project)

@@ -13,6 +13,7 @@ namespace KFlearning.Core.IO
     public enum PathKind
     {
         DefaultProjectRoot,
+        XamppProjectRoot,
         PersistanceDirectory,
         WallpaperPath,
         VisualStudioCodeExecutable,
