@@ -62,7 +62,7 @@ namespace KFlearning.Views
             Project = new Project
             {
                 Name = txtProjectName.Text,
-                Path = _project.GetPathForProject(txtProjectName.Text, _basePath),
+                Path = _project.GetPathForProject(txtProjectName.Text, (Template) cboTemplate.SelectedItem, _basePath),
                 Template = (Template) cboTemplate.SelectedItem
             };
 
@@ -87,7 +87,7 @@ namespace KFlearning.Views
         private void txtProjectName_TextChanged(object sender, EventArgs e)
         {
             if (_isRaf) return;
-            txtLocation.Text = _project.GetPathForProject(txtProjectName.Text, _basePath);
+            txtLocation.Text = _project.GetPathForProject(txtProjectName.Text, (Template) cboTemplate.SelectedItem, _basePath);
         }
     }
 }

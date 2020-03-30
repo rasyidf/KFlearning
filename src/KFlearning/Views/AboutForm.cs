@@ -11,6 +11,7 @@
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using KFlearning.Services;
 
 namespace KFlearning.Views
 {
@@ -19,10 +20,7 @@ namespace KFlearning.Views
         public AboutForm()
         {
             InitializeComponent();
-        }
-
-        private void AboutForm_Load(object sender, EventArgs e)
-        {
+            lblVersion.Text = Helpers.GetVersionString();
         }
 
         private void cmdInstagram_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

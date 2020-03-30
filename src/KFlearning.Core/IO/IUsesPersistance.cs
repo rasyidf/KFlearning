@@ -1,6 +1,6 @@
 ﻿// SOLUTION : KFlearning
 // PROJECT  : KFlearning.Core
-// FILENAME : PathKind.cs
+// FILENAME : IUsesPersistance.cs
 // AUTHOR   : Fahmi Noor Fiqri, Kodesiana.com
 // WEBSITE  : https://kodesiana.com
 // REPO     : https://github.com/Kodesiana or https://github.com/fahminlb33
@@ -10,16 +10,9 @@
 
 namespace KFlearning.Core.IO
 {
-    public enum PathKind
+    public interface IUsesPersistance
     {
-        DefaultProjectRoot,
-        XamppProjectRoot,
-        PersistanceDirectory,
-        WallpaperPath,
-        VisualStudioCodeExecutable,
-        MingwInclude1Directory,
-        MingwInclude2Directory,
-        MingwGXXExecutable,
-        MingwGDBExecutable,
+        void Load();
+        void Save();
     }
 }

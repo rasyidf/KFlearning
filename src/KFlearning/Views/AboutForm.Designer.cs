@@ -36,7 +36,7 @@
             this.cmdKodesiana = new System.Windows.Forms.LinkLabel();
             this.cmdInstagram = new System.Windows.Forms.LinkLabel();
             this.cmdGitHub = new System.Windows.Forms.LinkLabel();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblVersion = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -125,14 +125,14 @@
             this.cmdGitHub.Text = "GitHub";
             this.cmdGitHub.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.cmdGitHub_LinkClicked);
             // 
-            // label4
+            // lblVersion
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(106, 92);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(89, 15);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Versi 1.1 rev 247";
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.Location = new System.Drawing.Point(106, 92);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(54, 15);
+            this.lblVersion.TabIndex = 8;
+            this.lblVersion.Text = "VERSION";
             // 
             // AboutForm
             // 
@@ -140,7 +140,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(70)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(353, 269);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.cmdGitHub);
             this.Controls.Add(this.cmdInstagram);
             this.Controls.Add(this.cmdKodesiana);
@@ -156,7 +156,6 @@
             this.Name = "AboutForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tentang KFlearning";
-            this.Load += new System.EventHandler(this.AboutForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -175,6 +174,6 @@
         private System.Windows.Forms.LinkLabel cmdKodesiana;
         private System.Windows.Forms.LinkLabel cmdInstagram;
         private System.Windows.Forms.LinkLabel cmdGitHub;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblVersion;
     }
 }

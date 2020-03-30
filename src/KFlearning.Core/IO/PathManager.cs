@@ -27,8 +27,10 @@ namespace KFlearning.Core.IO
 
     public class PathManager : IPathManager
     {
+        private static readonly string SystemRoot = Path.GetPathRoot(Environment.SystemDirectory);
         private static readonly string InstallRoot = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         private static readonly char[] InvalidFileNameChars = Path.GetInvalidFileNameChars();
+        private string _cachedVscodePath;
 
         public string GetPath(PathKind kind, bool forwardSlash = false)
         {
@@ -39,21 +41,20 @@ namespace KFlearning.Core.IO
                     path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                         "KFlearning");
                     break;
-                case PathKind.HistoryFile:
+                case PathKind.XamppProjectRoot:
+                    path = Path.Combine(SystemRoot, @"xampp\htdocs");
+                    break;
+                case PathKind.PersistanceDirectory:
                     path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                        @"KFlearning\history.json");
+                        @"KFlearning\settings");
                     break;
                 case PathKind.WallpaperPath:
                     path = Path.Combine(Path.GetPathRoot(Environment.SystemDirectory), "wallpaper.jpg");
                     break;
                 case PathKind.VisualStudioCodeExecutable:
-                {
-                    var userDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                    var userInstall = Path.Combine(userDir, @"Programs\Microsoft VS Code\code.exe");
-
-                    path = File.Exists(userInstall) ? userInstall : null;
+                    path = _cachedVscodePath ?? FindVscode();
+                    _cachedVscodePath = path;
                     break;
-                }
                 case PathKind.MingwInclude1Directory:
                     path = Path.Combine(InstallRoot, @"mingw32\include");
                     break;
@@ -76,6 +77,21 @@ namespace KFlearning.Core.IO
         public string StripInvalidPathName(string path)
         {
             return InvalidFileNameChars.Aggregate(path, (current, x) => current.Replace(x, '_'));
+        }
+
+        private string FindVscode()
+        {
+            // find in env path
+            var userEnv = Environment.GetEnvironmentVariable("path");
+            var path = userEnv?.Split(Path.PathSeparator).FirstOrDefault(x => x.Contains("Microsoft VS Code"));
+            if (path != null) return Path.Combine(path.Substring(0, path.Length - 4), "code.exe");
+
+            // find in user dir
+            var userDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var userInstall = Path.Combine(userDir, @"Programs\Microsoft VS Code\code.exe");
+            if (File.Exists(userInstall)) return userInstall;
+
+            return null;
         }
     }
 }

@@ -8,14 +8,9 @@
 // This file is part of KFlearning, see LICENSE.
 // See this code in repository URL above!
 
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KFlearning.Views.Controls
@@ -37,8 +32,8 @@ namespace KFlearning.Views.Controls
             Rectangle bgRect = new Rectangle(e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height);
 
             SolidBrush stateBrush = e.State.HasFlag(DrawItemState.Selected)
-                                    ? new SolidBrush(Color.FromArgb(35, 168, 109))
-                                    : new SolidBrush(Color.FromArgb(51, 53, 55));
+                ? new SolidBrush(Color.FromArgb(35, 168, 109))
+                : new SolidBrush(Color.FromArgb(51, 53, 55));
 
             e.Graphics.FillRectangle(stateBrush, bgRect);
 

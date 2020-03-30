@@ -14,6 +14,7 @@
 
 
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace KFlearning.Core.Services
 {
@@ -21,12 +22,19 @@ namespace KFlearning.Core.Services
     {
         public string Title { get; }
 
-        public List<Transformable> FileMapping { get; }
+        public bool UseXamppPath { get; }
 
-        public Template(string title, List<Transformable> fileMapping)
+        [JsonIgnore] public List<Transformable> FileMapping { get; }
+
+        public Template()
+        {
+        }
+
+        public Template(string title, List<Transformable> fileMapping, bool useXampp = false)
         {
             Title = title;
             FileMapping = fileMapping;
+            UseXamppPath = useXampp;
         }
 
         public override string ToString()

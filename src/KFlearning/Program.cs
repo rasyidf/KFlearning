@@ -9,11 +9,13 @@
 // See this code in repository URL above!
 
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Castle.Windsor;
 using KFlearning.Core.IO;
 using KFlearning.Core.Services;
 using KFlearning.Properties;
+using KFlearning.Services;
 using KFlearning.Views;
 
 namespace KFlearning
@@ -30,6 +32,9 @@ namespace KFlearning
         {
             Container.Install(new AppModulesInstaller());
 
+            // check RAF mode
+            Container.Resolve<IHistoryService>().RecordHistory = !Settings.Default.Raf;
+
             // find vscode
             var path = Container.Resolve<IPathManager>();
             if (path.GetPath(PathKind.VisualStudioCodeExecutable) == null)
@@ -38,9 +43,6 @@ namespace KFlearning
                     MessageBoxIcon.Exclamation);
                 return;
             }
-
-            // history
-            Container.Resolve<IHistoryService>().RecordHistory = !Settings.Default.Raf;
 
             // app exit handler
             Application.ApplicationExit += Application_ApplicationExit;
@@ -53,7 +55,20 @@ namespace KFlearning
 
         private static void Application_ApplicationExit(object sender, EventArgs e)
         {
-            Container.Resolve<IHistoryService>().Save();
+            try
+            {
+                foreach (var usesPersistance in Container.ResolveAll<IUsesPersistance>())
+                {
+                    usesPersistance.Save();
+                }
+
+                Task.WaitAll(Container.Resolve<IUserService>().Sync());
+            }
+            catch
+            {
+                // ignore
+            }
+
             Container.Dispose();
         }
     }

@@ -3,7 +3,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <?include Variables.wxi ?>
 
-  <Product Id="*" Name="KFlearning" Language="1033" Version="1.1.0.0" Manufacturer="Kodesiana"
+  <Product Id="*" Name="KFlearning" Language="1033" Version="1.2" Manufacturer="Kodesiana"
            UpgradeCode="{3C1DF2CB-96CC-4249-9E74-683A8C22A388}">
     <!-- Package -->
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
@@ -32,10 +32,6 @@
     <!-- UI -->
     <UI>
       <UIRef Id="WixUI_InstallDir" />
-
-      <ProgressText Action="ExtractMingw">Installing MinGW-w64...</ProgressText>
-      <ProgressText Action="ExtractFreeglutGlew">Installing Freeglut and GLEW...</ProgressText>
-      <ProgressText Action="RemoveMingw">Removing MinGW-w64...</ProgressText>
 
       <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchApplication">
         WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 AND NOT Installed
